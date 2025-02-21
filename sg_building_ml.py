@@ -80,6 +80,20 @@ y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(classification_report(y_test, y_pred))
 
+# 输出特征重要性
+feature_importances = model.feature_importances_
+
+# 将特征及其重要性保存到DataFrame中
+importance_df = pd.DataFrame({
+    'Feature': X.columns,
+    'Importance': feature_importances
+})
+
+# 打印特征重要性
+importance_df = importance_df.sort_values(by='Importance', ascending=False)
+print("\nFeature Importance:")
+print(importance_df)
+
 # 如果模型准确率大于70%，进行预测并保存结果
 if accuracy >= 0.7:
     # 读取新数据并进行相同的处理
