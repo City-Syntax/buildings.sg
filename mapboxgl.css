@@ -1,0 +1,126 @@
+.mapboxgl-popup-content {
+    background: #fff;
+    border-radius: 10px;
+    border: 0px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mapboxgl-popup-tip {
+    fill: #fff;
+    transform: scale(1.1);
+    stroke: #fff;
+    stroke-width: 2px;
+}
+
+.mapboxgl-popup-close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #666;
+}
+
+.mapboxgl-popup-close-button:hover {
+    color: #333;
+    background-color: transparent;
+    border: none;
+}
+
+/* 调整标题和文本样式 */
+.mapboxgl-popup-content h3 {
+    margin: 3px;
+    font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    color: #007cbf;
+}
+
+.mapboxgl-popup-content p {
+    margin: 3px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12px;
+    color: #333;
+}
+
+/* 修改搜索框的 placeholder 字体 */
+.mapboxgl-ctrl-geocoder input::placeholder {
+    font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12px;
+    color: #666;
+}
+
+.mapboxgl-ctrl-geocoder .suggestions {
+    transform: translateX(-245px) translateY(36px);
+    font-size: 12px;
+    border: 0px;
+    border-radius: 10px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 修改搜索输入框的字体大小 */
+.mapboxgl-ctrl-geocoder input {
+    font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12px;
+    color: #666;
+}
+
+.mapboxgl-ctrl-bottom-left .mapboxgl-ctrl-scale {
+    background: transparent;
+    color: #333;
+    font-size: 12px;
+    position: fixed;
+    left: 100px;
+    bottom: 28px !important;
+    border: none;
+    box-shadow: none;
+    padding: 0px 10px;
+}
+
+.mapboxgl-ctrl-bottom-left.mapboxgl-ctrl-scale {
+    direction: rtl;
+    /* 让元素从右往左排列 */
+    text-align: right;
+    /* 确保文本在右侧 */
+}
+
+.mapboxgl-ctrl-scale::after {
+    content: '';
+    display: block;
+    width: 50%;
+    height: 3px;
+    border-radius: 1.5px;
+    background: #333;
+    margin-bottom: 2px;
+}
+
+.mapboxgl-ctrl-icon {
+    color: #fff;
+    border: 0;
+}
+
+.mapboxgl-ctrl-logo {
+    margin-bottom: -10px !important;
+    width: 75px !important;
+}
+
+.mapboxgl-ctrl {
+    border: 0;
+    border-radius: 10px;
+}
+
+.mapboxgl-ctrl-geocoder input:focus {
+    outline: none;
+}
+
+.mapboxgl-ctrl-attrib {
+    background: transparent !important;
+    white-space: nowrap !important;
+    /* 强制不换行 */
+    display: flex !important;
+    /* 让内容按行排列 */
+}

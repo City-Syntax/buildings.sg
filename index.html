@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singapore Building Carbon Map</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.2/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.2/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.css"
+        type="text/css">
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+
+    <link rel="stylesheet" href="mapboxgl.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body {
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        #geocoder {
+            position: absolute;
+            border: 0;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .header {
+            margin-left: 5px;
+            margin-right: 0;
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .header .title {
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            line-height: 1;
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .header .nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .header .nav a {
+            text-decoration: none;
+            color: #f0f0f0;
+            font-size: 12px;
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+
+        .header .nav a:hover,
+        .header .nav a:active {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .header .nav .active {
+            color: #fff;
+            font-weight: bold;
+        }
+
+
+        /* 弹出框样式 */
+        .popup {
+            position: fixed;
+            top: 55px;
+            right: 10px;
+            width: calc(100% - 490px);
+            bottom: 30px;
+            padding: 20px;
+            font-size: 12px;
+            line-height: 18px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 100;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .popup::-webkit-scrollbar {
+            width: 0px;
+            background-color: transparent;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            font-size: larger;
+            font-weight: bold;
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 16px;
+        }
+
+        .popup .link {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .popup table,
+        .popup th,
+        .popup td {
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+
+        .popup th,
+        .popup td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .popup td:first-child,
+        .popup th:first-child {
+            font-weight: bold;
+        }
+
+        .popup table {
+            width: 100%;
+            margin-top: 10px;
+            font-size: 12px;
+            border-collapse: collapse;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 99;
+        }
+
+        #download-btn-geojson {
+            display: block;
+            font-size: 12px;
+            margin-top: 0px;
+            margin-right: 20px;
+            padding: 8px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #download-btn-idf {
+            display: block;
+            font-size: 12px;
+            margin-top: 0px;
+            margin-right: 20px;
+            padding: 8px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #close-btn {
+            display: block;
+            font-size: 12px;
+            margin: 20px auto 0;
+            padding: 8px 12px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+
+        .calculation-box {
+            width: 230px;
+            position: absolute;
+            top: 256px;
+            max-height: 300px;
+            right: 10px;
+            background-color: #fff;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 5px;
+            border-radius: 10px;
+            color: #333;
+            font-size: 12px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: left;
+            display: none;
+        }
+
+        .calculation-box h3 {
+            font-family: 'Roboto Mono', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            font-size: 12px;
+            color: #007cbf;
+            margin: 15px 10px;
+        }
+
+        .calculation-box p {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+            margin-left: 10px;
+            line-height: 0.75;
+        }
+
+        .calculation-box .closex {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-weight: 500;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close-btn:hover {
+            color: #333;
+            border: none;
+        }
+
+        /* BCA 下拉按钮 */
+        .buttons-container {
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            width: 170px;
+            height: 100px;
+            top: 50px;
+            right: 80px;
+            background: transparent;
+            z-index: 5;
+        }
+
+        .buttons-container.show {
+            display: block;
+        }
+
+        .buttons-container button {
+            width: 170px;
+            text-align: center;
+            padding: 5px 10px;
+            margin-top: 5px;
+            color: #fff;
+            background-color: #333;
+            border-radius: 10px;
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+            border: 0;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .buttons-container button:hover,
+        .buttons-container button:active {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .buttons-container button.active {
+            color: #333;
+            background-color: #fff;
+            font-weight: bold;
+        }
+
+        /* 图例容器的样式 */
+        .legend-container-bca {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 40;
+        }
+
+        .legend-container-bca.show {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .legend-name {
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+            margin-left: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* 图例内容的隐藏样式 */
+        .legend-content {
+            position: fixed;
+            width: 220px;
+            bottom: 75px;
+            right: 10px;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+        }
+
+        .legend-content.show {
+            display: block;
+        }
+
+        .legend-grid-bca {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            row-gap: 5px;
+            column-gap: 27px;
+            margin-left: 5px;
+        }
+
+        .legend-item-bca {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 10px;
+        }
+
+        .legend-box-bca {
+            width: 20px;
+            height: 12px;
+            border-radius: 10px;
+        }
+
+        .legend-bar-eui {
+            width: 220px;
+            height: 15px;
+            background: linear-gradient(to right, #5cfe2f, #146aff, #a114ff);
+            border-radius: 10px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+        }
+
+        .legend-bar-gfa {
+            width: 220px;
+            height: 15px;
+            background: linear-gradient(to right,
+                    #660b27 0%,
+                    #e07410 20%,
+                    #faef14 50%,
+                    #c8dd69 100%);
+            border-radius: 10px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+        }
+
+        /* Green Mark 颜色定义 */
+        .greenmark-goldplus {
+            background-color: #fff457;
+        }
+
+        .greenmark-gold {
+            background-color: #d6ff33;
+        }
+
+        .greenmark-platinum {
+            background-color: #7eff3d;
+        }
+
+        .greenmark-legislated {
+            background-color: #00ff62;
+        }
+
+        .greenmark-certified {
+            background-color: #0affb1;
+        }
+
+        /* Main Layers Legend*/
+        .legend-main {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+        }
+
+        .legend-container {
+            position: fixed;
+            width: 220px;
+            bottom: 75px;
+            right: 10px;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+        }
+
+        .legend-container.active {
+            display: block;
+        }
+
+        .legend-container.show {
+            opacity: 1;
+        }
+
+        .legend-labels {
+            display: flex;
+            justify-content: space-between;
+            color: #333;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            row-gap: 5px;
+            column-gap: 10px;
+            margin-left: 5px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 5px;
+        }
+
+        .legend-box {
+            width: 12px;
+            height: 12px;
+            border-radius: 10px;
+        }
+
+        /* Archetypes 颜色定义*/
+        .legend-public-housing {
+            background-color: #1abc9c;
+        }
+
+        .legend-landed-property {
+            background-color: #2ecc71;
+        }
+
+        .legend-private-apartment {
+            background-color: #3498db;
+        }
+
+        .legend-other-dwelling {
+            background-color: #9b59b6;
+        }
+
+        .legend-educational {
+            background-color: #e67e22;
+        }
+
+        .legend-healthcare {
+            background-color: #f1c40f;
+        }
+
+        .legend-commercial {
+            background-color: #34495e;
+        }
+
+        .legend-industrial {
+            background-color: #e74c3c;
+        }
+
+        .legend-others {
+            background-color: #95a5a6;
+        }
+
+        .legend-unknown {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+        }
+
+        .legend-bar-energy {
+            width: 220px;
+            height: 15px;
+            background: linear-gradient(to right,
+                    #0d9c6c 0%,
+                    #57f46c 30%,
+                    #f5ed0f 60%,
+                    #f56b0f 100%);
+            border-radius: 10px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+        }
+
+        .legend-bar-carbon {
+            width: 220px;
+            height: 15px;
+            background: linear-gradient(to right,
+                    #2bf3a9 0%,
+                    #0fb89f 20%,
+                    #275fa0 40%,
+                    #df80e0 70%,
+                    #f0004c 100%);
+            border-radius: 10px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+        }
+
+        /* Result Panel*/
+        .result-panel {
+            position: fixed;
+            top: 50px;
+            left: 12px;
+            bottom: 30px;
+            width: 420px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 5px;
+            display: none;
+            overflow-y: auto;
+            overflow: hidden;
+        }
+
+        .result-panel.show {
+            display: block;
+        }
+
+        .result-panel select {
+            position: relative;
+            top: 5px;
+            left: 10px;
+            background-color: #333;
+            color: #fff;
+            border: 0px;
+            border-radius: 10px;
+            padding: 5px 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            font-size: 12px;
+        }
+
+        .result-panel select option {
+            margin-top: 15px;
+            background-color: #fff;
+            color: #333;
+            border-color: #fff;
+            border-radius: 10px;
+            padding: 5px 10px;
+            font-size: 12px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-panel select:hover {
+            background-color: #333;
+        }
+
+        .result-panel select::-ms-expand {
+            margin-right: 12px;
+        }
+
+        .result-panel .subtype-btn {
+            width: 130px;
+            border: 0px;
+        }
+
+        .result-panel .archetype-btn {
+            width: 200px;
+            border: 0px;
+        }
+
+        .result-panel .clear-btn {
+            position: relative;
+            top: 5px;
+            left: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 5px 10.5px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            font-size: 12px;
+        }
+
+        .result-panel .clear-btn:hover {
+            background-color: #333;
+        }
+
+        .simulation-header h2 {
+            position: relative;
+            top: 5px;
+            left: 15px;
+            font-size: larger;
+            font-weight: bold;
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 16px;
+        }
+
+        #toggle2D {
+            position: fixed;
+            top: 220px;
+            right: 10px;
+            padding: 8px 6px;
+            background-color: #fff;
+            color: #333;
+            font-size: 12px;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1;
+            border-width: 2px;
+            border: none;
+            outline: 2px solid rgba(50, 50, 50, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.1s, color 0.1s
+        }
+
+        #toggle2D:hover {
+            background-color: #f5f5f5;
+        }
+
+        #toggle2D:active,
+        #toggle2D.active {
+            background-color: #333;
+            color: #fff;
+        }
+
+        /* 关闭按钮样式 */
+        .panel-close-btn {
+            position: absolute;
+            top: 7px;
+            right: 10px;
+            font-size: 14px;
+            padding: 0px;
+            background: none;
+            border: none;
+            border-radius: 10px;
+            color: #666;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: Verdana, sans-serif;
+            transition: color 0.3s;
+        }
+
+        .panel-close-btn:hover {
+            color: #333;
+        }
+
+        #archetype-charts {
+            position: relative;
+            top: 0px;
+            width: 420px;
+        }
+
+        #sunchartsnumber {
+            position: relative;
+            top: 0px;
+            width: 420px;
+            height: 380px;
+            z-index: 90;
+            animation: showIcon 0.5s forwards;
+            animation-delay: 0s;
+        }
+
+        #sunchartsfootprint {
+            position: relative;
+            top: 0px;
+            width: 420px;
+            height: 380px;
+            z-index: 90;
+            animation: showIcon 0.5s forwards;
+            animation-delay: 0s;
+            display: none;
+        }
+
+        #archetype-charts .container {
+            display: flex;
+            gap: 10px;
+            width: 420px;
+        }
+
+        .sunchartname {
+            position: relative;
+            left: 15px;
+            top: 0px;
+            height: 26px;
+            font-size: 12px;
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #archetype-charts .toggle-container {
+            display: flex;
+            align-items: center;
+            background: #ddd;
+            border-radius: 11px;
+            border: 1.5px solid #ddd;
+            padding: 5px;
+            width: 190px;
+            height: 26px;
+            position: relative;
+            top: -5px;
+            left: 15px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        #archetype-charts .toggle-option {
+            flex: 1;
+            text-align: center;
+            line-height: 25px;
+            font-size: 12px;
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            z-index: 10;
+            position: relative;
+        }
+
+        #archetype-charts .toggle-option .active {
+            color: #fff;
+        }
+
+        #archetype-charts .toggle-slider {
+            position: absolute;
+            width: 100px;
+            height: 23px;
+            background: #333;
+            border-radius: 10px;
+            transition: 0.3s;
+            top: 0px;
+            left: 0px;
+        }
+
+        #downloadSunChart {
+            position: relative;
+            left: 30px;
+            top: -5px;
+            height: 25px;
+            width: 90px;
+            line-height: 25px;
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+            background: #333;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #downloadSunChart:hover {
+            font-weight: bold;
+        }
+
+        #downloadSunChart.active {
+            font-weight: bold;
+        }
+
+        #archetype-charts h3 {
+            font-family: 'Roboto Mono', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            font-size: 12px;
+            color: #007cbf;
+            margin: 10px 15px;
+        }
+
+        #archetype-description {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+            margin: 10px 15px;
+            line-height: 1.25;
+        }
+
+        .result-container h3 {
+            font-family: 'Roboto Mono', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            font-size: 12px;
+            color: #007cbf;
+            margin: 10px 15px;
+        }
+
+        .result-container h4 {
+            font-family: 'Roboto Mono', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            font-size: 12px;
+            color: #333;
+            margin: 10px 15px;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .result-container p {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+            margin: 0px 15px;
+            line-height: 1.5;
+        }
+
+        .result-underselect {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 420px;
+            margin-top: 10px;
+        }
+
+        .downloadBar {
+            position: relative;
+            top: 6px;
+            margin-right: 10px;
+            flex: 1;
+            min-width: 90px;
+            max-width: 90px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+            background: #333;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #carbonChartContainer {
+            position: relative;
+            top: 0px;
+            margin: -10px 10px 0px 15px;
+            flex-basis: 100%;
+            width: 390px;
+            height: 420px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            font-size: 10px;
+            z-index: 90;
+            animation: showIcon 0.5s;
+            animation-delay: 0s;
+        }
+
+        #carbonSubChart {
+            position: relative;
+            top: 0px;
+            margin: 0px 10px 10px 15px;
+            flex-basis: 100%;
+            width: 390px;
+            height: 420px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            font-size: 10px;
+            z-index: 90;
+            animation: showIcon 0.5s;
+            animation-delay: 0s;
+        }
+
+        #energyChartContainer {
+            position: relative;
+            top: 0px;
+            margin: -10px 10px 0px 15px;
+            flex-basis: 100%;
+            width: 390px;
+            height: 420px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            font-size: 10px;
+            z-index: 90;
+            animation: showIcon 0.5s;
+            animation-delay: 0s;
+        }
+
+        #energySubChart {
+            position: relative;
+            top: 0px;
+            margin: 0px 10px 10px 15px;
+            flex-basis: 100%;
+            width: 390px;
+            height: 420px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            font-size: 10px;
+            z-index: 90;
+            animation: showIcon 0.5s;
+            animation-delay: 0s;
+        }
+
+        .result-content {
+            display: none;
+            flex-wrap: wrap;
+            gap: 0px;
+            width: 420px;
+            margin-top: 10px;
+        }
+
+        .result-subtype {
+            display: none;
+            flex-wrap: wrap;
+            gap: 0px;
+            width: 420px;
+            margin-top: 10px;
+        }
+
+        .image-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ddd;
+            font-size: 12px;
+            color: #333;
+            margin: 10px 0px 0px 10px;
+            width: 140px;
+            height: 140px;
+            border-radius: 10px;
+            z-index: 40;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+
+        .overview {
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            flex: 1;
+            min-width: 240px;
+            top: 5px;
+            line-height: 1.2;
+            margin-right: 10px;
+            margin-left: 0px;
+        }
+
+        .overview p {
+            line-height: 1.5;
+        }
+
+        #archetype-value span,
+        #ec-intensity span,
+        #fitted-distribution span,
+        #distribution-params span {
+            display: inline-block;
+        }
+
+        .parameters {
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            top: 0px;
+            margin: 0px;
+            flex-basis: 100%;
+            min-width: 400px;
+            min-height: 150px;
+        }
+
+        .result-content table {
+            position: relative;
+            margin: 0px 15px 0px 15px;
+            min-width: 390px;
+            height: 100px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            font-size: 12px;
+            line-height: 1.5;
+            border-collapse: collapse;
+        }
+
+        .result-content td {
+            text-align: left;
+        }
+
+        .result-content th {
+            text-align: center;
+        }
+
+        .result-content td:nth-child(2),
+        .result-content td:nth-child(3) {
+            text-align: right;
+        }
+
+        .result-content .figure {
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            flex-basis: 100%;
+            flex: 1;
+            min-width: 400px;
+            max-width: 410px;
+            min-height: 160px;
+            margin: 0px;
+        }
+
+        #energy-eui {
+            position: relative;
+            flex-basis: 100%;
+            flex: 1;
+            top: 0px;
+            left: 15px;
+            width: 395px;
+            height: 160px;
+            margin: 0px;
+            animation-delay: 0s;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            font-size: 10px;
+        }
+
+        #carbonHistogram {
+            position: relative;
+            top: 0px;
+            min-height: 260px !important;
+            flex-basis: 100%;
+            margin: 0px;
+            margin-bottom: 10px;
+            min-width: 415px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            font-size: 10px;
+            animation-delay: 0s;
+        }
+
+        .downloadcharts {
+            position: relative;
+            left: 100px;
+            top: 10px;
+            margin-bottom: 30px;
+            padding-left: 15px;
+            padding-right: 15px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+            background: #333;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .mlswitch-label {
+            cursor: pointer;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+            background-color: #ddd;
+            border-radius: 12px;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        .mlswitch-wrapper {
+            position: fixed;
+            left: 501px;
+            bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 5px 12px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .toggle-mlswitch {
+            display: none;
+        }
+
+        .mlswitch-label::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 18px;
+            height: 18px;
+            background-color: white;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-mlswitch:checked+.mlswitch-label {
+            background-color: #4CAF50;
+        }
+
+        .toggle-mlswitch:checked+.mlswitch-label::before {
+            transform: translateX(24px);
+        }
+        
+        .label-text {
+            font-size: 12px;
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        .toggle-mlswitch:checked~.building-content #buildingLayer {
+            background-color: #ffeb3b;
+            /* 用机器学习生成的建筑类型颜色 */
+        }
+
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html" class="title">Singapore Building Carbon Map</a>
+        <nav class="nav">
+            <a href="#" id="type-link" data-content="type" class="nav-link">Archetype</a>
+            <a href="#" id="carbon-link" data-content="carbon" class="nav-link">Embodied Carbon</a>
+            <a href="#" id="energy-link" data-content="energy" class="nav-link">Operational Carbon</a>
+            <a href="#" id="bca-link" data-content="bca">BCA Layers</a>
+            <a href="#" id="data-link" data-content="data">Data</a>
+            <a href="#" id="about-link" data-content="about">About</a>
+        </nav>
+    </header>
+
+    <div id="map"></div>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
+    <script
+        src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+
+    <div class="buttons-container">
+        <button onclick="showLayerGroup('bca-buildings-gfa')">Gross Floor Area</button>
+        <button onclick="showLayerGroup('bca-buildings-eui')">Energy Use Intensity</button>
+        <button onclick="showLayerGroup('bca-buildings-gm')">GreenMark</button>
+    </div>
+
+    <!-- 图例容器 -->
+    <div class="legend-container-bca">
+        <!-- GFA 图例 -->
+        <div class="legend-content bca-buildings-gfa">
+            <div class="legend-name">Gross Floor Area (×10² m²)</div>
+            <div class="legend-bar-gfa"></div>
+            <div class="legend-labels">
+                <span>0</span>
+                <span>200</span>
+                <span>1000</span>
+                <span>2000</span>
+            </div>
+        </div>
+
+        <!-- EUI 图例 -->
+        <div class="legend-content bca-buildings-eui">
+            <div class="legend-name">Energy Use Intensity (kW/m²)</div>
+            <div class="legend-bar-eui"></div>
+            <div class="legend-labels">
+                <span>0</span>
+                <span>300</span>
+                <span>600</span>
+            </div>
+        </div>
+
+        <!-- GreenMark 图例 -->
+        <div class="legend-content bca-buildings-gm">
+            <div class="legend-name">GreenMark Certification</div>
+            <div class="legend-grid-bca">
+                <div class="legend-item-bca">
+                    <div class="legend-box-bca greenmark-goldplus"></div>
+                    <span>Gold Plus</span>
+                </div>
+                <div class="legend-item-bca">
+                    <div class="legend-box-bca greenmark-gold"></div>
+                    <span>Gold</span>
+                </div>
+                <div class="legend-item-bca">
+                    <div class="legend-box-bca greenmark-platinum"></div>
+                    <span>Platinum</span>
+                </div>
+                <div class="legend-item-bca">
+                    <div class="legend-box-bca greenmark-legislated"></div>
+                    <span>Legislated</span>
+                </div>
+                <div class="legend-item-bca">
+                    <div class="legend-box-bca greenmark-certified"></div>
+                    <span>Certified</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="legend-container type">
+        <div class="legend-name">Building Types</div>
+        <div class="legend-grid">
+            <div class="legend-item">
+                <div class="legend-box legend-public-housing"></div>
+                <span>Public Housing</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-healthcare"></div>
+                <span>Healthcare</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-landed-property"></div>
+                <span>Landed Property</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-commercial"></div>
+                <span>Commercial</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-private-apartment"></div>
+                <span>Private Apt.</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-industrial"></div>
+                <span>Industrial</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-other-dwelling"></div>
+                <span>Other Dwelling</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-others"></div>
+                <span>Others</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-educational"></div>
+                <span>Educational Inst.</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-unknown"></div>
+                <span>Unknown</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="legend-container carbon">
+        <div class="legend-name">Simulated Embodied Carbon (×10² kgCO₂e)</div>
+        <div class="legend-main">
+            <div class="legend-bar-carbon"></div>
+            <div class="legend-labels">
+                <span>5</span>
+                <span>50</span>
+                <span>500</span>
+                <span>1000</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="legend-container energy">
+        <div class="legend-name">Simulated Operational Carbon (×10² GJ)</div>
+        <div class="legend-main">
+            <div class="legend-bar-energy"></div>
+            <div class="legend-labels">
+                <span>0</span>
+                <span>50</span>
+                <span>500</span>
+                <span>5000</span>
+            </div>
+        </div>
+    </div>
+
+    <!--popup for data and about-->
+    <div id="overlay" class="overlay"></div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div id="popup-text"></div>
+            <button id="download-btn-geojson" style="display:none;">Download GeoJSON Document (Map Dataset)</button>
+            <button id="download-btn-idf" style="display:none;">Download IDF Package (for all Archetypes)</button>
+            <button id="close-btn">Close</button>
+        </div>
+    </div>
+
+    <!--draw polygon and calculating funtion-->
+    <div class="calculation-box">
+        <button class="closex">&times;</button>
+        <h3>Area Information</h3>
+        <div id="calculated-area"></div>
+    </div>
+
+    <div class="result-panel">
+        <div class="simulation-header"></div>
+        <!-- Dropdown Menu fro Archetype selecting-->
+        <select id="subtype" class="subtype-btn" onchange="updateArchetypes()">
+            <option value="">All Subtype</option>
+            <option value="publicHousing">Public Housing</option>
+            <option value="privateHousing">Private Housing</option>
+            <option value="otherDwelling">Other Dwelling</option>
+            <option value="commercial">Commercial</option>
+            <option value="healthcare">Healthcare</option>
+            <option value="educational">Educational Inst.</option>
+            <option value="industrial">Industrial</option>
+            <option value="others">Others</option>
+        </select>
+
+        <select id="archetype" class="archetype-btn">
+            <option value="">All Archetype</option>
+        </select>
+
+        <button class="clear-btn" onclick="clearSelections()">Clear</button>
+        <button class="panel-close-btn" onclick="panelClose()">&times;</button>
+
+        <div id="archetype-charts">
+            <div id="sunchartsnumber"></div>
+            <div id="sunchartsfootprint"></div>
+            <div class="container">
+                <div class="sunchartname">By Building</div>
+                <div class="toggle-container" onclick="toggleSwitch()">
+                    <div class="toggle-slider"></div>
+                    <div id="numberLabel" class="toggle-option active">Numbers</div>
+                    <div id="footprintLabel" class="toggle-option">Footprint</div>
+                </div>
+                <div id="downloadSunChart">Download</div>
+            </div>
+            <div class="type-intro">
+                <h3>Archetype Introduction</h3>
+                <p id="archetype-description">Select a subtype or an archetype to see the description.</p>
+            </div>
+            <script>
+                let isNumber = true;
+                function toggleSwitch() {
+                    isNumber = !isNumber;
+                    document.querySelector('.toggle-slider').style.transform = isNumber ? 'translateX(0)' : 'translateX(calc(100% - 12.5px))';
+                    document.getElementById('numberLabel').classList.toggle('active', isNumber);
+                    document.getElementById('footprintLabel').classList.toggle('active', !isNumber);
+                    document.getElementById('sunchartsnumber').style.display = isNumber ? 'flex' : 'none';
+                    document.getElementById('sunchartsfootprint').style.display = isNumber ? 'none' : 'flex';
+                }
+
+                document.getElementById("downloadSunChart").addEventListener("click", function () {
+                    this.classList.add("active");
+                    let chart1 = echarts.getInstanceByDom(document.getElementById("sunchartsnumber"));
+                    let chart2 = echarts.getInstanceByDom(document.getElementById("sunchartsfootprint"));
+
+                    if (chart1) {
+                        let link1 = document.createElement("a");
+                        link1.href = chart1.getDataURL({ type: "png", pixelRatio: 2, backgroundColor: "#fff" });
+                        link1.download = "archetype_sg_sunchartsnumber.png";
+                        link1.click();
+                    }
+
+                    if (chart2) {
+                        let link2 = document.createElement("a");
+                        link2.href = chart2.getDataURL({ type: "png", pixelRatio: 2, backgroundColor: "#fff" });
+                        link2.download = "archetype_sg_sunchartsfootprint.png";
+                        link2.click();
+                    }
+                });
+            </script>
+        </div>
+
+        <div id="carbon-container" class="result-container">
+            <div id="carbon-underselect" class="result-underselect">
+                <h4>Embodied Carbon Intensity (kgCO₂e/m²)</h4>
+                <div id="downloadCarbonBar" class="downloadBar">Download</div>
+                <div id="carbonChartContainer" class="ChartContainer"></div>
+                <script>
+                    let archetypes = [
+                        "HDB", "Landed property", "Private apt. & condo.", "Shophouse", "Hotel",
+                        "Retail", "Mixed development", "Office", "Business park", "Hospital",
+                        "Clinic", "Nursing home", "IHL", "Non-IHL",
+                        "Industrial B1", "Industrial B2", "Data centre", "Cultural inst.",
+                        "Sports", "Restaurant", "Hawker centre", "Supermarket"
+                    ];
+
+                    let values = [646.3, 527.1, 572.2, 848.1, 848.1, 527.4, 604.5, 519.97, 559.1,
+                        585.6, 652.9, 600, 546.3, 594.9, 556.4, 637.4, 700, 523.6,
+                        561.9, 620, 580, 550];
+
+                    let colorMap = {
+                        "HDB": "#1abc9c", "Landed property": "#2ecc71", "Private apt. & condo.": "#3498db",
+                        "Shophouse": "#9b59b6", "Hotel": "#9b59b6", "Retail": "#34495e", "Mixed development": "#34495e",
+                        "Office": "#34495e", "Business park": "#34495e", "Hospital": "#f1c40f",
+                        "Clinic": "#f1c40f", "Nursing home": "#f1c40f", "IHL": "#e67e22",
+                        "Non-IHL": "#e67e22", "Industrial B1": "#e74c3c", "Industrial B2": "#e74c3c",
+                        "Data centre": "#95a5a6", "Cultural inst.": "#95a5a6",
+                        "Sports": "#95a5a6", "Restaurant": "#95a5a6", "Hawker centre": "#95a5a6",
+                        "Supermarket": "#95a5a6"
+                    };
+
+                    let option = {
+                        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, textStyle: { fontSize: 12, color: '#333' }, borderRadius: 10 },
+                        grid: { left: '110px', right: '15px', top: '10px', bottom: '20px' },
+                        xAxis: { type: 'value', name: 'kgCO₂e/m²', axisLabel: { fontSize: 10, color: '#333' }, max: 900 },
+                        yAxis: { type: 'category', data: archetypes.reverse(), axisLabel: { fontSize: 10, color: '#333' } },
+                        series: [{
+                            type: 'bar',
+                            data: values.reverse().map((v, i) => ({ value: v, itemStyle: { color: colorMap[archetypes[i]], borderRadius: [0, 10, 10, 0] } })),
+                            label: { show: true, position: 'right', formatter: '{c}', fontSize: 10, color: '#333' }
+                        }]
+                    };
+
+                    let chart = echarts.init(document.getElementById('carbonChartContainer'));
+                    chart.setOption(option);
+
+                    document.getElementById('downloadCarbonBar').addEventListener('click', function () {
+                        const imgURL = chart.getDataURL({ pixelRatio: 2, backgroundColor: '#fff' });
+                        const link = document.createElement('a');
+                        link.href = imgURL;
+                        link.download = 'embodied_carbon_intensity_all.png';
+                        link.click();
+                    });
+                </script>
+                <p>Select a subtype then an archetype to see detailed simulation result.</p>
+            </div>
+            <div id="carbon-subtype" class="result-subtype">
+                <h4>Embodied Carbon Intensity (kgCO₂e/m²)</h4>
+                <div id="downloadSubCarbonBar" class="downloadBar">Download</div>
+                <div id="carbonSubChart" class="subChartContainer"></div>
+                <p>Select an archetype to see detailed simulation result.</p>
+            </div>
+            <div id="carbon-content" class="result-content">
+                <div id="image-container-carbon" class="image-container"></div>
+                <div class="overview">
+                    <h3>Simulation Overview</h3>
+                    <p id="carbon-overview">
+                        Archetype: <span id="archetype-value"></span><br>
+                        Scenario: Baseline<br>
+                        Mean EC Intensity: <span id="ec-intensity"></span><br>
+                        Fitted Distribution: <span id="fitted-distribution"></span><br>
+                        Distribution Parameters: <span id="distribution-params"></span>
+                    </p>
+                </div>
+                <div class="parameters">
+                    <h3>Simulation Parameters</h3>
+                    <table id="carbon-table">
+                        <thead>
+                            <tr>
+                                <th>Materials</th>
+                                <th>Mean Material Intensity</th>
+                                <th>Mean Waste Factor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Concrete</td>
+                                <td><span id="concreteMI"></span></td>
+                                <td><span id="concreteWF"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Steel</td>
+                                <td><span id="steelMI"></span></td>
+                                <td><span id="steelWF"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Glass</td>
+                                <td><span id="glassMI"></span></td>
+                                <td><span id="glassWF"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Aluminium</td>
+                                <td><span id="alMI"></span></td>
+                                <td><span id="alWF"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Brick</td>
+                                <td><span id="brickMI"></span></td>
+                                <td><span id="brickWF"></span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Mean onsite emissions</strong></td>
+                                <td><span id="meanOnsiteEmissions"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="carbon-figure" class="figure">
+                    <h3>MCS Results</h3>
+                    <div id="carbonHistogram"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="energy-container" class="result-container">
+            <div id="energy-underselect" class="result-underselect">
+                <h4>Energy Use Intensity (kWh/m²)</h4>
+                <div id="downloadEnergyBar" class="downloadBar">Download</div>
+                <div id="energyChartContainer" class="ChartContainer"></div>
+                <script>
+                    const energyChart = echarts.init(document.getElementById('energyChartContainer'));
+
+                    const euiData = {
+                        "HDB": [10.93, 2.61, 8.17, 1.52],
+                        "Landed property": [26.61, 3.58, 20.42, 0.70],
+                        "Private apt. & condo.": [16.39, 3.58, 13.61, 1.44],
+                        "Shophouse": [70.00, 15.00, 12.00, 3.00],
+                        "Hotel": [81.85, 6.19, 11.16, 2.70],
+                        "Retail": [94.03, 12.62, 11.72, 4.93],
+                        "Mixed development": [70.00, 15.00, 12.00, 3.00],
+                        "Office": [70.00, 15.00, 12.00, 3.00],
+                        "Business Park": [42.08, 7.72, 14.15, 1.24],
+                        "Hospital": [85.51, 11.48, 14.97, 1.97],
+                        "Clinic": [41.60, 5.16, 9.17, 1.11],
+                        "Nursing home": [24.67, 4.13, 6.39, 1.80],
+                        "IHL": [133.86, 5.00, 10.00, 1.00],
+                        "Non-IHL": [0.00, 5.46, 2.87, 0.83],
+                        "Industrial B1": [99.87, 9.26, 29.63, 2.31],
+                        "Industrial B2": [99.87, 9.26, 29.63, 2.31],
+                        "Data centre": [109.22, 9.38, 175.22, 0.63],
+                        "Cultural inst.": [47.13, 7.64, 8.94, 7.21],
+                        "Sports": [37.60, 9.36, 4.68, 5.06],
+                        "Restaurant": [83.72, 9.95, 82.92, 14.15],
+                        "Hawker centre": [0.00, 0.00, 86.05, 14.88],
+                        "Supermarket": [143.94, 26.78, 66.95, 6.86]
+                    };
+
+                    const categoryList = Object.keys(euiData).reverse();
+                    const dataValues = Object.values(euiData).reverse();
+
+                    const seriesData = [
+                        { name: 'Cooling', type: 'bar', stack: 'total', itemStyle: { color: '#A5F3FC' }, data: dataValues.map(v => v[0]) },
+                        { name: 'Interior Lighting', type: 'bar', stack: 'total', itemStyle: { color: '#FFFF00' }, data: dataValues.map(v => v[1]) },
+                        { name: 'Electric Equipment', type: 'bar', stack: 'total', itemStyle: { color: '#E0E0E0' }, data: dataValues.map(v => v[2]) },
+                        { name: 'Water System', type: 'bar', stack: 'total', itemStyle: { color: '#5a2e14' }, data: dataValues.map(v => v[3]) }
+                    ];
+
+                    const chartOption = {
+                        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, textStyle: { fontSize: 12, color: '#333' }, borderRadius: 10 },
+                        grid: { left: '110px', right: '10px', top: '10px', bottom: '20px' },
+                        xAxis: { type: 'value', axisLabel: { fontSize: 10, color: '#333' } },
+                        yAxis: { type: 'category', axisLabel: { fontSize: 10, color: '#333', }, data: categoryList },
+                        series: seriesData
+                    };
+
+                    energyChart.setOption(chartOption);
+
+                    document.getElementById('downloadEnergyBar').addEventListener('click', function () {
+                        const imgURL = energyChart.getDataURL({ pixelRatio: 2, backgroundColor: '#fff' });
+                        const link = document.createElement('a');
+                        link.href = imgURL;
+                        link.download = 'operational_carbon_intensity_all.png';
+                        link.click();
+                    });
+                </script>
+                <p>Select a subtype then an archetype to see detailed simulation result.</p>
+            </div>
+            <div id="energy-subtype" class="result-subtype">
+                <h4>Energy Use Intensity (kWh/m²)</h4>
+                <div id="downloadSubEnergyBar" class="downloadBar">Download</div>
+                <div id="energySubChart" class="SubChart"></div>
+                <p>Select an archetype to see detailed simulation result.</p>
+            </div>
+            <div id="energy-content" class="result-content">
+                <div id="image-container-energy" class="image-container"></div>
+                <div class="overview">
+                    <h3>Simulation Overview</h3>
+                    <p id="energy-overview">
+                        Archetype: <span id="archetype-val"></span><br>
+                        Scenario: Baseline<br>
+                        People Density: <span id="people-density"></span><br>
+                        Equipment Power Density: <span id="equip-density"></span><br>
+                        Lighting Power Density: <span id="light-density"></span>
+                    </p>
+                </div>
+                <div class="parameters">
+                    <h3>Simulation Parameters</h3>
+                    <table id="energy-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Parameter</th>
+                                <th>Value / Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Conditioning</td>
+                                <td>Cooling Set Point</td>
+                                <td><span id="coolingSet"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Conditioning</td>
+                                <td>Min Fresh Air Area</td>
+                                <td><span id="minFreshAir"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Envelope</td>
+                                <td>Roof U-Value</td>
+                                <td><span id="roofUval"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Envelope</td>
+                                <td>Facade U-Value</td>
+                                <td><span id="facadeUval"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Envelope</td>
+                                <td>Partition U-Value</td>
+                                <td><span id="partitionUval"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Envelope</td>
+                                <td>Slab U-Value</td>
+                                <td><span id="slabUval"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Infiltration</td>
+                                <td>Air Changes per Hour</td>
+                                <td><span id="airChange"></span></td>
+                            </tr>
+                            <tr>
+                                <td>HAVC Setting</td>
+                                <td>Cooling COP</td>
+                                <td><span id="coolingCOP"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="energy-figure" class="figure">
+                    <h3>EUI Results</h3>
+                    <div id="energy-eui"></div>
+                </div>
+                <div id="downloadEnergyCharts" class="downloadcharts">Download IDF file (EnergyPlus)</div>
+            </div>
+        </div>
+
+    </div>
+
+    <button id="toggle2D">2D</button>
+    
+    <!--ml switch-->
+    <div class="mlswitch-wrapper">
+        <span class="label-text">Show ML-Generated Buildings</span>
+        <input type="checkbox" id="buildingTypeToggle" class="toggle-mlswitch">
+        <label for="buildingTypeToggle" class="mlswitch-label"></label>
+    </div>
+
+    <!--js-->
+    <script src="popup.js"></script>
+    <script src="mapbox copy.js"></script>
+    <script src="panel.js"></script>
+
+</body>
+
+</html>

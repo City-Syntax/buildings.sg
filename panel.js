@@ -1,0 +1,1167 @@
+document.addEventListener("DOMContentLoaded", function () {
+    let resultPanel = document.querySelector(".result-panel");
+    let carbonLink = document.getElementById("carbon-link");
+    let energyLink = document.getElementById("energy-link");
+    let typeLink = document.getElementById("type-link");
+    let subtypeSelect = document.getElementById("subtype");
+    let archetypeSelect = document.getElementById("archetype");
+    let clearButton = document.querySelector(".clear-btn");
+    let closeButton = document.querySelector('.panel-close-btn');
+    let resultText = document.querySelector(".result-text");
+    let simulationHeader = document.querySelector(".simulation-header");
+    let currentSimulation = "";
+    let archetypesunCharts = document.getElementById("archetype-charts");
+    let sunChartsElementNumber = document.getElementById("sunchartsnumber");
+    let sunChartsElementFootprint = document.getElementById("sunchartsfootprint");
+    let carbonContainer = document.getElementById("carbon-container");
+    let energyContainer = document.getElementById("energy-container");
+
+    resultPanel.addEventListener('wheel', (event) => {
+        event.preventDefault();
+
+        resultPanel.scrollBy({
+            top: event.deltaY, // 垂直滚动
+            behavior: 'smooth' // 平滑滚动
+        });
+    });
+
+    // 获取所有的 nav-link 元素
+    const navLinks = document.querySelectorAll('.nav .nav-link');
+
+    // 获取 bca-link 和相关的元素
+    const bcaLink = document.getElementById('bca-link');
+    const legendContainerBCA = document.querySelector('.legend-container-bca');
+    const buttonsContainer = document.querySelector('.buttons-container');
+
+    // 遍历每个链接并添加点击事件监听
+    navLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            // 如果点击的不是 bca-link，则移除 bca-link 的 active 类并隐藏相关元素
+            if (event.target.id !== 'bca-link') {
+                bcaLink.classList.remove('active');
+                legendContainerBCA.classList.remove('active', 'show');
+                buttonsContainer.classList.remove('active', 'show');
+            } else {
+                // 如果点击的是 bca-link，确保它的相关元素显示
+                bcaLink.classList.add('active');
+                legendContainerBCA.classList.add('active', 'show');
+                buttonsContainer.classList.add('active', 'show');
+            }
+        });
+    });
+
+    setTimeout(function () {
+        let resultPanel = document.querySelector(".result-panel");
+        resultPanel.classList.remove("show");
+    }, 0);
+
+    const simulationContent = {
+        energy: "<h2>Operational Carbon</h2>",
+        carbon: "<h2>Embodied Carbon</h2>",
+        type: "<h2>Building Archetype</h2>"
+    };
+
+    const archetypes = {
+        publicHousing: ["HDB PPVC", "HDB non-PPVC"],
+        privateHousing: ["Landed property", "Private apartment & condo"],
+        otherDwelling: ["Shophouse", "Hotel"],
+        commercial: ["Retail", "Mixed development", "Office", "Business Park"],
+        healthcare: ["Hospital", "Clinic", "Nursing home"],
+        educational: ["Inst. of higher learning (IHL)", "Non-IHL"],
+        industrial: ["B1", "B2"],
+        others: ["Data centre", "Civic, community & cultural inst.", "Sports & recreation", "Restaurant", "Hawker centre", "Supermarket"]
+    };
+
+    const descriptions = {
+        publicHousing: "Public Housing includes government-built housing for citizens, primarily managed by the Housing and Development Board (HDB). These housing schemes offer affordable living options for Singaporean citizens.",
+        privateHousing: "Private Housing includes properties built by private developers. These properties are sold to private owners and typically include condominiums, landed houses, and other forms of private residential developments.",
+        otherDwelling: "Other Dwelling includes various non-residential properties that serve as residential spaces, such as shophouses or non-traditional forms of housing.",
+        commercial: "Commercial properties are buildings or spaces used for business purposes, such as offices, retail spaces, business parks, and mixed-use developments.",
+        healthcare: "Healthcare properties include hospitals, clinics, nursing homes, and other buildings designed for medical and health-related services.",
+        educational: "Educational properties include institutions of higher learning such as universities, colleges, and schools. Non-IHL refers to educational institutions that do not fall under higher learning.",
+        industrial: "Industrial properties are used for manufacturing, production, and other industrial purposes, such as factories, warehouses, and industrial parks.",
+        others: "Other categories include various types of properties such as data centres, civic buildings, community and cultural institutions, sports and recreation facilities, restaurants, hawker centres, and supermarkets."
+    };
+
+    const archetypeDescriptions = {
+        "HDB PPVC": "Prefabricated Pre-finished Volumetric Construction (PPVC) is a method of building that uses modular units, pre-built offsite and assembled onsite. This approach helps reduce construction time and enhances quality control.",
+        "HDB non-PPVC": "Traditional method of construction used by the Housing and Development Board (HDB) without prefabricated units. It involves the use of concrete and steel to construct public housing units.",
+        "Landed property": "Landed properties are individual houses that have their own plot of land. They include detached houses, semi-detached houses, and terraced houses, offering more space and privacy compared to high-rise flats.",
+        "Private apartment & condo": "Private apartments and condominiums are residential buildings that are owned privately. They usually offer amenities such as swimming pools, gyms, and security, and can be found in both city-centre and suburban areas.",
+        "Shophouse": "Shophouses are traditional buildings that combine both commercial and residential uses. They typically consist of a ground-floor retail space with living quarters above.",
+        "Hotel": "Hotels are commercial establishments offering accommodations to travelers, with amenities such as room service, concierge, and recreational facilities.",
+        "Retail": "Retail properties include spaces for selling goods directly to consumers, such as shopping malls, stores, and boutiques.",
+        "Mixed development": "Mixed development properties are those that combine different types of uses, typically commercial, retail, and residential, within a single complex.",
+        "Office": "Office buildings are spaces designed for business and administrative purposes. They can range from small office buildings to large office towers.",
+        "Business Park": "Business Parks are specialized areas designed to accommodate various types of businesses, particularly in research and development, information technology, and industrial services.",
+        "Hospital": "Hospitals are large healthcare facilities that provide medical treatment and emergency care, with inpatient and outpatient services.",
+        "Clinic": "Clinics are smaller healthcare facilities that offer outpatient medical services, typically for general practitioners or specialized services.",
+        "Nursing home": "Nursing homes are facilities that provide residential care and support for elderly individuals, including medical assistance and daily living activities.",
+        "Inst. of higher learning (IHL)": "Institutions of higher learning (IHL) include universities, polytechnics, and other higher education institutions offering advanced degrees and diplomas.",
+        "Non-IHL": "Non-Institution of Higher Learning refers to other types of educational institutions, including schools and training centres that provide education at a pre-university or vocational level.",
+        "B1": "B1 industrial properties are those zoned for light industry or research and development activities. They often accommodate businesses that do not involve heavy manufacturing processes.",
+        "B2": "B2 industrial properties are those zoned for general industrial uses, including manufacturing and processing activities that may produce noise, pollution, or waste.",
+        "Data centre": "Data centres are facilities used to house computer systems and associated components, such as telecommunications and storage systems, often with high levels of security and redundancy.",
+        "Civic, community & cultural inst.": "Civic, community, and cultural institutions include public buildings that serve community and cultural purposes, such as libraries, museums, and community centres.",
+        "Sports & recreation": "Sports and recreation properties include facilities such as sports complexes, stadiums, gyms, swimming pools, and recreational parks.",
+        "Restaurant": "Restaurants are establishments that provide food and beverages to customers in exchange for money, typically served at tables in a dining setting.",
+        "Hawker centre": "Hawker centres are open-air food courts where various food vendors sell affordable local dishes, providing an essential part of Singapore's food culture.",
+        "Supermarket": "Supermarkets are large retail spaces that sell a wide variety of food, beverages, and household products, typically arranged in aisles."
+    };
+
+    function toggleSimulationType(simulationType) {
+        // 找到当前点击的链接
+        const currentLink = document.getElementById(`${simulationType}-link`);
+        const isActive = currentLink.classList.contains('active');
+        const resultPanel = document.querySelector('.result-panel'); // 确保你有一个结果面板
+
+        if (isActive) {
+            resultPanel.classList.remove("show");
+            currentLink.classList.remove('active'); // 取消激活状态
+            // currentSimulation = ""; // 清空当前模拟类型
+        } else {
+            // 更新当前模拟内容
+            currentSimulation = simulationType;
+            resultPanel.classList.add("show"); // 显示面板
+            document.querySelector(".simulation-header").innerHTML = simulationContent[currentSimulation];
+
+            // 激活当前链接
+            const allLinks = document.querySelectorAll('.nav-link');
+            allLinks.forEach(link => link.classList.remove('active')); // 清除所有链接的激活状态
+            currentLink.classList.add('active'); // 设置当前链接为激活状态
+        }
+    }
+
+    function panelClose() {
+        const resultPanel = document.querySelector('.result-panel');
+        if (resultPanel) {
+            resultPanel.classList.remove('show');
+        }
+    }
+
+    closeButton.addEventListener('click', panelClose);
+
+    // 返回建筑类型选择结果
+    function updateArchetypes() {
+        let subtype = subtypeSelect.value;
+        archetypeSelect.innerHTML = "<option value=''>All Archetype</option>";
+
+        if (subtype && archetypes[subtype]) {
+            archetypes[subtype].forEach(option => {
+                let optionElement = document.createElement("option");
+                optionElement.value = option;
+                optionElement.textContent = option;
+                archetypeSelect.appendChild(optionElement);
+            });
+        }
+    }
+
+    function updateArchetypeDescription() {
+        let subtype = subtypeSelect.value; // 获取选中的subtype
+        let archetype = archetypeSelect.value; // 获取选中的archetype
+        let archetypeDescriptionElement = document.getElementById("archetype-description");
+
+        if (archetype && archetypeDescriptions[archetype]) {
+            archetypeDescriptionElement.textContent = archetypeDescriptions[archetype];
+        }
+        // 如果没有选择archetype，但选择了subtype，显示subtype的介绍
+        else if (subtype && descriptions[subtype]) {
+            archetypeDescriptionElement.textContent = descriptions[subtype];
+        } else {
+            // 如果没有subtype或archetype，显示默认信息
+            archetypeDescriptionElement.textContent = "Please select a valid archetype or subtype.";
+        }
+    }
+
+    // 监听subtypeSelect和archetypeSelect的变化
+    subtypeSelect.addEventListener("change", updateArchetypeDescription);
+    archetypeSelect.addEventListener("change", updateArchetypeDescription);
+    clearButton.addEventListener("click", updateArchetypeDescription);
+
+    function addImage(archetypeSelect, containerId) {
+        let imgElement = document.createElement("img");
+        imgElement.alt = archetypeSelect;
+        imgElement.src = `image/${archetypeSelect}.jpg?nocache=${new Date().getTime()}`;
+
+        // 动态获取目标容器
+        let imageContainer = document.getElementById(containerId);
+
+        // 先删除旧图片
+        const existingImage = imageContainer.querySelector("img");
+        if (existingImage) {
+            imageContainer.removeChild(existingImage);
+        }
+
+        imgElement.onerror = () => {
+            console.error("图片加载失败:", imgElement.src);
+        };
+
+        imageContainer.appendChild(imgElement);
+    }
+
+    // Simulation details
+    function carbonsimulationDetails() {
+        const archetypeSpan = document.getElementById("archetype-val");
+        const ecSpan = document.getElementById("ec-intensity");
+        const distSpan = document.getElementById("fitted-distribution");
+        const paramsSpan = document.getElementById("distribution-params");
+        const archetypeSelect = document.getElementById("archetype");
+        const concreteMISpan = document.getElementById("concreteMI");
+        const concreteWFSpan = document.getElementById("concreteWF");
+        const steelMISpan = document.getElementById("steelMI");
+        const steelWFSpan = document.getElementById("steelWF");
+        const glassMISpan = document.getElementById("glassMI");
+        const glassWFSpan = document.getElementById("glassWF");
+        const alMISpan = document.getElementById("alMI");
+        const alWFSpan = document.getElementById("alWF");
+        const brickMISpan = document.getElementById("brickMI");
+        const brickWFSpan = document.getElementById("brickWF");
+        const meanOnsiteEmissionsSpan = document.getElementById("meanOnsiteEmissions");
+
+        if (!archetypeSpan || !ecSpan || !distSpan || !paramsSpan || !archetypeSelect) {
+            return;
+        }
+
+        let excelData = [];
+
+        async function loadExcel() {
+            try {
+                const response = await fetch("data/building embodied carbon simulation details.xlsx");
+                if (!response.ok) {
+                    return;
+                }
+
+                const arrayBuffer = await response.arrayBuffer();
+                const workbook = XLSX.read(arrayBuffer, { type: "array" });
+
+                const sheet = workbook.Sheets["Baseline Scenario"];
+                if (!sheet) {
+                    return;
+                }
+
+                excelData = XLSX.utils.sheet_to_json(sheet);
+
+                archetypeSelect.addEventListener("change", updateCarbonDetails);
+                updateCarbonDetails();
+            } catch (error) {
+                console.error("Embodied Carbon Excel failed:", error);
+            }
+        }
+
+        function updateCarbonDetails() {
+            const selectedArchetype = archetypeSelect.value;
+
+            if (excelData.length === 0) {
+                console.warn("Embodied Carbon Excel is empty");
+                return;
+            }
+
+            const data = excelData.find(row => row.Archetypes === selectedArchetype);
+
+            if (data) {
+                // detail descriptions
+                archetypeSpan.textContent = data.Archetypes || "N/A";
+                ecSpan.textContent = data["Mean EC Intensity"] ? `${parseFloat(data["Mean EC Intensity"]).toFixed(4)} kgCO₂e/m²` : "N/A";
+                distSpan.textContent = data["Fitted Distribution"] || "N/A";
+                paramsSpan.textContent = data["Distribution Parameters"] || "N/A";
+
+                // parameters
+                concreteMISpan.textContent = data["Mean MI Concrete"] ? `${parseFloat(data["Mean MI Concrete"]).toFixed(4)} kg/m²` : "N/A";
+                concreteWFSpan.textContent = data["Mean WF Concrete"] ? parseFloat(data["Mean WF Concrete"]).toFixed(4) : "N/A";
+                steelMISpan.textContent = data["Mean MI Steel"] ? `${parseFloat(data["Mean MI Steel"]).toFixed(4)} kg/m²` : "N/A";
+                steelWFSpan.textContent = data["Mean WF Steel"] ? parseFloat(data["Mean WF Steel"]).toFixed(4) : "N/A";
+                glassMISpan.textContent = data["Mean MI Glass"] ? `${parseFloat(data["Mean MI Glass"]).toFixed(4)} kg/m²` : "N/A";
+                glassWFSpan.textContent = data["Mean WF Glass"] ? parseFloat(data["Mean WF Glass"]).toFixed(4) : "N/A";
+                alMISpan.textContent = data["Mean MI Aluminium"] ? `${parseFloat(data["Mean MI Aluminium"]).toFixed(4)} kg/m²` : "N/A";
+                alWFSpan.textContent = data["Mean WF Aluminium"] ? parseFloat(data["Mean WF Aluminium"]).toFixed(4) : "N/A";
+                brickMISpan.textContent = data["Mean MI Bricks"] ? `${parseFloat(data["Mean MI Bricks"]).toFixed(4)} kg/m²` : "N/A";
+                brickWFSpan.textContent = data["Mean WF Bricks"] ? parseFloat(data["Mean WF Bricks"]).toFixed(4) : "N/A";
+                meanOnsiteEmissionsSpan.textContent = data["Mean onsite emissions"] ? `${parseFloat(data["Mean onsite emissions"]).toFixed(4)} kgCO₂e/m²` : "N/A";
+
+                console.log("The Embodied Carbon Data is refreshed");
+            } else {
+                console.warn("No matching Archetype data found!");
+            }
+        }
+
+        loadExcel();
+    }
+
+    // 直方图 三个情景的MCS 结果
+    function updateCarbonArcheChart() {
+        var chartDom = document.getElementById('carbonHistogram');
+        console.log("Chart DOM:", chartDom);
+        if (!chartDom) {
+            console.error("Error: carbonHistogram container not found.");
+            return;
+        }
+
+        var carbonHistogram = echarts.init(chartDom);
+        console.log("ECharts initialized successfully.");
+
+        async function fetchData() {
+            const files = ['data/Asia.json', 'data/Baseline.json', 'data/PAMC.json'];
+            const names = ['Asia', 'Baseline', 'PAMC'];
+            const binCount = 40;
+            const xMin = 0, xMax = 2000;
+            const binSize = (xMax - xMin) / binCount;
+
+            try {
+                let datasets = await Promise.all(files.map(file => fetch(file).then(res => res.json())));
+
+                if (!datasets || datasets.length === 0) {
+                    console.error("Error: JSON data is empty or failed to load.");
+                    return;
+                }
+
+                let selectedBuildingType = archetypeSelect.value;
+                console.log("Selected building type:", selectedBuildingType);
+
+                let histogramData = datasets.map((data, i) => {
+                    let values = Object.values(data[selectedBuildingType] || {});
+                    let bins = new Array(binCount).fill(0);
+                    let totalCount = values.length;
+                    values.forEach(val => {
+                        if (val >= xMin && val <= xMax) {
+                            let binIndex = Math.floor((val - xMin) / binSize);
+                            bins[binIndex]++;
+                        }
+                    });
+
+                    bins = bins.map(bin => parseFloat((bin / (totalCount * binSize) * 100).toFixed(4)));
+
+                    return { name: names[i], type: 'bar', data: bins };
+                });
+
+                let xAxisData = Array.from({ length: binCount }, (_, i) => Math.round(xMin + (i + 0.5) * binSize));
+
+                let colors = ['#7ed6df', '#30336b', '#ccff66'];
+
+                let option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { type: 'shadow' },
+                        textStyle: { fontSize: 12, color: '#333' },
+                        borderRadius: 10
+                    },
+                    legend: {
+                        data: names,
+                        textStyle: {
+                            fontSize: 12,
+                            color: '#333'
+                        },
+                        borderRadius: 10,
+                        top: 0
+                    },
+                    grid: { left: '67px', right: '35px', top: '35px', bottom: '40px' },
+                    toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        left: 'right',
+                        top: 'center',
+                        color: '#333',
+                        feature: {
+                            mark: { show: true },
+                            magicType: { show: true, type: ['line', 'bar'] },
+                            saveAsImage: { show: true, name: 'MCS result for embodied carbon intensity' }
+                        }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: xAxisData,
+                        axisLabel: {
+                            textStyle: {
+                                fontSize: 10,
+                                color: '#333',
+                                fontFamily: "'Roboto Mono', Tahoma, Geneva, Verdana, sans-serif"
+                            }
+                        },
+                        nameLocation: 'middle',
+                        name: 'Embodied carbon intensity (kgCO₂e/m²)',
+                        nameTextStyle: {
+                            fontSize: 10,
+                            color: '#333'
+                        },
+                        nameGap: 25
+                    },
+                    yAxis: {
+                        type: 'value',
+                        axisLabel: {
+                            textStyle: {
+                                fontSize: 10,
+                                color: '#333',
+                                fontFamily: "'Roboto Mono', Tahoma, Geneva, Verdana, sans-serif"
+                            }
+                        },
+                        nameRotate: 90,
+                        nameLocation: 'middle',
+                        name: 'Probability Density (×10^-2)',
+                        nameTextStyle: {
+                            fontSize: 10,
+                            color: '#333'
+                        },
+                        nameGap: 40
+                    },
+                    series: histogramData.map((item, index) => ({
+                        ...item,
+                        barGap: '0%',
+                        barCategoryGap: '0%',
+                        itemStyle: {
+                            color: colors[index % colors.length]
+                        }
+                    }))
+                };
+
+                console.log("ECharts configuration:", option);
+                carbonHistogram.setOption(option);
+
+                setTimeout(() => {
+                    carbonHistogram.resize();
+                }, 100);
+
+            } catch (error) {
+                console.error("Error loading data:", error);
+            }
+        }
+
+        fetchData();
+    }
+
+    // 监听下拉菜单的变化
+    archetypeSelect.addEventListener("change", updateCarbonArcheChart);
+
+    function subCarbonUpdateChart(selectedSub) {
+        console.log('Selected Subtype:', selectedSub);
+
+        const categoryMap = {
+            publicHousing: ["HDB"],
+            privateHousing: ["Landed property", "Private apt. & condo."],
+            otherDwelling: ["Shophouse", "Hotel"],
+            commercial: ["Retail", "Mixed development", "Office", "Business park"],
+            healthcare: ["Hospital", "Clinic", "Nursing home"],
+            educational: ["IHL", "Non-IHL"],
+            industrial: ["Industrial B1", "Industrial B2"],
+            others: ["Cultural inst.", "Sports", "Restaurant", "Hawker centre", "Supermarket", "Data centre"]
+        };
+
+        let subColorMap = {
+            "HDB": "#1abc9c", "Landed property": "#2ecc71", "Private apt. & condo.": "#3498db",
+            "Shophouse": "#9b59b6", "Hotel": "#9b59b6", "Retail": "#34495e", "Mixed development": "#34495e",
+            "Office": "#34495e", "Business park": "#34495e", "Hospital": "#f1c40f",
+            "Clinic": "#f1c40f", "Nursing home": "#f1c40f", "IHL": "#e67e22",
+            "Non-IHL": "#e67e22", "Industrial B1": "#e74c3c", "Industrial B2": "#e74c3c",
+            "Data centre": "#95a5a6", "Cultural inst.": "#95a5a6",
+            "Sports": "#95a5a6", "Restaurant": "#95a5a6", "Hawker centre": "#95a5a6",
+            "Supermarket": "#95a5a6"
+        };
+
+        // 处理 selectedSub 的数据类型
+        let selectedArche = (Array.isArray(selectedSub) ? selectedSub : [selectedSub])
+            .flatMap(category => categoryMap[category] || []);
+        console.log('Selected subtypes:', selectedArche);
+
+        let reversedSubArchetypes = [...subArchetypes].reverse();
+
+        subChart.setOption({
+            yAxis: {
+                data: reversedSubArchetypes,
+                axisLabel: {
+                    fontSize: 10,
+                    color: value => selectedArche.includes(value) ? '#333' : '#999'
+                }
+            },
+            series: [{
+                data: reversedSubArchetypes.map((sub, i) => ({
+                    value: subValues[subArchetypes.indexOf(sub)], 
+                    itemStyle: {
+                        color: selectedArche.includes(sub) ? subColorMap[sub] : 'rgba(211, 211, 211, 0.6)',
+                        borderRadius: [0, 10, 10, 0]
+                    },
+                    label: {
+                        show: true,
+                        position: 'right',
+                        formatter: '{c}',
+                        fontSize: 10,
+                        color: selectedArche.includes(sub) ? '#333' : '#999'
+                    }
+                }))
+            }]
+        });
+
+        document.getElementById('downloadSubCarbonBar').addEventListener('click', function () {
+            const imgURL = subChart.getDataURL({ pixelRatio: 2, backgroundColor: '#fff' });
+            const link = document.createElement('a');
+            link.href = imgURL;
+            link.download = 'embodied_carbon_intensity_subtype.png';
+            link.click();
+        });
+    }
+
+    function subCarbonInit() {
+        console.log("Initializing Sub Carbon Chart...");
+
+        let subtypeSelect = document.getElementById("subtype");
+        if (!subtypeSelect) {
+            console.error("Subtype dropdown not found!");
+            return;
+        }
+
+        subtypeSelect.addEventListener("change", () => {
+            let selectedValue = subtypeSelect.value;
+            subCarbonUpdateChart(selectedValue ? [selectedValue] : []);
+        });
+
+        subArchetypes = [
+            "HDB", "Landed property", "Private apt. & condo.", "Shophouse", "Hotel",
+            "Retail", "Mixed development", "Office", "Business park", "Hospital",
+            "Clinic", "Nursing home", "IHL", "Non-IHL",
+            "Industrial B1", "Industrial B2", "Data centre", "Cultural inst.",
+            "Sports", "Restaurant", "Hawker centre", "Supermarket"
+        ];
+
+        subValues = [646.3, 527.1, 572.2, 848.1, 848.1, 527.4, 604.5, 519.97, 559.1,
+            585.6, 652.9, 600, 546.3, 594.9, 556.4, 637.4, 700, 523.6,
+            561.9, 620, 580, 550];
+
+        subChart = echarts.init(document.getElementById('carbonSubChart'));
+
+        subChart.setOption({
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, textStyle: { fontSize: 12, color: '#333' }, borderRadius: 10 },
+            grid: { left: '110px', right: '15px', top: '10px', bottom: '20px' },
+            xAxis: { type: 'value', name: 'kgCO₂e/m²', axisLabel: { fontSize: 10, color: '#333' }, max: 900 },
+            yAxis: { type: 'category', data: [...subArchetypes].reverse(), axisLabel: { fontSize: 10, color: '#999' } },
+            series: [{
+                type: 'bar',
+                data: subArchetypes.slice().reverse().map((archetype, i) => ({
+                    value: subValues[subArchetypes.length - 1 - i], 
+                    itemStyle: {
+                        color: 'rgba(211, 211, 211, 0.6)',
+                        borderRadius: [0, 10, 10, 0]
+                    },
+                    label: {
+                        show: true,
+                        position: 'right',
+                        formatter: '{c}',
+                        fontSize: 10,
+                        color: '#999'
+                    }
+                }))
+            }]
+        });
+
+    }
+
+    function updateCarbonPanel() {
+        let subtype = subtypeSelect.value;
+        let archetype = archetypeSelect.value;
+        let carbonContentElement = document.getElementById("carbon-content");
+        let carbonSubtypeElement = document.getElementById("carbon-subtype");
+        let carbonUnderselectElement = document.getElementById("carbon-underselect");
+
+        // 隐藏所有元素
+        carbonContentElement.style.display = "none";
+        carbonSubtypeElement.style.display = "none";
+        carbonUnderselectElement.style.display = "none";
+
+        if (archetype) {
+            carbonContentElement.style.display = "flex";
+            addImage(archetype, "image-container-carbon");
+            carbonsimulationDetails();
+            updateCarbonArcheChart();
+        } else if (subtype) {
+            carbonSubtypeElement.style.display = "flex";
+            subCarbonInit();
+        } else {
+            carbonUnderselectElement.style.display = "flex";
+        }
+    }
+
+    // 监听subtypeSelect和archetypeSelect的变化
+    subtypeSelect.addEventListener("change", updateCarbonPanel);
+    archetypeSelect.addEventListener("change", updateCarbonPanel);
+    clearButton.addEventListener("click", updateCarbonPanel);
+
+    function updateEnergyPanel() {
+        let subtype = subtypeSelect.value; // 获取选中的subtype
+        let archetype = archetypeSelect.value; // 获取选中的archetype
+        let energyContentElement = document.getElementById("energy-content");
+        let energySubtypeElement = document.getElementById("energy-subtype");
+        let energyUnderselectElement = document.getElementById("energy-underselect");
+
+        // 隐藏所有的 energy div
+        energyContentElement.style.display = "none";
+        energySubtypeElement.style.display = "none";
+        energyUnderselectElement.style.display = "none";
+
+        if (archetype) {
+            initEnergyChart();
+            energyContentElement.style.display = "flex";
+            addImage(archetype, "image-container-energy");
+            energysimulationDetails();
+            updateEnergyArcheChart(event);
+        }
+        else if (subtype) {
+            energySubtypeElement.style.display = "flex";
+            document.getElementById("subtype").addEventListener("change", function(e) {
+                const selectedSubtype = e.target.value || null; // 如果选 "" 就传 null
+                renderEnergySubChart(selectedSubtype); // 更新图表
+            });
+        } else {
+            energyUnderselectElement.style.display = "flex";
+        }
+    }
+
+
+    // Subtype Charts for Operational Part
+    function renderEnergySubChart(subtypeSelect = null) {
+        const energysubChart = echarts.init(document.getElementById('energySubChart'));
+    
+        const categoryMap = {
+            publicHousing: ["HDB"],
+            privateHousing: ["Landed property", "Private apt. & condo."],
+            otherDwelling: ["Shophouse", "Hotel"],
+            commercial: ["Retail", "Mixed development", "Office", "Business park"],
+            healthcare: ["Hospital", "Clinic", "Nursing home"],
+            educational: ["IHL", "Non-IHL"],
+            industrial: ["Industrial B1", "Industrial B2"],
+            others: ["Cultural inst.", "Sports", "Restaurant", "Hawker centre", "Supermarket", "Data centre"]
+        };
+    
+        const euiData = {
+            "HDB": [10.93, 2.61, 8.17, 1.52],
+            "Landed property": [26.61, 3.58, 20.42, 0.70],
+            "Private apt. & condo.": [16.39, 3.58, 13.61, 1.44],
+            "Shophouse": [70.00, 15.00, 12.00, 3.00],
+            "Hotel": [81.85, 6.19, 11.16, 2.70],
+            "Retail": [94.03, 12.62, 11.72, 4.93],
+            "Mixed development": [70.00, 15.00, 12.00, 3.00],
+            "Office": [70.00, 15.00, 12.00, 3.00],
+            "Business Park": [42.08, 7.72, 14.15, 1.24],
+            "Hospital": [85.51, 11.48, 14.97, 1.97],
+            "Clinic": [41.60, 5.16, 9.17, 1.11],
+            "Nursing home": [24.67, 4.13, 6.39, 1.80],
+            "IHL": [133.86, 5.00, 10.00, 1.00],
+            "Non-IHL": [0.00, 5.46, 2.87, 0.83],
+            "Industrial B1": [99.87, 9.26, 29.63, 2.31],
+            "Industrial B2": [99.87, 9.26, 29.63, 2.31],
+            "Data centre": [109.22, 9.38, 175.22, 0.63],
+            "Cultural inst.": [47.13, 7.64, 8.94, 7.21],
+            "Sports": [37.60, 9.36, 4.68, 5.06],
+            "Restaurant": [83.72, 9.95, 82.92, 14.15],
+            "Hawker centre": [0.00, 0.00, 86.05, 14.88],
+            "Supermarket": [143.94, 26.78, 66.95, 6.86]
+        };
+        
+        const defaultGray = '#D3D3D3';
+        const colorMapping = {
+            'Cooling': '#A5F3FC',
+            'Interior Lighting': '#FFFF00',
+            'Electric Equipment': '#E0E0E0',
+            'Water System': '#5a2e14'
+        };
+    
+        // 获取要高亮的类别
+        const highlightCategories = subtypeSelect && categoryMap[subtypeSelect] 
+            ? categoryMap[subtypeSelect] 
+            : [];
+    
+        const seriesData = [
+            { name: 'Cooling', type: 'bar', stack: 'total', data: [] },
+            { name: 'Interior Lighting', type: 'bar', stack: 'total', data: [] },
+            { name: 'Electric Equipment', type: 'bar', stack: 'total', data: [] },
+            { name: 'Water System', type: 'bar', stack: 'total', data: [] }
+        ];
+    
+        // 准备系列数据 - 所有柱子都会显示
+        categoryList.forEach((category, index) => {
+            const isHighlighted = highlightCategories.includes(category);
+            seriesData.forEach(series => {
+                series.data.push({
+                    value: dataValues[index][seriesData.indexOf(series)],
+                    itemStyle: { 
+                        color: isHighlighted ? colorMapping[series.name] : defaultGray,
+                        opacity: isHighlighted ? 1 : 0.6 
+                    }
+                });
+            });
+        });
+    
+        const chartenergyOption = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { type: 'shadow' }
+            },
+            grid: { left: '110px', right: '10px', top: '10px', bottom: '20px' },
+            xAxis: { 
+                type: 'value',
+                axisLabel: { fontSize: 10 }
+            },
+            yAxis: {
+                type: 'category',
+                axisLabel: {
+                    fontSize: 10,
+                    color: function(category) {
+                        return highlightCategories.includes(category) ? '#333' : defaultGray;
+                    }
+                },
+                data: categoryList
+            },
+            series: seriesData,
+            legend: { show: false }
+        };
+    
+        energysubChart.setOption(chartenergyOption, true);
+
+        document.getElementById('downloadSubEnergyBar').addEventListener('click', function () {
+            const imgURL = energysubChart.getDataURL({ pixelRatio: 2, backgroundColor: '#fff' });
+            const link = document.createElement('a');
+            link.href = imgURL;
+            link.download = 'operational_carbon_intensity_subtype.png';
+            link.click();
+        });
+    }
+    
+    // 初始化图表
+    renderEnergySubChart();
+    
+    // Archetype部分的
+    // Simulation details
+    function energysimulationDetails() {
+        const archetypeSpan = document.getElementById("archetype-value");
+        const peopleDensitySpan = document.getElementById("people-density");
+        const equipDensitySpan = document.getElementById("equip-density");
+        const lightDensitySpan = document.getElementById("light-density");
+        const coolingSetSpan = document.getElementById("coolingSet");
+        const minFreshAirSpan = document.getElementById("minFreshAir");
+        const roofUvalSpan = document.getElementById("roofUval");
+        const facadeUvalSpan = document.getElementById("facadeUval");
+        const partitionUvalSpan = document.getElementById("partitionUval");
+        const slabUvalSpan = document.getElementById("slabUval");
+        const airChangeSpan = document.getElementById("airChange");
+        const coolingCOPSpan = document.getElementById("coolingCOP");
+
+        let excelEnergyData = [];
+
+        async function loadExcel() {
+            try {
+                const response = await fetch("data/operational carbon simulation details.xlsx");
+                if (!response.ok) {
+                    return;
+                }
+
+                const arrayBuffer = await response.arrayBuffer();
+                const workbook = XLSX.read(arrayBuffer, { type: "array" });
+
+                const sheet = workbook.Sheets["Sheet1"];
+                if (!sheet) {
+                    return;
+                }
+
+                excelEnergyData = XLSX.utils.sheet_to_json(sheet);
+
+                archetypeSelect.addEventListener("change", updateEnergyDetails);
+                updateEnergyDetails();
+            } catch (error) {
+                console.error("Operational Carbon Excel failed:", error);
+            }
+        }
+
+        function updateEnergyDetails() {
+            const selectedArchetype = archetypeSelect.value;
+
+            if (excelEnergyData.length === 0) {
+                console.warn("Operational Carbon Excel is empty");
+                return;
+            }
+
+            const data = excelEnergyData.find(row => row.Archetypes === selectedArchetype);
+
+            if (data) {
+                // detail descriptions
+                archetypeSpan.textContent = data["Archetypes"] ? data["Archetypes"] : "N/A";
+                peopleDensitySpan.textContent = (data["People Density"] ? `${data["People Density"]} people/m²` : "N/A");
+                equipDensitySpan.textContent = (data["Equipment Power Density"] ? `${data["Equipment Power Density"]} W/m²` : "N/A");
+                lightDensitySpan.textContent = (data["Lighting Power Density"] ? `${data["Lighting Power Density"]} W/m²` : "N/A");
+
+                // parameters
+                coolingSetSpan.textContent = (data["Cooling Set Point"] ? `${data["Cooling Set Point"]} °C` : "N/A");
+                minFreshAirSpan.textContent = (data["Min Fresh Air Area"] ? `${data["Min Fresh Air Area"]} m³/s` : "N/A");
+                roofUvalSpan.textContent = (data["Roof UVal"] ? `${data["Roof UVal"]} W/m²·K` : "N/A");
+                facadeUvalSpan.textContent = (data["Façade Uval"] ? `${data["Façade Uval"]} W/m²·K` : "N/A");
+                partitionUvalSpan.textContent = (data["Partition Uval"] ? `${data["Partition Uval"]} W/m²·K` : "N/A");
+                slabUvalSpan.textContent = (data["Slab Uval"] ? `${data["Slab Uval"]} W/m²·K` : "N/A");
+                airChangeSpan.textContent = (data["Air Changes per Hour"] ? `${data["Air Changes per Hour"]} ACH` : "N/A");
+                coolingCOPSpan.textContent = (data["Cooling COP"] ? `${data["Cooling COP"]}` : "N/A");
+
+                console.log("The Operational Carbon Data is refreshed");
+            } else {
+                console.warn("No matching Archetype data found!");
+            }
+        }
+
+        loadExcel();
+    }
+
+    // 全局数据
+    var euidata = {
+        "Supermarket": [1423.008, 1144.569, 74.391, 185.979, 18.068],
+        "Restaurant": [383.090, 295.120, 27.641, 23.033, 37.297],
+        "Retail": [338.041, 253.283, 35.045, 37.548, 12.196],
+        "Hotel": [286.498, 202.057, 21.725, 37.814, 24.902],
+        "Office": [239.058, 176.266, 21.434, 39.296, 2.062],
+        "Sports & recreation": [231.404, 179.742, 26.013, 13.007, 12.642],
+        "Civic, community & cultural inst.": [189.920, 143.794, 22.577, 18.062, 5.486],
+        "Clinic": [169.851, 137.866, 9.553, 20.699, 1.731],
+        "Nursing home": [89.844, 70.737, 7.098, 8.281, 3.729],
+        "HDB non-PPVC": [47.961, 22.121, 9.089, 11.366, 5.386],
+        "Private apartment & condo": [47.664, 21.920, 9.088, 11.366, 4.972]
+    };
+
+    // 初始化图表
+    function initEnergyChart() {
+        var euiBar = echarts.init(document.getElementById('energy-eui'));
+
+        var initialOption = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { type: 'shadow' },
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                borderRadius: 10,
+                padding: [8, 16],
+                textStyle: { fontSize: 14, color: '#333' }
+            },
+            grid: { top: '10px', bottom: '30px', left: '50px', right: '40px' },
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                left: 'right',
+                top: 'center',
+                color: '#333',
+                feature: {
+                    mark: { show: true },
+                    /**
+                    restore: {
+                                show: true, // 使用事件监听来控制 restore 的行为
+                                click: function () { // 重新设置图表选项，恢复到原始状态
+                                carbonHistogram.setOption(option); // option 是你之前设置的配置
+                        }
+                    }, */
+                    saveAsImage: { show: true, name: 'EUI Barchart' }
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Total', 'Cooling', 'Lighting', 'Equipment', 'Hot Water'],
+                axisLabel: { textStyle: { fontSize: 10, color: '#333' }, interval: 0 },
+                axisLine: { lineStyle: { color: '#333' } }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: { formatter: '{value}', textStyle: { fontSize: 10, color: '#333' } },
+                axisLine: { lineStyle: { color: '#333' } },
+                nameRotate: 90,
+                nameLocation: 'middle',
+                name: 'Energy Use Intensity (kW/m²)',
+                nameTextStyle: {
+                    fontSize: 10,
+                    fontFamily: 'Segoe UI',
+                    color: '#333'
+                },
+                nameGap: 35
+            },
+            series: [{
+                data: [], // 初始为空，等待用户选择
+                type: 'bar',
+                barWidth: '30%',
+                itemStyle: {
+                    borderRadius: [10, 10, 0, 0],
+                    color: function (params) {
+                        var colors = ['#34495e', '#A5F3FC', '#FFFF00', '#E0E0E0', '#5a2e14'];
+                        return colors[params.dataIndex];
+                    }
+                }
+            }]
+        };
+
+        euiBar.setOption(initialOption);
+    }
+
+    // 更新图表
+    function updateEnergyArcheChart(event) {
+        let archetype = event.target.value.trim();
+        var euiBar = echarts.getInstanceByDom(document.getElementById('energy-eui'));
+
+        if (!euiBar) {
+            euiBar = echarts.init(document.getElementById('energy-eui'));
+        }
+
+        if (!euidata[archetype]) {
+            console.error("No EUI data found for: ", archetype);
+            return;
+        }
+
+        console.log("Updating chart for:", archetype, "Data:", euidata[archetype]);
+
+        euiBar.setOption({
+            series: [{ data: euidata[archetype] }]
+        });
+    }
+
+    archetypeSelect.addEventListener("change", updateEnergyArcheChart);
+
+    // 监听subtypeSelect和archetypeSelect的变化
+    subtypeSelect.addEventListener("change", updateEnergyPanel);
+    archetypeSelect.addEventListener("change", updateEnergyPanel);
+    clearButton.addEventListener("click", updateEnergyPanel);
+
+    carbonLink.addEventListener("click", function (event) {
+        updateArchetypes();
+        archetypesunCharts.style.display = "none";
+        energyContainer.style.display = "none";
+        carbonContainer.style.display = "block";
+        toggleSimulationType("carbon");
+    });
+
+    energyLink.addEventListener("click", function (event) {
+        updateArchetypes();
+        archetypesunCharts.style.display = "none";
+        carbonContainer.style.display = "none";
+        energyContainer.style.display = "block";
+        toggleSimulationType("energy");
+    });
+
+    typeLink.addEventListener("click", function (event) {
+        updateArchetypes();
+        toggleSimulationType("type");
+        carbonContainer.style.display = "none";
+        energyContainer.style.display = "none";
+        archetypesunCharts.style.display = "block";
+
+        var sunChartsNumber = echarts.init(sunChartsElementNumber);
+        var optionone = {
+            color: ['#ddd'],
+            tooltip: {
+                show: true,
+                trigger: 'item',
+                textStyle: {
+                    fontSize: 12,
+                    color: '#333'
+                },
+                borderRadius: 10,
+                formatter: function (params) {
+                    var parentValue = params.treePathInfo[params.treePathInfo.length - 2]?.value || 0;
+                    var percentage = (params.data.value / parentValue * 100).toFixed(2);
+                    return `${params.name}: ${params.data.value} (${percentage}%)`;
+                }
+            },
+            series: {
+                type: 'sunburst',
+                radius: ['10%', '90%'],
+                data: [
+                    {
+                        name: 'Public housing',
+                        itemStyle: { color: "#1abc9c" },
+                        children: [
+                            { name: 'HDB (PPVC)', value: 120, itemStyle: { color: "#1abc9c" } },
+                            { name: 'HDB (Non-PPVC)', value: 150, itemStyle: { color: "#1abc9c" } }
+                        ]
+                    },
+                    {
+                        name: 'Private housing',
+                        itemStyle: { color: "#57d798" },
+                        children: [
+                            { name: 'Landed property', value: 80, itemStyle: { color: "#2ecc71" } },
+                            { name: 'Private apt.', value: 110, itemStyle: { color: "#3498db" } }
+                        ]
+                    },
+                    {
+                        name: 'Other dwellings',
+                        itemStyle: { color: "#9b59b6" },
+                        children: [
+                            { name: 'Shophouse', value: 60, itemStyle: { color: "#9b59b6" } },
+                            { name: 'Hotel', value: 50, itemStyle: { color: "#9b59b6" } }
+                        ]
+                    },
+                    {
+                        name: 'Commercial',
+                        itemStyle: { color: "#34495e" },
+                        children: [
+                            { name: 'Retail', value: 130, itemStyle: { color: "#34495e" } },
+                            { name: 'Mixed development', value: 90, itemStyle: { color: "#34495e" } },
+                            { name: 'Office', value: 140, itemStyle: { color: "#34495e" } },
+                            { name: 'Business park', value: 70, itemStyle: { color: "#34495e" } }
+                        ]
+                    },
+                    {
+                        name: 'Healthcare',
+                        itemStyle: { color: "#f1c40f" },
+                        children: [
+                            { name: 'Hospital', value: 40, itemStyle: { color: "#f1c40f" } },
+                            { name: 'Clinic', value: 60, itemStyle: { color: "#f1c40f" } },
+                            { name: 'Nursing home', value: 30, itemStyle: { color: "#f1c40f" } }
+                        ]
+                    },
+                    {
+                        name: 'Educational inst.',
+                        itemStyle: { color: "#e67e22" },
+                        children: [
+                            { name: 'IHL', value: 50, itemStyle: { color: "#e67e22" } },
+                            { name: 'Non-IHL', value: 90, itemStyle: { color: "#e67e22" } }
+                        ]
+                    },
+                    {
+                        name: 'Industrial',
+                        itemStyle: { color: "#e74c3c" },
+                        children: [
+                            { name: 'B1', value: 100, itemStyle: { color: "#e74c3c" } },
+                            { name: 'B2', value: 80, itemStyle: { color: "#e74c3c" } }
+                        ]
+                    },
+                    {
+                        name: 'Others',
+                        itemStyle: { color: "#95a5a6" },
+                        children: [
+                            { name: 'Data centre', value: 20, itemStyle: { color: "#95a5a6" } },
+                            { name: 'Community inst.', value: 40, itemStyle: { color: "#95a5a6" } },
+                            { name: 'Sports', value: 30, itemStyle: { color: "#95a5a6" } },
+                            { name: 'Restaurant', value: 70, itemStyle: { color: "#95a5a6" } },
+                            { name: 'Hawker centre', value: 50, itemStyle: { color: "#95a5a6" } },
+                            { name: 'Supermarket', value: 60, itemStyle: { color: "#95a5a6" } }
+                        ]
+                    }],
+                label: {
+                    rotate: 'radial',
+                    color: '#fff',
+                    fontSize: 8
+                },
+                itemStyle: {
+                    borderRadius: 10,
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }
+            }
+        };
+        sunChartsNumber.setOption(optionone);
+
+        var sunChartsFootprint = echarts.init(sunChartsElementFootprint);
+        var optiontwo = {
+            color: ['#ddd'],
+            tooltip: {
+                show: true,
+                trigger: 'item',
+                textStyle: {
+                    fontSize: 12,
+                    color: '#333'
+                },
+                borderRadius: 10,
+                formatter: function (params) {
+                    var parentValue = params.treePathInfo[params.treePathInfo.length - 2]?.value || 0;
+                    var percentage = (params.data.value / parentValue * 100).toFixed(2);
+                    return `${params.name}: ${params.data.value} (${percentage}%)`;
+                }
+            },
+            series: {
+                type: 'sunburst',
+                radius: ['10%', '90%'],
+                data: [
+                    {
+                        name: 'Public housing',
+                        itemStyle: { color: "#1abc9c" },
+                        children: [
+                            { name: 'HDB (PPVC)', value: 520, itemStyle: { color: "#1abc9c" } },
+                            { name: 'HDB (Non-PPVC)', value: 450, itemStyle: { color: "#1abc9c" } }
+                        ]
+                    },
+                    {
+                        name: 'Private housing',
+                        itemStyle: { color: "#57d798" },
+                        children: [
+                            { name: 'Landed property', value: 180, itemStyle: { color: "#2ecc71" } },
+                            { name: 'Private apt.', value: 310, itemStyle: { color: "#3498db" } }
+                        ]
+                    },
+                    {
+                        name: 'Other dwellings',
+                        itemStyle: { color: "#9b59b6" },
+                        children: [
+                            { name: 'Shophouse', value: 60, itemStyle: { color: "#9b59b6" } },
+                            { name: 'Hotel', value: 50, itemStyle: { color: "#9b59b6" } }
+                        ]
+                    },
+                    {
+                        name: 'Commercial',
+                        itemStyle: { color: "#34495e" },
+                        children: [
+                            { name: 'Retail', value: 130, itemStyle: { color: "#34495e" } },
+                            { name: 'Mixed development', value: 90, itemStyle: { color: "#34495e" } },
+                            { name: 'Office', value: 140, itemStyle: { color: "#34495e" } },
+                            { name: 'Business park', value: 70, itemStyle: { color: "#34495e" } }
+                        ]
+                    },
+                    {
+                        name: 'Healthcare',
+                        itemStyle: { color: "#f1c40f" },
+                        children: [
+                            { name: 'Hospital', value: 40, itemStyle: { color: "#f1c40f" } },
+                            { name: 'Clinic', value: 60, itemStyle: { color: "#f1c40f" } },
+                            { name: 'Nursing home', value: 30, itemStyle: { color: "#f1c40f" } }
+                        ]
+                    },
+                    {
+                        name: 'Educational inst.',
+                        itemStyle: { color: "#e67e22" },
+                        children: [
+                            { name: 'IHL', value: 50, itemStyle: { color: "#e67e22" } },
+                            { name: 'Non-IHL', value: 90, itemStyle: { color: "#e67e22" } }
+                        ]
+                    },
+                    {
+                        name: 'Industrial',
+                        itemStyle: { color: "#e74c3c" },
+                        children: [
+                            { name: 'B1', value: 200, itemStyle: { color: "#e74c3c" } },
+                            { name: 'B2', value: 180, itemStyle: { color: "#e74c3c" } }
+                        ]
+                    },
+                    {
+                        name: 'Others',
+                        itemStyle: { color: "#95a5a6" },
+                        children: [
+                            { name: 'Data centre', value: 20, itemStyle: { color: "#95a5a6" } },
+                            { name: 'Community inst.', value: 40, itemStyle: { color: "#95a5a6" } },
+                            { name: 'Sports', value: 30, itemStyle: { color: "#95a5a6" } },
+                            { name: 'Restaurant', value: 70, itemStyle: { color: "#95a5a6" } },
+                            { name: 'Hawker centre', value: 50, itemStyle: { color: "#95a5a6" } },
+                            { name: 'Supermarket', value: 60, itemStyle: { color: "#95a5a6" } }
+                        ]
+                    }],
+                label: {
+                    rotate: 'radial',
+                    color: '#fff',
+                    fontSize: 8
+                },
+                itemStyle: {
+                    borderRadius: 10,
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }
+            }
+        };
+        sunChartsFootprint.setOption(optiontwo);
+    });
+
+    subtypeSelect.addEventListener("change", updateArchetypes);
+    archetypeSelect.addEventListener("change", updateResultContent);
+
+    function clearSelections() {
+        subtypeSelect.value = "";
+        archetypeSelect.innerHTML = "<option value=''>All Archetype</option>";
+        resultText.innerHTML = "";
+    }
+
+    clearButton.addEventListener("click", clearSelections);
+
+    // 初始化模拟标题并默认显示面板
+    simulationHeader.innerHTML = simulationContent[currentSimulation];
+    resultPanel.classList.add("show"); // 显示面板
+});
