@@ -61,6 +61,26 @@ document.addEventListener("DOMContentLoaded", function () {
             "Supermarket"]);
     };
 
+    // 全局缓存变量
+    let cachedCarbonData = null;
+
+    window.addEventListener('DOMContentLoaded', async () => {
+        const files = ['data/Asia.json', 'data/Baseline.json', 'data/PAMC.json'];
+
+        try {
+            let datasets = await Promise.all(files.map(file => fetch(file).then(res => res.json())));
+            cachedCarbonData = {
+                Asia: datasets[0],
+                Baseline: datasets[1],
+                PAMC: datasets[2]
+            };
+            console.log("Data preload finished");
+            updateCarbonArcheChart();
+        } catch (error) {
+            console.error("Data prload failed", error);
+        }
+    });
+
     // 获取所有的 nav-link 元素
     const navLinks = document.querySelectorAll('.nav .nav-link');
 
@@ -328,143 +348,88 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 直方图 三个情景的MCS 结果
     function updateCarbonArcheChart() {
+        if (!cachedCarbonData) {
+            console.warn("Waiting for the preload of the dataset...");
+            return;
+        }
+    
         var chartDom = document.getElementById('carbonHistogram');
-        console.log("Chart DOM:", chartDom);
         if (!chartDom) {
             console.error("Error: carbonHistogram container not found.");
             return;
         }
-
+    
         var carbonHistogram = echarts.init(chartDom);
-        console.log("ECharts initialized successfully.");
-
-        async function fetchData() {
-            const files = ['data/Asia.json', 'data/Baseline.json', 'data/PAMC.json'];
-            const names = ['Asia', 'Baseline', 'PAMC'];
-            const binCount = 40;
-            const xMin = 0, xMax = 2000;
-            const binSize = (xMax - xMin) / binCount;
-
-            try {
-                let datasets = await Promise.all(files.map(file => fetch(file).then(res => res.json())));
-
-                if (!datasets || datasets.length === 0) {
-                    console.error("Error: JSON data is empty or failed to load.");
-                    return;
+    
+        const names = ['Asia', 'Baseline', 'PAMC'];
+        const binCount = 40;
+        const xMin = 0, xMax = 2000;
+        const binSize = (xMax - xMin) / binCount;
+    
+        let selectedBuildingType = archetypeSelect.value;
+    
+        let histogramData = names.map(name => {
+            let data = cachedCarbonData[name];
+            let values = Object.values(data[selectedBuildingType] || {});
+            let bins = new Array(binCount).fill(0);
+            let totalCount = values.length;
+    
+            values.forEach(val => {
+                if (val >= xMin && val <= xMax) {
+                    let binIndex = Math.floor((val - xMin) / binSize);
+                    bins[binIndex]++;
                 }
-
-                let selectedBuildingType = archetypeSelect.value;
-                console.log("Selected building type:", selectedBuildingType);
-
-                let histogramData = datasets.map((data, i) => {
-                    let values = Object.values(data[selectedBuildingType] || {});
-                    let bins = new Array(binCount).fill(0);
-                    let totalCount = values.length;
-                    values.forEach(val => {
-                        if (val >= xMin && val <= xMax) {
-                            let binIndex = Math.floor((val - xMin) / binSize);
-                            bins[binIndex]++;
-                        }
-                    });
-
-                    bins = bins.map(bin => parseFloat((bin / (totalCount * binSize) * 100).toFixed(4)));
-
-                    return { name: names[i], type: 'bar', data: bins };
-                });
-
-                let xAxisData = Array.from({ length: binCount }, (_, i) => Math.round(xMin + (i + 0.5) * binSize));
-
-                let colors = ['#7ed6df', '#30336b', '#ccff66'];
-
-                let option = {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: { type: 'shadow' },
-                        textStyle: { fontSize: 12, color: '#333' },
-                        borderRadius: 10
-                    },
-                    legend: {
-                        data: names,
-                        textStyle: {
-                            fontSize: 12,
-                            color: '#333'
-                        },
-                        borderRadius: 10,
-                        top: 0
-                    },
-                    grid: { left: '67px', right: '35px', top: '35px', bottom: '40px' },
-                    toolbox: {
-                        show: true,
-                        orient: 'vertical',
-                        left: 'right',
-                        top: 'center',
-                        color: '#333',
-                        feature: {
-                            mark: { show: true },
-                            magicType: { show: true, type: ['line', 'bar'] },
-                            saveAsImage: { show: true, name: 'MCS result for embodied carbon intensity' }
-                        }
-                    },
-                    xAxis: {
-                        type: 'category',
-                        data: xAxisData,
-                        axisLabel: {
-                            textStyle: {
-                                fontSize: 10,
-                                color: '#333',
-                                fontFamily: "'Roboto Mono', Tahoma, Geneva, Verdana, sans-serif"
-                            }
-                        },
-                        nameLocation: 'middle',
-                        name: 'Embodied carbon intensity (kgCO₂e/m²)',
-                        nameTextStyle: {
-                            fontSize: 10,
-                            color: '#333'
-                        },
-                        nameGap: 25
-                    },
-                    yAxis: {
-                        type: 'value',
-                        axisLabel: {
-                            textStyle: {
-                                fontSize: 10,
-                                color: '#333',
-                                fontFamily: "'Roboto Mono', Tahoma, Geneva, Verdana, sans-serif"
-                            }
-                        },
-                        nameRotate: 90,
-                        nameLocation: 'middle',
-                        name: 'Probability Density (×10^-2)',
-                        nameTextStyle: {
-                            fontSize: 10,
-                            color: '#333'
-                        },
-                        nameGap: 40
-                    },
-                    series: histogramData.map((item, index) => ({
-                        ...item,
-                        barGap: '0%',
-                        barCategoryGap: '0%',
-                        itemStyle: {
-                            color: colors[index % colors.length]
-                        }
-                    }))
-                };
-
-                console.log("ECharts configuration:", option);
-                carbonHistogram.setOption(option);
-
-                setTimeout(() => {
-                    carbonHistogram.resize();
-                }, 100);
-
-            } catch (error) {
-                console.error("Error loading data:", error);
-            }
-        }
-
-        fetchData();
+            });
+    
+            bins = bins.map(bin => parseFloat((bin / (totalCount * binSize) * 100).toFixed(4)));
+    
+            return { name: name, type: 'bar', data: bins };
+        });
+    
+        let xAxisData = Array.from({ length: binCount }, (_, i) => Math.round(xMin + (i + 0.5) * binSize));
+        let colors = ['#7ed6df', '#30336b', '#ccff66'];
+    
+        let option = {
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, textStyle: { fontSize: 12 } },
+            legend: { data: names, top: 0 },
+            grid: { left: '67px', right: '35px', top: '35px', bottom: '40px' },
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                left: 'right',
+                top: 'center',
+                feature: {
+                    magicType: { show: true, type: ['line', 'bar'] },
+                    saveAsImage: { show: true, name: 'MCS result for embodied carbon intensity' }
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: xAxisData,
+                name: 'Embodied carbon intensity (kgCO₂e/m²)',
+                nameGap: 25,
+                nameLocation: 'middle',
+                axisLabel: { fontSize: 10 }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Probability Density (×10^-2)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                axisLabel: { fontSize: 10 }
+            },
+            series: histogramData.map((item, index) => ({
+                ...item,
+                barGap: '0%',
+                barCategoryGap: '0%',
+                itemStyle: { color: colors[index % colors.length] }
+            }))
+        };
+    
+        carbonHistogram.setOption(option);
+        setTimeout(() => carbonHistogram.resize(), 100);
     }
+    
 
     // 监听下拉菜单的变化
     archetypeSelect.addEventListener("change", updateCarbonArcheChart);
