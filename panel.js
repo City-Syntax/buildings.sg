@@ -411,17 +411,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 data: xAxisData,
                 name: 'Embodied carbon intensity (kgCO₂e/m²)',
                 nameGap: 25,
-                nameTextStyle: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' },
+                nameTextStyle: { fontSize: 12, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' },
                 nameLocation: 'middle',
-                axisLabel: { color: '#333' }
+                axisLabel: { fontSize: 10, color: '#333' }
             },
             yAxis: {
                 type: 'value',
                 name: 'Probability Density (×10^-2)',
                 nameLocation: 'middle',
                 nameGap: 40,
-                nameTextStyle: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' },
-                axisLabel: { color: '#333' }
+                { fontSize: 12, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' },
+                axisLabel: { fontSize: 10, color: '#333' }
             },
             series: histogramData.map((item, index) => ({
                 ...item,
@@ -871,7 +871,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 nameRotate: 90,
                 nameLocation: 'middle',
                 name: 'Energy Use Intensity (kW/m²)',
-                nameTextStyle: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' },
+                nameTextStyle: { fontSize: 12, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' },
                 axisLabel: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' },
                 nameGap: 35
             },
