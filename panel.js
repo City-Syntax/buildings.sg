@@ -413,7 +413,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 nameGap: 25,
                 nameTextStyle: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' },
                 nameLocation: 'middle',
-                axisLabel: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' }
+                axisLabel: { color: '#333' }
             },
             yAxis: {
                 type: 'value',
@@ -421,7 +421,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 nameLocation: 'middle',
                 nameGap: 40,
                 nameTextStyle: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' },
-                axisLabel: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' }
+                axisLabel: { color: '#333' }
             },
             series: histogramData.map((item, index) => ({
                 ...item,
