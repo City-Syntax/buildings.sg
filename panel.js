@@ -411,15 +411,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 data: xAxisData,
                 name: 'Embodied carbon intensity (kgCO₂e/m²)',
                 nameGap: 25,
+                nameTextStyle: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' },
                 nameLocation: 'middle',
-                axisLabel: { fontSize: 10 }
+                axisLabel: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' }
             },
             yAxis: {
                 type: 'value',
                 name: 'Probability Density (×10^-2)',
                 nameLocation: 'middle',
                 nameGap: 40,
-                axisLabel: { fontSize: 10 }
+                nameTextStyle: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' },
+                axisLabel: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' }
             },
             series: histogramData.map((item, index) => ({
                 ...item,
@@ -859,7 +861,7 @@ document.addEventListener("DOMContentLoaded", function () {
             xAxis: {
                 type: 'category',
                 data: ['Total', 'Cooling', 'Lighting', 'Equipment', 'Hot Water'],
-                axisLabel: { textStyle: { fontSize: 10, color: '#333' }, interval: 0 },
+                axisLabel: { textStyle: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' }, interval: 0 },
                 axisLine: { lineStyle: { color: '#333' } }
             },
             yAxis: {
@@ -869,11 +871,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 nameRotate: 90,
                 nameLocation: 'middle',
                 name: 'Energy Use Intensity (kW/m²)',
-                nameTextStyle: {
-                    fontSize: 10,
-                    fontFamily: 'Segoe UI',
-                    color: '#333'
-                },
+                nameTextStyle: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' },
+                axisLabel: { fontSize: 10, color: '#333', fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif' },
                 nameGap: 35
             },
             series: [{
