@@ -76,6 +76,9 @@ document.addEventListener("DOMContentLoaded", function () {
             };
             console.log("Data preload finished");
             updateCarbonArcheChart();
+            window.chartDataLoaded = true;
+            updateProgress(80); // 图表加载是大头
+            checkAllLoaded();
         } catch (error) {
             console.error("Data prload failed", error);
         }
@@ -352,43 +355,43 @@ document.addEventListener("DOMContentLoaded", function () {
             console.warn("Waiting for the preload of the dataset...");
             return;
         }
-    
+
         var chartDom = document.getElementById('carbonHistogram');
         if (!chartDom) {
             console.error("Error: carbonHistogram container not found.");
             return;
         }
-    
+
         var carbonHistogram = echarts.init(chartDom);
-    
+
         const names = ['Asia', 'Baseline', 'PAMC'];
         const binCount = 40;
         const xMin = 0, xMax = 2000;
         const binSize = (xMax - xMin) / binCount;
-    
+
         let selectedBuildingType = archetypeSelect.value;
-    
+
         let histogramData = names.map(name => {
             let data = cachedCarbonData[name];
             let values = Object.values(data[selectedBuildingType] || {});
             let bins = new Array(binCount).fill(0);
             let totalCount = values.length;
-    
+
             values.forEach(val => {
                 if (val >= xMin && val <= xMax) {
                     let binIndex = Math.floor((val - xMin) / binSize);
                     bins[binIndex]++;
                 }
             });
-    
+
             bins = bins.map(bin => parseFloat((bin / (totalCount * binSize) * 100).toFixed(4)));
-    
+
             return { name: name, type: 'bar', data: bins };
         });
-    
+
         let xAxisData = Array.from({ length: binCount }, (_, i) => Math.round(xMin + (i + 0.5) * binSize));
         let colors = ['#7ed6df', '#30336b', '#ccff66'];
-    
+
         let option = {
             tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, textStyle: { fontSize: 12 } },
             legend: { data: names, top: 0 },
@@ -425,11 +428,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 itemStyle: { color: colors[index % colors.length] }
             }))
         };
-    
+
         carbonHistogram.setOption(option);
         setTimeout(() => carbonHistogram.resize(), 100);
     }
-    
+
 
     // 监听下拉菜单的变化
     archetypeSelect.addEventListener("change", updateCarbonArcheChart);
