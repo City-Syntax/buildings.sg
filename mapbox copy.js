@@ -58,6 +58,10 @@ map.on('load', () => {
         attributionElement.insertAdjacentHTML('afterbegin', '<a href="https://www.citysyntax.io/" target="_blank">© City Syntax Lab &nbsp;</a>');
     }
 
+    window.mapLoaded = true;
+    updateProgress(50); // 地图加载中等耗时
+    checkAllLoaded();
+
     // 2D视图控件
     document.getElementById('toggle2D').addEventListener('click', () => {
         map.easeTo({
@@ -915,5 +919,3 @@ function displayResults(areaResult, analysisResult) {
 document.querySelector('.closex').addEventListener('click', function () {
     document.querySelector('.calculation-box').style.display = 'none';
 });
-
-
