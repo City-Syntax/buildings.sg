@@ -25,6 +25,42 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    const imageCache = {};
+
+    function preloadImages(archetypeList) {
+        archetypeList.forEach(archetype => {
+            const img = new Image();
+            img.src = `image/${archetype}.jpg`; // 注意不要加 nocache
+            imageCache[archetype] = img;
+        });
+    }
+
+    window.onload = () => {
+        preloadImages(["B1",
+            "B2",
+            "Business Park",
+            "Civic, community & cultural inst.",
+            "Clinic",
+            "Data Centre",
+            "Hawker Centre",
+            "HDB non-PPVC",
+            "HDB PPVC",
+            "Hospital",
+            "Hotel",
+            "Inst. of higher learning (IHL)",
+            "Landed Property",
+            "Mixed Development",
+            "Non-IHL",
+            "Nursing Home",
+            "Office",
+            "Private apartment & condo",
+            "Restaurant",
+            "Retail",
+            "Shophouse",
+            "Sports & recreation",
+            "Supermarket"]);
+    };
+
     // 获取所有的 nav-link 元素
     const navLinks = document.querySelectorAll('.nav .nav-link');
 
@@ -179,24 +215,27 @@ document.addEventListener("DOMContentLoaded", function () {
     clearButton.addEventListener("click", updateArchetypeDescription);
 
     function addImage(archetypeSelect, containerId) {
-        let imgElement = document.createElement("img");
-        imgElement.alt = archetypeSelect;
-        imgElement.src = `image/${archetypeSelect}.jpg?nocache=${new Date().getTime()}`;
-
-        // 动态获取目标容器
         let imageContainer = document.getElementById(containerId);
 
-        // 先删除旧图片
+        // 删除旧图
         const existingImage = imageContainer.querySelector("img");
         if (existingImage) {
             imageContainer.removeChild(existingImage);
         }
 
-        imgElement.onerror = () => {
-            console.error("图片加载失败:", imgElement.src);
-        };
-
-        imageContainer.appendChild(imgElement);
+        const cachedImage = imageCache[archetypeSelect];
+        if (cachedImage) {
+            const newImg = cachedImage.cloneNode();
+            imageContainer.appendChild(newImg);
+        } else {
+            const fallbackImg = new Image();
+            fallbackImg.src = `image/${archetypeSelect}.jpg`;
+            fallbackImg.alt = archetypeSelect;
+            fallbackImg.onerror = () => {
+                console.error("Image failled", fallbackImg.src);
+            };
+            imageContainer.appendChild(fallbackImg);
+        }
     }
 
     // Simulation details
@@ -472,7 +511,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             series: [{
                 data: reversedSubArchetypes.map((sub, i) => ({
-                    value: subValues[subArchetypes.indexOf(sub)], 
+                    value: subValues[subArchetypes.indexOf(sub)],
                     itemStyle: {
                         color: selectedArche.includes(sub) ? subColorMap[sub] : 'rgba(211, 211, 211, 0.6)',
                         borderRadius: [0, 10, 10, 0]
@@ -533,7 +572,7 @@ document.addEventListener("DOMContentLoaded", function () {
             series: [{
                 type: 'bar',
                 data: subArchetypes.slice().reverse().map((archetype, i) => ({
-                    value: subValues[subArchetypes.length - 1 - i], 
+                    value: subValues[subArchetypes.length - 1 - i],
                     itemStyle: {
                         color: 'rgba(211, 211, 211, 0.6)',
                         borderRadius: [0, 10, 10, 0]
@@ -602,7 +641,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         else if (subtype) {
             energySubtypeElement.style.display = "flex";
-            document.getElementById("subtype").addEventListener("change", function(e) {
+            document.getElementById("subtype").addEventListener("change", function (e) {
                 const selectedSubtype = e.target.value || null; // 如果选 "" 就传 null
                 renderEnergySubChart(selectedSubtype); // 更新图表
             });
@@ -615,7 +654,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Subtype Charts for Operational Part
     function renderEnergySubChart(subtypeSelect = null) {
         const energysubChart = echarts.init(document.getElementById('energySubChart'));
-    
+
         const categoryMap = {
             publicHousing: ["HDB"],
             privateHousing: ["Landed property", "Private apt. & condo."],
@@ -626,7 +665,7 @@ document.addEventListener("DOMContentLoaded", function () {
             industrial: ["Industrial B1", "Industrial B2"],
             others: ["Cultural inst.", "Sports", "Restaurant", "Hawker centre", "Supermarket", "Data centre"]
         };
-    
+
         const euiData = {
             "HDB": [10.93, 2.61, 8.17, 1.52],
             "Landed property": [26.61, 3.58, 20.42, 0.70],
@@ -651,7 +690,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Hawker centre": [0.00, 0.00, 86.05, 14.88],
             "Supermarket": [143.94, 26.78, 66.95, 6.86]
         };
-        
+
         const defaultGray = '#D3D3D3';
         const colorMapping = {
             'Cooling': '#A5F3FC',
@@ -659,40 +698,40 @@ document.addEventListener("DOMContentLoaded", function () {
             'Electric Equipment': '#E0E0E0',
             'Water System': '#5a2e14'
         };
-    
+
         // 获取要高亮的类别
-        const highlightCategories = subtypeSelect && categoryMap[subtypeSelect] 
-            ? categoryMap[subtypeSelect] 
+        const highlightCategories = subtypeSelect && categoryMap[subtypeSelect]
+            ? categoryMap[subtypeSelect]
             : [];
-    
+
         const seriesData = [
             { name: 'Cooling', type: 'bar', stack: 'total', data: [] },
             { name: 'Interior Lighting', type: 'bar', stack: 'total', data: [] },
             { name: 'Electric Equipment', type: 'bar', stack: 'total', data: [] },
             { name: 'Water System', type: 'bar', stack: 'total', data: [] }
         ];
-    
+
         // 准备系列数据 - 所有柱子都会显示
         categoryList.forEach((category, index) => {
             const isHighlighted = highlightCategories.includes(category);
             seriesData.forEach(series => {
                 series.data.push({
                     value: dataValues[index][seriesData.indexOf(series)],
-                    itemStyle: { 
+                    itemStyle: {
                         color: isHighlighted ? colorMapping[series.name] : defaultGray,
-                        opacity: isHighlighted ? 1 : 0.6 
+                        opacity: isHighlighted ? 1 : 0.6
                     }
                 });
             });
         });
-    
+
         const chartenergyOption = {
             tooltip: {
                 trigger: 'axis',
                 axisPointer: { type: 'shadow' }
             },
             grid: { left: '110px', right: '10px', top: '10px', bottom: '20px' },
-            xAxis: { 
+            xAxis: {
                 type: 'value',
                 axisLabel: { fontSize: 10 }
             },
@@ -700,7 +739,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 type: 'category',
                 axisLabel: {
                     fontSize: 10,
-                    color: function(category) {
+                    color: function (category) {
                         return highlightCategories.includes(category) ? '#333' : defaultGray;
                     }
                 },
@@ -709,7 +748,7 @@ document.addEventListener("DOMContentLoaded", function () {
             series: seriesData,
             legend: { show: false }
         };
-    
+
         energysubChart.setOption(chartenergyOption, true);
 
         document.getElementById('downloadSubEnergyBar').addEventListener('click', function () {
@@ -720,10 +759,10 @@ document.addEventListener("DOMContentLoaded", function () {
             link.click();
         });
     }
-    
+
     // 初始化图表
     renderEnergySubChart();
-    
+
     // Archetype部分的
     // Simulation details
     function energysimulationDetails() {
