@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Singapore Building Carbon Map</title>
+    <title>Buildings.sg - Singapore Building Carbon Map</title>
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.2/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.2/mapbox-gl.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.js"></script>
@@ -1132,12 +1132,12 @@
 
 <body>
     <header class="header">
-        <a href="index.html" class="title">Singapore Building Carbon Map</a>
+        <a href="index.html" class="title">Buildings.sg - Carbon Map & Scenarios for Singapore's Built Environment</a>
         <nav class="nav">
-            <a href="#" id="type-link" data-content="type" class="nav-link">Archetype</a>
+            <a href="#" id="type-link" data-content="type" class="nav-link">Building Archetypes</a>
             <a href="#" id="carbon-link" data-content="carbon" class="nav-link">Embodied Carbon</a>
             <a href="#" id="energy-link" data-content="energy" class="nav-link">Operational Carbon</a>
-            <a href="#" id="bca-link" data-content="bca">BCA Layers</a>
+            <a href="#" id="bca-link" data-content="bca">BCA Data Layers</a>
             <a href="#" id="data-link" data-content="data">Data</a>
             <a href="#" id="about-link" data-content="about">About</a>
         </nav>
@@ -1551,13 +1551,13 @@
                         link.click();
                     });
                 </script>
-                <p>Select a subtype then an archetype to see detailed simulation result.</p>
+                <p>Select a subtype then an archetype to view detailed simulation result.</p>
             </div>
             <div id="energy-subtype" class="result-subtype">
                 <h4>Energy Use Intensity (kWh/m²)</h4>
                 <div id="downloadSubEnergyBar" class="downloadBar">Download</div>
                 <div id="energySubChart" class="SubChart"></div>
-                <p>Select an archetype to see detailed simulation result.</p>
+                <p>Select an archetype to view detailed simulation result.</p>
             </div>
             <div id="energy-content" class="result-content">
                 <div id="image-container-energy" class="image-container"></div>
@@ -1639,7 +1639,7 @@
     
     <!--ml switch-->
     <div class="mlswitch-wrapper">
-        <span class="label-text">Show ML-Generated Buildings</span>
+        <span class="label-text">Show Buildings with Machine Learning Generated Parameters</span>
         <input type="checkbox" id="buildingTypeToggle" class="toggle-mlswitch">
         <label for="buildingTypeToggle" class="mlswitch-label"></label>
     </div>
