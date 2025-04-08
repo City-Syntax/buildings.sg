@@ -76,7 +76,14 @@ const contentData = {
                     <td>building_archetype</td>
                     <td>Classification category from the 23 defined building archetypes, spanning both residential and non-residential uses.</td>
                     <td>Text</td>
-                    <td>OpenStreetMap/HDB*/BCA</td>
+                    <td>OpenStreetMap/HDB*/BCA/Machine Learning</td>
+                </tr>
+                <tr>
+                    <td>Machine Learning Predicted Archetype Probability</td>
+                    <td>ml_probability</td>
+                    <td>The probability that a building belongs to a specific archetype, as predicted by a random forest classification model, based on input data from buildings in Singapore with known archetypes.</td>
+                    <td>Number</td>
+                    <td>Machine Learning</td>
                 </tr>
                 <tr>
                     <td>Height</td>
