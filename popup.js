@@ -326,15 +326,14 @@ overlay.addEventListener('click', () => {
     overlay.style.display = 'none';
 });
 
-
 // GeoJSON 下载按钮功能
 downloadBtnGeoJson.addEventListener("click", function () {
-    fetch("data/sg_buildings_v2.geojson") 
+    fetch("data/sg_buildings_v3.geojson") 
         .then(response => response.blob()) 
         .then(blob => {
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob); 
-            link.download = "singapore_building_carbon_map2025_v2.geojson"; 
+            link.download = "singapore_building_carbon_map202504.geojson"; 
             document.body.appendChild(link); 
             link.click(); 
             document.body.removeChild(link); 
