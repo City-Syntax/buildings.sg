@@ -280,6 +280,10 @@ const contentData = {
         <h2>Disclaimer</h2>
         <p>Buildings.sg presents carbon emission data for informational purposes only. This information should not be used as the basis for legal, financial, or regulatory decisions. Despite our commitment to accuracy, we make no warranties regarding the precision, completeness, or reliability of this data. 
         Users should independently verify all information through official sources before taking any action based on this tool. The developers, contributors, and affiliated organizations expressly disclaim all liability for any consequences arising from the use of this tool.</p>
+        <br>
+        
+        <h2>Publications</h2>
+        <p>This section is currently under development.</p>
         `
 };
 
