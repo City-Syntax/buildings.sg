@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buildings.sg - Singapore Building Carbon Map</title>
+    <title>Buildings.sg</title>
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.2/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.2/mapbox-gl.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.5.0/mapbox-gl-draw.js"></script>
@@ -51,6 +51,7 @@
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 30px;
+            line-height: 2;
         }
 
         .progressBar {
@@ -457,6 +458,7 @@
         }
 
         .legend-container {
+            display: block;
             position: fixed;
             width: 220px;
             bottom: 75px;
@@ -596,7 +598,7 @@
 
         .result-panel select {
             position: relative;
-            top: 5px;
+            top: 0px;
             left: 10px;
             background-color: #333;
             color: #fff;
@@ -608,7 +610,7 @@
         }
 
         .result-panel select option {
-            margin-top: 15px;
+            margin-top: 10px;
             background-color: #fff;
             color: #333;
             border-color: #fff;
@@ -638,7 +640,7 @@
 
         .result-panel .clear-btn {
             position: relative;
-            top: 5px;
+            top: 0px;
             left: 10px;
             background-color: #333;
             color: #fff;
@@ -656,7 +658,7 @@
 
         .simulation-header h2 {
             position: relative;
-            top: 5px;
+            top: 0px;
             left: 15px;
             font-size: larger;
             font-weight: bold;
@@ -1068,12 +1070,9 @@
             top: 0px;
             left: 15px;
             width: 395px;
-            height: 160px;
+            height: 180px;
             margin: 0px;
             animation-delay: 0s;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            font-size: 10px;
         }
 
         #carbonHistogram {
@@ -1093,8 +1092,8 @@
         .downloadcharts {
             position: relative;
             left: 100px;
-            top: 10px;
-            margin-bottom: 30px;
+            top: 5px;
+            margin-bottom: 25px;
             padding-left: 15px;
             padding-right: 15px;
             height: 25px;
@@ -1122,14 +1121,15 @@
 
         .mlswitch-wrapper {
             position: fixed;
-            left: 501px;
-            bottom: 30px;
+            left: 50%;
+            transform: translateX(-164px);
+            bottom: 18px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             background-color: white;
             border-radius: 10px;
-            padding: 5px 12px;
+            padding: 8px 15px;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             z-index: 1;
         }
@@ -1157,18 +1157,12 @@
         .toggle-mlswitch:checked+.mlswitch-label::before {
             transform: translateX(24px);
         }
-        
+
         .label-text {
             font-size: 12px;
             font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
             color: #333;
         }
-
-        .toggle-mlswitch:checked~.building-content #buildingLayer {
-            background-color: #ffeb3b;
-            /* 用机器学习生成的建筑类型颜色 */
-        }
-
     </style>
 </head>
 
@@ -1176,7 +1170,7 @@
     <!-- 加载遮罩层 -->
     <div id="loadingOverlay">
         <div class="loadingContent">
-            <p>Loading Buildings.sg</p>
+            <p>Loading Buildings.sg<br>Carbon Map & Scenarios for Singapore's Built Environment</p>
             <div class="progressBar">
                 <div class="progressBarInner" id="progressBarInner"></div>
             </div>
@@ -1195,15 +1189,15 @@
                 updateProgress(100);
                 setTimeout(() => {
                     document.getElementById("loadingOverlay").style.display = "none";
-                }, 1000);
+                }, 3000);
             }
         }
     </script>
-    
+
     <header class="header">
-        <a href="index.html" class="title">Buildings.sg - Carbon Map & Scenarios for Singapore's Built Environment</a>
+        <a href="index.html" class="title">Buildings.sg</a>
         <nav class="nav">
-            <a href="#" id="type-link" data-content="type" class="nav-link">Building Archetypes</a>
+            <a href="#" id="type-link" data-content="type" class="nav-link">Building Archetype</a>
             <a href="#" id="carbon-link" data-content="carbon" class="nav-link">Embodied Carbon</a>
             <a href="#" id="energy-link" data-content="energy" class="nav-link">Operational Carbon</a>
             <a href="#" id="bca-link" data-content="bca">BCA Data Layers</a>
@@ -1276,7 +1270,7 @@
         </div>
     </div>
 
-    <div class="legend-container type">
+    <div class="legend-container type" style="visibility: visible;">
         <div class="legend-name">Building Types</div>
         <div class="legend-grid">
             <div class="legend-item">
@@ -1330,17 +1324,17 @@
                 <span>5</span>
                 <span>50</span>
                 <span>500</span>
-                <span>1000</span>
+                <span>5000</span>
             </div>
         </div>
     </div>
 
     <div class="legend-container energy">
-        <div class="legend-name">Simulated Operational Carbon (×10² GJ)</div>
+        <div class="legend-name">Simulated Operational Carbon (×10⁴ kgCO₂e)</div>
         <div class="legend-main">
             <div class="legend-bar-energy"></div>
             <div class="legend-labels">
-                <span>0</span>
+                <span>5</span>
                 <span>50</span>
                 <span>500</span>
                 <span>5000</span>
@@ -1620,13 +1614,13 @@
                         link.click();
                     });
                 </script>
-                <p>Select a subtype then an archetype to view detailed simulation result.</p>
+                <p>Select a subtype then an archetype to see detailed simulation result.</p>
             </div>
             <div id="energy-subtype" class="result-subtype">
                 <h4>Energy Use Intensity (kWh/m²)</h4>
                 <div id="downloadSubEnergyBar" class="downloadBar">Download</div>
                 <div id="energySubChart" class="SubChart"></div>
-                <p>Select an archetype to view detailed simulation result.</p>
+                <p>Select an archetype to see detailed simulation result.</p>
             </div>
             <div id="energy-content" class="result-content">
                 <div id="image-container-energy" class="image-container"></div>
@@ -1704,12 +1698,12 @@
 
     </div>
 
-    <button id="toggle2D">2D</button>
-    
+    <button id="toggle2D" title="Switch to 2D view">2D</button>
+
     <!--ml switch-->
-    <div class="mlswitch-wrapper">
-        <span class="label-text">Show Buildings with Machine Learning Generated Parameters</span>
-        <input type="checkbox" id="buildingTypeToggle" class="toggle-mlswitch">
+    <div class="mlswitch-wrapper" title="Show Buildings with Machine Learning Generated Parameters">
+        <span class="label-text">Show Buildings with Machine<br>Learning Generated Parameters</span>
+        <input type="checkbox" id="buildingTypeToggle" class="toggle-mlswitch" checked>
         <label for="buildingTypeToggle" class="mlswitch-label"></label>
     </div>
 
