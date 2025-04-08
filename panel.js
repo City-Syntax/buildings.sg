@@ -988,8 +988,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         name: 'Other dwellings',
                         itemStyle: { color: "#9b59b6" },
                         children: [
-                            { name: 'Shophouse', value: 6, itemStyle: { color: "#9b59b6" } },
-                            { name: 'Hotel', value: 193, itemStyle: { color: "#9b59b6" } }
+                            { name: 'Shophouse', value: 6, itemStyle: { color: "#9b59b6" }, label: { show: false } },
+                            { name: 'Hotel', value: 193, itemStyle: { color: "#9b59b6" }, label: { show: false } }
                         ], label: { show: false }
                     },
                     {
@@ -1006,17 +1006,17 @@ document.addEventListener("DOMContentLoaded", function () {
                         name: 'Healthcare',
                         itemStyle: { color: "#f1c40f" },
                         children: [
-                            { name: 'Hospital', value: 88, itemStyle: { color: "#f1c40f" }, label: { show: false } },
-                            { name: 'Clinic', value: 29, itemStyle: { color: "#f1c40f" }, label: { show: false } },
-                            { name: 'Nursing home', value: 48, itemStyle: { color: "#f1c40f" }, label: { show: false } }
+                            { name: 'Hospital', value: 88, itemStyle: { color: "#f1c40f" }, label: { show: false }, label: { show: false } },
+                            { name: 'Clinic', value: 29, itemStyle: { color: "#f1c40f" }, label: { show: false }, label: { show: false } },
+                            { name: 'Nursing home', value: 48, itemStyle: { color: "#f1c40f" }, label: { show: false }, label: { show: false } }
                         ], label: { show: false }
                     },
                     {
                         name: 'Educational inst.',
                         itemStyle: { color: "#e67e22" },
                         children: [
-                            { name: 'IHL', value: 303, itemStyle: { color: "#e67e22" } },
-                            { name: 'Non-IHL', value: 541, itemStyle: { color: "#e67e22" } }
+                            { name: 'IHL', value: 303, itemStyle: { color: "#e67e22" }, label: { show: false } },
+                            { name: 'Non-IHL', value: 541, itemStyle: { color: "#e67e22" }, label: { show: false } }
                         ], label: { show: false }
                     },
                     {
@@ -1031,12 +1031,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         name: 'Others',
                         itemStyle: { color: "#95a5a6" },
                         children: [
-                            { name: 'Data centre', value: 6, itemStyle: { color: "#95a5a6" } },
-                            { name: 'Community inst.', value: 697, itemStyle: { color: "#95a5a6" } },
-                            { name: 'Sports', value: 116, itemStyle: { color: "#95a5a6" } },
-                            { name: 'Restaurant', value: 25, itemStyle: { color: "#95a5a6" } },
-                            { name: 'Hawker centre', value: 30, itemStyle: { color: "#95a5a6" } },
-                            { name: 'Supermarket', value: 8, itemStyle: { color: "#95a5a6" } }
+                            { name: 'Data centre', value: 6, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Community inst.', value: 697, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Sports', value: 116, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Restaurant', value: 25, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Hawker centre', value: 30, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Supermarket', value: 8, itemStyle: { color: "#95a5a6" }, label: { show: false } }
                         ], label: { show: false }
                     }],
                 label: {
@@ -1094,8 +1094,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         name: 'Other dwellings',
                         itemStyle: { color: "#9b59b6" },
                         children: [
-                            { name: 'Shophouse', value: 1053, itemStyle: { color: "#9b59b6" } },
-                            { name: 'Hotel', value: 426258, itemStyle: { color: "#9b59b6" } }
+                            { name: 'Shophouse', value: 1053, itemStyle: { color: "#9b59b6" }, label: { show: false } },
+                            { name: 'Hotel', value: 426258, itemStyle: { color: "#9b59b6" }, label: { show: false } }
                         ], label: { show: false }
                     },
                     {
@@ -1112,9 +1112,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         name: 'Healthcare',
                         itemStyle: { color: "#f1c40f" },
                         children: [
-                            { name: 'Hospital', value: 691951, itemStyle: { color: "#f1c40f" } },
-                            { name: 'Clinic', value: 227816, itemStyle: { color: "#f1c40f" } },
-                            { name: 'Nursing home', value: 119196, itemStyle: { color: "#f1c40f" } }
+                            { name: 'Hospital', value: 691951, itemStyle: { color: "#f1c40f" }, label: { show: false } },
+                            { name: 'Clinic', value: 227816, itemStyle: { color: "#f1c40f" }, label: { show: false } },
+                            { name: 'Nursing home', value: 119196, itemStyle: { color: "#f1c40f" }, label: { show: false } }
                         ], label: { show: false }
                     },
                     {
