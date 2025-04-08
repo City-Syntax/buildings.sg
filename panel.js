@@ -1046,7 +1046,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 itemStyle: {
                     borderRadius: 10,
-                    borderWidth: 0,
+                    borderWidth: 2,
                     borderColor: '#fff'
                 }
             }
@@ -1152,7 +1152,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 itemStyle: {
                     borderRadius: 10,
-                    borderWidth: 0,
+                    borderWidth: 2,
                     borderColor: '#fff'
                 }
             }
