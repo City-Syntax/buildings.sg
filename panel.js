@@ -972,7 +972,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         name: 'Public housing',
                         itemStyle: { color: "#1abc9c" },
                         children: [
-                            { name: 'HDB (PPVC)', value: 205, itemStyle: { color: "#1abc9c" } },
+                            { name: 'HDB (PPVC)', value: 205, itemStyle: { color: "#1abc9c" }, label: { show: false } },
                             { name: 'HDB (Non-PPVC)', value: 11205, itemStyle: { color: "#1abc9c" } }
                         ]
                     },
@@ -990,26 +990,26 @@ document.addEventListener("DOMContentLoaded", function () {
                         children: [
                             { name: 'Shophouse', value: 6, itemStyle: { color: "#9b59b6" } },
                             { name: 'Hotel', value: 193, itemStyle: { color: "#9b59b6" } }
-                        ]
+                        ], label: { show: false }
                     },
                     {
                         name: 'Commercial',
                         itemStyle: { color: "#34495e" },
                         children: [
                             { name: 'Retail', value: 2552, itemStyle: { color: "#34495e" } },
-                            { name: 'Mixed development', value: 207, itemStyle: { color: "#34495e" } },
-                            { name: 'Office', value: 412, itemStyle: { color: "#34495e" } },
-                            { name: 'Business park', value: 3, itemStyle: { color: "#34495e" } }
+                            { name: 'Mixed development', value: 207, itemStyle: { color: "#34495e" }, label: { show: false } },
+                            { name: 'Office', value: 412, itemStyle: { color: "#34495e" }, label: { show: false } },
+                            { name: 'Business park', value: 3, itemStyle: { color: "#34495e" }, label: { show: false } }
                         ]
                     },
                     {
                         name: 'Healthcare',
                         itemStyle: { color: "#f1c40f" },
                         children: [
-                            { name: 'Hospital', value: 88, itemStyle: { color: "#f1c40f" } },
-                            { name: 'Clinic', value: 29, itemStyle: { color: "#f1c40f" } },
-                            { name: 'Nursing home', value: 48, itemStyle: { color: "#f1c40f" } }
-                        ]
+                            { name: 'Hospital', value: 88, itemStyle: { color: "#f1c40f" }, label: { show: false } },
+                            { name: 'Clinic', value: 29, itemStyle: { color: "#f1c40f" }, label: { show: false } },
+                            { name: 'Nursing home', value: 48, itemStyle: { color: "#f1c40f" }, label: { show: false } }
+                        ], label: { show: false }
                     },
                     {
                         name: 'Educational inst.',
@@ -1017,7 +1017,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         children: [
                             { name: 'IHL', value: 303, itemStyle: { color: "#e67e22" } },
                             { name: 'Non-IHL', value: 541, itemStyle: { color: "#e67e22" } }
-                        ]
+                        ], label: { show: false }
                     },
                     {
                         name: 'Industrial',
@@ -1037,7 +1037,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             { name: 'Restaurant', value: 25, itemStyle: { color: "#95a5a6" } },
                             { name: 'Hawker centre', value: 30, itemStyle: { color: "#95a5a6" } },
                             { name: 'Supermarket', value: 8, itemStyle: { color: "#95a5a6" } }
-                        ]
+                        ], label: { show: false }
                     }],
                 label: {
                     rotate: 'radial',
@@ -1046,7 +1046,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 itemStyle: {
                     borderRadius: 10,
-                    borderWidth: 2,
+                    borderWidth: 0,
                     borderColor: '#fff'
                 }
             }
@@ -1078,7 +1078,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         name: 'Public housing',
                         itemStyle: { color: "#1abc9c" },
                         children: [
-                            { name: 'HDB (PPVC)', value: 109846, itemStyle: { color: "#1abc9c" } },
+                            { name: 'HDB (PPVC)', value: 109846, itemStyle: { color: "#1abc9c" }, label: { show: false } },
                             { name: 'HDB (Non-PPVC)', value: 17109846, itemStyle: { color: "#1abc9c" } }
                         ]
                     },
@@ -1096,16 +1096,16 @@ document.addEventListener("DOMContentLoaded", function () {
                         children: [
                             { name: 'Shophouse', value: 1053, itemStyle: { color: "#9b59b6" } },
                             { name: 'Hotel', value: 426258, itemStyle: { color: "#9b59b6" } }
-                        ]
+                        ], label: { show: false }
                     },
                     {
                         name: 'Commercial',
                         itemStyle: { color: "#34495e" },
                         children: [
                             { name: 'Retail', value: 5799631, itemStyle: { color: "#34495e" } },
-                            { name: 'Mixed development', value: 1253799, itemStyle: { color: "#34495e" } },
+                            { name: 'Mixed development', value: 1253799, itemStyle: { color: "#34495e" }, label: { show: false } },
                             { name: 'Office', value: 2229394, itemStyle: { color: "#34495e" } },
-                            { name: 'Business park', value: 22978, itemStyle: { color: "#34495e" } }
+                            { name: 'Business park', value: 22978, itemStyle: { color: "#34495e" }, label: { show: false } }
                         ]
                     },
                     {
@@ -1115,13 +1115,13 @@ document.addEventListener("DOMContentLoaded", function () {
                             { name: 'Hospital', value: 691951, itemStyle: { color: "#f1c40f" } },
                             { name: 'Clinic', value: 227816, itemStyle: { color: "#f1c40f" } },
                             { name: 'Nursing home', value: 119196, itemStyle: { color: "#f1c40f" } }
-                        ]
+                        ], label: { show: false }
                     },
                     {
                         name: 'Educational inst.',
                         itemStyle: { color: "#e67e22" },
                         children: [
-                            { name: 'IHL', value: 1043358, itemStyle: { color: "#e67e22" } },
+                            { name: 'IHL', value: 1043358, itemStyle: { color: "#e67e22" }, label: { show: false } },
                             { name: 'Non-IHL', value: 4131270, itemStyle: { color: "#e67e22" } }
                         ]
                     },
@@ -1137,12 +1137,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         name: 'Others',
                         itemStyle: { color: "#95a5a6" },
                         children: [
-                            { name: 'Data centre', value: 41566, itemStyle: { color: "#95a5a6" } },
+                            { name: 'Data centre', value: 41566, itemStyle: { color: "#95a5a6" }, label: { show: false } },
                             { name: 'Community inst.', value: 2527179, itemStyle: { color: "#95a5a6" } },
-                            { name: 'Sports', value: 642846, itemStyle: { color: "#95a5a6" } },
-                            { name: 'Restaurant', value: 10888, itemStyle: { color: "#95a5a6" } },
-                            { name: 'Hawker centre', value: 72801, itemStyle: { color: "#95a5a6" } },
-                            { name: 'Supermarket', value: 38150, itemStyle: { color: "#95a5a6" } }
+                            { name: 'Sports', value: 642846, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Restaurant', value: 10888, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Hawker centre', value: 72801, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Supermarket', value: 38150, itemStyle: { color: "#95a5a6" }, label: { show: false } }
                         ]
                     }],
                 label: {
@@ -1152,7 +1152,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 itemStyle: {
                     borderRadius: 10,
-                    borderWidth: 2,
+                    borderWidth: 0,
                     borderColor: '#fff'
                 }
             }
