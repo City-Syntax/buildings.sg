@@ -258,7 +258,7 @@ const contentData = {
     `,
     about: `
         <h2>About the Project</h2>
-        <p>The <a href="#" class="link">Buildings.sg</a> is an interactive platform developed by <a href="https://www.citysyntax.io/" class="link">City Syntax Lab</a> at the <a href="https://nus.edu.sg/" class="link">National University of Singapore (NUS)</a>. It visualizes and analyzes the carbon emissions of buildings across Singapore, covering both operational and embodied carbon footprints. By integrating geographic data with building performance insights, the platform empowers policymakers, industry professionals, and the public to identify opportunities for carbon reduction. This tool supports Singapore's <a href="https://www.greenplan.gov.sg/" class="link">Green Plan 2030</a> by promoting energy-efficient designs, sustainable materials, and low-carbon construction practices, driving progress toward a more sustainable built environment.
+        <p>The <a href="#" class="link">Buildings.sg</a> is an interactive platform developed by <a href="https://www.citysyntax.io/" class="link">City Syntax Lab</a> at the <a href="https://nus.edu.sg/" class="link">National University of Singapore (NUS)</a>. It visualizes and analyzes the carbon emissions of buildings across Singapore, covering both operational and embodied carbon footprints. By integrating geographic data with building performance insights, the platform empowers policymakers, industry professionals, and the public to identify opportunities for carbon reduction. This platform supports Singapore's <a href="https://www.greenplan.gov.sg/" class="link">Green Plan 2030</a> by promoting energy-efficient designs, sustainable materials, and low-carbon construction practices, driving progress toward a more sustainable built environment.
         <br><br>Buildings.sg leverages urban building energy modeling and machine learning to assess, predict and visualize energy use and carbon emissions for buildings across Singapore.</p>
         <div style="text-align: center; margin-top: 10px;">
             <a href="https://www.citysyntax.io/">
@@ -279,7 +279,7 @@ const contentData = {
         
         <h2>Disclaimer</h2>
         <p>Data and results presented in Buildings.sg are for informational purposes only, and should not be used as the basis for legal, financial, or regulatory decisions. Despite our commitment to accuracy, we make no warranties regarding the precision, completeness, or reliability of this data. 
-        Users should independently verify all information through official sources before taking any action based on this tool. The developers, contributors, and affiliated organizations expressly disclaim all liability for any consequences arising from the use of this tool.</p>
+        Users should independently verify all information through official sources before taking any action based on this platform. The developers, contributors, and affiliated organizations expressly disclaim all liability for any consequences arising from the use of this tool.</p>
         <br>
         
         <h2>Publications</h2>
