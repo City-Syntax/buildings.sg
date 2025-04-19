@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
             archetypeDescriptionElement.textContent = descriptions[subtype];
         } else {
             // 如果没有subtype或archetype，显示默认信息
-            archetypeDescriptionElement.textContent = "Please select a valid archetype or subtype.";
+            archetypeDescriptionElement.textContent = "Please select a valid archetype or type.";
         }
     }
 
@@ -519,7 +519,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let subtypeSelect = document.getElementById("subtype");
         if (!subtypeSelect) {
-            console.error("Subtype dropdown not found!");
+            console.error("Type dropdown not found!");
             return;
         }
 
