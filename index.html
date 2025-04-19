@@ -1122,14 +1122,14 @@
         .mlswitch-wrapper {
             position: fixed;
             left: 50%;
-            transform: translateX(-164px);
-            bottom: 18px;
+            transform: translateX(-145px);
+            bottom: 30px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             background-color: white;
             border-radius: 10px;
-            padding: 8px 15px;
+            padding: 5px 10px;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             z-index: 1;
         }
@@ -1167,7 +1167,6 @@
 </head>
 
 <body>
-    <!-- 加载遮罩层 -->
     <div id="loadingOverlay">
         <div class="loadingContent">
             <p>Loading Buildings.sg<br>Carbon Map, Urban Building Energy Models & Scenarios for Singapore's Built Environment</p>
@@ -1197,10 +1196,10 @@
     <header class="header">
         <a href="index.html" class="title">Buildings.sg</a>
         <nav class="nav">
-            <a href="#" id="type-link" data-content="type" class="nav-link">Building Archetype</a>
+            <a href="#" id="type-link" data-content="type" class="nav-link">Archetype</a>
             <a href="#" id="carbon-link" data-content="carbon" class="nav-link">Embodied Carbon</a>
             <a href="#" id="energy-link" data-content="energy" class="nav-link">Operational Carbon</a>
-            <a href="#" id="bca-link" data-content="bca">BCA Data Layers</a>
+            <a href="#" id="bca-link" data-content="bca">BCA Layers</a>
             <a href="#" id="data-link" data-content="data">Data</a>
             <a href="#" id="about-link" data-content="about">About</a>
         </nav>
@@ -1364,7 +1363,7 @@
         <div class="simulation-header"></div>
         <!-- Dropdown Menu fro Archetype selecting-->
         <select id="subtype" class="subtype-btn" onchange="updateArchetypes()">
-            <option value="">All Subtype</option>
+            <option value="">All Type</option>
             <option value="publicHousing">Public Housing</option>
             <option value="privateHousing">Private Housing</option>
             <option value="otherDwelling">Other Dwelling</option>
@@ -1396,7 +1395,7 @@
             </div>
             <div class="type-intro">
                 <h3>Archetype Introduction</h3>
-                <p id="archetype-description">Select a subtype or an archetype to view the description.</p>
+                <p id="archetype-description">Select a type or an archetype to view the description.</p>
             </div>
             <script>
                 let isNumber = true;
@@ -1483,7 +1482,7 @@
                         link.click();
                     });
                 </script>
-                <p>Select a subtype then an archetype to view detailed simulation result.</p>
+                <p>Select a type then an archetype to view detailed simulation result.</p>
             </div>
             <div id="carbon-subtype" class="result-subtype">
                 <h4>Embodied Carbon Intensity (kgCO₂e/m²)</h4>
@@ -1614,7 +1613,7 @@
                         link.click();
                     });
                 </script>
-                <p>Select a subtype then an archetype to view detailed simulation result.</p>
+                <p>Select a type then an archetype to view detailed simulation result.</p>
             </div>
             <div id="energy-subtype" class="result-subtype">
                 <h4>Energy Use Intensity (kWh/m²)</h4>
@@ -1702,7 +1701,7 @@
 
     <!--ml switch-->
     <div class="mlswitch-wrapper" title="Show Buildings with Machine Learning Generated Parameters">
-        <span class="label-text">Show Buildings with Machine<br>Learning Generated Parameters</span>
+        <span class="label-text">Buildings with ML Parameters</span>
         <input type="checkbox" id="buildingTypeToggle" class="toggle-mlswitch" checked>
         <label for="buildingTypeToggle" class="mlswitch-label"></label>
     </div>
