@@ -1130,7 +1130,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         itemStyle: { color: "#e74c3c" },
                         children: [
                             { name: 'B1', value: 111.67, itemStyle: { color: "#e74c3c" } },
-                            { name: 'B2', value: 2000.00, itemStyle: { color: "#e74c3c" } }
+                            { name: 'B2', value: 1999.99, itemStyle: { color: "#e74c3c" } }
                         ]
                     },
                     {
