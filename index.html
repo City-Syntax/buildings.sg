@@ -766,11 +766,11 @@
             border-radius: 11px;
             border: 1.5px solid #ddd;
             padding: 5px;
-            width: 190px;
+            width: 270px;
             height: 26px;
             position: relative;
             top: -5px;
-            left: 15px;
+            left: 10px;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             box-sizing: border-box;
@@ -793,7 +793,7 @@
 
         #archetype-charts .toggle-slider {
             position: absolute;
-            width: 100px;
+            width: 138px;
             height: 23px;
             background: #333;
             border-radius: 10px;
@@ -804,10 +804,10 @@
 
         #downloadSunChart {
             position: relative;
-            left: 30px;
+            left: 15px;
             top: -5px;
             height: 25px;
-            width: 90px;
+            width: 88px;
             line-height: 25px;
             text-align: center;
             color: #fff;
@@ -1385,11 +1385,11 @@
             <div id="sunchartsnumber"></div>
             <div id="sunchartsfootprint"></div>
             <div class="container">
-                <div class="sunchartname">By Building</div>
+                <div class="sunchartname">By</div>
                 <div class="toggle-container" onclick="toggleSwitch()">
                     <div class="toggle-slider"></div>
-                    <div id="numberLabel" class="toggle-option active">Numbers</div>
-                    <div id="footprintLabel" class="toggle-option">Footprint</div>
+                    <div id="numberLabel" class="toggle-option active">Building Numbers</div>
+                    <div id="footprintLabel" class="toggle-option">Footprint(10⁴m²)</div>
                 </div>
                 <div id="downloadSunChart">Download</div>
             </div>
@@ -1401,7 +1401,7 @@
                 let isNumber = true;
                 function toggleSwitch() {
                     isNumber = !isNumber;
-                    document.querySelector('.toggle-slider').style.transform = isNumber ? 'translateX(0)' : 'translateX(calc(100% - 12.5px))';
+                    document.querySelector('.toggle-slider').style.transform = isNumber ? 'translateX(0)' : 'translateX(calc(100% - 9px))';
                     document.getElementById('numberLabel').classList.toggle('active', isNumber);
                     document.getElementById('footprintLabel').classList.toggle('active', !isNumber);
                     document.getElementById('sunchartsnumber').style.display = isNumber ? 'flex' : 'none';
