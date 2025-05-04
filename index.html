@@ -163,6 +163,8 @@
         }
 
         .popup h2 {
+            display: block;
+            width: 100%;
             margin-top: 0;
             font-size: larger;
             font-weight: bold;
@@ -194,6 +196,10 @@
             font-weight: bold;
         }
 
+        .popup-content {
+            width: 100%;
+        }
+
         .popup table {
             width: 100%;
             margin-top: 10px;
@@ -212,36 +218,134 @@
             z-index: 99;
         }
 
-        #download-btn-geojson {
-            display: block;
-            font-size: 12px;
-            margin-top: 0px;
-            margin-right: 20px;
-            padding: 8px 15px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
+        #data-sub-buttons {
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            top: 50px;
+            right: 45px;
+            background: transparent;
+            z-index: 5;
         }
 
-        #download-btn-idf {
+        #data-sub-buttons.show {
             display: block;
-            font-size: 12px;
-            margin-top: 0px;
-            margin-right: 20px;
-            padding: 8px 15px;
+        }
+
+        #data-sub-buttons button {
+            width: 100px;
+            text-align: center;
+            padding: 5px 10px;
+            margin-top: 5px;
+            color: #fff;
             background-color: #333;
-            color: white;
-            border: none;
             border-radius: 10px;
+            font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+            border: 0;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #data-sub-buttons button:hover,
+        #data-sub-buttons button:active {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        #data-sub-buttons button.active {
+            color: #333;
+            background-color: #fff;
+            font-weight: bold;
+        }
+
+        #popupDownload {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+        }
+
+        .download-grid {
+            display: flex !important;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding-bottom: 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .download-item {
+            position: relative;
             cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.2s;
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .download-item img {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            filter: grayscale(100%) contrast(90%) brightness(120%) invert(20%);
+            transition: filter 0.3s ease;
+        }
+
+        .download-item:hover img {
+            filter: grayscale(0%) contrast(100%) brightness(100%) invert(0%);
+        }
+
+        .download-tooltip {
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 10px;
+            opacity: 0;
+            box-sizing: border-box;
+            transition: opacity 0.3s ease;
+        }
+
+        .download-item:hover .download-tooltip {
+            opacity: 1;
+        }
+
+        .download-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            padding: 4px 6px;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+
+        .download-item:hover .download-label {
+            opacity: 0;
         }
 
         #close-btn {
             display: block;
             font-size: 12px;
-            margin: 20px auto 0;
+            margin: 20px auto 0px auto;
             padding: 8px 12px;
             background-color: #333;
             color: white;
@@ -307,10 +411,10 @@
             display: none;
             flex-direction: column;
             position: fixed;
-            width: 170px;
+            width: 165px;
             height: 100px;
             top: 50px;
-            right: 80px;
+            right: 85px;
             background: transparent;
             z-index: 5;
         }
@@ -320,7 +424,7 @@
         }
 
         .buttons-container button {
-            width: 170px;
+            width: 165px;
             text-align: center;
             padding: 5px 10px;
             margin-top: 5px;
@@ -766,7 +870,7 @@
             border-radius: 11px;
             border: 1.5px solid #ddd;
             padding: 5px;
-            width: 270px;
+            width: 280px;
             height: 26px;
             position: relative;
             top: -5px;
@@ -793,7 +897,7 @@
 
         #archetype-charts .toggle-slider {
             position: absolute;
-            width: 138px;
+            width: 142px;
             height: 23px;
             background: #333;
             border-radius: 10px;
@@ -804,10 +908,10 @@
 
         #downloadSunChart {
             position: relative;
-            left: 15px;
+            left: 10px;
             top: -5px;
             height: 25px;
-            width: 88px;
+            width: 83px;
             line-height: 25px;
             text-align: center;
             color: #fff;
@@ -1169,7 +1273,8 @@
 <body>
     <div id="loadingOverlay">
         <div class="loadingContent">
-            <p>Loading Buildings.sg<br>Carbon Map, Urban Building Energy Models & Scenarios for Singapore's Built Environment</p>
+            <p>Loading Buildings.sg<br>Carbon Map, Urban Building Energy Models & Scenarios for Singapore's Built
+                Environment</p>
             <div class="progressBar">
                 <div class="progressBarInner" id="progressBarInner"></div>
             </div>
@@ -1200,7 +1305,7 @@
             <a href="#" id="carbon-link" data-content="carbon" class="nav-link">Embodied Carbon</a>
             <a href="#" id="energy-link" data-content="energy" class="nav-link">Operational Carbon</a>
             <a href="#" id="bca-link" data-content="bca">BCA Layers</a>
-            <a href="#" id="data-link" data-content="data">Data</a>
+            <a href="#" id="data-link" class="nav-link">Data</a>
             <a href="#" id="about-link" data-content="about">About</a>
         </nav>
     </header>
@@ -1215,6 +1320,50 @@
         <button onclick="showLayerGroup('bca-buildings-eui')">Energy Use Intensity</button>
         <button onclick="showLayerGroup('bca-buildings-gm')">GreenMark</button>
     </div>
+
+    <div id="data-sub-buttons">
+        <button id="info-link" data-content="data">Information</button>
+        <button id="download-link" data-content="dataDown">Download</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const bcaLink = document.getElementById('bca-link');
+            const dataLink = document.getElementById('data-link');
+            const bcaMenu = document.querySelector('.buttons-container');
+            const dataMenu = document.getElementById('data-sub-buttons');
+            const navLinks = document.querySelectorAll('nav a');  // 获取所有导航链接
+
+            // 初始隐藏两个菜单
+            bcaMenu.style.display = 'none';
+            dataMenu.style.display = 'none';
+
+            bcaLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const isVisible = bcaMenu.style.display === 'block';
+                bcaMenu.style.display = isVisible ? 'none' : 'block';
+                dataMenu.style.display = 'none';
+            });
+
+            dataLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const isVisible = dataMenu.style.display === 'block';
+                dataMenu.style.display = isVisible ? 'none' : 'block';
+                bcaMenu.style.display = 'none';
+            });
+
+            // 监听所有导航链接的点击事件
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (link !== dataLink && link !== bcaLink) {
+                        dataMenu.style.display = 'none';
+                        bcaMenu.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
 
     <!-- 图例容器 -->
     <div class="legend-container-bca">
@@ -1346,9 +1495,123 @@
     <div id="popup" class="popup">
         <div class="popup-content">
             <div id="popup-text"></div>
-            <button id="download-btn-geojson" style="display:none;">Download GeoJSON Document (Map Dataset)</button>
-            <button id="download-btn-idf" style="display:none;">Download IDF Package (for all Archetypes)</button>
+            <div id="popupDownload">
+                <h2 style="font-weight: 500; width: 100%;">Download IDF Files</h2>
+                <div id="downloadGridIDF" class="download-grid">
+                    <div class="download-item" download-file="HDB PPVC.idf">
+                        <img src="image/HDB PPVC.jpg" alt="HDB PPVC.jpg">
+                        <span class="download-label">HDB PPVC</span>
+                        <div class="download-tooltip">Download HDB PPVC IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="HDB non-PPVC.idf">
+                        <img src="image/HDB non-PPVC.jpg" alt="HDB non-PPVC.jpg">
+                        <span class="download-label">HDB Non-PPVC</span>
+                        <div class="download-tooltip">Download HDB Non-PPVC IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Landed property.idf">
+                        <img src="image/Landed property.jpg" alt="Landed property.jpg">
+                        <span class="download-label">Landed Property</span>
+                        <div class="download-tooltip">Download Landed Property IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Private apartment & condo.idf">
+                        <img src="image/Private apartment & condo.jpg" alt="Private apartment & condo.jpg">
+                        <span class="download-label">Private Apartment & Condo</span>
+                        <div class="download-tooltip">Download Private Apartment & Condo IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Hotel.idf">
+                        <img src="image/Hotel.jpg" alt="Hotel.jpg">
+                        <span class="download-label">Hotel</span>
+                        <div class="download-tooltip">Download Hotel IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Shophouse.idf">
+                        <img src="image/Shophouse.jpg" alt="Shophouse.jpg">
+                        <span class="download-label">Shophouse</span>
+                        <div class="download-tooltip">Download Shophouse IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Retail.idf">
+                        <img src="image/Retail.jpg" alt="Retail.jpg">
+                        <span class="download-label">Retail</span>
+                        <div class="download-tooltip">Download Retail IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Mixed development.idf">
+                        <img src="image/Mixed development.jpg" alt="Mixed development.jpg">
+                        <span class="download-label">Mixed Development</span>
+                        <div class="download-tooltip">Download Mixed Development IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Office.idf">
+                        <img src="image/Office.jpg" alt="Office.jpg">
+                        <span class="download-label">Office</span>
+                        <div class="download-tooltip">Download Office IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Business park.idf">
+                        <img src="image/Business park.jpg" alt="Business park.jpg">
+                        <span class="download-label">Business Park</span>
+                        <div class="download-tooltip">Download Business Park IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Hospital.idf">
+                        <img src="image/Hospital.jpg" alt="Hospital.jpg">
+                        <span class="download-label">Hospital</span>
+                        <div class="download-tooltip">Download Hospital IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Clinic.idf">
+                        <img src="image/Clinic.jpg" alt="Clinic.jpg">
+                        <span class="download-label">Clinic</span>
+                        <div class="download-tooltip">Download Clinic IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Nursing home.idf">
+                        <img src="image/Nursing home.jpg" alt="Nursing home.jpg">
+                        <span class="download-label">Nursing Home</span>
+                        <div class="download-tooltip">Download Nursing Home IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Inst. of higher learning (IHL).idf">
+                        <img src="image/Inst. of higher learning (IHL).jpg" alt="Inst. of higher learning (IHL).jpg">
+                        <span class="download-label">Inst. of Higher Learning (IHL)</span>
+                        <div class="download-tooltip">Download Inst. of Higher Learning (IHL) IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Non-IHL.idf">
+                        <img src="image/Non-IHL.jpg" alt="Non-IHL.jpg">
+                        <span class="download-label">Non-IHL</span>
+                        <div class="download-tooltip">Download Non-IHL IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Civic, community & cultural inst..idf">
+                        <img src="image/Civic, community & cultural inst..jpg"
+                            alt="Civic, community & cultural inst..jpg">
+                        <span class="download-label">Civic, Community & Cultural Inst.</span>
+                        <div class="download-tooltip">Download Civic, Community & Cultural Inst. IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Restaurant.idf">
+                        <img src="image/Restaurant.jpg" alt="Restaurant.jpg">
+                        <span class="download-label">Restaurant</span>
+                        <div class="download-tooltip">Download Restaurant IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Supermarket.idf">
+                        <img src="image/Supermarket.jpg" alt="Supermarket.jpg">
+                        <span class="download-label">Supermarket</span>
+                        <div class="download-tooltip">Download Supermarket IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Hawker centre.idf">
+                        <img src="image/Hawker centre.jpg" alt="Hawker centre.jpg">
+                        <span class="download-label">Hawker Centre</span>
+                        <div class="download-tooltip">Download Hawker Centre IDF File</div>
+                    </div>
+                    <div class="download-item" download-file="Data centre.idf">
+                        <img src="image/Data centre.jpg" alt="Data centre.jpg">
+                        <span class="download-label">Data Centre</span>
+                        <div class="download-tooltip">Download Data Centre IDF File</div>
+                    </div>
+                </div>
+                <br>
+
+                <h2 style="font-weight: 500; width: 100%;">Download GEOJSON Files</h2>
+                <div id="downloadGridMap" class="download-grid">
+                    <div class="download-item" download-file="Map_data.idf">
+                        <img src="image/Map_data.jpg" alt="Map_data.jpg">
+                        <div class="download-tooltip">Download Map Dataset GEOJSON File</div>
+                    </div>
+                </div>
+            </div>
             <button id="close-btn">Close</button>
+            <br>
         </div>
     </div>
 
@@ -1401,7 +1664,7 @@
                 let isNumber = true;
                 function toggleSwitch() {
                     isNumber = !isNumber;
-                    document.querySelector('.toggle-slider').style.transform = isNumber ? 'translateX(0)' : 'translateX(calc(100% - 9px))';
+                    document.querySelector('.toggle-slider').style.transform = isNumber ? 'translateX(0)' : 'translateX(calc(100% - 6.5px))';
                     document.getElementById('numberLabel').classList.toggle('active', isNumber);
                     document.getElementById('footprintLabel').classList.toggle('active', !isNumber);
                     document.getElementById('sunchartsnumber').style.display = isNumber ? 'flex' : 'none';
