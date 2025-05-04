@@ -252,9 +252,9 @@ const contentData = {
         <p>
         *Data for HDB buildings is derived from various data sources including HDB, OpenStreetMap, and the HDB dataset from the NUS Urban Analytics Lab.
         </p>
-        <br>
-        
-        <h2>Data Download</h2>
+    `,
+    dataDown: `
+        <h2>Download Data</h2>
     `,
     about: `
         <h2>About the Project</h2>
@@ -289,34 +289,57 @@ const contentData = {
 
 // 获取 DOM 元素
 const dataLink = document.getElementById('data-link');
+const dataDown = document.getElementById('download-link');
+const dataInfo = document.getElementById('info-link');
 const aboutLink = document.getElementById('about-link');
 const popup = document.getElementById('popup');
 const overlay = document.getElementById('overlay');
 const closeBtn = document.getElementById('close-btn');
 const popupText = document.getElementById('popup-text');
-const downloadBtnGeoJson = document.getElementById("download-btn-geojson");
-const downloadBtnIDF = document.getElementById("download-btn-idf");
+const downloadItems = document.querySelectorAll(".download-item");
 
+document.getElementById("data-link").addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const subButtons = document.getElementById("data-sub-buttons");
+
+    // 切换显示或隐藏 class
+    subButtons.classList.toggle("show");
+
+    // 关闭 popup 和 overlay（可选）
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("buttons-container").style.display = "none";
+});
+
+  
 // 点击链接时根据不同的参数显示对应的内容
 function showPopup(type) {
+    console.log("Popup triggered for:", type); // 调试用
+
     popupText.innerHTML = contentData[type] || "Content not found!";
 
-    if (type === "data") {
-        downloadBtnGeoJson.style.display = "inline-block";
-        downloadBtnIDF.style.display = "inline-block";
+    if (type === "dataDown") {
+        document.getElementById("popupDownload").style.display = "flex";
     } else {
-        downloadBtnGeoJson.style.display = "none";
-        downloadBtnIDF.style.display = "none";
-    }
+        document.getElementById("popupDownload").style.display = "none";
+    }    
 
-    popup.style.display = 'block';
+    popup.style.display = 'flex';
     overlay.style.display = 'block';
+    document.getElementById("buttons-container").style.display = "none"; // 隐藏按钮容器
 }
 
+
 // 点击 'Data' 链接显示数据内容
-dataLink.addEventListener('click', (e) => {
+dataInfo.addEventListener('click', (e) => {
     e.preventDefault();
     showPopup('data');
+});
+
+dataDown.addEventListener('click', (e) => {
+    e.preventDefault();
+    showPopup('dataDown');
 });
 
 // 点击 'About' 链接显示关于内容
@@ -337,31 +360,32 @@ overlay.addEventListener('click', () => {
     overlay.style.display = 'none';
 });
 
-// GeoJSON 下载按钮功能
-downloadBtnGeoJson.addEventListener("click", function () {
-    fetch("data/sg_buildings_v3.geojson") 
-        .then(response => response.blob()) 
-        .then(blob => {
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob); 
-            link.download = "singapore_building_carbon_map202504.geojson"; 
-            document.body.appendChild(link); 
-            link.click(); 
-            document.body.removeChild(link); 
-        })
-        .catch(error => console.error("save failled:", error));
-});
 
-downloadBtnIDF.addEventListener("click", function () {
-    fetch("data/singapore_building_IDF.zip") // 确保这里是你的 ZIP 文件路径
-        .then(response => response.blob()) // 转换为 Blob
-        .then(blob => {
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob); // 生成 Blob URL
-            link.download = "singapore_building_IDF.zip"; // 设置下载文件名
-            document.body.appendChild(link); // 添加到 DOM
-            link.click(); // 触发下载
-            document.body.removeChild(link); // 移除 DOM 元素
-        })
-        .catch(error => console.error("save failled:", error));
+// 处理下载链接点击事件
+downloadItems.forEach(item => {
+    item.addEventListener("click", () => {
+        const fileName = item.getAttribute("download-file"); // 获取文件名
+        const filePath = "download/" + fileName; // 拼接路径（可根据你项目结构调整）
+
+        // 创建下载链接并触发点击
+        fetch(filePath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            })
+            .catch(error => {
+                console.error("Download failed:", error);
+                alert("Download failed: " + error.message);
+            });
+    });
 });
