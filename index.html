@@ -1267,6 +1267,18 @@
             font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
             color: #333;
         }
+
+        #visitor-counter {
+            position: fixed;
+            bottom: 5px;
+            left: 100px;
+            background-color: transparent;
+            padding: 0px;
+            font-size: 12px;
+            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            z-index: 9;
+        }
     </style>
 </head>
 
@@ -1312,8 +1324,10 @@
 
     <div id="map"></div>
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
-    <script
-        src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js">
+    </script>
+
+    <div id="visitor-counter">Total Site Visitors: loading…</div>
 
     <div class="buttons-container">
         <button onclick="showLayerGroup('bca-buildings-gfa')">Gross Floor Area</button>
@@ -1973,6 +1987,21 @@
     <script src="popup.js"></script>
     <script src="mapbox copy.js"></script>
     <script src="panel.js"></script>
+
+    <script>
+        const NAMESPACE = 'buildings.sg';
+        const KEY = 'visitor-count';
+
+        fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('visitor-counter').textContent = 'Total Site Visitors: ' + data.value;
+            })
+            .catch(err => {
+                document.getElementById('visitor-counter').textContent = 'Total Site Visitors: N/A';
+                console.error('Visitor count failed:', err);
+            });
+    </script>
 
 </body>
 
