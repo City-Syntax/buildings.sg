@@ -18,6 +18,15 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9SKSBMB2TX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'G-9SKSBMB2TX');
+    </script>
 
     <link rel="stylesheet" href="mapboxgl.css">
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
@@ -1327,8 +1336,6 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js">
     </script>
 
-    <div id="visitor-counter">Total Site Visitors: loading…</div>
-
     <div class="buttons-container">
         <button onclick="showLayerGroup('bca-buildings-gfa')">Gross Floor Area</button>
         <button onclick="showLayerGroup('bca-buildings-eui')">Energy Use Intensity</button>
@@ -1987,21 +1994,6 @@
     <script src="popup.js"></script>
     <script src="mapbox copy.js"></script>
     <script src="panel.js"></script>
-
-    <script>
-        const NAMESPACE = 'buildings.sg';
-        const KEY = 'visitor-count';
-
-        fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`)
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('visitor-counter').textContent = 'Total Site Visitors: ' + data.value;
-            })
-            .catch(err => {
-                document.getElementById('visitor-counter').textContent = 'Total Site Visitors: N/A';
-                console.error('Visitor count failed:', err);
-            });
-    </script>
 
 </body>
 
