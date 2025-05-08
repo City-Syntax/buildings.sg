@@ -1990,6 +1990,22 @@
         <label for="buildingTypeToggle" class="mlswitch-label"></label>
     </div>
 
+    <div id="visitor-counter">Total Site Visitors: loading…</div>
+    <script>
+        const NAMESPACE = 'buildings.sg';
+        const KEY = 'visitor-count';
+
+        fetch(`https://api.counterapi.dev/hit/${NAMESPACE}/${KEY}`)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('visitor-counter').textContent = 'Total Site Visitors: ' + data.value;
+            })
+            .catch(err => {
+                document.getElementById('visitor-counter').textContent = 'Total Site Visitors: N/A';
+                console.error('Visitor count failed:', err);
+            });
+    </script>
+
     <!--js-->
     <script src="popup.js"></script>
     <script src="mapbox copy.js"></script>
