@@ -1,0 +1,2837 @@
+  Version,24.2;
+
+  Timestep,6;
+
+  LifeCycleCost:Parameters,
+    Life Cycle Cost Parameters,  !- Name
+    EndOfYear,               !- Discounting Convention
+    ConstantDollar,          !- Inflation Approach
+    0.03,                    !- Real Discount Rate
+    ,                        !- Nominal Discount Rate
+    ,                        !- Inflation
+    ,                        !- Base Date Month
+    2011,                    !- Base Date Year
+    ,                        !- Service Date Month
+    2011,                    !- Service Date Year
+    25,                      !- Length of Study Period in Years
+    ,                        !- Tax rate
+    None;                    !- Depreciation Method
+
+  LifeCycleCost:UsePriceEscalation,
+    U.S. Avg  Commercial-Electricity,  !- LCC Price Escalation Name
+    Electricity,             !- Resource
+    2011,                    !- Escalation Start Year
+    January,                 !- Escalation Start Month
+    0.9838,                  !- Year 1 Escalation
+    0.9730,                  !- Year 2 Escalation
+    0.9632,                  !- Year 3 Escalation
+    0.9611,                  !- Year 4 Escalation
+    0.9571,                  !- Year 5 Escalation
+    0.9553,                  !- Year 6 Escalation
+    0.9539,                  !- Year 7 Escalation
+    0.9521,                  !- Year 8 Escalation
+    0.9546,                  !- Year 9 Escalation
+    0.9550,                  !- <none>
+    0.9553,                  !- <none>
+    0.9564,                  !- <none>
+    0.9575,                  !- <none>
+    0.9596,                  !- <none>
+    0.9618,                  !- <none>
+    0.9614,                  !- <none>
+    0.9618,                  !- <none>
+    0.9618,                  !- <none>
+    0.9593,                  !- <none>
+    0.9589,                  !- <none>
+    0.9607,                  !- <none>
+    0.9625,                  !- <none>
+    0.9650,                  !- <none>
+    0.9708,                  !- <none>
+    0.9751,                  !- <none>
+    0.9762,                  !- <none>
+    0.9766,                  !- <none>
+    0.9766,                  !- <none>
+    0.9769,                  !- <none>
+    0.9773;                  !- <none>
+
+  LifeCycleCost:UsePriceEscalation,
+    U.S. Avg  Commercial-Distillate Oil,  !- LCC Price Escalation Name
+    FuelOilNo1,              !- Resource
+    2011,                    !- Escalation Start Year
+    January,                 !- Escalation Start Month
+    0.9714,                  !- Year 1 Escalation
+    0.9730,                  !- Year 2 Escalation
+    0.9942,                  !- Year 3 Escalation
+    1.0164,                  !- Year 4 Escalation
+    1.0541,                  !- Year 5 Escalation
+    1.0928,                  !- Year 6 Escalation
+    1.1267,                  !- Year 7 Escalation
+    1.1580,                  !- Year 8 Escalation
+    1.1792,                  !- Year 9 Escalation
+    1.1967,                  !- <none>
+    1.2200,                  !- <none>
+    1.2333,                  !- <none>
+    1.2566,                  !- <none>
+    1.2709,                  !- <none>
+    1.2826,                  !- <none>
+    1.2985,                  !- <none>
+    1.3102,                  !- <none>
+    1.3250,                  !- <none>
+    1.3261,                  !- <none>
+    1.3282,                  !- <none>
+    1.3324,                  !- <none>
+    1.3356,                  !- <none>
+    1.3431,                  !- <none>
+    1.3510,                  !- <none>
+    1.3568,                  !- <none>
+    1.3606,                  !- <none>
+    1.3637,                  !- <none>
+    1.3674,                  !- <none>
+    1.3706,                  !- <none>
+    1.3743;                  !- <none>
+
+  LifeCycleCost:UsePriceEscalation,
+    U.S. Avg  Commercial-Residual Oil,  !- LCC Price Escalation Name
+    FuelOilNo2,              !- Resource
+    2011,                    !- Escalation Start Year
+    January,                 !- Escalation Start Month
+    0.8469,                  !- Year 1 Escalation
+    0.8257,                  !- Year 2 Escalation
+    0.8681,                  !- Year 3 Escalation
+    0.8988,                  !- Year 4 Escalation
+    0.9289,                  !- Year 5 Escalation
+    0.9604,                  !- Year 6 Escalation
+    0.9897,                  !- Year 7 Escalation
+    1.0075,                  !- Year 8 Escalation
+    1.0314,                  !- Year 9 Escalation
+    1.0554,                  !- <none>
+    1.0861,                  !- <none>
+    1.1278,                  !- <none>
+    1.1497,                  !- <none>
+    1.1620,                  !- <none>
+    1.1743,                  !- <none>
+    1.1852,                  !- <none>
+    1.1948,                  !- <none>
+    1.2037,                  !- <none>
+    1.2071,                  !- <none>
+    1.2119,                  !- <none>
+    1.2139,                  !- <none>
+    1.2194,                  !- <none>
+    1.2276,                  !- <none>
+    1.2365,                  !- <none>
+    1.2420,                  !- <none>
+    1.2461,                  !- <none>
+    1.2509,                  !- <none>
+    1.2550,                  !- <none>
+    1.2591,                  !- <none>
+    1.2638;                  !- <none>
+
+  LifeCycleCost:UsePriceEscalation,
+    U.S. Avg  Commercial-Natural gas,  !- LCC Price Escalation Name
+    NaturalGas,              !- Resource
+    2011,                    !- Escalation Start Year
+    January,                 !- Escalation Start Month
+    0.9823,                  !- Year 1 Escalation
+    0.9557,                  !- Year 2 Escalation
+    0.9279,                  !- Year 3 Escalation
+    0.9257,                  !- Year 4 Escalation
+    0.9346,                  !- Year 5 Escalation
+    0.9412,                  !- Year 6 Escalation
+    0.9512,                  !- Year 7 Escalation
+    0.9645,                  !- Year 8 Escalation
+    0.9856,                  !- Year 9 Escalation
+    1.0067,                  !- <none>
+    1.0222,                  !- <none>
+    1.0410,                  !- <none>
+    1.0610,                  !- <none>
+    1.0787,                  !- <none>
+    1.0942,                  !- <none>
+    1.1098,                  !- <none>
+    1.1220,                  !- <none>
+    1.1308,                  !- <none>
+    1.1386,                  !- <none>
+    1.1486,                  !- <none>
+    1.1619,                  !- <none>
+    1.1763,                  !- <none>
+    1.1918,                  !- <none>
+    1.2118,                  !- <none>
+    1.2284,                  !- <none>
+    1.2439,                  !- <none>
+    1.2605,                  !- <none>
+    1.2772,                  !- <none>
+    1.2938,                  !- <none>
+    1.3115;                  !- <none>
+
+  LifeCycleCost:UsePriceEscalation,
+    U.S. Avg  Commercial-Coal,  !- LCC Price Escalation Name
+    Coal,                    !- Resource
+    2011,                    !- Escalation Start Year
+    January,                 !- Escalation Start Month
+    0.9970,                  !- Year 1 Escalation
+    1.0089,                  !- Year 2 Escalation
+    1.0089,                  !- Year 3 Escalation
+    0.9941,                  !- Year 4 Escalation
+    0.9941,                  !- Year 5 Escalation
+    1.0000,                  !- Year 6 Escalation
+    1.0030,                  !- Year 7 Escalation
+    1.0059,                  !- Year 8 Escalation
+    1.0089,                  !- Year 9 Escalation
+    1.0119,                  !- <none>
+    1.0148,                  !- <none>
+    1.0178,                  !- <none>
+    1.0208,                  !- <none>
+    1.0267,                  !- <none>
+    1.0297,                  !- <none>
+    1.0356,                  !- <none>
+    1.0415,                  !- <none>
+    1.0534,                  !- <none>
+    1.0564,                  !- <none>
+    1.0593,                  !- <none>
+    1.0653,                  !- <none>
+    1.0712,                  !- <none>
+    1.0742,                  !- <none>
+    1.0801,                  !- <none>
+    1.0831,                  !- <none>
+    1.0831,                  !- <none>
+    1.0861,                  !- <none>
+    1.0890,                  !- <none>
+    1.0920,                  !- <none>
+    1.0950;                  !- <none>
+
+  Building,
+    NonIHL Archetype,        !- Name
+    0,                       !- North Axis {deg}
+    City,                    !- Terrain
+    ,                        !- Loads Convergence Tolerance Value {W}
+    ,                        !- Temperature Convergence Tolerance Value {deltaC}
+    FullExteriorWithReflections,  !- Solar Distribution
+    ,                        !- Maximum Number of Warmup Days
+    ;                        !- Minimum Number of Warmup Days
+
+  Zone,
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Name
+    ,                        !- Direction of Relative North {deg}
+    0,                       !- X Origin {m}
+    0,                       !- Y Origin {m}
+    0,                       !- Z Origin {m}
+    ,                        !- Type
+    1,                       !- Multiplier
+    3,                       !- Ceiling Height {m}
+    192,                     !- Volume {m3}
+    ,                        !- Floor Area {m2}
+    ,                        !- Zone Inside Convection Algorithm
+    ,                        !- Zone Outside Convection Algorithm
+    Yes;                     !- Part of Total Floor Area
+
+  Space,
+    NonIHL_Shoebox_1_6f0fbfeb_Space,  !- Name
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Zone Name
+    ,                        !- Ceiling Height {m}
+    ,                        !- Volume {m3}
+    ,                        !- Floor Area {m2}
+    NonIHL;                  !- Space Type
+
+  SpaceList,
+    NonIHL,                  !- Name
+    NonIHL_Shoebox_1_6f0fbfeb_Space,  !- Space 1 Name
+    NonIHL_Shoebox_4_cb3a4fdc_Space,  !- Space 2 Name
+    NonIHL_Shoebox_2_13b1d407_Space,  !- Space 3 Name
+    NonIHL_Shoebox_3_62284603_Space,  !- Space 4 Name
+    NonIHL_Shoebox_5_a1d11df5_Space;  !- Space 5 Name
+
+  Lights,
+    NonIHL Lighting,         !- Name
+    NonIHL,                  !- Zone or ZoneList or Space or SpaceList Name
+    Vacation,                !- Schedule Name
+    Watts/Area,              !- Design Level Calculation Method
+    ,                        !- Lighting Level {W}
+    9.5,                     !- Watts per Floor Area {W/m2}
+    ,                        !- Watts per Person {W/person}
+    0,                       !- Return Air Fraction
+    0.2,                     !- Fraction Radiant
+    0.7,                     !- Fraction Visible
+    1,                       !- Fraction Replaceable
+    General;                 !- End-Use Subcategory
+
+  ScheduleTypeLimits,
+    Fractional,              !- Name
+    0,                       !- Lower Limit Value
+    1,                       !- Upper Limit Value
+    Continuous,              !- Numeric Type
+    dimensionless;           !- Unit Type
+
+  Schedule:Day:Interval,
+    Building Occupancy_Sunday,  !- Name
+    Fractional,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    0;                       !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    Schedule Day 2,          !- Name
+    Fractional,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    07:00,                   !- Time 1
+    0,                       !- Value Until Time 1
+    11:00,                   !- Time 2
+    1,                       !- Value Until Time 2
+    17:00,                   !- Time 3
+    0.5,                     !- Value Until Time 3
+    24:00,                   !- Time 4
+    0;                       !- Value Until Time 4
+
+  Schedule:Day:Interval,
+    Schedule Day 1,          !- Name
+    Fractional,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    0;                       !- Value Until Time 1
+
+  Schedule:Week:Daily,
+    Vacation Week Rule - Jan1-Nov11,  !- Name
+    Building Occupancy_Sunday,  !- Sunday Schedule:Day Name
+    Schedule Day 2,          !- Monday Schedule:Day Name
+    Schedule Day 2,          !- Tuesday Schedule:Day Name
+    Schedule Day 2,          !- Wednesday Schedule:Day Name
+    Schedule Day 2,          !- Thursday Schedule:Day Name
+    Schedule Day 2,          !- Friday Schedule:Day Name
+    Building Occupancy_Sunday,  !- Saturday Schedule:Day Name
+    Building Occupancy_Hol 1,!- Holiday Schedule:Day Name
+    Building Occupancy_Monday_SmrDsn 1,  !- SummerDesignDay Schedule:Day Name
+    Building Occupancy_Monday_SmrDsn_WntrDsn 1,  !- WinterDesignDay Schedule:Day Name
+    Building Occupancy_Sunday,  !- CustomDay1 Schedule:Day Name
+    Building Occupancy_Sunday;  !- CustomDay2 Schedule:Day Name
+
+  Schedule:Week:Daily,
+    Vacation Week Rule - Nov12-Nov18,  !- Name
+    Building Occupancy_Sunday,  !- Sunday Schedule:Day Name
+    Schedule Day 2,          !- Monday Schedule:Day Name
+    Schedule Day 2,          !- Tuesday Schedule:Day Name
+    Schedule Day 2,          !- Wednesday Schedule:Day Name
+    Schedule Day 1,          !- Thursday Schedule:Day Name
+    Schedule Day 1,          !- Friday Schedule:Day Name
+    Schedule Day 1,          !- Saturday Schedule:Day Name
+    Building Occupancy_Hol 1,!- Holiday Schedule:Day Name
+    Building Occupancy_Monday_SmrDsn 1,  !- SummerDesignDay Schedule:Day Name
+    Building Occupancy_Monday_SmrDsn_WntrDsn 1,  !- WinterDesignDay Schedule:Day Name
+    Building Occupancy_Sunday,  !- CustomDay1 Schedule:Day Name
+    Building Occupancy_Sunday;  !- CustomDay2 Schedule:Day Name
+
+  Schedule:Week:Daily,
+    Vacation Week Rule - Nov19-Dec30,  !- Name
+    Schedule Day 1,          !- Sunday Schedule:Day Name
+    Schedule Day 1,          !- Monday Schedule:Day Name
+    Schedule Day 1,          !- Tuesday Schedule:Day Name
+    Schedule Day 1,          !- Wednesday Schedule:Day Name
+    Schedule Day 1,          !- Thursday Schedule:Day Name
+    Schedule Day 1,          !- Friday Schedule:Day Name
+    Schedule Day 1,          !- Saturday Schedule:Day Name
+    Building Occupancy_Hol 1,!- Holiday Schedule:Day Name
+    Building Occupancy_Monday_SmrDsn 1,  !- SummerDesignDay Schedule:Day Name
+    Building Occupancy_Monday_SmrDsn_WntrDsn 1,  !- WinterDesignDay Schedule:Day Name
+    Building Occupancy_Sunday,  !- CustomDay1 Schedule:Day Name
+    Building Occupancy_Sunday;  !- CustomDay2 Schedule:Day Name
+
+  Schedule:Week:Daily,
+    Vacation Week Rule - Dec31-Dec31,  !- Name
+    Building Occupancy_Sunday,  !- Sunday Schedule:Day Name
+    Schedule Day 1,          !- Monday Schedule:Day Name
+    Schedule Day 1,          !- Tuesday Schedule:Day Name
+    Schedule Day 1,          !- Wednesday Schedule:Day Name
+    Schedule Day 1,          !- Thursday Schedule:Day Name
+    Schedule Day 1,          !- Friday Schedule:Day Name
+    Schedule Day 1,          !- Saturday Schedule:Day Name
+    Building Occupancy_Hol 1,!- Holiday Schedule:Day Name
+    Building Occupancy_Monday_SmrDsn 1,  !- SummerDesignDay Schedule:Day Name
+    Building Occupancy_Monday_SmrDsn_WntrDsn 1,  !- WinterDesignDay Schedule:Day Name
+    Building Occupancy_Sunday,  !- CustomDay1 Schedule:Day Name
+    Building Occupancy_Sunday;  !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    Vacation,                !- Name
+    Fractional,              !- Schedule Type Limits Name
+    Vacation Week Rule - Jan1-Nov11,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    11,                      !- End Month 1
+    11,                      !- End Day 1
+    Vacation Week Rule - Nov12-Nov18,  !- Schedule:Week Name 2
+    11,                      !- Start Month 2
+    12,                      !- Start Day 2
+    11,                      !- End Month 2
+    18,                      !- End Day 2
+    Vacation Week Rule - Nov19-Dec30,  !- Schedule:Week Name 3
+    11,                      !- Start Month 3
+    19,                      !- Start Day 3
+    12,                      !- End Month 3
+    30,                      !- End Day 3
+    Vacation Week Rule - Dec31-Dec31,  !- Schedule:Week Name 4
+    12,                      !- Start Month 4
+    31,                      !- Start Day 4
+    12,                      !- End Month 4
+    31;                      !- End Day 4
+
+  Schedule:Day:Interval,
+    Building Occupancy_Monday_SmrDsn 1,  !- Name
+    Fractional,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    07:00,                   !- Time 1
+    0,                       !- Value Until Time 1
+    11:00,                   !- Time 2
+    1,                       !- Value Until Time 2
+    17:00,                   !- Time 3
+    0.5,                     !- Value Until Time 3
+    24:00,                   !- Time 4
+    0;                       !- Value Until Time 4
+
+  Schedule:Day:Interval,
+    Building Occupancy_Monday_SmrDsn_WntrDsn 1,  !- Name
+    Fractional,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    0;                       !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    Building Occupancy_Hol 1,!- Name
+    Fractional,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    0;                       !- Value Until Time 1
+
+  People,
+    NonIHL People,           !- Name
+    NonIHL,                  !- Zone or ZoneList or Space or SpaceList Name
+    Vacation,                !- Number of People Schedule Name
+    People/Area,             !- Number of People Calculation Method
+    ,                        !- Number of People
+    0.025064,                !- People per Floor Area {person/m2}
+    ,                        !- Floor Area per Person {m2/person}
+    0.3,                     !- Fraction Radiant
+    0.7,                     !- Sensible Heat Fraction
+    Activity Level;          !- Activity Level Schedule Name
+
+  ScheduleTypeLimits,
+    Activity Level,          !- Name
+    0,                       !- Lower Limit Value
+    ,                        !- Upper Limit Value
+    Continuous,              !- Numeric Type
+    activitylevel;           !- Unit Type
+
+  Schedule:Day:Interval,
+    Activity Level_Day Schedule,  !- Name
+    Activity Level,          !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    120;                     !- Value Until Time 1
+
+  Schedule:Week:Daily,
+    Activity Level Week Rule - Jan1-Dec31,  !- Name
+    Activity Level_Day Schedule,  !- Sunday Schedule:Day Name
+    Activity Level_Day Schedule,  !- Monday Schedule:Day Name
+    Activity Level_Day Schedule,  !- Tuesday Schedule:Day Name
+    Activity Level_Day Schedule,  !- Wednesday Schedule:Day Name
+    Activity Level_Day Schedule,  !- Thursday Schedule:Day Name
+    Activity Level_Day Schedule,  !- Friday Schedule:Day Name
+    Activity Level_Day Schedule,  !- Saturday Schedule:Day Name
+    Activity Level_Day Schedule,  !- Holiday Schedule:Day Name
+    Activity Level_Day Schedule,  !- SummerDesignDay Schedule:Day Name
+    Activity Level_Day Schedule,  !- WinterDesignDay Schedule:Day Name
+    Activity Level_Day Schedule,  !- CustomDay1 Schedule:Day Name
+    Activity Level_Day Schedule;  !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    Activity Level,          !- Name
+    Activity Level,          !- Schedule Type Limits Name
+    Activity Level Week Rule - Jan1-Dec31,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    12,                      !- End Month 1
+    31;                      !- End Day 1
+
+  ElectricEquipment,
+    NonIHL Equipment,        !- Name
+    NonIHL,                  !- Zone or ZoneList or Space or SpaceList Name
+    Vacation,                !- Schedule Name
+    Watts/Area,              !- Design Level Calculation Method
+    ,                        !- Design Level {W}
+    8,                       !- Watts per Floor Area {W/m2}
+    ,                        !- Watts per Person {W/person}
+    0,                       !- Fraction Latent
+    0.5,                     !- Fraction Radiant
+    0,                       !- Fraction Lost
+    Electric Equipment;      !- End-Use Subcategory
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_1_6f0fbfeb..Face0,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Zone Name
+    NonIHL_Shoebox_1_6f0fbfeb_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_3_62284603..Face1,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    1,9,3,  !- X,Y,Z ==> Vertex 1 {m}
+    1,9,0,  !- X,Y,Z ==> Vertex 2 {m}
+    1,1,0,  !- X,Y,Z ==> Vertex 3 {m}
+    1,1,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_1_6f0fbfeb..Face1,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Zone Name
+    NonIHL_Shoebox_1_6f0fbfeb_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_2_13b1d407..Face1,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    1,1,3,  !- X,Y,Z ==> Vertex 1 {m}
+    1,1,0,  !- X,Y,Z ==> Vertex 2 {m}
+    9,1,0,  !- X,Y,Z ==> Vertex 3 {m}
+    9,1,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_1_6f0fbfeb..Face2,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Zone Name
+    NonIHL_Shoebox_1_6f0fbfeb_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_5_a1d11df5..Face1,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    9,1,3,  !- X,Y,Z ==> Vertex 1 {m}
+    9,1,0,  !- X,Y,Z ==> Vertex 2 {m}
+    9,9,0,  !- X,Y,Z ==> Vertex 3 {m}
+    9,9,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_1_6f0fbfeb..Face3,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Zone Name
+    NonIHL_Shoebox_1_6f0fbfeb_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_4_cb3a4fdc..Face1,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    9,9,3,  !- X,Y,Z ==> Vertex 1 {m}
+    9,9,0,  !- X,Y,Z ==> Vertex 2 {m}
+    1,9,0,  !- X,Y,Z ==> Vertex 3 {m}
+    1,9,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_1_6f0fbfeb..Face4,  !- Name
+    Floor,                   !- Surface Type
+    Generic Ground Slab,     !- Construction Name
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Zone Name
+    NonIHL_Shoebox_1_6f0fbfeb_Space,  !- Space Name
+    Ground,                  !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    9,9,0,  !- X,Y,Z ==> Vertex 1 {m}
+    9,1,0,  !- X,Y,Z ==> Vertex 2 {m}
+    1,1,0,  !- X,Y,Z ==> Vertex 3 {m}
+    1,9,0;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_1_6f0fbfeb..Face5,  !- Name
+    Roof,                    !- Surface Type
+    exterior_roof,           !- Construction Name
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Zone Name
+    NonIHL_Shoebox_1_6f0fbfeb_Space,  !- Space Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    1,9,3,  !- X,Y,Z ==> Vertex 1 {m}
+    1,1,3,  !- X,Y,Z ==> Vertex 2 {m}
+    9,1,3,  !- X,Y,Z ==> Vertex 3 {m}
+    9,9,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  ZoneMixing,
+    Zone Mixing 1,           !- Name
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    1.44,                    !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_3_62284603;  !- Source Zone or Space Name
+
+  Schedule:Day:Interval,
+    Always On_Day Schedule,  !- Name
+    Fractional,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    1;                       !- Value Until Time 1
+
+  Schedule:Week:Daily,
+    Always On Week Rule - Jan1-Dec31,  !- Name
+    Always On_Day Schedule,  !- Sunday Schedule:Day Name
+    Always On_Day Schedule,  !- Monday Schedule:Day Name
+    Always On_Day Schedule,  !- Tuesday Schedule:Day Name
+    Always On_Day Schedule,  !- Wednesday Schedule:Day Name
+    Always On_Day Schedule,  !- Thursday Schedule:Day Name
+    Always On_Day Schedule,  !- Friday Schedule:Day Name
+    Always On_Day Schedule,  !- Saturday Schedule:Day Name
+    Always On_Day Schedule,  !- Holiday Schedule:Day Name
+    Always On_Day Schedule,  !- SummerDesignDay Schedule:Day Name
+    Always On_Day Schedule,  !- WinterDesignDay Schedule:Day Name
+    Always On_Day Schedule,  !- CustomDay1 Schedule:Day Name
+    Always On_Day Schedule;  !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    Always On,               !- Name
+    Fractional,              !- Schedule Type Limits Name
+    Always On Week Rule - Jan1-Dec31,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    12,                      !- End Month 1
+    31;                      !- End Day 1
+
+  ZoneMixing,
+    Zone Mixing 2,           !- Name
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    1.44,                    !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_2_13b1d407;  !- Source Zone or Space Name
+
+  ZoneMixing,
+    Zone Mixing 3,           !- Name
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    1.44,                    !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_5_a1d11df5;  !- Source Zone or Space Name
+
+  ZoneMixing,
+    Zone Mixing 4,           !- Name
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    1.44,                    !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_4_cb3a4fdc;  !- Source Zone or Space Name
+
+  ZoneVentilation:DesignFlowRate,
+    VentilationFan_83599144..NonIHL_Shoebox_1_6f0fbfeb,  !- Name
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Zone or ZoneList or Space or SpaceList Name
+    Always On Discrete,      !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    0.9,                     !- Design Flow Rate {m3/s}
+    0,                       !- Flow Rate per Floor Area {m3/s-m2}
+    0,                       !- Flow Rate per Person {m3/s-person}
+    0,                       !- Air Changes per Hour {1/hr}
+    Intake,                  !- Ventilation Type
+    60,                      !- Fan Pressure Rise {Pa}
+    0.7,                     !- Fan Total Efficiency
+    0.606,                   !- Constant Term Coefficient
+    0.03636,                 !- Temperature Term Coefficient
+    0.1177,                  !- Velocity Term Coefficient
+    0,                       !- Velocity Squared Term Coefficient
+    -100,                    !- Minimum Indoor Temperature {C}
+    ,                        !- Minimum Indoor Temperature Schedule Name
+    100,                     !- Maximum Indoor Temperature {C}
+    ,                        !- Maximum Indoor Temperature Schedule Name
+    -100,                    !- Delta Temperature {deltaC}
+    ,                        !- Delta Temperature Schedule Name
+    -100,                    !- Minimum Outdoor Temperature {C}
+    ,                        !- Minimum Outdoor Temperature Schedule Name
+    100,                     !- Maximum Outdoor Temperature {C}
+    ,                        !- Maximum Outdoor Temperature Schedule Name
+    40;                      !- Maximum Wind Speed {m/s}
+
+  Zone,
+    NonIHL_Shoebox_2_13b1d407,  !- Name
+    ,                        !- Direction of Relative North {deg}
+    0,                       !- X Origin {m}
+    0,                       !- Y Origin {m}
+    0,                       !- Z Origin {m}
+    ,                        !- Type
+    1,                       !- Multiplier
+    3,                       !- Ceiling Height {m}
+    27,                      !- Volume {m3}
+    ,                        !- Floor Area {m2}
+    ,                        !- Zone Inside Convection Algorithm
+    ,                        !- Zone Outside Convection Algorithm
+    Yes;                     !- Part of Total Floor Area
+
+  Space,
+    NonIHL_Shoebox_2_13b1d407_Space,  !- Name
+    NonIHL_Shoebox_2_13b1d407,  !- Zone Name
+    ,                        !- Ceiling Height {m}
+    ,                        !- Volume {m3}
+    ,                        !- Floor Area {m2}
+    NonIHL;                  !- Space Type
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_2_13b1d407..Face0,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_2_13b1d407,  !- Zone Name
+    NonIHL_Shoebox_2_13b1d407_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_5_a1d11df5..Face2,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    10,0,3,  !- X,Y,Z ==> Vertex 1 {m}
+    10,0,0,  !- X,Y,Z ==> Vertex 2 {m}
+    9,1,0,  !- X,Y,Z ==> Vertex 3 {m}
+    9,1,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_2_13b1d407..Face1,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_2_13b1d407,  !- Zone Name
+    NonIHL_Shoebox_2_13b1d407_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_1_6f0fbfeb..Face1,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    9,1,3,  !- X,Y,Z ==> Vertex 1 {m}
+    9,1,0,  !- X,Y,Z ==> Vertex 2 {m}
+    1,1,0,  !- X,Y,Z ==> Vertex 3 {m}
+    1,1,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_2_13b1d407..Face2,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_2_13b1d407,  !- Zone Name
+    NonIHL_Shoebox_2_13b1d407_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_3_62284603..Face0,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    1,1,3,  !- X,Y,Z ==> Vertex 1 {m}
+    1,1,0,  !- X,Y,Z ==> Vertex 2 {m}
+    0,0,0,  !- X,Y,Z ==> Vertex 3 {m}
+    0,0,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_2_13b1d407..Face3,  !- Name
+    Wall,                    !- Surface Type
+    exterior_wall,           !- Construction Name
+    NonIHL_Shoebox_2_13b1d407,  !- Zone Name
+    NonIHL_Shoebox_2_13b1d407_Space,  !- Space Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    0,0,3,  !- X,Y,Z ==> Vertex 1 {m}
+    0,0,0,  !- X,Y,Z ==> Vertex 2 {m}
+    10,0,0,  !- X,Y,Z ==> Vertex 3 {m}
+    10,0,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  FenestrationSurface:Detailed,
+    NonIHL_Shoebox_2_13b1d407..Face3_Glz0,  !- Name
+    Window,                  !- Surface Type
+    Double Glazing with Low Emission Coating,  !- Construction Name
+    NonIHL_Shoebox_2_13b1d407..Face3,  !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    ,                        !- Number of Vertices
+    1.83772233983162,0,2.44868329805051,  !- X,Y,Z ==> Vertex 1 {m}
+    1.83772233983162,0,0.551316701949486,  !- X,Y,Z ==> Vertex 2 {m}
+    8.16227766016838,0,0.551316701949486,  !- X,Y,Z ==> Vertex 3 {m}
+    8.16227766016838,0,2.44868329805051;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_2_13b1d407..Face4,  !- Name
+    Floor,                   !- Surface Type
+    Generic Ground Slab,     !- Construction Name
+    NonIHL_Shoebox_2_13b1d407,  !- Zone Name
+    NonIHL_Shoebox_2_13b1d407_Space,  !- Space Name
+    Ground,                  !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    9,1,0,  !- X,Y,Z ==> Vertex 1 {m}
+    10,0,0,  !- X,Y,Z ==> Vertex 2 {m}
+    0,0,0,  !- X,Y,Z ==> Vertex 3 {m}
+    1,1,0;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_2_13b1d407..Face5,  !- Name
+    Roof,                    !- Surface Type
+    exterior_roof,           !- Construction Name
+    NonIHL_Shoebox_2_13b1d407,  !- Zone Name
+    NonIHL_Shoebox_2_13b1d407_Space,  !- Space Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    0,0,3,  !- X,Y,Z ==> Vertex 1 {m}
+    10,0,3,  !- X,Y,Z ==> Vertex 2 {m}
+    9,1,3,  !- X,Y,Z ==> Vertex 3 {m}
+    1,1,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  ZoneMixing,
+    Zone Mixing 5,           !- Name
+    NonIHL_Shoebox_2_13b1d407,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    0.254558441227157,       !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_5_a1d11df5;  !- Source Zone or Space Name
+
+  ZoneMixing,
+    Zone Mixing 6,           !- Name
+    NonIHL_Shoebox_2_13b1d407,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    1.44,                    !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_1_6f0fbfeb;  !- Source Zone or Space Name
+
+  ZoneMixing,
+    Zone Mixing 7,           !- Name
+    NonIHL_Shoebox_2_13b1d407,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    0.254558441227157,       !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_3_62284603;  !- Source Zone or Space Name
+
+  ZoneVentilation:DesignFlowRate,
+    VentilationFan_5fbfaade..NonIHL_Shoebox_2_13b1d407,  !- Name
+    NonIHL_Shoebox_2_13b1d407,  !- Zone or ZoneList or Space or SpaceList Name
+    Always On Discrete,      !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    0.9,                     !- Design Flow Rate {m3/s}
+    0,                       !- Flow Rate per Floor Area {m3/s-m2}
+    0,                       !- Flow Rate per Person {m3/s-person}
+    0,                       !- Air Changes per Hour {1/hr}
+    Intake,                  !- Ventilation Type
+    60,                      !- Fan Pressure Rise {Pa}
+    0.7,                     !- Fan Total Efficiency
+    0.606,                   !- Constant Term Coefficient
+    0.03636,                 !- Temperature Term Coefficient
+    0.1177,                  !- Velocity Term Coefficient
+    0,                       !- Velocity Squared Term Coefficient
+    -100,                    !- Minimum Indoor Temperature {C}
+    ,                        !- Minimum Indoor Temperature Schedule Name
+    100,                     !- Maximum Indoor Temperature {C}
+    ,                        !- Maximum Indoor Temperature Schedule Name
+    -100,                    !- Delta Temperature {deltaC}
+    ,                        !- Delta Temperature Schedule Name
+    -100,                    !- Minimum Outdoor Temperature {C}
+    ,                        !- Minimum Outdoor Temperature Schedule Name
+    100,                     !- Maximum Outdoor Temperature {C}
+    ,                        !- Maximum Outdoor Temperature Schedule Name
+    40;                      !- Maximum Wind Speed {m/s}
+
+  Zone,
+    NonIHL_Shoebox_3_62284603,  !- Name
+    ,                        !- Direction of Relative North {deg}
+    0,                       !- X Origin {m}
+    0,                       !- Y Origin {m}
+    0,                       !- Z Origin {m}
+    ,                        !- Type
+    1,                       !- Multiplier
+    3,                       !- Ceiling Height {m}
+    27,                      !- Volume {m3}
+    ,                        !- Floor Area {m2}
+    ,                        !- Zone Inside Convection Algorithm
+    ,                        !- Zone Outside Convection Algorithm
+    Yes;                     !- Part of Total Floor Area
+
+  Space,
+    NonIHL_Shoebox_3_62284603_Space,  !- Name
+    NonIHL_Shoebox_3_62284603,  !- Zone Name
+    ,                        !- Ceiling Height {m}
+    ,                        !- Volume {m3}
+    ,                        !- Floor Area {m2}
+    NonIHL;                  !- Space Type
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_3_62284603..Face0,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_3_62284603,  !- Zone Name
+    NonIHL_Shoebox_3_62284603_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_2_13b1d407..Face2,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    0,0,3,  !- X,Y,Z ==> Vertex 1 {m}
+    0,0,0,  !- X,Y,Z ==> Vertex 2 {m}
+    1,1,0,  !- X,Y,Z ==> Vertex 3 {m}
+    1,1,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_3_62284603..Face1,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_3_62284603,  !- Zone Name
+    NonIHL_Shoebox_3_62284603_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_1_6f0fbfeb..Face0,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    1,1,3,  !- X,Y,Z ==> Vertex 1 {m}
+    1,1,0,  !- X,Y,Z ==> Vertex 2 {m}
+    1,9,0,  !- X,Y,Z ==> Vertex 3 {m}
+    1,9,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_3_62284603..Face2,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_3_62284603,  !- Zone Name
+    NonIHL_Shoebox_3_62284603_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_4_cb3a4fdc..Face0,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    1,9,3,  !- X,Y,Z ==> Vertex 1 {m}
+    1,9,0,  !- X,Y,Z ==> Vertex 2 {m}
+    0,10,0,  !- X,Y,Z ==> Vertex 3 {m}
+    0,10,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_3_62284603..Face3,  !- Name
+    Wall,                    !- Surface Type
+    exterior_wall,           !- Construction Name
+    NonIHL_Shoebox_3_62284603,  !- Zone Name
+    NonIHL_Shoebox_3_62284603_Space,  !- Space Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    0,10,3,  !- X,Y,Z ==> Vertex 1 {m}
+    0,10,0,  !- X,Y,Z ==> Vertex 2 {m}
+    0,0,0,  !- X,Y,Z ==> Vertex 3 {m}
+    0,0,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  FenestrationSurface:Detailed,
+    NonIHL_Shoebox_3_62284603..Face3_Glz0,  !- Name
+    Window,                  !- Surface Type
+    Double Glazing with Low Emission Coating,  !- Construction Name
+    NonIHL_Shoebox_3_62284603..Face3,  !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    ,                        !- Number of Vertices
+    0,8.16227766016838,2.44868329805051,  !- X,Y,Z ==> Vertex 1 {m}
+    0,8.16227766016838,0.551316701949486,  !- X,Y,Z ==> Vertex 2 {m}
+    0,1.83772233983162,0.551316701949486,  !- X,Y,Z ==> Vertex 3 {m}
+    0,1.83772233983162,2.44868329805051;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_3_62284603..Face4,  !- Name
+    Floor,                   !- Surface Type
+    Generic Ground Slab,     !- Construction Name
+    NonIHL_Shoebox_3_62284603,  !- Zone Name
+    NonIHL_Shoebox_3_62284603_Space,  !- Space Name
+    Ground,                  !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    0,10,0,  !- X,Y,Z ==> Vertex 1 {m}
+    1,9,0,  !- X,Y,Z ==> Vertex 2 {m}
+    1,1,0,  !- X,Y,Z ==> Vertex 3 {m}
+    0,0,0;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_3_62284603..Face5,  !- Name
+    Roof,                    !- Surface Type
+    exterior_roof,           !- Construction Name
+    NonIHL_Shoebox_3_62284603,  !- Zone Name
+    NonIHL_Shoebox_3_62284603_Space,  !- Space Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    0,10,3,  !- X,Y,Z ==> Vertex 1 {m}
+    0,0,3,  !- X,Y,Z ==> Vertex 2 {m}
+    1,1,3,  !- X,Y,Z ==> Vertex 3 {m}
+    1,9,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  ZoneMixing,
+    Zone Mixing 10,          !- Name
+    NonIHL_Shoebox_3_62284603,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    0.254558441227157,       !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_4_cb3a4fdc;  !- Source Zone or Space Name
+
+  ZoneMixing,
+    Zone Mixing 8,           !- Name
+    NonIHL_Shoebox_3_62284603,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    0.254558441227157,       !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_2_13b1d407;  !- Source Zone or Space Name
+
+  ZoneMixing,
+    Zone Mixing 9,           !- Name
+    NonIHL_Shoebox_3_62284603,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    1.44,                    !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_1_6f0fbfeb;  !- Source Zone or Space Name
+
+  ZoneVentilation:DesignFlowRate,
+    VentilationFan_e0cdc3e5..NonIHL_Shoebox_3_62284603,  !- Name
+    NonIHL_Shoebox_3_62284603,  !- Zone or ZoneList or Space or SpaceList Name
+    Always On Discrete,      !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    0.9,                     !- Design Flow Rate {m3/s}
+    0,                       !- Flow Rate per Floor Area {m3/s-m2}
+    0,                       !- Flow Rate per Person {m3/s-person}
+    0,                       !- Air Changes per Hour {1/hr}
+    Intake,                  !- Ventilation Type
+    60,                      !- Fan Pressure Rise {Pa}
+    0.7,                     !- Fan Total Efficiency
+    0.606,                   !- Constant Term Coefficient
+    0.03636,                 !- Temperature Term Coefficient
+    0.1177,                  !- Velocity Term Coefficient
+    0,                       !- Velocity Squared Term Coefficient
+    -100,                    !- Minimum Indoor Temperature {C}
+    ,                        !- Minimum Indoor Temperature Schedule Name
+    100,                     !- Maximum Indoor Temperature {C}
+    ,                        !- Maximum Indoor Temperature Schedule Name
+    -100,                    !- Delta Temperature {deltaC}
+    ,                        !- Delta Temperature Schedule Name
+    -100,                    !- Minimum Outdoor Temperature {C}
+    ,                        !- Minimum Outdoor Temperature Schedule Name
+    100,                     !- Maximum Outdoor Temperature {C}
+    ,                        !- Maximum Outdoor Temperature Schedule Name
+    40;                      !- Maximum Wind Speed {m/s}
+
+  Zone,
+    NonIHL_Shoebox_4_cb3a4fdc,  !- Name
+    ,                        !- Direction of Relative North {deg}
+    0,                       !- X Origin {m}
+    0,                       !- Y Origin {m}
+    0,                       !- Z Origin {m}
+    ,                        !- Type
+    1,                       !- Multiplier
+    3,                       !- Ceiling Height {m}
+    27,                      !- Volume {m3}
+    ,                        !- Floor Area {m2}
+    ,                        !- Zone Inside Convection Algorithm
+    ,                        !- Zone Outside Convection Algorithm
+    Yes;                     !- Part of Total Floor Area
+
+  Space,
+    NonIHL_Shoebox_4_cb3a4fdc_Space,  !- Name
+    NonIHL_Shoebox_4_cb3a4fdc,  !- Zone Name
+    ,                        !- Ceiling Height {m}
+    ,                        !- Volume {m3}
+    ,                        !- Floor Area {m2}
+    NonIHL;                  !- Space Type
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_4_cb3a4fdc..Face0,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_4_cb3a4fdc,  !- Zone Name
+    NonIHL_Shoebox_4_cb3a4fdc_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_3_62284603..Face2,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    0,10,3,  !- X,Y,Z ==> Vertex 1 {m}
+    0,10,0,  !- X,Y,Z ==> Vertex 2 {m}
+    1,9,0,  !- X,Y,Z ==> Vertex 3 {m}
+    1,9,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_4_cb3a4fdc..Face1,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_4_cb3a4fdc,  !- Zone Name
+    NonIHL_Shoebox_4_cb3a4fdc_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_1_6f0fbfeb..Face3,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    1,9,3,  !- X,Y,Z ==> Vertex 1 {m}
+    1,9,0,  !- X,Y,Z ==> Vertex 2 {m}
+    9,9,0,  !- X,Y,Z ==> Vertex 3 {m}
+    9,9,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_4_cb3a4fdc..Face2,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_4_cb3a4fdc,  !- Zone Name
+    NonIHL_Shoebox_4_cb3a4fdc_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_5_a1d11df5..Face0,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    9,9,3,  !- X,Y,Z ==> Vertex 1 {m}
+    9,9,0,  !- X,Y,Z ==> Vertex 2 {m}
+    10,10,0,  !- X,Y,Z ==> Vertex 3 {m}
+    10,10,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_4_cb3a4fdc..Face3,  !- Name
+    Wall,                    !- Surface Type
+    exterior_wall,           !- Construction Name
+    NonIHL_Shoebox_4_cb3a4fdc,  !- Zone Name
+    NonIHL_Shoebox_4_cb3a4fdc_Space,  !- Space Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    10,10,3,  !- X,Y,Z ==> Vertex 1 {m}
+    10,10,0,  !- X,Y,Z ==> Vertex 2 {m}
+    0,10,0,  !- X,Y,Z ==> Vertex 3 {m}
+    0,10,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  FenestrationSurface:Detailed,
+    NonIHL_Shoebox_4_cb3a4fdc..Face3_Glz0,  !- Name
+    Window,                  !- Surface Type
+    Double Glazing with Low Emission Coating,  !- Construction Name
+    NonIHL_Shoebox_4_cb3a4fdc..Face3,  !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    ,                        !- Number of Vertices
+    8.16227766016838,10,2.44868329805051,  !- X,Y,Z ==> Vertex 1 {m}
+    8.16227766016838,10,0.551316701949486,  !- X,Y,Z ==> Vertex 2 {m}
+    1.83772233983162,10,0.551316701949486,  !- X,Y,Z ==> Vertex 3 {m}
+    1.83772233983162,10,2.44868329805051;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_4_cb3a4fdc..Face4,  !- Name
+    Floor,                   !- Surface Type
+    Generic Ground Slab,     !- Construction Name
+    NonIHL_Shoebox_4_cb3a4fdc,  !- Zone Name
+    NonIHL_Shoebox_4_cb3a4fdc_Space,  !- Space Name
+    Ground,                  !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    10,10,0,  !- X,Y,Z ==> Vertex 1 {m}
+    9,9,0,  !- X,Y,Z ==> Vertex 2 {m}
+    1,9,0,  !- X,Y,Z ==> Vertex 3 {m}
+    0,10,0;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_4_cb3a4fdc..Face5,  !- Name
+    Roof,                    !- Surface Type
+    exterior_roof,           !- Construction Name
+    NonIHL_Shoebox_4_cb3a4fdc,  !- Zone Name
+    NonIHL_Shoebox_4_cb3a4fdc_Space,  !- Space Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    0,10,3,  !- X,Y,Z ==> Vertex 1 {m}
+    1,9,3,  !- X,Y,Z ==> Vertex 2 {m}
+    9,9,3,  !- X,Y,Z ==> Vertex 3 {m}
+    10,10,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  ZoneMixing,
+    Zone Mixing 11,          !- Name
+    NonIHL_Shoebox_4_cb3a4fdc,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    0.254558441227157,       !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_3_62284603;  !- Source Zone or Space Name
+
+  ZoneMixing,
+    Zone Mixing 12,          !- Name
+    NonIHL_Shoebox_4_cb3a4fdc,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    1.44,                    !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_1_6f0fbfeb;  !- Source Zone or Space Name
+
+  ZoneMixing,
+    Zone Mixing 13,          !- Name
+    NonIHL_Shoebox_4_cb3a4fdc,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    0.254558441227156,       !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_5_a1d11df5;  !- Source Zone or Space Name
+
+  ZoneVentilation:DesignFlowRate,
+    VentilationFan_709d3646..NonIHL_Shoebox_4_cb3a4fdc,  !- Name
+    NonIHL_Shoebox_4_cb3a4fdc,  !- Zone or ZoneList or Space or SpaceList Name
+    Always On Discrete,      !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    0.9,                     !- Design Flow Rate {m3/s}
+    0,                       !- Flow Rate per Floor Area {m3/s-m2}
+    0,                       !- Flow Rate per Person {m3/s-person}
+    0,                       !- Air Changes per Hour {1/hr}
+    Intake,                  !- Ventilation Type
+    60,                      !- Fan Pressure Rise {Pa}
+    0.7,                     !- Fan Total Efficiency
+    0.606,                   !- Constant Term Coefficient
+    0.03636,                 !- Temperature Term Coefficient
+    0.1177,                  !- Velocity Term Coefficient
+    0,                       !- Velocity Squared Term Coefficient
+    -100,                    !- Minimum Indoor Temperature {C}
+    ,                        !- Minimum Indoor Temperature Schedule Name
+    100,                     !- Maximum Indoor Temperature {C}
+    ,                        !- Maximum Indoor Temperature Schedule Name
+    -100,                    !- Delta Temperature {deltaC}
+    ,                        !- Delta Temperature Schedule Name
+    -100,                    !- Minimum Outdoor Temperature {C}
+    ,                        !- Minimum Outdoor Temperature Schedule Name
+    100,                     !- Maximum Outdoor Temperature {C}
+    ,                        !- Maximum Outdoor Temperature Schedule Name
+    40;                      !- Maximum Wind Speed {m/s}
+
+  Zone,
+    NonIHL_Shoebox_5_a1d11df5,  !- Name
+    ,                        !- Direction of Relative North {deg}
+    0,                       !- X Origin {m}
+    0,                       !- Y Origin {m}
+    0,                       !- Z Origin {m}
+    ,                        !- Type
+    1,                       !- Multiplier
+    3,                       !- Ceiling Height {m}
+    27,                      !- Volume {m3}
+    ,                        !- Floor Area {m2}
+    ,                        !- Zone Inside Convection Algorithm
+    ,                        !- Zone Outside Convection Algorithm
+    Yes;                     !- Part of Total Floor Area
+
+  Space,
+    NonIHL_Shoebox_5_a1d11df5_Space,  !- Name
+    NonIHL_Shoebox_5_a1d11df5,  !- Zone Name
+    ,                        !- Ceiling Height {m}
+    ,                        !- Volume {m3}
+    ,                        !- Floor Area {m2}
+    NonIHL;                  !- Space Type
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_5_a1d11df5..Face0,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_5_a1d11df5,  !- Zone Name
+    NonIHL_Shoebox_5_a1d11df5_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_4_cb3a4fdc..Face2,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    10,10,3,  !- X,Y,Z ==> Vertex 1 {m}
+    10,10,0,  !- X,Y,Z ==> Vertex 2 {m}
+    9,9,0,  !- X,Y,Z ==> Vertex 3 {m}
+    9,9,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_5_a1d11df5..Face1,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_5_a1d11df5,  !- Zone Name
+    NonIHL_Shoebox_5_a1d11df5_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_1_6f0fbfeb..Face2,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    9,9,3,  !- X,Y,Z ==> Vertex 1 {m}
+    9,9,0,  !- X,Y,Z ==> Vertex 2 {m}
+    9,1,0,  !- X,Y,Z ==> Vertex 3 {m}
+    9,1,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_5_a1d11df5..Face2,  !- Name
+    Wall,                    !- Surface Type
+    Generic Air Boundary,    !- Construction Name
+    NonIHL_Shoebox_5_a1d11df5,  !- Zone Name
+    NonIHL_Shoebox_5_a1d11df5_Space,  !- Space Name
+    Surface,                 !- Outside Boundary Condition
+    NonIHL_Shoebox_2_13b1d407..Face0,  !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    9,1,3,  !- X,Y,Z ==> Vertex 1 {m}
+    9,1,0,  !- X,Y,Z ==> Vertex 2 {m}
+    10,0,0,  !- X,Y,Z ==> Vertex 3 {m}
+    10,0,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_5_a1d11df5..Face3,  !- Name
+    Wall,                    !- Surface Type
+    exterior_wall,           !- Construction Name
+    NonIHL_Shoebox_5_a1d11df5,  !- Zone Name
+    NonIHL_Shoebox_5_a1d11df5_Space,  !- Space Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    10,0,3,  !- X,Y,Z ==> Vertex 1 {m}
+    10,0,0,  !- X,Y,Z ==> Vertex 2 {m}
+    10,10,0,  !- X,Y,Z ==> Vertex 3 {m}
+    10,10,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  FenestrationSurface:Detailed,
+    NonIHL_Shoebox_5_a1d11df5..Face3_Glz0,  !- Name
+    Window,                  !- Surface Type
+    Double Glazing with Low Emission Coating,  !- Construction Name
+    NonIHL_Shoebox_5_a1d11df5..Face3,  !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    ,                        !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    ,                        !- Multiplier
+    ,                        !- Number of Vertices
+    10,1.83772233983162,2.44868329805051,  !- X,Y,Z ==> Vertex 1 {m}
+    10,1.83772233983162,0.551316701949486,  !- X,Y,Z ==> Vertex 2 {m}
+    10,8.16227766016838,0.551316701949486,  !- X,Y,Z ==> Vertex 3 {m}
+    10,8.16227766016838,2.44868329805051;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_5_a1d11df5..Face4,  !- Name
+    Floor,                   !- Surface Type
+    Generic Ground Slab,     !- Construction Name
+    NonIHL_Shoebox_5_a1d11df5,  !- Zone Name
+    NonIHL_Shoebox_5_a1d11df5_Space,  !- Space Name
+    Ground,                  !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    NoSun,                   !- Sun Exposure
+    NoWind,                  !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    10,10,0,  !- X,Y,Z ==> Vertex 1 {m}
+    10,0,0,  !- X,Y,Z ==> Vertex 2 {m}
+    9,1,0,  !- X,Y,Z ==> Vertex 3 {m}
+    9,9,0;  !- X,Y,Z ==> Vertex 4 {m}
+
+  BuildingSurface:Detailed,
+    NonIHL_Shoebox_5_a1d11df5..Face5,  !- Name
+    Roof,                    !- Surface Type
+    exterior_roof,           !- Construction Name
+    NonIHL_Shoebox_5_a1d11df5,  !- Zone Name
+    NonIHL_Shoebox_5_a1d11df5_Space,  !- Space Name
+    Outdoors,                !- Outside Boundary Condition
+    ,                        !- Outside Boundary Condition Object
+    SunExposed,              !- Sun Exposure
+    WindExposed,             !- Wind Exposure
+    ,                        !- View Factor to Ground
+    ,                        !- Number of Vertices
+    10,10,3,  !- X,Y,Z ==> Vertex 1 {m}
+    9,9,3,  !- X,Y,Z ==> Vertex 2 {m}
+    9,1,3,  !- X,Y,Z ==> Vertex 3 {m}
+    10,0,3;  !- X,Y,Z ==> Vertex 4 {m}
+
+  ZoneMixing,
+    Zone Mixing 14,          !- Name
+    NonIHL_Shoebox_5_a1d11df5,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    0.254558441227156,       !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_4_cb3a4fdc;  !- Source Zone or Space Name
+
+  ZoneMixing,
+    Zone Mixing 15,          !- Name
+    NonIHL_Shoebox_5_a1d11df5,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    1.44,                    !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_1_6f0fbfeb;  !- Source Zone or Space Name
+
+  ZoneMixing,
+    Zone Mixing 16,          !- Name
+    NonIHL_Shoebox_5_a1d11df5,  !- Zone or Space Name
+    Always On,               !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    0.254558441227157,       !- Design Flow Rate {m3/s}
+    ,                        !- Flow Rate per Floor Area {m3/s-m2}
+    ,                        !- Flow Rate per Person {m3/s-person}
+    ,                        !- Air Changes per Hour {1/hr}
+    NonIHL_Shoebox_2_13b1d407;  !- Source Zone or Space Name
+
+  ZoneVentilation:DesignFlowRate,
+    VentilationFan_81fce51d..NonIHL_Shoebox_5_a1d11df5,  !- Name
+    NonIHL_Shoebox_5_a1d11df5,  !- Zone or ZoneList or Space or SpaceList Name
+    Always On Discrete,      !- Schedule Name
+    Flow/Zone,               !- Design Flow Rate Calculation Method
+    0.9,                     !- Design Flow Rate {m3/s}
+    0,                       !- Flow Rate per Floor Area {m3/s-m2}
+    0,                       !- Flow Rate per Person {m3/s-person}
+    0,                       !- Air Changes per Hour {1/hr}
+    Intake,                  !- Ventilation Type
+    60,                      !- Fan Pressure Rise {Pa}
+    0.7,                     !- Fan Total Efficiency
+    0.606,                   !- Constant Term Coefficient
+    0.03636,                 !- Temperature Term Coefficient
+    0.1177,                  !- Velocity Term Coefficient
+    0,                       !- Velocity Squared Term Coefficient
+    -100,                    !- Minimum Indoor Temperature {C}
+    ,                        !- Minimum Indoor Temperature Schedule Name
+    100,                     !- Maximum Indoor Temperature {C}
+    ,                        !- Maximum Indoor Temperature Schedule Name
+    -100,                    !- Delta Temperature {deltaC}
+    ,                        !- Delta Temperature Schedule Name
+    -100,                    !- Minimum Outdoor Temperature {C}
+    ,                        !- Minimum Outdoor Temperature Schedule Name
+    100,                     !- Maximum Outdoor Temperature {C}
+    ,                        !- Maximum Outdoor Temperature Schedule Name
+    40;                      !- Maximum Wind Speed {m/s}
+
+  SimulationControl,
+    Yes,                     !- Do Zone Sizing Calculation
+    Yes,                     !- Do System Sizing Calculation
+    Yes,                     !- Do Plant Sizing Calculation
+    No,                      !- Run Simulation for Sizing Periods
+    Yes,                     !- Run Simulation for Weather File Run Periods
+    No,                      !- Do HVAC Sizing Simulation for Sizing Periods
+    ;                        !- Maximum Number of HVAC Sizing Simulation Passes
+
+  HeatBalanceAlgorithm,ConductionTransferFunction,200;
+
+  RunPeriod,
+    Run Period 1,            !- Name
+    1,                       !- Begin Month
+    1,                       !- Begin Day of Month
+    2006,                    !- Begin Year
+    12,                      !- End Month
+    31,                      !- End Day of Month
+    2006,                    !- End Year
+    Sunday,                  !- Day of Week for Start Day
+    No,                      !- Use Weather File Holidays and Special Days
+    No,                      !- Use Weather File Daylight Saving Period
+    No,                      !- Apply Weekend Holiday Rule
+    Yes,                     !- Use Weather File Rain Indicators
+    Yes;                     !- Use Weather File Snow Indicators
+
+  ShadowCalculation,
+    PolygonClipping,         !- Shading Calculation Method
+    Periodic,                !- Shading Calculation Update Frequency Method
+    30,                      !- Shading Calculation Update Frequency
+    15000,                   !- Maximum Figures in Shadow Overlap Calculations
+    SutherlandHodgman,       !- Polygon Clipping Algorithm
+    512,                     !- Pixel Counting Resolution
+    SimpleSkyDiffuseModeling,!- Sky Diffuse Modeling Algorithm
+    No,                      !- Output External Shading Calculation Results
+    No,                      !- Disable Self-Shading Within Shading Zone Groups
+    No;                      !- Disable Self-Shading From Shading Zone Groups to Other Zones
+
+  Sizing:Parameters,
+    1.25,                    !- Heating Sizing Factor
+    1.15;                    !- Cooling Sizing Factor
+
+  GlobalGeometryRules,
+    UpperLeftCorner,         !- Starting Vertex Position
+    Counterclockwise,        !- Vertex Entry Direction
+    Relative,                !- Coordinate System
+    Relative,                !- Daylighting Reference Point Coordinate System
+    Relative;                !- Rectangular Surface Coordinate System
+
+  Material,
+    exterior_floors,         !- Name
+    MediumRough,             !- Roughness
+    0.25,                    !- Thickness {m}
+    1.442,                   !- Conductivity {W/m-K}
+    2240,                    !- Density {kg/m3}
+    840,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+  Material,
+    Generic 25mm Insulation, !- Name
+    MediumRough,             !- Roughness
+    0.025,                   !- Thickness {m}
+    0.03,                    !- Conductivity {W/m-K}
+    43,                      !- Density {kg/m3}
+    1210,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+  Material,
+    Generic 25mm Wood,       !- Name
+    MediumSmooth,            !- Roughness
+    0.0254,                  !- Thickness {m}
+    0.15,                    !- Conductivity {W/m-K}
+    608,                     !- Density {kg/m3}
+    1630,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+  Material,
+    Generic 50mm Insulation, !- Name
+    MediumRough,             !- Roughness
+    0.05,                    !- Thickness {m}
+    0.03,                    !- Conductivity {W/m-K}
+    43,                      !- Density {kg/m3}
+    1210,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+  Material,
+    Generic Acoustic Tile,   !- Name
+    MediumSmooth,            !- Roughness
+    0.02,                    !- Thickness {m}
+    0.06,                    !- Conductivity {W/m-K}
+    368,                     !- Density {kg/m3}
+    590,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.2,                     !- Solar Absorptance
+    0.2;                     !- Visible Absorptance
+
+  Material,
+    Generic Brick,           !- Name
+    MediumRough,             !- Roughness
+    0.1,                     !- Thickness {m}
+    0.9,                     !- Conductivity {W/m-K}
+    1920,                    !- Density {kg/m3}
+    790,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.65,                    !- Solar Absorptance
+    0.65;                    !- Visible Absorptance
+
+  Material,
+    Generic Ceiling Air Gap, !- Name
+    Smooth,                  !- Roughness
+    0.1,                     !- Thickness {m}
+    0.556,                   !- Conductivity {W/m-K}
+    1.28,                    !- Density {kg/m3}
+    1000,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+  Material,
+    Generic Gypsum Board,    !- Name
+    MediumSmooth,            !- Roughness
+    0.0127,                  !- Thickness {m}
+    0.16,                    !- Conductivity {W/m-K}
+    800,                     !- Density {kg/m3}
+    1090,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+  Material,
+    Generic HW Concrete,     !- Name
+    MediumRough,             !- Roughness
+    0.2,                     !- Thickness {m}
+    1.95,                    !- Conductivity {W/m-K}
+    2240,                    !- Density {kg/m3}
+    900,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.8,                     !- Solar Absorptance
+    0.8;                     !- Visible Absorptance
+
+  Material,
+    Generic LW Concrete,     !- Name
+    MediumRough,             !- Roughness
+    0.1,                     !- Thickness {m}
+    0.53,                    !- Conductivity {W/m-K}
+    1280,                    !- Density {kg/m3}
+    840,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.8,                     !- Solar Absorptance
+    0.8;                     !- Visible Absorptance
+
+  Material,
+    Generic Painted Metal,   !- Name
+    Smooth,                  !- Roughness
+    0.0015,                  !- Thickness {m}
+    45,                      !- Conductivity {W/m-K}
+    7690,                    !- Density {kg/m3}
+    410,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.5,                     !- Solar Absorptance
+    0.5;                     !- Visible Absorptance
+
+  Material,
+    Generic Roof Membrane,   !- Name
+    MediumRough,             !- Roughness
+    0.01,                    !- Thickness {m}
+    0.16,                    !- Conductivity {W/m-K}
+    1120,                    !- Density {kg/m3}
+    1460,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.65,                    !- Solar Absorptance
+    0.65;                    !- Visible Absorptance
+
+  Material,
+    Generic Wall Air Gap,    !- Name
+    Smooth,                  !- Roughness
+    0.1,                     !- Thickness {m}
+    0.667,                   !- Conductivity {W/m-K}
+    1.28,                    !- Density {kg/m3}
+    1000,                    !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+  Material,
+    Material 1,              !- Name
+    Smooth,                  !- Roughness
+    0.1,                     !- Thickness {m}
+    0.1,                     !- Conductivity {W/m-K}
+    0.1,                     !- Density {kg/m3}
+    100,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.65,                    !- Solar Absorptance
+    0.65;                    !- Visible Absorptance
+
+  Material,
+    Material 2,              !- Name
+    Smooth,                  !- Roughness
+    0.1,                     !- Thickness {m}
+    0.1,                     !- Conductivity {W/m-K}
+    0.1,                     !- Density {kg/m3}
+    100,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.8,                     !- Solar Absorptance
+    0.8;                     !- Visible Absorptance
+
+  Material,
+    roofs,                   !- Name
+    MediumRough,             !- Roughness
+    0.25,                    !- Thickness {m}
+    0.303,                   !- Conductivity {W/m-K}
+    1280,                    !- Density {kg/m3}
+    840,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+  Material,
+    walls,                   !- Name
+    MediumRough,             !- Roughness
+    0.125,                   !- Thickness {m}
+    0.303,                   !- Conductivity {W/m-K}
+    1280,                    !- Density {kg/m3}
+    840,                     !- Specific Heat {J/kg-K}
+    0.9,                     !- Thermal Absorptance
+    0.7,                     !- Solar Absorptance
+    0.7;                     !- Visible Absorptance
+
+  WindowMaterial:Gas,
+    Generic Window Air Gap,  !- Name
+    Air,                     !- Gas Type
+    0.0127;                  !- Thickness {m}
+
+  WindowMaterial:Gas,
+    Generic Window Argon Gap,!- Name
+    Argon,                   !- Gas Type
+    0.0127;                  !- Thickness {m}
+
+  WindowMaterial:Glazing,
+    Generic Clear Glass,     !- Name
+    SpectralAverage,         !- Optical Data Type
+    ,                        !- Window Glass Spectral Data Set Name
+    0.006,                   !- Thickness {m}
+    0.77,                    !- Solar Transmittance at Normal Incidence
+    0.07,                    !- Front Side Solar Reflectance at Normal Incidence
+    0.07,                    !- Back Side Solar Reflectance at Normal Incidence
+    0.88,                    !- Visible Transmittance at Normal Incidence
+    0.08,                    !- Front Side Visible Reflectance at Normal Incidence
+    0.08,                    !- Back Side Visible Reflectance at Normal Incidence
+    0,                       !- Infrared Transmittance at Normal Incidence
+    0.84,                    !- Front Side Infrared Hemispherical Emissivity
+    0.84,                    !- Back Side Infrared Hemispherical Emissivity
+    1,                       !- Conductivity {W/m-K}
+    1,                       !- Dirt Correction Factor for Solar and Visible Transmittance
+    No;                      !- Solar Diffusing
+
+  WindowMaterial:Glazing,
+    Generic Low-e Glass,     !- Name
+    SpectralAverage,         !- Optical Data Type
+    ,                        !- Window Glass Spectral Data Set Name
+    0.006,                   !- Thickness {m}
+    0.45,                    !- Solar Transmittance at Normal Incidence
+    0.36,                    !- Front Side Solar Reflectance at Normal Incidence
+    0.36,                    !- Back Side Solar Reflectance at Normal Incidence
+    0.71,                    !- Visible Transmittance at Normal Incidence
+    0.21,                    !- Front Side Visible Reflectance at Normal Incidence
+    0.21,                    !- Back Side Visible Reflectance at Normal Incidence
+    0,                       !- Infrared Transmittance at Normal Incidence
+    0.84,                    !- Front Side Infrared Hemispherical Emissivity
+    0.047,                   !- Back Side Infrared Hemispherical Emissivity
+    1,                       !- Conductivity {W/m-K}
+    1,                       !- Dirt Correction Factor for Solar and Visible Transmittance
+    No;                      !- Solar Diffusing
+
+  WindowMaterial:SimpleGlazingSystem,
+    Double Glazing with Low Emission Coating,  !- Name
+    1.6,                     !- U-Factor {W/m2-K}
+    0.12,                    !- Solar Heat Gain Coefficient
+    0.6;                     !- Visible Transmittance
+
+  Construction,
+    Double Glazing with Low Emission Coating,  !- Name
+    Double Glazing with Low Emission Coating;  !- Outside Layer
+
+  Construction,
+    exposed_floors,          !- Name
+    exterior_floors;         !- Outside Layer
+
+  Construction,
+    exterior_roof,           !- Name
+    roofs;                   !- Outside Layer
+
+  Construction,
+    exterior_wall,           !- Name
+    walls;                   !- Outside Layer
+
+  Construction,
+    Generic Context,         !- Name
+    Material 2;              !- Outside Layer
+
+  Construction,
+    Generic Double Pane,     !- Name
+    Generic Low-e Glass,     !- Outside Layer
+    Generic Window Air Gap,  !- Layer 2
+    Generic Clear Glass;     !- Layer 3
+
+  Construction,
+    Generic Exposed Floor,   !- Name
+    Generic Painted Metal,   !- Outside Layer
+    Generic Ceiling Air Gap, !- Layer 2
+    Generic 50mm Insulation, !- Layer 3
+    Generic LW Concrete;     !- Layer 4
+
+  Construction,
+    Generic Exterior Door,   !- Name
+    Generic Painted Metal,   !- Outside Layer
+    Generic 25mm Insulation, !- Layer 2
+    Generic Painted Metal;   !- Layer 3
+
+  Construction,
+    Generic Exterior Wall,   !- Name
+    Generic Brick,           !- Outside Layer
+    Generic LW Concrete,     !- Layer 2
+    Generic 50mm Insulation, !- Layer 3
+    Generic Wall Air Gap,    !- Layer 4
+    Generic Gypsum Board;    !- Layer 5
+
+  Construction,
+    Generic Ground Slab,     !- Name
+    Generic 50mm Insulation, !- Outside Layer
+    Generic HW Concrete;     !- Layer 2
+
+  Construction,
+    Generic Interior Ceiling,!- Name
+    Generic LW Concrete,     !- Outside Layer
+    Generic Ceiling Air Gap, !- Layer 2
+    Generic Acoustic Tile;   !- Layer 3
+
+  Construction,
+    Generic Interior Door,   !- Name
+    Generic 25mm Wood;       !- Outside Layer
+
+  Construction,
+    Generic Interior Floor,  !- Name
+    Generic Acoustic Tile,   !- Outside Layer
+    Generic Ceiling Air Gap, !- Layer 2
+    Generic LW Concrete;     !- Layer 3
+
+  Construction,
+    Generic Interior Wall,   !- Name
+    Generic Gypsum Board,    !- Outside Layer
+    Generic Wall Air Gap,    !- Layer 2
+    Generic Gypsum Board;    !- Layer 3
+
+  Construction,
+    Generic Roof,            !- Name
+    Generic Roof Membrane,   !- Outside Layer
+    Generic 50mm Insulation, !- Layer 2
+    Generic LW Concrete,     !- Layer 3
+    Generic Ceiling Air Gap, !- Layer 4
+    Generic Acoustic Tile;   !- Layer 5
+
+  Construction,
+    Generic Shade,           !- Name
+    Material 1;              !- Outside Layer
+
+  Construction,
+    Generic Single Pane,     !- Name
+    Generic Clear Glass;     !- Outside Layer
+
+  Construction,
+    Generic Underground Roof,!- Name
+    Generic 50mm Insulation, !- Outside Layer
+    Generic HW Concrete,     !- Layer 2
+    Generic Ceiling Air Gap, !- Layer 3
+    Generic Acoustic Tile;   !- Layer 4
+
+  Construction,
+    Generic Underground Wall,!- Name
+    Generic 50mm Insulation, !- Outside Layer
+    Generic HW Concrete,     !- Layer 2
+    Generic Wall Air Gap,    !- Layer 3
+    Generic Gypsum Board;    !- Layer 4
+
+  Construction:AirBoundary,
+    Generic Air Boundary,    !- Name
+    None,                    !- Air Exchange Method
+    0,                       !- Simple Mixing Air Changes per Hour {1/hr}
+    ;                        !- Simple Mixing Schedule Name
+
+  ScheduleTypeLimits,
+    Fractional 1,            !- Name
+    0,                       !- Lower Limit Value
+    1,                       !- Upper Limit Value
+    Continuous;              !- Numeric Type
+
+  ScheduleTypeLimits,
+    Humidity,                !- Name
+    0,                       !- Lower Limit Value
+    100,                     !- Upper Limit Value
+    Continuous,              !- Numeric Type
+    percent;                 !- Unit Type
+
+  ScheduleTypeLimits,
+    OnOff,                   !- Name
+    0,                       !- Lower Limit Value
+    1,                       !- Upper Limit Value
+    Discrete,                !- Numeric Type
+    availability;            !- Unit Type
+
+  ScheduleTypeLimits,
+    Temperature,             !- Name
+    -273.15,                 !- Lower Limit Value
+    ,                        !- Upper Limit Value
+    Continuous,              !- Numeric Type
+    temperature;             !- Unit Type
+
+  ScheduleTypeLimits,
+    Temperature 1,           !- Name
+    ,                        !- Lower Limit Value
+    ,                        !- Upper Limit Value
+    Continuous,              !- Numeric Type
+    temperature;             !- Unit Type
+
+  Schedule:Constant,Always On Continuous,Fractional 1,1;
+
+  Schedule:Constant,Always On Discrete,OnOff,1;
+
+  Schedule:Day:Interval,
+    Building Occupancy [Vacation]_Sunday,  !- Name
+    Fractional,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    0;                       !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    Building Occupancy_Hol,  !- Name
+    Fractional,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    0;                       !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    Building Occupancy_Monday,  !- Name
+    Fractional,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    07:00,                   !- Time 1
+    0,                       !- Value Until Time 1
+    11:00,                   !- Time 2
+    1,                       !- Value Until Time 2
+    17:00,                   !- Time 3
+    0.5,                     !- Value Until Time 3
+    24:00,                   !- Time 4
+    0;                       !- Value Until Time 4
+
+  Schedule:Day:Interval,
+    Building Occupancy_Monday_SmrDsn,  !- Name
+    Fractional,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    07:00,                   !- Time 1
+    0,                       !- Value Until Time 1
+    11:00,                   !- Time 2
+    1,                       !- Value Until Time 2
+    17:00,                   !- Time 3
+    0.5,                     !- Value Until Time 3
+    24:00,                   !- Time 4
+    0;                       !- Value Until Time 4
+
+  Schedule:Day:Interval,
+    Building Occupancy_Monday_SmrDsn_WntrDsn,  !- Name
+    Fractional,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    0;                       !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    Cooling Setpoint_Day Schedule,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    28;                      !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    Heating Setpoint_Day Schedule,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    20;                      !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    NonIHL Setpoint_DeHumidSetp_Day Schedule,  !- Name
+    Humidity,                !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    70;                      !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    NonIHL Setpoint_HumidSetp_Day Schedule,  !- Name
+    Humidity,                !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    40;                      !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    Schedule Day 3,          !- Name
+    Temperature 1,           !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    60;                      !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    Schedule Day 4,          !- Name
+    ,                        !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    0.2;                     !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    Schedule Day 5,          !- Name
+    ,                        !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    0.05;                    !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    Schedule Day 6,          !- Name
+    Temperature 1,           !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    60;                      !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    Schedule Day 7,          !- Name
+    Temperature 1,           !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    22;                      !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    Schedule Day 8,          !- Name
+    Temperature 1,           !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    60;                      !- Value Until Time 1
+
+  Schedule:Day:Interval,
+    Schedule Day 9,          !- Name
+    Temperature 1,           !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1
+    22;                      !- Value Until Time 1
+
+  Schedule:Week:Daily,
+    0.05 Hot Water Latent Fraction Week Rule - Jan1-Dec31,  !- Name
+    Schedule Day 5,          !- Sunday Schedule:Day Name
+    Schedule Day 5,          !- Monday Schedule:Day Name
+    Schedule Day 5,          !- Tuesday Schedule:Day Name
+    Schedule Day 5,          !- Wednesday Schedule:Day Name
+    Schedule Day 5,          !- Thursday Schedule:Day Name
+    Schedule Day 5,          !- Friday Schedule:Day Name
+    Schedule Day 5,          !- Saturday Schedule:Day Name
+    Schedule Day 5,          !- Holiday Schedule:Day Name
+    Schedule Day 5,          !- SummerDesignDay Schedule:Day Name
+    Schedule Day 5,          !- WinterDesignDay Schedule:Day Name
+    Schedule Day 5,          !- CustomDay1 Schedule:Day Name
+    Schedule Day 5;          !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    0.05 Hot Water Latent Fraction,  !- Name
+    ,                        !- Schedule Type Limits Name
+    0.05 Hot Water Latent Fraction Week Rule - Jan1-Dec31,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    12,                      !- End Month 1
+    31;                      !- End Day 1
+
+  Schedule:Week:Daily,
+    0.2 Hot Water Sensible Fraction Week Rule - Jan1-Dec31,  !- Name
+    Schedule Day 4,          !- Sunday Schedule:Day Name
+    Schedule Day 4,          !- Monday Schedule:Day Name
+    Schedule Day 4,          !- Tuesday Schedule:Day Name
+    Schedule Day 4,          !- Wednesday Schedule:Day Name
+    Schedule Day 4,          !- Thursday Schedule:Day Name
+    Schedule Day 4,          !- Friday Schedule:Day Name
+    Schedule Day 4,          !- Saturday Schedule:Day Name
+    Schedule Day 4,          !- Holiday Schedule:Day Name
+    Schedule Day 4,          !- SummerDesignDay Schedule:Day Name
+    Schedule Day 4,          !- WinterDesignDay Schedule:Day Name
+    Schedule Day 4,          !- CustomDay1 Schedule:Day Name
+    Schedule Day 4;          !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    0.2 Hot Water Sensible Fraction,  !- Name
+    ,                        !- Schedule Type Limits Name
+    0.2 Hot Water Sensible Fraction Week Rule - Jan1-Dec31,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    12,                      !- End Month 1
+    31;                      !- End Day 1
+
+  Schedule:Week:Daily,
+    22C Ambient Condition Week Rule - Jan1-Dec31,  !- Name
+    Schedule Day 9,          !- Sunday Schedule:Day Name
+    Schedule Day 9,          !- Monday Schedule:Day Name
+    Schedule Day 9,          !- Tuesday Schedule:Day Name
+    Schedule Day 9,          !- Wednesday Schedule:Day Name
+    Schedule Day 9,          !- Thursday Schedule:Day Name
+    Schedule Day 9,          !- Friday Schedule:Day Name
+    Schedule Day 9,          !- Saturday Schedule:Day Name
+    Schedule Day 9,          !- Holiday Schedule:Day Name
+    Schedule Day 9,          !- SummerDesignDay Schedule:Day Name
+    Schedule Day 9,          !- WinterDesignDay Schedule:Day Name
+    Schedule Day 9,          !- CustomDay1 Schedule:Day Name
+    Schedule Day 9;          !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    22C Ambient Condition,   !- Name
+    Temperature 1,           !- Schedule Type Limits Name
+    22C Ambient Condition Week Rule - Jan1-Dec31,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    12,                      !- End Month 1
+    31;                      !- End Day 1
+
+  Schedule:Week:Daily,
+    60.0C Hot Water Week Rule - Jan1-Dec31,  !- Name
+    Schedule Day 3,          !- Sunday Schedule:Day Name
+    Schedule Day 3,          !- Monday Schedule:Day Name
+    Schedule Day 3,          !- Tuesday Schedule:Day Name
+    Schedule Day 3,          !- Wednesday Schedule:Day Name
+    Schedule Day 3,          !- Thursday Schedule:Day Name
+    Schedule Day 3,          !- Friday Schedule:Day Name
+    Schedule Day 3,          !- Saturday Schedule:Day Name
+    Schedule Day 3,          !- Holiday Schedule:Day Name
+    Schedule Day 3,          !- SummerDesignDay Schedule:Day Name
+    Schedule Day 3,          !- WinterDesignDay Schedule:Day Name
+    Schedule Day 3,          !- CustomDay1 Schedule:Day Name
+    Schedule Day 3;          !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    60.0C Hot Water,         !- Name
+    Temperature 1,           !- Schedule Type Limits Name
+    60.0C Hot Water Week Rule - Jan1-Dec31,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    12,                      !- End Month 1
+    31;                      !- End Day 1
+
+  Schedule:Week:Daily,
+    60C Hot Water Week Rule - Jan1-Dec31,  !- Name
+    Schedule Day 6,          !- Sunday Schedule:Day Name
+    Schedule Day 6,          !- Monday Schedule:Day Name
+    Schedule Day 6,          !- Tuesday Schedule:Day Name
+    Schedule Day 6,          !- Wednesday Schedule:Day Name
+    Schedule Day 6,          !- Thursday Schedule:Day Name
+    Schedule Day 6,          !- Friday Schedule:Day Name
+    Schedule Day 6,          !- Saturday Schedule:Day Name
+    Schedule Day 6,          !- Holiday Schedule:Day Name
+    Schedule Day 6,          !- SummerDesignDay Schedule:Day Name
+    Schedule Day 6,          !- WinterDesignDay Schedule:Day Name
+    Schedule Day 6,          !- CustomDay1 Schedule:Day Name
+    Schedule Day 6;          !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    60C Hot Water,           !- Name
+    Temperature 1,           !- Schedule Type Limits Name
+    60C Hot Water Week Rule - Jan1-Dec31,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    12,                      !- End Month 1
+    31;                      !- End Day 1
+
+  Schedule:Week:Daily,
+    Cooling Setpoint Week Rule - Jan1-Dec31,  !- Name
+    Cooling Setpoint_Day Schedule,  !- Sunday Schedule:Day Name
+    Cooling Setpoint_Day Schedule,  !- Monday Schedule:Day Name
+    Cooling Setpoint_Day Schedule,  !- Tuesday Schedule:Day Name
+    Cooling Setpoint_Day Schedule,  !- Wednesday Schedule:Day Name
+    Cooling Setpoint_Day Schedule,  !- Thursday Schedule:Day Name
+    Cooling Setpoint_Day Schedule,  !- Friday Schedule:Day Name
+    Cooling Setpoint_Day Schedule,  !- Saturday Schedule:Day Name
+    Cooling Setpoint_Day Schedule,  !- Holiday Schedule:Day Name
+    Cooling Setpoint_Day Schedule,  !- SummerDesignDay Schedule:Day Name
+    Cooling Setpoint_Day Schedule,  !- WinterDesignDay Schedule:Day Name
+    Cooling Setpoint_Day Schedule,  !- CustomDay1 Schedule:Day Name
+    Cooling Setpoint_Day Schedule;  !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    Cooling Setpoint,        !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Cooling Setpoint Week Rule - Jan1-Dec31,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    12,                      !- End Month 1
+    31;                      !- End Day 1
+
+  Schedule:Week:Daily,
+    Heating Setpoint Week Rule - Jan1-Dec31,  !- Name
+    Heating Setpoint_Day Schedule,  !- Sunday Schedule:Day Name
+    Heating Setpoint_Day Schedule,  !- Monday Schedule:Day Name
+    Heating Setpoint_Day Schedule,  !- Tuesday Schedule:Day Name
+    Heating Setpoint_Day Schedule,  !- Wednesday Schedule:Day Name
+    Heating Setpoint_Day Schedule,  !- Thursday Schedule:Day Name
+    Heating Setpoint_Day Schedule,  !- Friday Schedule:Day Name
+    Heating Setpoint_Day Schedule,  !- Saturday Schedule:Day Name
+    Heating Setpoint_Day Schedule,  !- Holiday Schedule:Day Name
+    Heating Setpoint_Day Schedule,  !- SummerDesignDay Schedule:Day Name
+    Heating Setpoint_Day Schedule,  !- WinterDesignDay Schedule:Day Name
+    Heating Setpoint_Day Schedule,  !- CustomDay1 Schedule:Day Name
+    Heating Setpoint_Day Schedule;  !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    Heating Setpoint,        !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Heating Setpoint Week Rule - Jan1-Dec31,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    12,                      !- End Month 1
+    31;                      !- End Day 1
+
+  Schedule:Week:Daily,
+    NonIHL Setpoint_DeHumidSetp Week Rule - Jan1-Dec31,  !- Name
+    NonIHL Setpoint_DeHumidSetp_Day Schedule,  !- Sunday Schedule:Day Name
+    NonIHL Setpoint_DeHumidSetp_Day Schedule,  !- Monday Schedule:Day Name
+    NonIHL Setpoint_DeHumidSetp_Day Schedule,  !- Tuesday Schedule:Day Name
+    NonIHL Setpoint_DeHumidSetp_Day Schedule,  !- Wednesday Schedule:Day Name
+    NonIHL Setpoint_DeHumidSetp_Day Schedule,  !- Thursday Schedule:Day Name
+    NonIHL Setpoint_DeHumidSetp_Day Schedule,  !- Friday Schedule:Day Name
+    NonIHL Setpoint_DeHumidSetp_Day Schedule,  !- Saturday Schedule:Day Name
+    NonIHL Setpoint_DeHumidSetp_Day Schedule,  !- Holiday Schedule:Day Name
+    NonIHL Setpoint_DeHumidSetp_Day Schedule,  !- SummerDesignDay Schedule:Day Name
+    NonIHL Setpoint_DeHumidSetp_Day Schedule,  !- WinterDesignDay Schedule:Day Name
+    NonIHL Setpoint_DeHumidSetp_Day Schedule,  !- CustomDay1 Schedule:Day Name
+    NonIHL Setpoint_DeHumidSetp_Day Schedule;  !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    NonIHL Setpoint_DeHumidSetp,  !- Name
+    Humidity,                !- Schedule Type Limits Name
+    NonIHL Setpoint_DeHumidSetp Week Rule - Jan1-Dec31,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    12,                      !- End Month 1
+    31;                      !- End Day 1
+
+  Schedule:Week:Daily,
+    NonIHL Setpoint_HumidSetp Week Rule - Jan1-Dec31,  !- Name
+    NonIHL Setpoint_HumidSetp_Day Schedule,  !- Sunday Schedule:Day Name
+    NonIHL Setpoint_HumidSetp_Day Schedule,  !- Monday Schedule:Day Name
+    NonIHL Setpoint_HumidSetp_Day Schedule,  !- Tuesday Schedule:Day Name
+    NonIHL Setpoint_HumidSetp_Day Schedule,  !- Wednesday Schedule:Day Name
+    NonIHL Setpoint_HumidSetp_Day Schedule,  !- Thursday Schedule:Day Name
+    NonIHL Setpoint_HumidSetp_Day Schedule,  !- Friday Schedule:Day Name
+    NonIHL Setpoint_HumidSetp_Day Schedule,  !- Saturday Schedule:Day Name
+    NonIHL Setpoint_HumidSetp_Day Schedule,  !- Holiday Schedule:Day Name
+    NonIHL Setpoint_HumidSetp_Day Schedule,  !- SummerDesignDay Schedule:Day Name
+    NonIHL Setpoint_HumidSetp_Day Schedule,  !- WinterDesignDay Schedule:Day Name
+    NonIHL Setpoint_HumidSetp_Day Schedule,  !- CustomDay1 Schedule:Day Name
+    NonIHL Setpoint_HumidSetp_Day Schedule;  !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    NonIHL Setpoint_HumidSetp,  !- Name
+    Humidity,                !- Schedule Type Limits Name
+    NonIHL Setpoint_HumidSetp Week Rule - Jan1-Dec31,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    12,                      !- End Month 1
+    31;                      !- End Day 1
+
+  Schedule:Week:Daily,
+    Schedule Ruleset 1 Week Rule - Jan1-Dec31,  !- Name
+    Schedule Day 7,          !- Sunday Schedule:Day Name
+    Schedule Day 7,          !- Monday Schedule:Day Name
+    Schedule Day 7,          !- Tuesday Schedule:Day Name
+    Schedule Day 7,          !- Wednesday Schedule:Day Name
+    Schedule Day 7,          !- Thursday Schedule:Day Name
+    Schedule Day 7,          !- Friday Schedule:Day Name
+    Schedule Day 7,          !- Saturday Schedule:Day Name
+    Schedule Day 7,          !- Holiday Schedule:Day Name
+    Schedule Day 7,          !- SummerDesignDay Schedule:Day Name
+    Schedule Day 7,          !- WinterDesignDay Schedule:Day Name
+    Schedule Day 7,          !- CustomDay1 Schedule:Day Name
+    Schedule Day 7;          !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    Schedule Ruleset 1,      !- Name
+    Temperature 1,           !- Schedule Type Limits Name
+    Schedule Ruleset 1 Week Rule - Jan1-Dec31,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    12,                      !- End Month 1
+    31;                      !- End Day 1
+
+  Schedule:Week:Daily,
+    Schedule Ruleset 2 Week Rule - Jan1-Dec31,  !- Name
+    Schedule Day 8,          !- Sunday Schedule:Day Name
+    Schedule Day 8,          !- Monday Schedule:Day Name
+    Schedule Day 8,          !- Tuesday Schedule:Day Name
+    Schedule Day 8,          !- Wednesday Schedule:Day Name
+    Schedule Day 8,          !- Thursday Schedule:Day Name
+    Schedule Day 8,          !- Friday Schedule:Day Name
+    Schedule Day 8,          !- Saturday Schedule:Day Name
+    Schedule Day 8,          !- Holiday Schedule:Day Name
+    Schedule Day 8,          !- SummerDesignDay Schedule:Day Name
+    Schedule Day 8,          !- WinterDesignDay Schedule:Day Name
+    Schedule Day 8,          !- CustomDay1 Schedule:Day Name
+    Schedule Day 8;          !- CustomDay2 Schedule:Day Name
+
+  Schedule:Year,
+    Schedule Ruleset 2,      !- Name
+    Temperature 1,           !- Schedule Type Limits Name
+    Schedule Ruleset 2 Week Rule - Jan1-Dec31,  !- Schedule:Week Name 1
+    1,                       !- Start Month 1
+    1,                       !- Start Day 1
+    12,                      !- End Month 1
+    31;                      !- End Day 1
+
+  Schedule:Constant,Always Off Discrete,,0;
+
+  OutdoorAir:Node,
+    Model Outdoor Air Node;  !- Name
+
+  PlantLoop,
+    SHW Loop default_district_shw,  !- Name
+    Water,                   !- Fluid Type
+    ,                        !- User Defined Fluid Type
+    SHW Loop default_district_shw Operation Schemes,  !- Plant Equipment Operation Scheme Name
+    Node 7,                  !- Loop Temperature Setpoint Node Name
+    60,                      !- Maximum Loop Temperature {C}
+    10,                      !- Minimum Loop Temperature {C}
+    Autosize,                !- Maximum Loop Flow Rate {m3/s}
+    0,                       !- Minimum Loop Flow Rate {m3/s}
+    Autocalculate,           !- Plant Loop Volume {m3}
+    Node 6,                  !- Plant Side Inlet Node Name
+    Node 7,                  !- Plant Side Outlet Node Name
+    SHW Loop default_district_shw Supply Branches,  !- Plant Side Branch List Name
+    SHW Loop default_district_shw Supply Connector List,  !- Plant Side Connector List Name
+    Node 9,                  !- Demand Side Inlet Node Name
+    Node 10,                 !- Demand Side Outlet Node Name
+    SHW Loop default_district_shw Demand Branches,  !- Demand Side Branch List Name
+    SHW Loop default_district_shw Demand Connector List,  !- Demand Side Connector List Name
+    Optimal,                 !- Load Distribution Scheme
+    ,                        !- Availability Manager List Name
+    SingleSetpoint,          !- Plant Loop Demand Calculation Scheme
+    None;                    !- Common Pipe Simulation
+
+  Sizing:Plant,
+    SHW Loop default_district_shw,  !- Plant or Condenser Loop Name
+    Heating,                 !- Loop Type
+    60,                      !- Design Loop Exit Temperature {C}
+    5,                       !- Loop Design Temperature Difference {deltaC}
+    NonCoincident,           !- Sizing Option
+    1,                       !- Zone Timesteps in Averaging Window
+    None;                    !- Coincident Sizing Factor Mode
+
+  BranchList,
+    SHW Loop default_district_shw Supply Branches,  !- Name
+    SHW Loop default_district_shw Supply Inlet Branch,  !- Branch 1 Name
+    SHW Loop default_district_shw Supply Branch 1,  !- Branch 2 Name
+    SHW Loop default_district_shw Supply Outlet Branch;  !- Branch 3 Name
+
+  ConnectorList,
+    SHW Loop default_district_shw Supply Connector List,  !- Name
+    Connector:Splitter,      !- Connector 1 Object Type
+    SHW Loop default_district_shw Supply Splitter,  !- Connector 1 Name
+    Connector:Mixer,         !- Connector 2 Object Type
+    SHW Loop default_district_shw Supply Mixer;  !- Connector 2 Name
+
+  Connector:Splitter,
+    SHW Loop default_district_shw Supply Splitter,  !- Name
+    SHW Loop default_district_shw Supply Inlet Branch,  !- Inlet Branch Name
+    SHW Loop default_district_shw Supply Branch 1;  !- Outlet Branch 1 Name
+
+  Connector:Mixer,
+    SHW Loop default_district_shw Supply Mixer,  !- Name
+    SHW Loop default_district_shw Supply Outlet Branch,  !- Outlet Branch Name
+    SHW Loop default_district_shw Supply Branch 1;  !- Inlet Branch 1 Name
+
+  Branch,
+    SHW Loop default_district_shw Supply Inlet Branch,  !- Name
+    ,                        !- Pressure Drop Curve Name
+    Pump:ConstantSpeed,      !- Component 1 Object Type
+    SHW Pump1,               !- Component 1 Name
+    Node 6,                  !- Component 1 Inlet Node Name
+    Node 12;                 !- Component 1 Outlet Node Name
+
+  Pump:ConstantSpeed,
+    SHW Pump1,               !- Name
+    Node 6,                  !- Inlet Node Name
+    Node 12,                 !- Outlet Node Name
+    Autosize,                !- Design Flow Rate {m3/s}
+    29891,                   !- Design Pump Head {Pa}
+    Autosize,                !- Design Power Consumption {W}
+    0.9,                     !- Motor Efficiency
+    0,                       !- Fraction of Motor Inefficiencies to Fluid Stream
+    Intermittent,            !- Pump Control Type
+    ,                        !- Pump Flow Rate Schedule Name
+    ,                        !- Pump Curve Name
+    ,                        !- Impeller Diameter {m}
+    ,                        !- Rotational Speed {rev/min}
+    ,                        !- Zone Name
+    ,                        !- Skin Loss Radiative Fraction
+    PowerPerFlowPerPressure, !- Design Power Sizing Method
+    348701.1,                !- Design Electric Power per Unit Flow Rate {W/(m3/s)}
+    1.282051282,             !- Design Shaft Power per Unit Flow Rate per Unit Head {W/((m3/s)-Pa)}
+    Water Systems;           !- End-Use Subcategory
+
+  Branch,
+    SHW Loop default_district_shw Supply Branch 1,  !- Name
+    ,                        !- Pressure Drop Curve Name
+    WaterHeater:Mixed,       !- Component 1 Object Type
+    Ideal Service Hot Water Heater,  !- Component 1 Name
+    Node 8,                  !- Component 1 Inlet Node Name
+    Node 13;                 !- Component 1 Outlet Node Name
+
+  WaterHeater:Mixed,
+    Ideal Service Hot Water Heater,  !- Name
+    0,                       !- Tank Volume {m3}
+    Schedule Ruleset 2,      !- Setpoint Temperature Schedule Name
+    2,                       !- Deadband Temperature Difference {deltaC}
+    82.22,                   !- Maximum Temperature Limit {C}
+    Modulate,                !- Heater Control Type
+    1000000,                 !- Heater Maximum Capacity {W}
+    ,                        !- Heater Minimum Capacity {W}
+    0,                       !- Heater Ignition Minimum Flow Rate {m3/s}
+    0,                       !- Heater Ignition Delay {s}
+    DistrictHeatingWater,    !- Heater Fuel Type
+    1,                       !- Heater Thermal Efficiency
+    ,                        !- Part Load Factor Curve Name
+    20,                      !- Off Cycle Parasitic Fuel Consumption Rate {W}
+    DistrictHeatingWater,    !- Off Cycle Parasitic Fuel Type
+    0.8,                     !- Off Cycle Parasitic Heat Fraction to Tank
+    0,                       !- On Cycle Parasitic Fuel Consumption Rate {W}
+    DistrictHeatingWater,    !- On Cycle Parasitic Fuel Type
+    0,                       !- On Cycle Parasitic Heat Fraction to Tank
+    Schedule,                !- Ambient Temperature Indicator
+    22C Ambient Condition,   !- Ambient Temperature Schedule Name
+    ,                        !- Ambient Temperature Zone Name
+    ,                        !- Ambient Temperature Outdoor Air Node Name
+    0,                       !- Off Cycle Loss Coefficient to Ambient Temperature {W/K}
+    1,                       !- Off Cycle Loss Fraction to Zone
+    0,                       !- On Cycle Loss Coefficient to Ambient Temperature {W/K}
+    1,                       !- On Cycle Loss Fraction to Zone
+    ,                        !- Peak Use Flow Rate {m3/s}
+    ,                        !- Use Flow Rate Fraction Schedule Name
+    ,                        !- Cold Water Supply Temperature Schedule Name
+    Node 8,                  !- Use Side Inlet Node Name
+    Node 13,                 !- Use Side Outlet Node Name
+    1,                       !- Use Side Effectiveness
+    ,                        !- Source Side Inlet Node Name
+    ,                        !- Source Side Outlet Node Name
+    1,                       !- Source Side Effectiveness
+    Autosize,                !- Use Side Design Flow Rate {m3/s}
+    Autosize,                !- Source Side Design Flow Rate {m3/s}
+    1.5,                     !- Indirect Water Heating Recovery Time {hr}
+    IndirectHeatPrimarySetpoint,  !- Source Side Flow Control Mode
+    ,                        !- Indirect Alternate Setpoint Temperature Schedule Name
+    General;                 !- End-Use Subcategory
+
+  WaterHeater:Sizing,
+    Ideal Service Hot Water Heater,  !- WaterHeater Name
+    PeakDraw,                !- Design Mode
+    0.538503,                !- Time Storage Can Meet Peak Draw {hr}
+    0,                       !- Time for Tank Recovery {hr}
+    1;                       !- Nominal Tank Volume for Autosizing Plant Connections {m3}
+
+  Branch,
+    SHW Loop default_district_shw Supply Outlet Branch,  !- Name
+    ,                        !- Pressure Drop Curve Name
+    Pipe:Adiabatic,          !- Component 1 Object Type
+    SHW Loop default_district_shw Supply Outlet Pipe,  !- Component 1 Name
+    SHW Loop default_district_shw Supply Outlet Pipe Node,  !- Component 1 Inlet Node Name
+    Node 7;                  !- Component 1 Outlet Node Name
+
+  Pipe:Adiabatic,
+    SHW Loop default_district_shw Supply Outlet Pipe,  !- Name
+    SHW Loop default_district_shw Supply Outlet Pipe Node,  !- Inlet Node Name
+    Node 7;                  !- Outlet Node Name
+
+  BranchList,
+    SHW Loop default_district_shw Demand Branches,  !- Name
+    SHW Loop default_district_shw Demand Inlet Branch,  !- Branch 1 Name
+    SHW Loop default_district_shw Demand Branch 1,  !- Branch 2 Name
+    SHW Loop default_district_shw Demand Branch 2,  !- Branch 3 Name
+    SHW Loop default_district_shw Demand Branch 3,  !- Branch 4 Name
+    SHW Loop default_district_shw Demand Branch 4,  !- Branch 5 Name
+    SHW Loop default_district_shw Demand Branch 5,  !- Branch 6 Name
+    SHW Loop default_district_shw Demand Bypass Branch,  !- Branch 7 Name
+    SHW Loop default_district_shw Demand Outlet Branch;  !- Branch 8 Name
+
+  ConnectorList,
+    SHW Loop default_district_shw Demand Connector List,  !- Name
+    Connector:Splitter,      !- Connector 1 Object Type
+    SHW Loop default_district_shw Demand Splitter,  !- Connector 1 Name
+    Connector:Mixer,         !- Connector 2 Object Type
+    SHW Loop default_district_shw Demand Mixer;  !- Connector 2 Name
+
+  Connector:Splitter,
+    SHW Loop default_district_shw Demand Splitter,  !- Name
+    SHW Loop default_district_shw Demand Inlet Branch,  !- Inlet Branch Name
+    SHW Loop default_district_shw Demand Branch 1,  !- Outlet Branch 1 Name
+    SHW Loop default_district_shw Demand Branch 2,  !- Outlet Branch 2 Name
+    SHW Loop default_district_shw Demand Branch 3,  !- Outlet Branch 3 Name
+    SHW Loop default_district_shw Demand Branch 4,  !- Outlet Branch 4 Name
+    SHW Loop default_district_shw Demand Branch 5,  !- Outlet Branch 5 Name
+    SHW Loop default_district_shw Demand Bypass Branch;  !- Outlet Branch 6 Name
+
+  Connector:Mixer,
+    SHW Loop default_district_shw Demand Mixer,  !- Name
+    SHW Loop default_district_shw Demand Outlet Branch,  !- Outlet Branch Name
+    SHW Loop default_district_shw Demand Branch 1,  !- Inlet Branch 1 Name
+    SHW Loop default_district_shw Demand Branch 2,  !- Inlet Branch 2 Name
+    SHW Loop default_district_shw Demand Branch 3,  !- Inlet Branch 3 Name
+    SHW Loop default_district_shw Demand Branch 4,  !- Inlet Branch 4 Name
+    SHW Loop default_district_shw Demand Branch 5,  !- Inlet Branch 5 Name
+    SHW Loop default_district_shw Demand Bypass Branch;  !- Inlet Branch 6 Name
+
+  Branch,
+    SHW Loop default_district_shw Demand Inlet Branch,  !- Name
+    ,                        !- Pressure Drop Curve Name
+    Pipe:Adiabatic,          !- Component 1 Object Type
+    SHW Loop default_district_shw Demand Inlet Pipe,  !- Component 1 Name
+    Node 9,                  !- Component 1 Inlet Node Name
+    SHW Loop default_district_shw Demand Inlet Pipe Node;  !- Component 1 Outlet Node Name
+
+  Pipe:Adiabatic,
+    SHW Loop default_district_shw Demand Inlet Pipe,  !- Name
+    Node 9,                  !- Inlet Node Name
+    SHW Loop default_district_shw Demand Inlet Pipe Node;  !- Outlet Node Name
+
+  Branch,
+    SHW Loop default_district_shw Demand Branch 1,  !- Name
+    ,                        !- Pressure Drop Curve Name
+    WaterUse:Connections,    !- Component 1 Object Type
+    Water Use Connections 1, !- Component 1 Name
+    Node 11,                 !- Component 1 Inlet Node Name
+    Node 14;                 !- Component 1 Outlet Node Name
+
+  WaterUse:Connections,
+    Water Use Connections 1, !- Name
+    Node 11,                 !- Inlet Node Name
+    Node 14,                 !- Outlet Node Name
+    ,                        !- Supply Water Storage Tank Name
+    ,                        !- Reclamation Water Storage Tank Name
+    60.0C Hot Water,         !- Hot Water Supply Temperature Schedule Name
+    ,                        !- Cold Water Supply Temperature Schedule Name
+    None,                    !- Drain Water Heat Exchanger Type
+    Plant,                   !- Drain Water Heat Exchanger Destination
+    ,                        !- Drain Water Heat Exchanger U-Factor Times Area {W/K}
+    NonIHL Hot Water..NonIHL_Shoebox_1_6f0fbfeb;  !- Water Use Equipment 1 Name
+
+  WaterUse:Equipment,
+    NonIHL Hot Water..NonIHL_Shoebox_1_6f0fbfeb,  !- Name
+    General,                 !- End-Use Subcategory
+    3.24106666666667e-07,    !- Peak Flow Rate {m3/s}
+    Vacation,                !- Flow Rate Fraction Schedule Name
+    60.0C Hot Water,         !- Target Temperature Schedule Name
+    ,                        !- Hot Water Supply Temperature Schedule Name
+    ,                        !- Cold Water Supply Temperature Schedule Name
+    NonIHL_Shoebox_1_6f0fbfeb,  !- Zone Name
+    0.2 Hot Water Sensible Fraction,  !- Sensible Fraction Schedule Name
+    0.05 Hot Water Latent Fraction;  !- Latent Fraction Schedule Name
+
+  Branch,
+    SHW Loop default_district_shw Demand Branch 2,  !- Name
+    ,                        !- Pressure Drop Curve Name
+    WaterUse:Connections,    !- Component 1 Object Type
+    Water Use Connections 2, !- Component 1 Name
+    Node 15,                 !- Component 1 Inlet Node Name
+    Node 16;                 !- Component 1 Outlet Node Name
+
+  WaterUse:Connections,
+    Water Use Connections 2, !- Name
+    Node 15,                 !- Inlet Node Name
+    Node 16,                 !- Outlet Node Name
+    ,                        !- Supply Water Storage Tank Name
+    ,                        !- Reclamation Water Storage Tank Name
+    60.0C Hot Water,         !- Hot Water Supply Temperature Schedule Name
+    ,                        !- Cold Water Supply Temperature Schedule Name
+    None,                    !- Drain Water Heat Exchanger Type
+    Plant,                   !- Drain Water Heat Exchanger Destination
+    ,                        !- Drain Water Heat Exchanger U-Factor Times Area {W/K}
+    NonIHL Hot Water..NonIHL_Shoebox_2_13b1d407;  !- Water Use Equipment 1 Name
+
+  WaterUse:Equipment,
+    NonIHL Hot Water..NonIHL_Shoebox_2_13b1d407,  !- Name
+    General,                 !- End-Use Subcategory
+    4.55775e-08,             !- Peak Flow Rate {m3/s}
+    Vacation,                !- Flow Rate Fraction Schedule Name
+    60.0C Hot Water,         !- Target Temperature Schedule Name
+    ,                        !- Hot Water Supply Temperature Schedule Name
+    ,                        !- Cold Water Supply Temperature Schedule Name
+    NonIHL_Shoebox_2_13b1d407,  !- Zone Name
+    0.2 Hot Water Sensible Fraction,  !- Sensible Fraction Schedule Name
+    0.05 Hot Water Latent Fraction;  !- Latent Fraction Schedule Name
+
+  Branch,
+    SHW Loop default_district_shw Demand Branch 3,  !- Name
+    ,                        !- Pressure Drop Curve Name
+    WaterUse:Connections,    !- Component 1 Object Type
+    Water Use Connections 3, !- Component 1 Name
+    Node 17,                 !- Component 1 Inlet Node Name
+    Node 18;                 !- Component 1 Outlet Node Name
+
+  WaterUse:Connections,
+    Water Use Connections 3, !- Name
+    Node 17,                 !- Inlet Node Name
+    Node 18,                 !- Outlet Node Name
+    ,                        !- Supply Water Storage Tank Name
+    ,                        !- Reclamation Water Storage Tank Name
+    60.0C Hot Water,         !- Hot Water Supply Temperature Schedule Name
+    ,                        !- Cold Water Supply Temperature Schedule Name
+    None,                    !- Drain Water Heat Exchanger Type
+    Plant,                   !- Drain Water Heat Exchanger Destination
+    ,                        !- Drain Water Heat Exchanger U-Factor Times Area {W/K}
+    NonIHL Hot Water..NonIHL_Shoebox_3_62284603;  !- Water Use Equipment 1 Name
+
+  WaterUse:Equipment,
+    NonIHL Hot Water..NonIHL_Shoebox_3_62284603,  !- Name
+    General,                 !- End-Use Subcategory
+    4.55775e-08,             !- Peak Flow Rate {m3/s}
+    Vacation,                !- Flow Rate Fraction Schedule Name
+    60.0C Hot Water,         !- Target Temperature Schedule Name
+    ,                        !- Hot Water Supply Temperature Schedule Name
+    ,                        !- Cold Water Supply Temperature Schedule Name
+    NonIHL_Shoebox_3_62284603,  !- Zone Name
+    0.2 Hot Water Sensible Fraction,  !- Sensible Fraction Schedule Name
+    0.05 Hot Water Latent Fraction;  !- Latent Fraction Schedule Name
+
+  Branch,
+    SHW Loop default_district_shw Demand Branch 4,  !- Name
+    ,                        !- Pressure Drop Curve Name
+    WaterUse:Connections,    !- Component 1 Object Type
+    Water Use Connections 4, !- Component 1 Name
+    Node 19,                 !- Component 1 Inlet Node Name
+    Node 20;                 !- Component 1 Outlet Node Name
+
+  WaterUse:Connections,
+    Water Use Connections 4, !- Name
+    Node 19,                 !- Inlet Node Name
+    Node 20,                 !- Outlet Node Name
+    ,                        !- Supply Water Storage Tank Name
+    ,                        !- Reclamation Water Storage Tank Name
+    60.0C Hot Water,         !- Hot Water Supply Temperature Schedule Name
+    ,                        !- Cold Water Supply Temperature Schedule Name
+    None,                    !- Drain Water Heat Exchanger Type
+    Plant,                   !- Drain Water Heat Exchanger Destination
+    ,                        !- Drain Water Heat Exchanger U-Factor Times Area {W/K}
+    NonIHL Hot Water..NonIHL_Shoebox_4_cb3a4fdc;  !- Water Use Equipment 1 Name
+
+  WaterUse:Equipment,
+    NonIHL Hot Water..NonIHL_Shoebox_4_cb3a4fdc,  !- Name
+    General,                 !- End-Use Subcategory
+    4.55775e-08,             !- Peak Flow Rate {m3/s}
+    Vacation,                !- Flow Rate Fraction Schedule Name
+    60.0C Hot Water,         !- Target Temperature Schedule Name
+    ,                        !- Hot Water Supply Temperature Schedule Name
+    ,                        !- Cold Water Supply Temperature Schedule Name
+    NonIHL_Shoebox_4_cb3a4fdc,  !- Zone Name
+    0.2 Hot Water Sensible Fraction,  !- Sensible Fraction Schedule Name
+    0.05 Hot Water Latent Fraction;  !- Latent Fraction Schedule Name
+
+  Branch,
+    SHW Loop default_district_shw Demand Branch 5,  !- Name
+    ,                        !- Pressure Drop Curve Name
+    WaterUse:Connections,    !- Component 1 Object Type
+    Water Use Connections 5, !- Component 1 Name
+    Node 21,                 !- Component 1 Inlet Node Name
+    Node 22;                 !- Component 1 Outlet Node Name
+
+  WaterUse:Connections,
+    Water Use Connections 5, !- Name
+    Node 21,                 !- Inlet Node Name
+    Node 22,                 !- Outlet Node Name
+    ,                        !- Supply Water Storage Tank Name
+    ,                        !- Reclamation Water Storage Tank Name
+    60.0C Hot Water,         !- Hot Water Supply Temperature Schedule Name
+    ,                        !- Cold Water Supply Temperature Schedule Name
+    None,                    !- Drain Water Heat Exchanger Type
+    Plant,                   !- Drain Water Heat Exchanger Destination
+    ,                        !- Drain Water Heat Exchanger U-Factor Times Area {W/K}
+    NonIHL Hot Water..NonIHL_Shoebox_5_a1d11df5;  !- Water Use Equipment 1 Name
+
+  WaterUse:Equipment,
+    NonIHL Hot Water..NonIHL_Shoebox_5_a1d11df5,  !- Name
+    General,                 !- End-Use Subcategory
+    4.55775e-08,             !- Peak Flow Rate {m3/s}
+    Vacation,                !- Flow Rate Fraction Schedule Name
+    60.0C Hot Water,         !- Target Temperature Schedule Name
+    ,                        !- Hot Water Supply Temperature Schedule Name
+    ,                        !- Cold Water Supply Temperature Schedule Name
+    NonIHL_Shoebox_5_a1d11df5,  !- Zone Name
+    0.2 Hot Water Sensible Fraction,  !- Sensible Fraction Schedule Name
+    0.05 Hot Water Latent Fraction;  !- Latent Fraction Schedule Name
+
+  Branch,
+    SHW Loop default_district_shw Demand Bypass Branch,  !- Name
+    ,                        !- Pressure Drop Curve Name
+    Pipe:Adiabatic,          !- Component 1 Object Type
+    SHW Loop default_district_shw Demand Bypass Pipe,  !- Component 1 Name
+    SHW Loop default_district_shw Demand Bypass Pipe Inlet Node,  !- Component 1 Inlet Node Name
+    SHW Loop default_district_shw Demand Bypass Pipe Outlet Node;  !- Component 1 Outlet Node Name
+
+  Pipe:Adiabatic,
+    SHW Loop default_district_shw Demand Bypass Pipe,  !- Name
+    SHW Loop default_district_shw Demand Bypass Pipe Inlet Node,  !- Inlet Node Name
+    SHW Loop default_district_shw Demand Bypass Pipe Outlet Node;  !- Outlet Node Name
+
+  Branch,
+    SHW Loop default_district_shw Demand Outlet Branch,  !- Name
+    ,                        !- Pressure Drop Curve Name
+    Pipe:Adiabatic,          !- Component 1 Object Type
+    SHW Loop default_district_shw Demand Outlet Pipe,  !- Component 1 Name
+    SHW Loop default_district_shw Demand Outlet Pipe Node,  !- Component 1 Inlet Node Name
+    Node 10;                 !- Component 1 Outlet Node Name
+
+  Pipe:Adiabatic,
+    SHW Loop default_district_shw Demand Outlet Pipe,  !- Name
+    SHW Loop default_district_shw Demand Outlet Pipe Node,  !- Inlet Node Name
+    Node 10;                 !- Outlet Node Name
+
+  PlantEquipmentOperationSchemes,
+    SHW Loop default_district_shw Operation Schemes,  !- Name
+    PlantEquipmentOperation:HeatingLoad,  !- Control Scheme 1 Object Type
+    SHW Loop default_district_shw Heating Operation Scheme,  !- Control Scheme 1 Name
+    Always On Discrete;      !- Control Scheme 1 Schedule Name
+
+  PlantEquipmentOperation:HeatingLoad,
+    SHW Loop default_district_shw Heating Operation Scheme,  !- Name
+    0,                       !- Load Range 1 Lower Limit {W}
+    1000000000,              !- Load Range 1 Upper Limit {W}
+    SHW Loop default_district_shw Heating Equipment List;  !- Range 1 Equipment List Name
+
+  PlantEquipmentList,
+    SHW Loop default_district_shw Heating Equipment List,  !- Name
+    WaterHeater:Mixed,       !- Equipment 1 Object Type
+    Ideal Service Hot Water Heater;  !- Equipment 1 Name
+
+  OutputControl:ReportingTolerances,
+    1.11,                    !- Tolerance for Time Heating Setpoint Not Met {deltaC}
+    1.11;                    !- Tolerance for Time Cooling Setpoint Not Met {deltaC}
+
+  Output:Table:SummaryReports,
+    AllSummary;              !- Report 1 Name
+
+  Site:Location,
+    Site 1,                  !- Name
+    0,                       !- Latitude {deg}
+    0,                       !- Longitude {deg}
+    0,                       !- Time Zone {hr}
+    0;                       !- Elevation {m}
+
+  Site:WaterMainsTemperature,
+    CorrelationFromWeatherFile;  !- Calculation Method
+
+  SizingPeriod:DesignDay,
+    Singapore Heating Design Day 99.6% Condns DB,  !- Name
+    1,                       !- Month
+    21,                      !- Day of Month
+    WinterDesignDay,         !- Day Type
+    23.6,                    !- Maximum Dry-Bulb Temperature {C}
+    0,                       !- Daily Dry-Bulb Temperature Range {deltaC}
+    DefaultMultipliers,      !- Dry-Bulb Temperature Range Modifier Type
+    ,                        !- Dry-Bulb Temperature Range Modifier Day Schedule Name
+    Wetbulb,                 !- Humidity Condition Type
+    23.6,                    !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+    ,                        !- Humidity Condition Day Schedule Name
+    ,                        !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
+    ,                        !- Enthalpy at Maximum Dry-Bulb {J/kg}
+    ,                        !- Daily Wet-Bulb Temperature Range {deltaC}
+    31000,                   !- Barometric Pressure {Pa}
+    1.8,                     !- Wind Speed {m/s}
+    359,                     !- Wind Direction {deg}
+    No,                      !- Rain Indicator
+    No,                      !- Snow Indicator
+    No,                      !- Daylight Saving Time Indicator
+    ASHRAEClearSky,          !- Solar Model Indicator
+    ,                        !- Beam Solar Day Schedule Name
+    ,                        !- Diffuse Solar Day Schedule Name
+    ,                        !- ASHRAE Clear Sky Optical Depth for Beam Irradiance (taub) {dimensionless}
+    ,                        !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance (taud) {dimensionless}
+    0,                       !- Sky Clearness
+    ,                        !- Maximum Number Warmup Days
+    FullResetAtBeginEnvironment;  !- Begin Environment Reset Mode
+
+  SetpointManager:Scheduled,
+    Setpoint Manager Scheduled 1,  !- Name
+    Temperature,             !- Control Variable
+    60C Hot Water,           !- Schedule Name
+    Node 7;                  !- Setpoint Node or NodeList Name
+
+  Output:Variable,*,AFN Zone Infiltration Sensible Heat Gain Energy,Hourly;
+
+  Output:Variable,*,Zone Electric Equipment Electricity Energy,Hourly;
+
+  Output:Variable,*,Zone Gas Equipment NaturalGas Energy,Hourly;
+
+  Output:Variable,*,Zone Ideal Loads Supply Air Total Cooling Energy,Hourly;
+
+  Output:Variable,*,Zone Ideal Loads Supply Air Total Heating Energy,Hourly;
+
+  Output:Variable,*,Zone Ideal Loads Zone Total Cooling Energy,Hourly;
+
+  Output:Variable,*,Zone Ideal Loads Zone Total Heating Energy,Hourly;
+
+  Output:Variable,*,Zone Infiltration Total Heat Gain Energy,Hourly;
+
+  Output:Variable,*,Zone Infiltration Total Heat Loss Energy,Hourly;
+
+  Output:Variable,*,Zone Lights Electricity Energy,Hourly;
+
+  Output:Variable,*,Zone Other Equipment Lost Heat Energy,Hourly;
+
+  Output:Variable,*,AFN Zone Infiltration Sensible Heat Loss Energy,Hourly;
+
+  Output:Variable,*,Zone Other Equipment Total Heating Energy,Hourly;
+
+  Output:Variable,*,Zone People Total Heating Energy,Hourly;
+
+  Output:Variable,*,Zone Ventilation Fan Electricity Energy,Hourly;
+
+  Output:Variable,*,Zone Ventilation Latent Heat Gain Energy,Hourly;
+
+  Output:Variable,*,Zone Ventilation Latent Heat Loss Energy,Hourly;
+
+  Output:Variable,*,Zone Ventilation Sensible Heat Gain Energy,Hourly;
+
+  Output:Variable,*,Zone Ventilation Sensible Heat Loss Energy,Hourly;
+
+  Output:Variable,*,Enclosure Windows Total Transmitted Solar Radiation Energy,Hourly;
+
+  Output:Variable,*,AFN Zone Ventilation Sensible Heat Gain Energy,Hourly;
+
+  Output:Variable,*,AFN Zone Ventilation Sensible Heat Loss Energy,Hourly;
+
+  Output:Variable,*,Enclosure Windows Total Transmitted Solar Radiation Energy,Hourly;
+
+  Output:Variable,*,Surface Inside Face Conduction Heat Transfer Energy,Hourly;
+
+  Output:Variable,*,Surface Window Heat Gain Energy,Hourly;
+
+  Output:Variable,*,Surface Window Heat Loss Energy,Hourly;
+
+  Output:Variable,*,Water Use Equipment Heating Energy,Hourly;
+
+  OutputControl:Table:Style,
+    HTML;                    !- Column Separator
+
+  Output:VariableDictionary,IDF,Unsorted;
+
+  Output:SQLite,
+    SimpleAndTabular;        !- Option Type
+
+  LifeCycleCost:NonrecurringCost,
+    Default Cost,            !- Name
+    Construction,            !- Category
+    0,                       !- Cost
+    ServicePeriod;           !- Start of Costs
+
