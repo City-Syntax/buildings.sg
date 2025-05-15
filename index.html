@@ -2023,6 +2023,7 @@
     </div>
 
     <div id="visitorcounter">Total Site Visitors: loading…</div>
+
     <script>
         fetch('https://api.countapi.xyz/hit/buildingssg/visitorcount')
             .then(res => res.json())
@@ -2031,7 +2032,8 @@
                     'Total Site Visitors: ' + data.value;
             })
             .catch(err => {
-                document.getElementById('visitorcounter').textContent = 'Total Site Visitors: N/A';
+                document.getElementById('visitorcounter').textContent =
+                    'Total Site Visitors: N/A';
                 console.error('Visitor count failed:', err);
             });
     </script>
