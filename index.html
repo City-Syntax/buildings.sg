@@ -2028,6 +2028,7 @@
         fetch('https://api.countapi.xyz/hit/buildingssg/visitorcount')
             .then(res => res.json())
             .then(data => {
+                console.log("Number of visitors", data.value);
                 document.getElementById('visitorcounter').textContent =
                     'Total Site Visitors: ' + data.value;
             })
