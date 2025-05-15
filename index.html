@@ -2024,13 +2024,11 @@
 
     <div id="visitorcounter">Total Site Visitors: loading…</div>
     <script>
-        const NAMESPACE = 'buildingssg';
-        const KEY = 'visitorcount';
-    
-        fetch(`https://api.counterapi.dev/hit/${NAMESPACE}/${KEY}`)
+        fetch('https://api.countapi.xyz/hit/buildingssg/visitorcount')
             .then(res => res.json())
             .then(data => {
-                document.getElementById('visitorcounter').textContent = 'Total Site Visitors: ' + data.value;
+                document.getElementById('visitorcounter').textContent =
+                    'Total Site Visitors: ' + data.value;
             })
             .catch(err => {
                 document.getElementById('visitorcounter').textContent = 'Total Site Visitors: N/A';
