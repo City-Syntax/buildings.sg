@@ -2021,23 +2021,26 @@
         <input type="checkbox" id="buildingTypeToggle" class="toggle-mlswitch" checked>
         <label for="buildingTypeToggle" class="mlswitch-label"></label>
     </div>
-
+    
     <div id="visitorcounter">Total Site Visitors: loading…</div>
-
     <script>
-        fetch('https://api.countapi.xyz/hit/buildingssg/visitorcount')
+        const NAMESPACE = 'buildingssg';
+        const KEY = 'visitorcount';
+    
+        fetch(`https://api.counterapi.dev/hit/${NAMESPACE}/${KEY}`)
             .then(res => res.json())
             .then(data => {
-                console.log("Number of visitors", data.value);
+                console.log("Visitor count:", data.value);
                 document.getElementById('visitorcounter').textContent =
-                    'Total Site Visitors: ' + data.value;
+                  'Total Site Visitors: ' + data.value;
             })
-            .catch(err => {
-                document.getElementById('visitorcounter').textContent =
-                    'Total Site Visitors: N/A';
-                console.error('Visitor count failed:', err);
+              .catch(err => {
+                  document.getElementById('visitorcounter').textContent =
+                      'Total Site Visitors: N/A';
+                  console.error('Visitor count failed:', err);
             });
     </script>
+
 
     <!--js-->
     <script src="popup.js"></script>
