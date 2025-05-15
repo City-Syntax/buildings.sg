@@ -2026,7 +2026,7 @@
     <script>
         const NAMESPACE = 'buildings.sg';
         const KEY = 'visitor-count';
-
+    
         fetch(`https://api.counterapi.dev/hit/${NAMESPACE}/${KEY}`)
             .then(res => res.json())
             .then(data => {
