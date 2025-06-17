@@ -1,6 +1,6 @@
 # Buildings.sg
 
-Buildings.sg is a web-based viewer for building carbon information in Singapore. The project combines spatial data, operational and embodied carbon calculations and a set of EnergyPlus templates for typical building archetypes. It can be used to explore carbon performance across the island or to download templates for your own simulations.
+Buildings.sg is an open platform for urban building energy modeling (UBEM) and carbon emissions mapping in Singapore. The project combines spatial data, operational and embodied carbon simulations and a full set of EnergyPlus templates for typical building archetypes in Singapore. It can be used to simulate energy and carbon performance across the city, or you may also download the templates for further customization (for your own simulations).
 
 ## Project structure
 
@@ -13,7 +13,7 @@ Buildings.sg is a web-based viewer for building carbon information in Singapore.
 
 ## Running locally
 
-Open `index.html` in a modern browser. Some browsers restrict local file access, so serving the project with a simple HTTP server can help:
+Download entire code base and popen `index.html` in a modern browser. Some browsers restrict local file access, so serving the project with a simple HTTP server can help:
 
 ```bash
 python3 -m http.server
@@ -43,9 +43,6 @@ The `download` directory provides `.idf` templates for use with EnergyPlus. Each
 
 A ZIP archive `AllArhcetypes_SGP_2025_V5.zip` collects all templates. These files include typical schedules, constructions and system assumptions reflecting Singapore's 2025 building stock. You can modify them or plug them directly into EnergyPlus for your own analyses.
 
-The `sg_buildings_v3.zip` archive contains the GeoJSON building geometry used by the viewer.
+The `sg_buildings_v3.zip` archive contains the GeoJSON building geometries (building footprints + heights and other parameters) for Singapore.
 
-## License
-
-No explicit license file is provided. Assume all rights reserved unless specified otherwise.
 
