@@ -104,7 +104,7 @@ These models can be imported into Rhino3D and Grasshopper for scenario customiza
 
 ## 💡 Example Usage
 
-<img alt="image" src="https://github.com/user-attachments/assets/ce9bcc82-e30f-4404-a4d5-7f28b6783fa4" />
+<img width="600px" alt="image" src="https://github.com/user-attachments/assets/ce9bcc82-e30f-4404-a4d5-7f28b6783fa4" />
 
 Here is an example workflow demonstrating how to use Buildings.sg for urban energy and carbon analysis:
 
