@@ -2,7 +2,7 @@
 
 ![image](https://github.com/user-attachments/assets/f4796fe9-130e-4a80-882a-be38e5d13901)
 
-[Buildings.sg](https://buildings.sg) is an open, interactive platform developed by the [City Syntax Lab](https://www.citysyntax.io/) at the National University of Singapore (NUS) for urban building energy modeling (UBEM) and carbon emissions mapping in Singapore.
+[Buildings.sg](https://buildings.sg) is an open, interactive platform developed by the [City Syntax Lab](https://www.citysyntax.io/) at the National University of Singapore (NUS) for **Urban Building Energy Modeling (UBEM)** and carbon emissions mapping in Singapore.
 
 The platform combines spatial data with operational and embodied carbon simulations, supported by a full set of EnergyPlus templates for typical building archetypes. It allows users to visualize and analyze building-level carbon footprints to identify opportunities for reduction.
 
