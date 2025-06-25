@@ -18,7 +18,7 @@ The platform combines spatial data with operational and embodied carbon simulati
 - **mapbox copy.js, panel.js, popup.js** – Core JavaScript files managing the frontend behavior:
   - `mapbox copy.js`: initializes and styles the interactive map using Mapbox GL JS.
   - `panel.js`: handles user interface panels, controls, and filtering options.
-  - `popup.js`: creates and displays informational popups when map features are clicked.
+  - `popup.js`: creates and displays informational popups `Data` and `About`.
  
 ## 🚀 Main Features
 
