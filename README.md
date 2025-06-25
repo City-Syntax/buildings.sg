@@ -40,18 +40,26 @@ python3 -m http.server
 
 Then navigate to `http://localhost:8000` in your browser.
 
-## 🗃️ Data Directory
+## 🧱 Data Backbone
 
-The `data` directory includes example **GeoJSON** files containing building-level carbon emissions results. Additional field descriptions are provided in the spreadsheets under `data/Information`.
+[Buildings.sg](https://buildings.sg) is powered by an integrated building-level dataset covering the entire territory of Singapore. The dataset combines multiple sources:
 
-The `sg_buildings_v3.zip` archive contains the full dataset for Singapore, including building footprints, archetypes, and associated simulation outputs. Each feature corresponds to a single building with its geometry and detailed attributes. A sample entry is shown below:
+- **OpenStreetMap (OSM)** provides the core building footprints and heights that serve as the spatial foundation for all other data.
+- **Housing and Development Board (HDB)** and **Building and Construction Authority (BCA)** contribute public housing details and Green Mark certification data.
+- **Machine learning–predicted building archetypes** fill gaps where archetypes are missing from referenced sources.
+- **Simulated embodied and operational carbon** metrics are modeled and attributed per building.
+
+These datasets are merged into a unified GeoJSON format and visualized using **Mapbox GL JS**. Color-coded map layers primarily represent building archetype classifications, embodied and operational carbon metrics, along with selected government data such as EUI and Green Mark ratings.
+
+The full dataset is available in `sg_buildings_v3.zip`. You can find it directly in the `/data` folder or download it via the Buildings.sg platform under **Data → Download → Download GEOJSON Files**.
+
+Each feature corresponds to a single building with its geometry and detailed attributes. A sample entry is shown below:
 
 ```json
 {
   "type": "Feature",
   "properties": {
     "id": "relation/1569296",
-    "addr_housename": "None",
     "addr_housenumber": "30",
     "addr_street": "Jalan Lempeng",
     "addr_postcode": "128806",
@@ -60,31 +68,16 @@ The `sg_buildings_v3.zip` archive contains the full dataset for Singapore, inclu
     "height": 22.4,
     "building_footprint": 7361.03,
     "gross_floor_area": 51527.21,
-    "built_year": null,
-    "data_source": null,
+    ...
     "greenmark_rating": null,
-    "greenmark_year": null,
-    "greenmark_version": null,
-    "aircon_area": null,
-    "occupancy": null,
-    "eui2020": null,
-    "eui2021": null,
-    "eui2022": null,
-    "eui2023": null,
-    "total_dwelling_units": null,
+    ...
     "embodied_carbon": 31229202.89,
-    "energy_cooling": 0.0,
-    "energy_lighting": 117318.18,
-    "energy_equipment": 61667.25,
-    "energy_water": 17834.08,
     "energy_total": 196819.51,
-    "aircon_system": null,
-    "gui2023": null,
-    "ml_probability": null
+    ...
   },
   "geometry": {
     "type": "Polygon",
-    "coordinates": [[[103.7611972, 1.3190274], [103.7611972, 1.3189724], [103.7612562, 1.3189322], ..., [103.7609566, 1.3193733]]]
+    "coordinates": [...]
   }
 }
 ```
@@ -111,7 +104,7 @@ These models can be imported into Rhino3D and Grasshopper for scenario customiza
 
 ## 💡 Example Usage
 
-<img width="483" alt="image" src="https://github.com/user-attachments/assets/ce9bcc82-e30f-4404-a4d5-7f28b6783fa4" />
+<img alt="image" src="https://github.com/user-attachments/assets/ce9bcc82-e30f-4404-a4d5-7f28b6783fa4" />
 
 Here is an example workflow demonstrating how to use Buildings.sg for urban energy and carbon analysis:
 
