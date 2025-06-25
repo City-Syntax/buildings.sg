@@ -100,7 +100,7 @@ The `Data/Download` directory provides `.idf` templates for use with EnergyPlus.
 
 A ZIP archive `AllArhcetypes_SGP_2025_V5.zip` collects all templates. These files include typical schedules, constructions and system assumptions reflecting Singapore's 2025 building stock. You can modify them or plug them directly into EnergyPlus for your own analyses.
 
-These models can be imported into Rhino3D and Grasshopper for scenario customization using **Ladybug Tools**. The **Honeybee** and **Honeybee-Energy** plugins are used to assign constructions, internal loads, and HVAC systems based on the provided templates, while **Ladybug** handles climate integration and visualization. Initial calibration can be performed using Singapore’s EPW climate data (2001–2020), before proceeding to batch simulations or archetype-level performance analyses.
+These models can be imported into **Rhino3D** and **Grasshopper** for scenario customization using **Ladybug Tools**. The **Honeybee** and **Honeybee-Energy** plugins are used to assign constructions, internal loads, and HVAC systems based on the provided templates, while **Ladybug** handles climate integration and visualization. Initial calibration can be performed using Singapore’s EPW climate data (2001–2020), before proceeding to batch simulations or archetype-level performance analyses.
 
 ## 💡 Example Usage
 
