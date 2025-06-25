@@ -132,3 +132,6 @@ Here is an example workflow demonstrating how to use Buildings.sg for urban ener
 
 8. **Visualize and interpret results**  
    Use Buildings.sg to analyze and visualize the spatial distribution of energy performance and carbon footprints, enabling data-driven insights and decision-making.
+
+Whether you are a policymaker, urban planner, or researcher, Buildings.sg provides an accessible, data-driven platform to analyze building energy use, quantify carbon emissions, evaluate reduction scenarios, and support sustainable urban development decisions.
+
