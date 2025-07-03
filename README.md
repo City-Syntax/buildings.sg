@@ -4,9 +4,9 @@
 
 [Buildings.sg](https://buildings.sg) is an open, interactive platform developed by the [City Syntax Lab](https://www.citysyntax.io/) at the National University of Singapore (NUS) for **Urban Building Energy Modeling (UBEM)** and carbon emissions mapping in Singapore.
 
-The platform combines spatial data with operational and embodied carbon simulations, supported by a full set of EnergyPlus templates for typical building archetypes. It allows users to visualize and analyze building-level carbon footprints to identify opportunities for reduction.
+The platform combines spatial data with operational and embodied carbon simulations, supported by a full set of EnergyPlus templates for typical building archetypes in Singapore. Users can freely download and customize the (open-source) EnergyPlus templates for their simulations. The platform also enables users to visualize and analyze building-level carbon footprints, identifying opportunities for reduction.
 
-[Buildings.sg](https://buildings.sg) supports Singapore’s Green Plan 2030 by promoting energy-efficient designs, sustainable materials, and low-carbon construction practices. You can also download simulation templates for further customization.
+[Buildings.sg](https://buildings.sg) supports Singapore’s Green Plan 2030 by promoting energy-efficient designs, sustainable materials, and low-carbon construction practices. The platform is designed to be scalable and adaptable, making it deployable in any city or municipality with available building and climate data.
 
 ## 📂 Project Structure
 
@@ -28,11 +28,12 @@ The platform offers a range of interactive tools designed to support urban-scale
 - Filter by building archetype to explore detailed simulation methods, parameters, and results.  
 - Click on individual buildings to view energy, carbon emissions, and key metrics.  
 - Toggle displays for machine learning–derived parameters to explore various scenarios.  
-- Download GeoJSON map data and EnergyPlus IDF templates for selected archetypes for further simulation or analysis.  
+- Download GeoJSON map data and EnergyPlus IDF templates for the selected archetypes to facilitate further simulation or analysis.
+- Built with minimal dependencies and without reliance on complex frameworks, the platform is easy to edit, maintain, and scale for use in other regions.
 
 ## 🛠️ Running Locally
 
-Download entire code base and popen `index.html` in a modern browser. Some browsers restrict local file access, so serving the project with a simple HTTP server can help:
+Download the entire code base and open `index.html` in a modern browser. Some browsers restrict local file access, so serving the project with a simple HTTP server can help:
 
 ```bash
 python3 -m http.server
@@ -42,7 +43,7 @@ Then navigate to `http://localhost:8000` in your browser.
 
 ## 🧱 Data Backbone
 
-[Buildings.sg](https://buildings.sg) is powered by an integrated building-level dataset covering the entire territory of Singapore. The dataset combines multiple sources:
+[Buildings.sg](https://buildings.sg) is powered by an integrated urban-scale to building-level dataset covering the entire territory of Singapore. The dataset combines multiple sources:
 
 - **OpenStreetMap (OSM)** provides the core building footprints and heights that serve as the spatial foundation for all other data.
 - **Housing and Development Board (HDB)** and **Building and Construction Authority (BCA)** contribute public housing details and Green Mark certification data.
@@ -84,7 +85,7 @@ Each feature corresponds to a single building with its geometry and detailed att
 
 ## 🧾 EnergyPlus Templates
 
-The `Data/Download` directory provides `.idf` templates for use with EnergyPlus. Each file represents a common building archetype in Singapore:
+The `Data/Download` directory provides `.idf` templates for use with EnergyPlus. Each file represents a common building archetype in Singapore, with the parameter set sourced and contextualized for the relevant buildings. The archetype templates are either calibrated or validated against benchmark data published by the authorities:
 
 ```
 01_HDB_SGP_2025_V5.idf           12_NonIHL_SGP_2025_V5.idf
@@ -98,9 +99,9 @@ The `Data/Download` directory provides `.idf` templates for use with EnergyPlus.
 09_Polyclinic_SGP_2025_V5.idf    20_Supermarket_SGP_2025_V5.idf
 ```
 
-A ZIP archive `AllArhcetypes_SGP_2025_V5.zip` collects all templates. These files include typical schedules, constructions and system assumptions reflecting Singapore's 2025 building stock. You can modify them or plug them directly into EnergyPlus for your own analyses.
+A ZIP archive `AllArhcetypes_SGP_2025_V5.zip` collects all templates. These files include typical schedules, constructions, and system assumptions reflecting Singapore's 2025 building stock. You can modify them or plug them directly into EnergyPlus for your own analyses.
 
-These models can be imported into **Rhino3D** and **Grasshopper** for scenario customization using **Ladybug Tools**. The **Honeybee** and **Honeybee-Energy** plugins are used to assign constructions, internal loads, and HVAC systems based on the provided templates, while **Ladybug** handles climate integration and visualization. Initial calibration can be performed using Singapore’s EPW climate data (2001–2020), before proceeding to batch simulations or archetype-level performance analyses.
+These models can be imported into Rhino3D and Grasshopper for scenario customization using tools like Ladybug Tools, which includes Honeybee and Honeybee-Energy for assigning constructions, internal loads, and HVAC systems, along with Ladybug for climate integration and visualization. Alternatively, the provided EnergyPlus templates can be used directly in any software that supports the EnergyPlus engine, such as ClimateStudio, DesignBuilder, or custom simulation workflows. Initial calibration can be performed using Singapore’s EPW climate data (2001–2020), before proceeding to batch simulations or archetype-level performance analyses.
 
 ## 💡 Example Usage
 
@@ -116,7 +117,7 @@ Here is an example workflow demonstrating how to use Buildings.sg for urban ener
    Export the selected area as a Rhino 3D model from Cadmapper. Perform minor adjustments as needed.
 
 3. **Complete missing attributes**  
-   Inspect individual buildings directly on Buildings.sg to retrieve missing attributes like building levels or height.
+   Inspect individual buildings directly on Buildings.sg to retrieve missing attributes, such as building levels or height.
 
 4. **Download simulation templates**  
    Download the EnergyPlus IDF templates corresponding to the building archetypes in your study area.
@@ -133,5 +134,5 @@ Here is an example workflow demonstrating how to use Buildings.sg for urban ener
 8. **Visualize and interpret results**  
    Use Buildings.sg to analyze and visualize the spatial distribution of energy performance and carbon footprints, enabling data-driven insights and decision-making.
 
-Whether you are a policymaker, urban planner, or researcher, Buildings.sg provides an accessible, data-driven platform to analyze building energy use, quantify carbon emissions, evaluate reduction scenarios, and support sustainable urban development decisions.
+Whether you are a policymaker, urban planner, or researcher, Buildings.sg provides an accessible, data-driven platform for analyzing building energy use, quantifying carbon emissions, evaluating reduction scenarios, and supporting sustainable urban development decisions.
 
