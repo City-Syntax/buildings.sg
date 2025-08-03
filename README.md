@@ -15,8 +15,8 @@ The platform combines spatial data with operational and embodied carbon simulati
 - **download/** – Provides EnergyPlus IDF templates, DesignBuilder files and map data files for users to download and use externally.
 - **image/** – Holds images illustrating different building archetypes, used throughout the interface for better visualization.
 - **logo/** – Includes icons and branding graphics displayed on the site.
-- **mapbox copy.js, panel.js, popup.js** – Core JavaScript files managing the frontend behavior:
-  - `mapbox copy.js`: initializes and styles the interactive map using Mapbox GL JS.
+- **mapbox.js, panel.js, popup.js** – Core JavaScript files managing the frontend behavior:
+  - `mapbox.js`: initializes and styles the interactive map using Mapbox GL JS.
   - `panel.js`: handles user interface panels, controls, and filtering options.
   - `popup.js`: creates and displays informational popups `Data` and `About`.
  
