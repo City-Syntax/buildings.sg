@@ -48,6 +48,7 @@ Then navigate to `http://localhost:8000` in your browser.
 
 - **OpenStreetMap (OSM)** provides the core building footprints and heights that serve as the spatial foundation for all other data.
 - **Housing and Development Board (HDB)** and **Building and Construction Authority (BCA)** contribute public housing details and Green Mark certification data.
+- **Urban Redevelopment Authority (URA)** provides Master Plan 2019 land‑use zoning data for interactive exploration of permitted uses and planning annotations.
 - **Machine learning–predicted building archetypes** fill gaps where archetypes are missing from referenced sources.
 - **Simulated embodied and operational carbon** metrics are modeled and attributed per building.
 
