@@ -839,7 +839,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "B1": [343.445, 229.278, 25.722, 82.306, 6.139],
             "B2": [444.499, 227.444, 25.722, 185.194, 6.139],
             "Data centre": [1996.111, 1134.694, 26.056, 833.611, 1.750],
-            "Civic, community & cultural inst.": [163.445, 116.584, 22.583, 18.056, 6.222]
+            "Civic, community & cultural inst.": [163.445, 116.584, 22.583, 18.056, 6.222],
             "Sports & recreation": [197.083, 145.750, 26.000, 13.000, 13.333],
             "Restaurant": [336.556, 248.583, 27.639, 23.028, 37.306],
             "Hawker centre": [290.416, 107.833, 23.889, 119.500, 39.194],
@@ -1237,3 +1237,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });    
 */
 });
+
