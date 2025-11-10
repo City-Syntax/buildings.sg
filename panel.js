@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
 
         resultPanel.scrollBy({
-            top: event.deltaY, // 垂直滚动
-            behavior: 'smooth' // 平滑滚动
+            top: event.deltaY,
+            behavior: 'smooth'
         });
     });
 
@@ -1237,5 +1237,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });    
 */
 });
+
 
 
