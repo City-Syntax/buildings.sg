@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         async function loadExcel() {
             try {
-                const response = await fetch("data/building embodied carbon simulation details.xlsx");
+                const response = await fetch("data/embodied carbon simulation details.xlsx");
                 if (!response.ok) {
                     return;
                 }
@@ -1237,4 +1237,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });    
 */
 });
+
 
