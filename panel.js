@@ -666,7 +666,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Sports": [145.750, 26.000, 13.000, 13.333],
             "Restaurant": [248.583, 27.639, 23.028, 37.306],
             "Hawker centre": [107.833, 23.889, 119.500, 39.194],
-            "Supermarket": [268.150, 48.830, 85.972, 18.083]
+            "Supermarket": [843.417, 74.389, 185.972, 18.083]
         };
                 
         const defaultGray = '#D3D3D3';
@@ -843,7 +843,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Sports & recreation": [197.083, 145.750, 26.000, 13.000, 13.333],
             "Restaurant": [336.556, 248.583, 27.639, 23.028, 37.306],
             "Hawker centre": [290.416, 107.833, 23.889, 119.500, 39.194],
-            "Supermarket": [420.035, 268.150, 48.830, 85.972, 18.083]            
+            "Supermarket": [1121.861, 843.417, 74.389, 185.972, 18.083]            
         };
 
 
@@ -1237,6 +1237,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });    
 */
 });
+
 
 
 
