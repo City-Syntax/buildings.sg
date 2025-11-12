@@ -536,9 +536,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Sports", "Restaurant", "Hawker centre", "Supermarket"
         ];
 
-        subValues = [646.3, 527.1, 572.2, 848.1, 848.1, 527.4, 604.5, 519.97, 559.1,
-            585.6, 652.9, 600, 546.3, 594.9, 556.4, 637.4, 700, 523.6,
-            561.9, 620, 580, 550];
+        subValues = [629.58, 519.23, 560.87, 536.14, 816.74, 508.14, 587.08, 499.84, 538.88, 560.51, 632.44, 0.00, 535.59, 586.33, 544.15, 622.45, 0.00, 516.81, 547.48, 0.00, 0.00, 0.00];
 
         subChart = echarts.init(document.getElementById('carbonSubChart'));
 
@@ -1237,6 +1235,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });    
 */
 });
+
 
 
 
