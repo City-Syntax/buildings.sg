@@ -1001,7 +1001,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         name: 'Other dwellings',
                         itemStyle: { color: "#9b59b6" },
                         children: [
-                            { name: 'Shophouse', value: 6825, itemStyle: { color: "#9b59b6" }, label: { show: false } },
+                            { name: 'Shophouse', value: 6825, itemStyle: { color: "#9b59b6" } },
                             { name: 'Hotel', value: 807, itemStyle: { color: "#9b59b6" }, label: { show: false } }
                         ], label: { show: false }
                     },
@@ -1029,8 +1029,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         itemStyle: { color: "#e67e22" },
                         children: [
                             { name: 'IHL', value: 1122, itemStyle: { color: "#e67e22" }, label: { show: false } },
-                            { name: 'Non-IHL', value: 5487, itemStyle: { color: "#e67e22" }, label: { show: false } }
-                        ], label: { show: false }
+                            { name: 'Non-IHL', value: 5487, itemStyle: { color: "#e67e22" } }
+                        ]
                     },
                     {
                         name: 'Industrial',
@@ -1045,12 +1045,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         itemStyle: { color: "#95a5a6" },
                         children: [
                             { name: 'Data centre', value: 17, itemStyle: { color: "#95a5a6" }, label: { show: false } },
-                            { name: 'Community inst.', value: 5085, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Community inst.', value: 5085, itemStyle: { color: "#95a5a6" } },
                             { name: 'Sports', value: 1383, itemStyle: { color: "#95a5a6" }, label: { show: false } },
                             { name: 'Restaurant', value: 78, itemStyle: { color: "#95a5a6" }, label: { show: false } },
                             { name: 'Hawker centre', value: 107, itemStyle: { color: "#95a5a6" }, label: { show: false } },
                             { name: 'Supermarket', value: 11, itemStyle: { color: "#95a5a6" }, label: { show: false } }
-                        ], label: { show: false }
+                        ]
                     }],
                 label: {
                     rotate: 'radial',
@@ -1125,7 +1125,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         name: 'Healthcare',
                         itemStyle: { color: "#f1c40f" },
                         children: [
-                            { name: 'Hospital', value: 173.0, itemStyle: { color: "#f1c40f" }, label: { show: false } },
+                            { name: 'Hospital', value: 173.0, itemStyle: { color: "#f1c40f" } },
                             { name: 'Clinic', value: 15.9, itemStyle: { color: "#f1c40f" }, label: { show: false } },
                             { name: 'Nursing home', value: 32.0, itemStyle: { color: "#f1c40f" }, label: { show: false } }
                         ], label: { show: false }
@@ -1134,7 +1134,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         name: 'Educational inst.',
                         itemStyle: { color: "#e67e22" },
                         children: [
-                            { name: 'IHL', value: 195.7, itemStyle: { color: "#e67e22" }, label: { show: false } },
+                            { name: 'IHL', value: 195.7, itemStyle: { color: "#e67e22" } },
                             { name: 'Non-IHL', value: 672.0, itemStyle: { color: "#e67e22" } }
                         ]
                     },
@@ -1152,7 +1152,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         children: [
                             { name: 'Data centre', value: 8.6, itemStyle: { color: "#95a5a6" }, label: { show: false } },
                             { name: 'Community inst.', value: 443.9, itemStyle: { color: "#95a5a6" } },
-                            { name: 'Sports', value: 175.5, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Sports', value: 175.5, itemStyle: { color: "#95a5a6" } },
                             { name: 'Restaurant', value: 4.4, itemStyle: { color: "#95a5a6" }, label: { show: false } },
                             { name: 'Hawker centre', value: 15.1, itemStyle: { color: "#95a5a6" }, label: { show: false } },
                             { name: 'Supermarket', value: 3.8, itemStyle: { color: "#95a5a6" }, label: { show: false } }
@@ -1237,6 +1237,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });    
 */
 });
+
 
 
 
