@@ -985,71 +985,71 @@ document.addEventListener("DOMContentLoaded", function () {
                         name: 'Public housing',
                         itemStyle: { color: "#1abc9c" },
                         children: [
-                            { name: 'HDB (PPVC)', value: 205, itemStyle: { color: "#1abc9c" }, label: { show: false } },
-                            { name: 'HDB (Non-PPVC)', value: 11205, itemStyle: { color: "#1abc9c" } }
+                            { name: 'HDB (PPVC)', value: 0, itemStyle: { color: "#1abc9c" }, label: { show: false } },
+                            { name: 'HDB (Non-PPVC)', value: 12261, itemStyle: { color: "#1abc9c" } }
                         ]
                     },
                     {
                         name: 'Private housing',
                         itemStyle: { color: "#57d798" },
                         children: [
-                            { name: 'Landed property', value: 18675, itemStyle: { color: "#2ecc71" } },
-                            { name: 'Private apt.', value: 3508, itemStyle: { color: "#3498db" } }
+                            { name: 'Landed property', value: 56154, itemStyle: { color: "#2ecc71" } },
+                            { name: 'Private apt.', value: 9215, itemStyle: { color: "#3498db" } }
                         ]
                     },
                     {
                         name: 'Other dwellings',
                         itemStyle: { color: "#9b59b6" },
                         children: [
-                            { name: 'Shophouse', value: 6, itemStyle: { color: "#9b59b6" }, label: { show: false } },
-                            { name: 'Hotel', value: 193, itemStyle: { color: "#9b59b6" }, label: { show: false } }
+                            { name: 'Shophouse', value: 6825, itemStyle: { color: "#9b59b6" }, label: { show: false } },
+                            { name: 'Hotel', value: 807, itemStyle: { color: "#9b59b6" }, label: { show: false } }
                         ], label: { show: false }
                     },
                     {
                         name: 'Commercial',
                         itemStyle: { color: "#34495e" },
                         children: [
-                            { name: 'Retail', value: 2552, itemStyle: { color: "#34495e" } },
-                            { name: 'Mixed development', value: 207, itemStyle: { color: "#34495e" }, label: { show: false } },
-                            { name: 'Office', value: 412, itemStyle: { color: "#34495e" }, label: { show: false } },
-                            { name: 'Business park', value: 3, itemStyle: { color: "#34495e" }, label: { show: false } }
+                            { name: 'Retail', value: 4322, itemStyle: { color: "#34495e" } },
+                            { name: 'Mixed development', value: 391, itemStyle: { color: "#34495e" }, label: { show: false } },
+                            { name: 'Office', value: 1083, itemStyle: { color: "#34495e" }, label: { show: false } },
+                            { name: 'Business park', value: 225, itemStyle: { color: "#34495e" }, label: { show: false } }
                         ]
                     },
                     {
                         name: 'Healthcare',
                         itemStyle: { color: "#f1c40f" },
                         children: [
-                            { name: 'Hospital', value: 88, itemStyle: { color: "#f1c40f" }, label: { show: false }, label: { show: false } },
-                            { name: 'Clinic', value: 29, itemStyle: { color: "#f1c40f" }, label: { show: false }, label: { show: false } },
-                            { name: 'Nursing home', value: 48, itemStyle: { color: "#f1c40f" }, label: { show: false }, label: { show: false } }
+                            { name: 'Hospital', value: 348, itemStyle: { color: "#f1c40f" }, label: { show: false }, label: { show: false } },
+                            { name: 'Clinic', value: 86, itemStyle: { color: "#f1c40f" }, label: { show: false }, label: { show: false } },
+                            { name: 'Nursing home', value: 161, itemStyle: { color: "#f1c40f" }, label: { show: false }, label: { show: false } }
                         ], label: { show: false }
                     },
                     {
                         name: 'Educational inst.',
                         itemStyle: { color: "#e67e22" },
                         children: [
-                            { name: 'IHL', value: 303, itemStyle: { color: "#e67e22" }, label: { show: false } },
-                            { name: 'Non-IHL', value: 541, itemStyle: { color: "#e67e22" }, label: { show: false } }
+                            { name: 'IHL', value: 1122, itemStyle: { color: "#e67e22" }, label: { show: false } },
+                            { name: 'Non-IHL', value: 5487, itemStyle: { color: "#e67e22" }, label: { show: false } }
                         ], label: { show: false }
                     },
                     {
                         name: 'Industrial',
                         itemStyle: { color: "#e74c3c" },
                         children: [
-                            { name: 'B1', value: 1033, itemStyle: { color: "#e74c3c" } },
-                            { name: 'B2', value: 1700, itemStyle: { color: "#e74c3c" } }
+                            { name: 'B1', value: 5014, itemStyle: { color: "#e74c3c" } },
+                            { name: 'B2', value: 8600, itemStyle: { color: "#e74c3c" } }
                         ]
                     },
                     {
                         name: 'Others',
                         itemStyle: { color: "#95a5a6" },
                         children: [
-                            { name: 'Data centre', value: 6, itemStyle: { color: "#95a5a6" }, label: { show: false } },
-                            { name: 'Community inst.', value: 697, itemStyle: { color: "#95a5a6" }, label: { show: false } },
-                            { name: 'Sports', value: 116, itemStyle: { color: "#95a5a6" }, label: { show: false } },
-                            { name: 'Restaurant', value: 25, itemStyle: { color: "#95a5a6" }, label: { show: false } },
-                            { name: 'Hawker centre', value: 30, itemStyle: { color: "#95a5a6" }, label: { show: false } },
-                            { name: 'Supermarket', value: 8, itemStyle: { color: "#95a5a6" }, label: { show: false } }
+                            { name: 'Data centre', value: 17, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Community inst.', value: 5085, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Sports', value: 1383, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Restaurant', value: 78, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Hawker centre', value: 107, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Supermarket', value: 11, itemStyle: { color: "#95a5a6" }, label: { show: false } }
                         ], label: { show: false }
                     }],
                 label: {
@@ -1091,71 +1091,71 @@ document.addEventListener("DOMContentLoaded", function () {
                         name: 'Public housing',
                         itemStyle: { color: "#1abc9c" },
                         children: [
-                            { name: 'HDB (PPVC)', value: 10.98, itemStyle: { color: "#1abc9c" }, label: { show: false } },
-                            { name: 'HDB (Non-PPVC)', value: 1710.98, itemStyle: { color: "#1abc9c" } }
+                            { name: 'HDB (PPVC)', value: 0, itemStyle: { color: "#1abc9c" }, label: { show: false } },
+                            { name: 'HDB (Non-PPVC)', value: 1574.3, itemStyle: { color: "#1abc9c" } }
                         ]
                     },
                     {
                         name: 'Private housing',
                         itemStyle: { color: "#57d798" },
                         children: [
-                            { name: 'Landed property', value: 1398.92, itemStyle: { color: "#2ecc71" } },
-                            { name: 'Private apt.', value: 634.64, itemStyle: { color: "#3498db" } }
+                            { name: 'Landed property', value: 1053.1, itemStyle: { color: "#2ecc71" } },
+                            { name: 'Private apt.', value: 589.1, itemStyle: { color: "#3498db" } }
                         ]
                     },
                     {
                         name: 'Other dwellings',
                         itemStyle: { color: "#9b59b6" },
                         children: [
-                            { name: 'Shophouse', value: 0.11, itemStyle: { color: "#9b59b6" }, label: { show: false } },
-                            { name: 'Hotel', value: 42.63, itemStyle: { color: "#9b59b6" }, label: { show: false } }
+                            { name: 'Shophouse', value: 91.8, itemStyle: { color: "#9b59b6" }, label: { show: false } },
+                            { name: 'Hotel', value: 81.1, itemStyle: { color: "#9b59b6" }, label: { show: false } }
                         ], label: { show: false }
                     },
                     {
                         name: 'Commercial',
                         itemStyle: { color: "#34495e" },
                         children: [
-                            { name: 'Retail', value: 579.96, itemStyle: { color: "#34495e" } },
-                            { name: 'Mixed development', value: 125.38, itemStyle: { color: "#34495e" }, label: { show: false } },
-                            { name: 'Office', value: 222.94, itemStyle: { color: "#34495e" } },
-                            { name: 'Business park', value: 2.30, itemStyle: { color: "#34495e" }, label: { show: false } }
+                            { name: 'Retail', value: 423.8, itemStyle: { color: "#34495e" } },
+                            { name: 'Mixed development', value: 212.1, itemStyle: { color: "#34495e" }, label: { show: false } },
+                            { name: 'Office', value: 284.7, itemStyle: { color: "#34495e" } },
+                            { name: 'Business park', value: 62.5, itemStyle: { color: "#34495e" }, label: { show: false } }
                         ]
                     },
                     {
                         name: 'Healthcare',
                         itemStyle: { color: "#f1c40f" },
                         children: [
-                            { name: 'Hospital', value: 69.20, itemStyle: { color: "#f1c40f" }, label: { show: false } },
-                            { name: 'Clinic', value: 22.78, itemStyle: { color: "#f1c40f" }, label: { show: false } },
-                            { name: 'Nursing home', value: 11.92, itemStyle: { color: "#f1c40f" }, label: { show: false } }
+                            { name: 'Hospital', value: 173.0, itemStyle: { color: "#f1c40f" }, label: { show: false } },
+                            { name: 'Clinic', value: 15.9, itemStyle: { color: "#f1c40f" }, label: { show: false } },
+                            { name: 'Nursing home', value: 32.0, itemStyle: { color: "#f1c40f" }, label: { show: false } }
                         ], label: { show: false }
                     },
                     {
                         name: 'Educational inst.',
                         itemStyle: { color: "#e67e22" },
                         children: [
-                            { name: 'IHL', value: 104.34, itemStyle: { color: "#e67e22" }, label: { show: false } },
-                            { name: 'Non-IHL', value: 413.13, itemStyle: { color: "#e67e22" } }
+                            { name: 'IHL', value: 195.7, itemStyle: { color: "#e67e22" }, label: { show: false } },
+                            { name: 'Non-IHL', value: 672.0, itemStyle: { color: "#e67e22" } }
                         ]
                     },
                     {
                         name: 'Industrial',
                         itemStyle: { color: "#e74c3c" },
                         children: [
-                            { name: 'B1', value: 111.67, itemStyle: { color: "#e74c3c" } },
-                            { name: 'B2', value: 1999.99, itemStyle: { color: "#e74c3c" } }
+                            { name: 'B1', value: 806.1, itemStyle: { color: "#e74c3c" } },
+                            { name: 'B2', value: 1870.0, itemStyle: { color: "#e74c3c" } }
                         ]
                     },
                     {
                         name: 'Others',
                         itemStyle: { color: "#95a5a6" },
                         children: [
-                            { name: 'Data centre', value: 4.16, itemStyle: { color: "#95a5a6" }, label: { show: false } },
-                            { name: 'Community inst.', value: 252.72, itemStyle: { color: "#95a5a6" } },
-                            { name: 'Sports', value: 64.28, itemStyle: { color: "#95a5a6" }, label: { show: false } },
-                            { name: 'Restaurant', value: 1.09, itemStyle: { color: "#95a5a6" }, label: { show: false } },
-                            { name: 'Hawker centre', value: 7.28, itemStyle: { color: "#95a5a6" }, label: { show: false } },
-                            { name: 'Supermarket', value: 3.82, itemStyle: { color: "#95a5a6" }, label: { show: false } }
+                            { name: 'Data centre', value: 8.6, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Community inst.', value: 443.9, itemStyle: { color: "#95a5a6" } },
+                            { name: 'Sports', value: 175.5, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Restaurant', value: 4.4, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Hawker centre', value: 15.1, itemStyle: { color: "#95a5a6" }, label: { show: false } },
+                            { name: 'Supermarket', value: 3.8, itemStyle: { color: "#95a5a6" }, label: { show: false } }
                         ]
                     }],
                 label: {
@@ -1237,6 +1237,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });    
 */
 });
+
 
 
 
