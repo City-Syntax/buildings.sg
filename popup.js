@@ -1,4 +1,3 @@
-// 数据源：将不同的内容存储在一个对象中
 const contentData = {
     data: `
         <h2>Data Introduction</h2>
@@ -289,6 +288,14 @@ const contentData = {
         </div>
         <br>
         
+        <h2>Quick Start Guide</h2>
+        <a href="documentation.html">
+            <button style="padding: 10px 20px; font-size: 14px;">
+                View Documentation
+            </button>
+        </a>
+        <br>
+        
         <h2>With inputs from</h2>
         <p></p>
         <div style="text-align: center; margin-top: 20px; margin-bottom: 30px; display: flex; justify-content: center; gap: 50px;">
@@ -411,3 +418,4 @@ downloadItems.forEach(item => {
             });
     });
 });
+
