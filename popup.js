@@ -293,7 +293,7 @@ const contentData = {
             <a href="documentation.html" target="_blank">
             <button
                 style="
-                    width: 100px;
+                    width: 200px;
                     padding: 5px 10px;
                     margin-top: 5px;
                     text-align: center;
@@ -434,5 +434,6 @@ downloadItems.forEach(item => {
             });
     });
 });
+
 
 
