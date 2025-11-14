@@ -290,7 +290,23 @@ const contentData = {
         
         <h2>Quick Start Guide</h2>
         <a href="documentation.html">
-            <button style="padding: 10px 20px; font-size: 14px;">
+            <a href="documentation.html" target="_blank">
+            <button
+                style="
+                    width: 100px;
+                    padding: 5px 10px;
+                    margin-top: 5px;
+                    text-align: center;
+                    color: #fff;
+                    background-color: #333;
+                    border: 0;
+                    border-radius: 10px;
+                    font-family: 'Roboto Mono', Tahoma, Geneva, Verdana, sans-serif;
+                    font-size: 12px;
+                    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                    cursor: pointer;
+                "
+            >
                 View Documentation
             </button>
         </a>
@@ -418,4 +434,5 @@ downloadItems.forEach(item => {
             });
     });
 });
+
 
