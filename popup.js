@@ -291,24 +291,26 @@ const contentData = {
         <h2>Quick Start Guide</h2>
         <a href="documentation.html">
             <a href="documentation.html" target="_blank">
-            <button
-                style="
-                    width: 200px;
-                    padding: 5px 10px;
-                    margin-top: 5px;
-                    text-align: center;
-                    color: #fff;
-                    background-color: #333;
-                    border: 0;
-                    border-radius: 10px;
-                    font-family: 'Roboto Mono', Tahoma, Geneva, Verdana, sans-serif;
-                    font-size: 12px;
-                    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-                    cursor: pointer;
-                "
-            >
-                View Documentation
-            </button>
+            <div style="text-align: center;">
+                <button
+                    style="
+                        width: 180px;
+                        padding: 8px 16px;
+                        margin-top: 5px;
+                        text-align: center;
+                        color: #fff;
+                        background-color: #333;
+                        border: 0;
+                        border-radius: 10px;
+                        font-family: 'Roboto Mono', Tahoma, Geneva, Verdana, sans-serif;
+                        font-size: 12px;
+                        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                        cursor: pointer;
+                    "
+                >
+                    View Documentation
+                </button>
+            </div>
         </a>
         <br><br>
         
@@ -434,6 +436,7 @@ downloadItems.forEach(item => {
             });
     });
 });
+
 
 
 
