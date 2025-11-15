@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buildings.sg Documentation</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f7;
+      color: #333;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    code {
+      font-family: "Roboto Mono", Consolas, monospace;
+      background: #f2f2f2;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 90%;
+      white-space: nowrap;
+      display: inline;
+      border: 1px solid #e0e0e0;
+    }
+
+    .sidebar {
+      width: 360px;
+      backdrop-filter: blur(22px);
+      background: rgba(255, 255, 255, 0.72);
+      border-right: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 44px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+
+    .search-box input {
+      width: 90%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      font-size: 15px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      transition: all 0.25s;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: #0071e3;
+      box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15);
+    }
+
+    .toc-title {
+      font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 28px 0 10px;
+      color: #333;
+      opacity: 0.8;
+    }
+
+    .toc a {
+      display: block;
+      text-decoration: none;
+      color: #333;
+      padding: 8px 6px;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.25s;
+      font-weight: bold;
+      opacity: 0.85;
+    }
+
+    .toc a.step {
+      padding-left: 25px;
+      font-weight: 400;
+    }
+
+    .toc a.step2 {
+      padding-left: 45px;
+      font-weight: 400;
+    }
+
+    .toc a.step3 {
+      padding-left: 65px;
+      font-weight: 400;
+    }
+
+    .toc a:hover {
+      background: rgba(0, 0, 0, 0.06);
+      font-weight: 600;
+      opacity: 1;
+    }
+
+    .content {
+      flex: 1;
+      padding: 60px;
+      overflow-y: auto;
+    }
+
+    .page-title {
+      font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      margin-top: 50px;
+      color: #333;
+    }
+
+    h1 {
+      font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+      color: #666;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    h3 {
+      font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    h4 {
+      font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      font-size: 16px;
+      font-weight: 100;
+    }
+
+    .section {
+      margin-bottom: 40px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.3s;
+    }
+
+    .section:hover {
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.09);
+    }
+
+    p,
+    li {
+      font-size: 14px;
+      line-height: 2;
+      color: #333;
+      opacity: 1;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .link {
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    table,
+    th,
+    td {
+      overflow: hidden;
+      border: 1px solid #ddd;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 12px;
+    }
+
+    td:first-child,
+    th:first-child {
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      font-size: 14px;
+      margin-top: 40px;
+      border-collapse: collapse;
+    }
+
+    .download-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashed-arrow {
+      text-decoration: none;
+      border-bottom: 1px dashed #333;
+      position: relative;
+      color: #333;
+    }
+
+    .dashed-arrow::after {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search..." />
+    </div>
+
+    <div class="toc-title">Contents</div>
+    <div class="toc" id="toc">
+      <a href="#about">About the Project</a>
+      <a href="#project-structure" class="step">Project Structure</a>
+      <a href="#main-features" class="step">Main Features</a>
+
+      <a href="#data">Data</a>
+      <a href="#data-source" class="step">Data Resource</a>
+      <a href="#data-dict" class="step">Mapping Data Dictionary</a>
+      <a href="#data-download" class="step">Data Download</a>
+      <a href="#idf" class="step step2">Energy Simulation Templates</a>
+      <a href="#geojson" class="step step2">Map GeoJSON</a>
+
+      <a href="#energy">Energy Simulation</a>
+      <a href="#energy-beforestart" class="step step">Before Start</a>
+      <a href="#energy-quickstart" class="step">Quick Start</a>
+      <a href="#energy-step1" class="step step2">Step 1</a>
+      <a href="#energy-step2" class="step step2">Step 2</a>
+      <a href="#energy-step3" class="step step2">Step 3</a>
+      <a href="#energy-step4" class="step step2">Step 4</a>
+      <a href="#energy-step5" class="step step2">Step 5</a>
+
+      <a href="#carbon">Embodied Carbon Simulation</a>
+      <a href="#carbon-beforestart" class="step step">Before Start</a>
+      <a href="#carbon-quickstart" class="step">Quick Start</a>
+      <a href="#carbon-step1" class="step step2">Step 1</a>
+      <a href="#carbon-step2" class="step step2">Step 2</a>
+      <a href="#carbon-step3" class="step step2">Step 3</a>
+      <a href="#carbon-step4" class="step step2">Step 4</a>
+
+      <a href="#publication">Publication</a>
+      <a href="#team">Team</a>
+      <a href="#disclaimer">Disclaimer</a>
+    </div>
+  </div>
+
+  <div class="content" id="contentArea">
+    <h1 class="page-title">Buildings.sg Documentation</h1>
+
+    <div class="section" id="about">
+      <h1>About the Project</h1>
+      <p>
+        <a href="https://buildings.sg/" class="link">Buildings.sg</a> is an open, interactive platform developed by
+        the <a href="https://www.citysyntax.io/" class="link">City Syntax Lab</a> at the <a href="https://nus.edu.sg/"
+          class="link">National University of Singapore (NUS)</a> for urban building energy modeling (UBEM) and carbon
+        emissions analysis in Singapore. The platform integrates spatial data with operational and embodied carbon
+        simulations, supported by a comprehensive set of open-source <a href="https://energyplus.net/"
+          class="link">EnergyPlus</a> templates for typical building archetypes in Singapore.
+      </p>
+      <p>
+        Users can download and customize these EnergyPlus templates for detailed simulations. Buildings.sg enables
+        visualization and analysis of building-level carbon footprints, facilitating identification of energy
+        efficiency improvements and carbon reduction opportunities.
+        The platform supports Singapore’s <a href="https://www.greenplan.gov.sg/" class="link">Green Plan 2030</a> by
+        promoting energy-efficient designs, sustainable materials, and low-carbon construction practices. Designed to
+        be scalable and adaptable, Buildings.sg can be deployed in any city or municipality with available building
+        and climate data.
+      </p>
+      <br>
+      <h3>Singapore Building Archetypes</h3>
+      <p>Singapore's buildings are classified into residential and non-residential categories, further divided into
+        seven Building Subtypes and 23 Building Archetypes, forming a comprehensive three-tier system. This framework is
+        specifically optimized to support accurate simulation of building carbon emissions in Singapore. For detailed
+        information about each subtype and archetype, please refer to the <a href="#" class="link">Archetypes
+          section</a> of the map.
+      </p>
+      <h3>Operational Carbon Simulation</h3>
+      <p>Operational carbon represents emissions arising from a building's daily energy consumption, including cooling,
+        lighting, equipment, and heating systems. We adopt an Urban Building Energy Modeling (UBEM) approach, a
+        city-scale shoebox-based methodology that simulates energy performance across the built environment. This
+        analytical
+        framework allows evaluation of multiple scenarios to identify effective carbon reduction strategies and improve
+        energy efficiency.
+      </p>
+      <h3>Embodied Carbon Simulation</h3>
+      <p>Embodied carbon accounts for emissions associated with building materials and construction throughout the
+        building's lifecycle. While full life cycle assessments (LCA) consider multiple stages, this project focuses on
+        emissions
+        from raw material extraction, transportation, manufacturing, and construction (stages A1–A5, known as "cradle to
+        practical completion"). Due to limited data and inherent uncertainties, a probabilistic calculation method is
+        used. Results are presented as probability distributions rather than single values, reflecting uncertainty and
+        enabling effective risk assessment.
+      </p>
+    </div>
+
+    <div class="section" id="project-structure">
+      <h2>Project Structure</h2>
+
+      <pre style="
+        background: transparent;
+        padding: 0px;
+        margin-top: 40px;
+        border-radius: 10px;
+        overflow-x: auto;
+        line-height: 1.5;
+        white-space: pre; 
+      "><code style="
+        white-space: pre;
+        display: block;
+      ">
+    index.html          – Main entry point that loads and initializes the web application.
+    documentation.html  – Documentationation for project pipelines and user guidance.
+    data/               – GeoJSON, and spreadsheets supporting charts and analysis.
+    download/           – EnergyPlus IDF templates, DesignBuilder files, and map data.
+    image/              – Archetype illustration images for interface visualization.
+    logo/               – Icons and branding graphics displayed across the site.
+    mapbox.js           – Initializes and styles the interactive map using Mapbox GL JS.
+    panel.js            – Manages UI panels, controls, and filtering logic.
+    popup.js            – Generates informational popups for Data and About sections.
+      </code></pre>
+
+    </div>
+
+
+    <div class="section" id="main-features">
+      <h2>Main Features</h2>
+      <p>The platform offers a range of interactive tools designed to support urban-scale building performance analysis
+        and decision-making:</p>
+      <ul>
+        <li>Multi-layer 3D visualization of building archetypes, embodied and operational carbon, and Green Mark
+          attributes.</li>
+        <li>Archetype-based filtering to explore detailed simulation methods, parameters, and results.</li>
+        <li>Interactive building-level information: click any building to view energy use, carbon emissions, and key
+          metrics.</li>
+        <li>Integration of Singapore’s Master Plan 2019 land use with 3D zoning layers for urban planning analysis.</li>
+        <li>Toggle machine-learning–derived building parameters to explore scenario variations.</li>
+        <li>Download GeoJSON map data and EnergyPlus IDF templates for selected archetypes to support external modeling.
+        </li>
+        <li>Minimal dependencies and no complex frameworks, providing easy maintenance, extensibility, and adaptation to
+          other regions.</li>
+      </ul>
+    </div>
+
+    <div class="section" id="data">
+      <h1>Data</h1>
+    </div>
+
+    <div class="section" id="data-source">
+      <h2>Data Resource</h2>
+
+      <h3>Buildings.sg Dataset</h3>
+      <p>
+        Buildings.sg provides an integrated urban-to-building-level dataset covering Singapore. Sources include:
+      </p>
+      <ul>
+        <li><strong>OpenStreetMap (OSM):</strong> Building footprints and heights.
+          <a href="https://overpass-turbo.eu/" class="dashed-arrow">https://overpass-turbo.eu/</a>
+        </li>
+        <li><strong>HDB & BCA:</strong> Public housing details and Green Mark certification data.
+          <a href="https://github.com/ualsg/hdb3d-data" class="dashed-arrow">https://github.com/ualsg/hdb3d-data</a>
+          <a href="https://www1.bca.gov.sg/buildsg/sustainability/regulatory-requirements-for-existing-buildings/bca-building-energy-benchmarking-and-disclosure"
+            class="dashed-arrow">https://www1.bca.gov.sg/buildsg/sustainability</a>
+        </li>
+        <li><strong>URA:</strong> Master Plan 2019 land-use zoning and planning annotations.
+          <a href="https://data.gov.sg/collections/2104/view"
+            class="dashed-arrow">https://data.gov.sg/collections/2104/view</a>
+        </li>
+        <li><strong>Machine Learning–Predicted Archetypes:</strong> Fill missing building archetypes.</li>
+        <li><strong>Simulated Carbon Metrics:</strong> Embodied and operational carbon modeled per building.</li>
+      </ul>
+      <p>
+        The data is provided in unified <strong>GeoJSON</strong> format and visualized using <strong>Mapbox GL
+          JS</strong>. Map layers include building archetypes, carbon metrics, EUI, and Green Mark ratings. Each feature
+        represents a single building with attributes such as building levels, height, footprint, gross floor area,
+        archetype, energy use, and carbon metrics.
+      </p>
+      <br>
+
+      <h3>Archetypes</h3>
+      <ul>
+        <li><strong>International & Local Frameworks:</strong> <a href="https://webtool.building-typology.eu/#bm"
+            class="dashed-arrow">TABULA (EU)</a>, <a
+            href="https://www.energy.gov/eere/buildings/commercial-reference-buildings" class="dashed-arrow">DOE
+            Prototype Buildings (US)</a>.</li>
+        <li><strong>Singapore References:</strong> <a
+            href="https://www1.bca.gov.sg/buildsg/sustainability/regulatory-requirements-for-existing-buildings/bca-building-energy-benchmarking-and-disclosure"
+            class="dashed-arrow">BCA codes</a>, <a
+            href="https://data.gov.sg/datasets/d_c4bd082b48fa7611713f39e23d250c27/view" class="dashed-arrow">Green Mark
+            dataset</a>, <a href="https://data.gov.sg/datasets/d_17f5382f26140b1fdae0ba2ef6239d2f/view"
+            class="dashed-arrow">HDB flat types
+            dataset</a>, <a href="https://www.ura.gov.sg/Corporate/Guidelines/Development-Control/Residential/"
+            class="dashed-arrow">URA development controls
+            dataset</a>, dwelling classifications.</li>
+      </ul>
+      <br>
+
+      <h3>Energy Simulation</h3>
+      <ul>
+        <li><strong>UBEM Guides:</strong> Introduction and setup instructions for urban-scale energy modeling.</li>
+        <li><strong>ASHRAE Guidelines:</strong> Parameters and procedures for building geometry setup.</li>
+        <li><strong>Singapore Standards:</strong> Codes for lighting, HVAC, curtain walls, sustainable data centers,
+          energy efficiency. <a
+            href="https://www1.bca.gov.sg/docs/default-source/docs-corp-buildsg/sustainability/bca-building-energy-benchmarking-report-2023.pdf"
+            class="dashed-arrow">BCA Building Energy Benchmarking Report 2023</a>, <a
+            href="https://ireus.nus.edu.sg/wp-content/uploads/2025/01/Refining-Energy-Use-Benchmarks-for-Commercial-Properties-in-Singapore-Summary_-20250122.pdf"
+            class="dashed-arrow">Refining Energy Benchmarks_IREUS
+          </a>
+        </li>
+        <li><strong>Input Parameters:</strong> People density, occupancy schedules, energy and operational
+          characteristics. <a
+            href="https://developers.google.com/maps/documentation/places/web-service/get-api-key?setupProd=configure&hl=zh-cn#manage-key"
+            class="dashed-arrow">Google’s public data
+          </a></li>
+        <li><strong>Operational Data:</strong> Building EUI, energy consumption profiles, processed occupancy schedules.
+          <a href="https://www.openelectricitymarket.sg/residential/metering-options"
+            class="dashed-arrow">https://www.openelectricitymarket.sg
+          </a>
+        </li>
+        <li><strong>Weather Data:</strong> TMY files (current, medium, long-term) and HWY files for extreme heatwave
+          scenarios. <a href="https://annex80.iea-ebc.org/weather-data"
+            class="dashed-arrow">https://annex80.iea-ebc.org/weather-data
+          </a></li>
+      </ul>
+      <br>
+
+      <h3>Embodied Carbon Simulation</h3>
+      <ul>
+        <li><strong>Material Quantities:</strong> kg/m² of GFA, categorized by archetype-material. PDFs fitted for
+          sufficient data; mean values used otherwise.</li>
+        <li><strong>Country of Origin:</strong> All materials assumed imported. UN Comtrade data used to determine
+          probabilities of origin.</li>
+        <li><strong>A1-A3 Emissions:</strong> ECFs (kgCO₂e/kg) for extraction and manufacturing, categorized by
+          country-material. PDFs or means calculated.</li>
+        <li><strong>A4 Transport Emissions:</strong> Sea freight distances × transport ECFs to obtain emissions.</li>
+        <li><strong>A5 Waste & Onsite Emissions:</strong> Industry-average waste factors and onsite construction
+          emissions, fitted to PDFs where data allows.</li>
+        <li><strong>Standards & Guidelines:</strong> Incorporates RICS, GBCA, SGBC, NZGBC, URA, BCA; includes URA
+          Development Control, HDB flat types, Green Mark, and Buildability codes.</li>
+      </ul>
+    </div>
+
+    <div class="section" id="data-dict">
+      <h2>Mapping Data Dictionary</h2>
+      <table>
+        <thead style="background-color: #f0f0f0;">
+          <tr>
+            <th>Features Name</th>
+            <th>Dataset Field Name</th>
+            <th>Description</th>
+            <th>Data Type</th>
+            <th>Data Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Building ID</td>
+            <td>id</td>
+            <td>Unique identifier for each building, formatted as 'relation/' or 'way/' followed by a 7-digit number.
+            </td>
+            <td>Text</td>
+            <td>OpenStreetMap</td>
+          </tr>
+          <tr>
+            <td>Building Name</td>
+            <td>addr_housename</td>
+            <td>Official name of the building, which may sometimes match its address.</td>
+            <td>Text</td>
+            <td>OpenStreetMap/BCA</td>
+          </tr>
+          <tr>
+            <td>Building Address (Housenumber)</td>
+            <td>addr_housenumber</td>
+            <td>Building's street or unit number, usually appearing before the street name in the full address.</td>
+            <td>Text</td>
+            <td>OpenStreetMap/BCA</td>
+          </tr>
+          <tr>
+            <td>Building Address (Street)</td>
+            <td>addr_street</td>
+            <td>Official street or road name where the building is situated.</td>
+            <td>Text</td>
+            <td>OpenStreetMap/BCA</td>
+          </tr>
+          <tr>
+            <td>Postal Code</td>
+            <td>addr_postcode</td>
+            <td>Singapore postal code assigned to the building location.</td>
+            <td>Text</td>
+            <td>OpenStreetMap/BCA</td>
+          </tr>
+          <tr>
+            <td>Building Levels</td>
+            <td>building_levels</td>
+            <td>Total number of above-ground floors in the building, excluding basement levels.</td>
+            <td>Text</td>
+            <td>OpenStreetMap/HDB*/Google Map</td>
+          </tr>
+          <tr>
+            <td>Building Archetype</td>
+            <td>building_archetype</td>
+            <td>Classification category from the 23 defined building archetypes, spanning both residential and
+              non-residential uses.</td>
+            <td>Text</td>
+            <td>OpenStreetMap/HDB*/BCA/Machine Learning</td>
+          </tr>
+          <tr>
+            <td>Machine Learning Predicted Archetype Probability</td>
+            <td>ml_probability</td>
+            <td>The probability that a building belongs to a specific archetype, as predicted by a random forest
+              classification model, based on input data from buildings in Singapore with known archetypes.</td>
+            <td>Number</td>
+            <td>Machine Learning</td>
+          </tr>
+          <tr>
+            <td>Height</td>
+            <td>height</td>
+            <td>Total vertical height of the building in meters, measured from ground level to the highest point.</td>
+            <td>Number</td>
+            <td>OpenStreetMap/HDB*</td>
+          </tr>
+          <tr>
+            <td>Building Footprint</td>
+            <td>building_footprint</td>
+            <td>Ground-level area covered by the building, calculated from its geometric polygon outline (m²).</td>
+            <td>Number</td>
+            <td>OpenStreetMap</td>
+          </tr>
+          <tr>
+            <td>Gross Floor Area</td>
+            <td>gross_floor_area</td>
+            <td>Total usable floor space in the building (m²), calculated or estimated based on footprint and number of
+              floors.</td>
+            <td>Number</td>
+            <td>BCA/OpenStreetMap</td>
+          </tr>
+          <tr>
+            <td>Built Year</td>
+            <td>built_year</td>
+            <td>Year of the building's original construction completion.</td>
+            <td>Text</td>
+            <td>HDB*/OpenStreetMap/BCA</td>
+          </tr>
+          <tr>
+            <td>Data Source</td>
+            <td>data_source</td>
+            <td>Origin of the building data, with HDB and BCA sources specially marked for Mapbox layer filtering.
+              Default: OpenStreetMap.</td>
+            <td>Text</td>
+            <td>HDB*/BCA</td>
+          </tr>
+          <tr>
+            <td>Green Mark Rating</td>
+            <td>greenmark_rating</td>
+            <td>Building's sustainability performance rating under Singapore's Green Mark certification system.</td>
+            <td>Text</td>
+            <td>BCA</td>
+          </tr>
+          <tr>
+            <td>Green Mark Year of Award</td>
+            <td>greenmark_year</td>
+            <td>Year when the Green Mark certification was granted to the building.</td>
+            <td>Text</td>
+            <td>BCA</td>
+          </tr>
+          <tr>
+            <td>Green Mark Version</td>
+            <td>greenmark_version</td>
+            <td>Specific edition of the Green Mark assessment criteria used for the building's certification.</td>
+            <td>Text</td>
+            <td>BCA</td>
+          </tr>
+          <tr>
+            <td>AC Floor Area Percentage</td>
+            <td>aircon_area</td>
+            <td>Percentage of total floor area with air-conditioning, primarily relevant for non-residential buildings.
+            </td>
+            <td>Number</td>
+            <td>BCA</td>
+          </tr>
+          <tr>
+            <td>Type of AC System</td>
+            <td>aircon_type</td>
+            <td>Specific air-conditioning technology deployed in the building (e.g., central, split, VRF).</td>
+            <td>Text</td>
+            <td>BCA</td>
+          </tr>
+          <tr>
+            <td>Average Monthly Building Occupancy Rate</td>
+            <td>occupancy</td>
+            <td>Average monthly occupant density measured in persons per square meter (P/sqm).</td>
+            <td>Number</td>
+            <td>BCA</td>
+          </tr>
+          <tr>
+            <td>2021 EUI</td>
+            <td>eui2021</td>
+            <td>Measured Energy Use Intensity for 2021, representing annual energy consumption per unit floor area
+              (kWh/m²/year).</td>
+            <td>Number</td>
+            <td>BCA</td>
+          </tr>
+          <tr>
+            <td>2022 EUI</td>
+            <td>eui2022</td>
+            <td>Measured Energy Use Intensity (EUI) for 2022, representing annual energy consumption per unit floor area
+              (kWh/m²/year).</td>
+            <td>Number</td>
+            <td>BCA</td>
+          </tr>
+          <tr>
+            <td>2023 EUI</td>
+            <td>eui2023</td>
+            <td>Measured Energy Use Intensity for 2023, representing annual energy consumption per unit floor area
+              (kWh/m²/year).</td>
+            <td>Number</td>
+            <td>BCA</td>
+          </tr>
+          <tr>
+            <td>Total Dwelling Units</td>
+            <td>total_dwelling_units</td>
+            <td>Complete count of individual residential units within the building.</td>
+            <td>Number</td>
+            <td>HDB*</td>
+          </tr>
+          <tr>
+            <td>Total Embodied Carbon</td>
+            <td>embodied_carbon</td>
+            <td>Total carbon emissions associated with building materials and construction processes (kgCO₂).</td>
+            <td>Number</td>
+            <td>Simulation</td>
+          </tr>
+          <tr>
+            <td>Cooling Carbon</td>
+            <td>energy_cooling</td>
+            <td>Carbon emissions resulting from energy used for space cooling and air conditioning (kgCO₂).</td>
+            <td>Number</td>
+            <td>Simulation</td>
+          </tr>
+          <tr>
+            <td>Lighting Carbon</td>
+            <td>energy_lighting</td>
+            <td>Carbon emissions resulting from energy consumed for interior and exterior lighting (kgCO₂).</td>
+            <td>Number</td>
+            <td>Simulation</td>
+          </tr>
+          <tr>
+            <td>Equipment Carbon</td>
+            <td>energy_equipment</td>
+            <td>Carbon emissions from energy used by appliances, office equipment, and other electrical devices (kgCO₂).
+            </td>
+            <td>Number</td>
+            <td>Simulation</td>
+          </tr>
+          <tr>
+            <td>Water Carbon</td>
+            <td>energy_water</td>
+            <td>Carbon emissions associated with energy used for water heating, pumping, and treatment systems (kgCO₂).
+            </td>
+            <td>Number</td>
+            <td>Simulation</td>
+          </tr>
+          <tr>
+            <td>Total End Use</td>
+            <td>energy_total</td>
+            <td>Aggregate carbon emissions from all operational energy consumption categories (kgCO₂).</td>
+            <td>Number</td>
+            <td>Simulation</td>
+          </tr>
+
+          <tr>
+            <td>Geometry Type</td>
+            <td>type</td>
+            <td>GeoJSON geometry classification, typically "Polygon" for simple buildings or "MultiPolygon" for more
+              complex structures.</td>
+            <td>Text</td>
+            <td>OpenStreetMap</td>
+          </tr>
+          <tr>
+            <td>Geometry Coordinates</td>
+            <td>coordinates</td>
+            <td>Ordered array of geographic coordinates defining the building outline, with each point represented as
+              [longitude, latitude].</td>
+            <td>Array</td>
+            <td>OpenStreetMap</td>
+          </tr>
+
+          <tr>
+            <td>Land Use ID</td>
+            <td>Name</td>
+            <td>Unique identifier assigned to each land parcel in the Master Plan</td>
+            <td>Text</td>
+            <td>URA</td>
+          </tr>
+          <tr>
+            <td>Land Use GPR</td>
+            <td>GPR</td>
+            <td>Maximum permissible gross plot ratio specified for the parcel</td>
+            <td>Number</td>
+            <td>URA</td>
+          </tr>
+          <tr>
+            <td>Land Use Description</td>
+            <td>LU_DESC</td>
+            <td>Official land use designation under the URA Master Plan 2019 (e.g., Residential, Commercial, Park)</td>
+            <td>Text</td>
+            <td>URA</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        *Data for HDB buildings is derived from various data sources including HDB, OpenStreetMap, and the HDB dataset
+        from the NUS Urban Analytics Lab.
+      </p>
+    </div>
+    <div class="section" id="data-download">
+      <h2>Data Download</h2>
+    </div>
+    <div class="section" id="idf">
+      <h3>Energy Simulation Templates</h3>
+      <table>
+        <thead style="background-color: #f0f0f0;">
+          <tr>
+            <th>Archetype Name</th>
+            <th>Description</th>
+            <th>Download IDF</th>
+            <th>Download DesignBuilder</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>HDB PPVC</td>
+            <td>Prefabricated Pre-finished Volumetric Construction (PPVC) is a method of building that uses modular
+              units, pre-built offsite and assembled onsite. This approach helps reduce construction time and enhances
+              quality control.</td>
+            <td><a href="#" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>HDB non-PPVC</td>
+            <td>Traditional method of construction used by the Housing and Development Board (HDB) without prefabricated
+              units. It involves the use of concrete and steel to construct public housing units.</td>
+            <td><a href="download/01_HDB_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Landed property</td>
+            <td>Landed properties are individual houses that have their own plot of land. They include detached houses,
+              semi-detached houses, and terraced houses, offering more space and privacy compared to high-rise flats.
+            </td>
+            <td><a href="download/02_SFH_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Private apartment & condo</td>
+            <td>Private apartments and condominiums are residential buildings that are owned privately. They usually
+              offer amenities such as swimming pools, gyms, and security, and can be found in both city-centre and
+              suburban areas.</td>
+            <td><a href="download/03_MFH_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Shophouse</td>
+            <td>Shophouses are traditional buildings that combine both commercial and residential uses. They typically
+              consist of a ground-floor retail space with living quarters above.</td>
+            <td><a href="#" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Hotel</td>
+            <td>Hotels are commercial establishments offering accommodations to travelers, with amenities such as room
+              service, concierge, and recreational facilities.</td>
+            <td><a href="download/04_Hotel_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Retail</td>
+            <td>Retail properties include spaces for selling goods directly to consumers, such as shopping malls,
+              stores, and boutiques.</td>
+            <td><a href="download/05_Retail_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Mixed development</td>
+            <td>Mixed development properties are those that combine different types of uses, typically commercial,
+              retail, and residential, within a single complex.</td>
+            <td><a href="#" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Office</td>
+            <td>Office buildings are spaces designed for business and administrative purposes. They can range from small
+              office buildings to large office towers.</td>
+            <td><a href="download/06_Office_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Business park</td>
+            <td>Business parks are specialized areas designed to accommodate various types of businesses, particularly
+              in research and development, information technology, and industrial services.</td>
+            <td><a href="download/07_BusinessPark_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Hospital</td>
+            <td>Hospitals are large healthcare facilities that provide medical treatment and emergency care, with
+              inpatient and outpatient services.</td>
+            <td><a href="download/08_Hospital_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Clinic</td>
+            <td>Clinics are smaller healthcare facilities that offer outpatient medical services, typically for general
+              practitioners or specialized services.</td>
+            <td><a href="download/09_Polyclinic_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Nursing home</td>
+            <td>Nursing homes are facilities that provide residential care and support for elderly individuals,
+              including medical assistance and daily living activities.</td>
+            <td><a href="download/10_NursingHome_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Inst. of higher learning (IHL)</td>
+            <td>Institutions of higher learning (IHL) include universities, polytechnics, and other higher education
+              institutions offering advanced degrees and diplomas.</td>
+            <td><a href="download/11_IHL_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Non-IHL</td>
+            <td>Non-Institution of Higher Learning refers to other types of educational institutions, including schools
+              and training centres that provide education at a pre-university or vocational level.</td>
+            <td><a href="download/12_NonIHL_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>B1</td>
+            <td>B1 industrial properties are those zoned for light industry or research and development activities. They
+              often accommodate businesses that do not involve heavy manufacturing processes.</td>
+            <td><a href="download/13_IndustrialB1_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>B2</td>
+            <td>B2 industrial properties are those zoned for general industrial uses, including manufacturing and
+              processing activities that may produce noise, pollution, or waste.</td>
+            <td><a href="download/14_IndustrialB2_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Data centre</td>
+            <td>Data centres are facilities used to house computer systems and associated components, such as
+              telecommunications and storage systems, often with high levels of security and redundancy.</td>
+            <td><a href="download/15_DataCentre_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Civic, community & cultural inst.</td>
+            <td>Civic, community, and cultural institutions include public buildings that serve community and cultural
+              purposes, such as libraries, museums, and community centres.</td>
+            <td><a href="download/16_CivicCommunity_Cultural_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Sports & recreation</td>
+            <td>Sports and recreation properties include facilities such as sports complexes, stadiums, gyms, swimming
+              pools, and recreational parks.</td>
+            <td><a href="download/17_SportsRec_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Restaurant</td>
+            <td>Restaurants are establishments that provide food and beverages to customers in exchange for money,
+              typically served at tables in a dining setting.</td>
+            <td><a href="download/18_Restaurant_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Hawker centre</td>
+            <td>Hawker centres are open-air food courts where various food vendors sell affordable local dishes,
+              providing an essential part of Singapore's food culture.</td>
+            <td><a href="download/19_HawkerCentre_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+          <tr>
+            <td>Supermarket</td>
+            <td>Supermarkets are large retail spaces that sell a wide variety of food, beverages, and household
+              products, typically arranged in aisles.</td>
+            <td><a href="download/20_Supermarket_SGP_2025_V5.idf" class="link">IDF</a></td>
+            <td><a href="#" class="link">DesignBuilder</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="download/AllArhcetypes_SGP_2025_V5.zip" class="download-button" download>
+          Download All Archetypes
+        </a>
+      </div>
+
+    </div>
+    <div class="section" id="geojson">
+      <h3>Map GeoJSON</h3>
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="download/sg_buildings_v5.zip" class="download-button" download>
+          Download Buildings.sg Mapping Dataset
+        </a>
+      </div>
+    </div>
+
+    <div class="section" id="energy">
+      <h1>Energy Simulation</h1>
+    </div>
+
+    <div class="section" id="energy-beforestart">
+      <h2>Before Start</h2>
+      <p>Before beginning your urban- to district-scale energy simulation, make sure you have all the necessary
+        software, tools, and files ready. This preparation will help you efficiently set up your model, run simulations,
+        and analyze results without interruptions.</p>
+
+      <h3>Required Software</h3>
+      <ul>
+        <li><a href="https://www.rhino3d.com/" class="link">Rhino3D</a></li>
+        <li>
+          <a href="https://www.grasshopper3d.com/page/download-1" class="link">Grasshopper</a> and its plugins,
+          including
+          <a href="https://www.food4rhino.com/en/app/ladybug-tools#downloads_list" class="link">Ladybug</a> and
+          <a href="https://app.pollination.solutions/cad-plugins" class="link">OpenStudio Plugin for Rhino</a>
+        </li>
+        <li><a href="https://openstudio.net/downloads" class="link">OpenStudio</a></li>
+        <li><a href="https://energyplus.net/" class="link">EnergyPlus</a></li>
+        <li><a href="https://www.python.org/" class="link">Python</a></li>
+      </ul>
+
+      <h3>Required Files</h3>
+      <ul>
+        <li>Simulation templates (download from <a href="https://buildings.sg/" class="link">Buildings.sg</a> or our
+          GitHub repository)</li>
+        <li>Weather files (EPW) for your study area</li>
+      </ul>
+
+      <h3>Optional Online Tools</h3>
+      <ul>
+        <li><a href="https://cadmapper.com/" class="link">Cadmapper</a> – for generating 3D building models of your
+          study area</li>
+        <li><a href="https://www.mapbox.com/" class="link">Mapbox</a> – for visualizing your simulation results</li>
+      </ul>
+    </div>
+
+
+    <div class="section" id="energy-quickstart">
+      <h2>Quick Start</h2>
+      <img src="Document_img\EnergySimPipeline.png" alt="step 4.2-3"
+        style="width: 100%; max-width: 1000px; display: block;">
+    </div>
+
+    <div class="section" id="energy-step1">
+      <h3>Step 1: Study Area Selection</h3>
+      <p>Start by defining the area you want to study. This can be a single building, a block, a neighborhood, or a
+        larger district. Identify the following information for all buildings in your study area:</p>
+      <ul>
+        <li>Number of buildings</li>
+        <li>Function/type</li>
+        <li>Number of floors/height</li>
+      </ul>
+      <p>You can obtain this information from <strong>Buildings.sg</strong> (for Singapore) or other public sources such
+        as <strong>Google Maps</strong> or <strong>OpenStreetMap</strong>.</p>
+    </div>
+
+    <div class="section" id="energy-step2">
+      <h3>Step 2: Geometry Export & Cleaning</h3>
+      <p>If you already have a complete 3D model in <strong>Rhino3D</strong>, you can skip this step. Otherwise, follow
+        these steps to obtain geometry data:</p>
+      <p><strong>Example using Cadmapper:</strong></p>
+      <ol>
+        <li>Enable <strong>Include 3D Buildings (if available)</strong>.</li>
+        <li>Draw a rectangle that fully encloses your study area and click <strong>CREATE FILE</strong>.</li>
+        <li>Review the <strong>3D Axonometric View</strong> on the right to ensure it is correct.</li>
+        <li>Click <strong>DOWNLOAD</strong> to obtain your <code>.3dm</code> model.</li>
+      </ol>
+      <img src="Document_img\step2.png" alt="Cadmapper Screenshot"
+        style="width: 100%; max-width: 1000px; display: block;">
+    </div>
+
+    <div class="section" id="energy-step3">
+      <h3>Step 3: Attribute Completion</h3>
+      <p>Open your 3D model in <strong>Rhino</strong> and perform the following:</p>
+      <ol>
+        <li>Check all buildings for completeness and fix any duplicates or anomalies.</li>
+        <li>Remove non-building objects (roads, green spaces, etc.) that are irrelevant to energy simulation.</li>
+        <li>Update building geometry with the correct height and function/type based on your research from Step 1. (You
+          may need to manually adjust heights for individual buildings.)</li>
+      </ol>
+      <p>Before and after this step:</p>
+      <img src="Document_img\step3.1.png" alt="Rhino3D before step 3"
+        style="width: 100%; max-width: 1000px; display: block;">
+      <img src="Document_img\step3.2.png" alt="Rhino3D after step 3"
+        style="width: 100%; max-width: 1000px; display: block;">
+    </div>
+
+
+    <div class="section" id="energy-step4">
+      <h3>Step 4: Simulation Template Setup</h3>
+      <h4>4.1 Install Plugins</h4>
+      <p>Ensure <strong>Ladybug Tools / OpenStudio</strong> plugins are installed. Open <strong>Grasshopper</strong> in
+        Rhino to confirm successful installation.</p>
+      <img src="Document_img\step4.1.png" alt="step 4.1" style="width: 100%; max-width: 1000px; display: block;">
+
+      <h4>4.2 Import Archetype Template</h4>
+      <p>Import the provided <code>EnergySim_regional.gh</code> file (containing all building archetypes) into
+        Grasshopper.
+        You can find the file at our <a href="download/EnergySim_regional.gh" class="link">GitHub repository</a></p>
+      <img src="Document_img\step4.2.png" alt="step 4.2-1" style="width: 100%; max-width: 1000px; display: block;">
+      <p>Each archetype as shown below.</p>
+      <img src="Document_img\step4.3.png" alt="step 4.2-2" style="width: 100%; max-width: 1000px; display: block;">
+      <p>The internal structure of the EnergySimCluster is shown below.</p>
+      <img src="Document_img\step4.4.png" alt="step 4.2-3" style="width: 100%; max-width: 1000px; display: block;">
+      <p><strong>Troubleshooting:</strong> If any components are red or display errors:</p>
+      <ol>
+        <li>Confirm that plugins from Step 4.1 are installed correctly.</li>
+        <li>Check that OpenStudio is added to your system <code>PATH</code>.</li>
+        <li>Ensure the template version is compatible; incompatible components can be replaced with the new ones.</li>
+      </ol>
+
+      <h4>4.3 Configure Weather & Geometry</h4>
+      <ol>
+        <li>Replace the <strong>Weather File</strong> module with your own <code>.epw</code> file.</li>
+        <li>Right-click the <strong>Geometry</strong> module, select buildings corresponding to your study area by name,
+          and press Enter. Selected buildings will appear red in Rhino.</li>
+      </ol>
+      <img src="Document_img\step4.5.png" alt="step 4.3-1" style="width: 100%; max-width: 300px; display: block;">
+      <br>
+      <img src="Document_img\step4.6.png" alt="step 4.3-2" style="width: 100%; max-width: 1000px; display: block;">
+
+      <h4>4.4 Customize Input Parameters</h4>
+      <p>Double-click <strong>EnergySim Cluster</strong> to access internal input/output parameters. Modify inputs based
+        on your data to generate a benchmark simulation.</p>
+
+      <h4>4.5 Run Archetype Simulations</h4>
+      <p>Double-click <strong>FalseStart</strong> under each archetype to start the simulation. Results for that
+        archetype will appear in the panel to the right. Repeat for all archetypes. Calculate the overall district EUI
+        by weighting individual archetype results.</p>
+      <img src="Document_img\step4.7.png" alt="step 4.5" style="width: 100%; max-width: 600px; display: block;">
+
+    </div>
+
+    <div class="section" id="energy-step5">
+      <h3>Step 5: Scenario Setup & Batch Simulation</h3>
+      <p>With the benchmark results obtained, you can perform <strong>scenario analysis</strong>:</p>
+      <ul>
+        <li>Modify inputs such as energy-efficient lighting, roof PV, advanced HVAC, wall insulation, or local occupancy
+          schedules.</li>
+        <li>Run simulations to generate district-scale results, including end-use breakdowns.</li>
+      </ul>
+      <p><strong>Notes:</strong></p>
+      <ul>
+        <li>Total simulation time depends on building count and height.</li>
+        <li>A typical sample area completes simulations within ~60 minutes, enabling rapid assessment of different
+          energy-saving strategies.</li>
+      </ul>
+    </div>
+
+
+    <div class="section" id="carbon">
+      <h1>Embodied Carbon Simulation</h1>
+    </div>
+
+    <div class="section" id="carbon-beforestart">
+      <h2>Before Start</h2>
+      <p>Before running the probabilistic embodied carbon estimation for UBEM, make sure you have all the necessary
+        software and tools ready. This preparation ensures smooth execution of the scripts and accurate generation of
+        results.</p>
+
+      <h3>Required Software for Code Execution</h3>
+      <ul>
+        <li><a href="https://www.python.org/" class="link">Python</a></li>
+        <li>Python modules:
+          <a href="https://numpy.org/install/" class="link">NumPy, </a>
+          <a href="https://scipy.org/install/" class="link">SciPy, </a>
+          <a href="https://pandas.pydata.org/docs/getting_started/install.html" class="link">Pandas</a>
+        </li>
+      </ul>
+
+      <h3>Software for District Modeling (Optional)</h3>
+      <ul>
+        <li><a href="https://www.rhino3d.com/" class="link">Rhino3D</a> (v8)</li>
+        <li><a href="https://www.grasshopper3d.com/" class="link">Grasshopper</a> (installed with Rhino)</li>
+        <li><a href="https://www.food4rhino.com/en/app/anemone" class="link">Anemone</a> (v0.4)</li>
+      </ul>
+    </div>
+
+    <div class="section" id="carbon-quickstart">
+      <h2>Quick Start</h2>
+    </div>
+
+    <div class="section" id="carbon-step1">
+      <h3>Step 1: Prepare Data</h3>
+      <p>Edit the Excel and CSV files in the <code>/data</code> subfolder as needed before running any scripts. This
+        ensures that your embodied carbon calculation will use the most accurate and relevant inputs for your study.</p>
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="download/Rhino & Grasshopper Tutorial.pptx" class="download-button" download>
+          Detailed Tutorial for Building Embodied Carbon Simulation
+        </a>
+      </div>
+    </div>
+
+    <div class="section" id="carbon-step2">
+      <h3>Step 2: Generate District-Independent Results</h3>
+      <p>Run the following scripts in order to produce general EC results not tied to a specific district:</p>
+      <ol>
+        <li><strong>EC_Calibration_A1A3ECF_Weights.py</strong> calibrates hyperparameters to meet the error threshold.
+        </li>
+        <li><strong>EC_execution.py</strong> generates <code>archetype_container</code> objects containing generalized
+          EC results for each archetype; saves them as <code>.pkl</code> files.</li>
+        <li><strong>EC_results.py</strong> produces reports and diagrams in <code>.pkl</code>, <code>.xlsx</code>, and
+          <code>.csv</code> formats.
+        </li>
+      </ol>
+    </div>
+
+    <div class="section" id="carbon-step3">
+      <h3>Step 3: Provide Study District Details</h3>
+      <p>To generate results for a specific district, you need to provide:</p>
+      <ol>
+        <li><strong>GFA of each building</strong> Use the Grasshopper script
+          <code>district_modelling/Building GFA Calculator.gh</code> or manually input data. Refer to the tutorial
+          <code>district_modelling/Rhino & Grasshopper Tutorial.pptx</code> for guidance.
+        </li>
+        <li><strong>Archetype classification</strong> Assign each building to an archetype listed in
+          <code>data/Available Archetypes.txt</code>.
+        </li>
+        <li><strong>Input data</strong> Enter building GFAs and archetypes into
+          <code>data/District Individual Building GFAs.xlsx</code>.
+        </li>
+      </ol>
+    </div>
+
+    <div class="section" id="carbon-step4">
+      <h3>Step 4: Generate District-Specific Results</h3>
+      <p>After providing district details, run the following scripts:</p>
+      <ol>
+        <li><strong>EC_district_execution.py</strong> calculates embodied carbon based on the district data and saves
+          results as <code>.pkl</code> files.</li>
+        <li><strong>EC_district_result.py</strong> generates district-level reports and diagrams for analysis.</li>
+      </ol>
+    </div>
+
+
+    <div class="section" id="publication">
+      <h1>Publication</h1>
+    </div>
+
+    <div class="section" id="team">
+      <h1>Team</h1>
+      <img src="Document_img/logo_nus_citysyntax.jpg" alt="City Syntax Lab & NUS Logo" width="240"
+        style="display: block; margin: 0 auto;">
+      <p>
+        <strong>Yu Qian Ang:</strong> Principal Investigator, project coordination, and research guidance
+        <br><strong>Hongyao Wong:</strong> Data analysis and Energy Template modeling
+        <br><strong>Royden Soh Wei Jun:</strong> Data analysis and Embodied Carbon Template modeling
+        <br><strong>Pengdi LYu:</strong> Platform development, data analysis, and Energy Template modeling
+        <br>
+      </p>
+    </div>
+
+    <div class="section" id="disclaimer">
+      <h1>Disclaimer</h1>
+      <p>Data and results presented in Buildings.sg are for informational purposes only, and should not be used as the
+        basis for legal, financial, or regulatory decisions. Despite our commitment to accuracy, we make no warranties
+        regarding the precision, completeness, or reliability of this data. Users should independently verify all
+        information through official sources before taking any action based on this platform. The developers,
+        contributors, and affiliated organizations expressly disclaim all liability for any consequences arising from
+        the use of this tool.
+      </p>
+    </div>
+
+  </div>
