@@ -55,6 +55,11 @@
       box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15);
     }
 
+    .highlight {
+      background-color: #333;
+      color: white;
+    }
+
     .toc-title {
       font-family: "Roboto Mono", Tahoma, Geneva, Verdana, sans-serif;
       font-size: 14px;
@@ -230,6 +235,63 @@
     <div class="search-box">
       <input type="text" id="searchInput" placeholder="Search..." />
     </div>
+
+  <script>
+    function removeHighlights(root) {
+      const highlighted = root.querySelectorAll(".highlight");
+      highlighted.forEach(span => {
+        const parent = span.parentNode;
+        parent.replaceChild(document.createTextNode(span.textContent), span);
+        parent.normalize();
+      });
+    }
+    
+    function highlightText(root, keyword) {
+      if (!keyword) return 0;
+    
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+      let count = 0;
+    
+      while (walker.nextNode()) {
+        const node = walker.currentNode;
+        const text = node.nodeValue;
+        const index = text.toLowerCase().indexOf(keyword.toLowerCase());
+        if (index >= 0) {
+          const before = text.slice(0, index);
+          const match = text.slice(index, index + keyword.length);
+          const after = text.slice(index + keyword.length);
+    
+          const span = document.createElement("span");
+          span.className = "highlight";
+          span.textContent = match;
+    
+          const newNode = document.createDocumentFragment();
+          if (before) newNode.appendChild(document.createTextNode(before));
+          newNode.appendChild(span);
+          if (after) newNode.appendChild(document.createTextNode(after));
+    
+          node.parentNode.replaceChild(newNode, node);
+          count++;
+        }
+      }
+    
+      return count;
+    }
+    
+    const input = document.getElementById("searchInput");
+    const matchCount = document.getElementById("matchCount");
+    
+    input.addEventListener("input", () => {
+      const keyword = input.value.trim();
+      const root = document.body; 
+    
+      removeHighlights(root);
+      const count = highlightText(root, keyword);
+    
+      matchCount.textContent = keyword ? `Matches: ${count}` : "";
+    });
+    </script>
+
 
     <div class="toc-title">Buildings.sg Documentation</div>
     <div class="toc" id="toc">
