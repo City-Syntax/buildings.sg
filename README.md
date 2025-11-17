@@ -1,9 +1,18 @@
 # Buildings.sg
 
-| 📍 Buildings.sg | 📘 Documentation | 🛠️ GitHub Repository |
-|-----------------|-----------------|------------------------|
-| Access the live platform for urban energy and carbon analysis. | Read the full pipeline, methods, and usage guide. | Explore the source code, datasets, and templates. |
-| **http://buildings.sg/** | **https://city-syntax.github.io/buildings.sg/documentation.html** | **https://github.com/City-Syntax/buildings.sg/tree/main** |
+<p>
+  <a href="http://buildings.sg/" style="background:#3b82f6;color:white;padding:10px 18px;border-radius:8px;text-decoration:none;margin-right:8px;">
+    🌐 Visit Buildings.sg
+  </a>
+
+  <a href="https://city-syntax.github.io/buildings.sg/documentation.html" style="background:#10b981;color:white;padding:10px 18px;border-radius:8px;text-decoration:none;margin-right:8px;">
+    📘 Documentation
+  </a>
+
+  <a href="https://github.com/City-Syntax/buildings.sg/tree/main" style="background:#f59e0b;color:white;padding:10px 18px;border-radius:8px;text-decoration:none;">
+    🛠️ GitHub Repo
+  </a>
+</p>
 
 <img width="1920" height="1200" alt="platform1" src="https://github.com/user-attachments/assets/56349b70-5349-4b0b-b53a-119879239733" />
 
