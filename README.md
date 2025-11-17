@@ -2,9 +2,10 @@
 
 <img width="1920" height="1200" alt="platform1" src="https://github.com/user-attachments/assets/56349b70-5349-4b0b-b53a-119879239733" />
 
-[![Buildings.sg](https://img.shields.io/badge/🌐-Buildings.sg--------blue?style=for-the-badge)](http://buildings.sg/)  
-[![Documentation](https://img.shields.io/badge/📘-Documentation--brightgreen?style=for-the-badge)](https://city-syntax.github.io/buildings.sg/documentation.html)  
-[![GitHub](https://img.shields.io/badge/🛠️-GitHub--------black?style=for-the-badge)](https://github.com/City-Syntax/buildings.sg/tree/main)
+[![Buildings.sg](https://img.shields.io/badge/🌐-Buildings.sg%20%20%20-blue?style=for-the-badge)](http://buildings.sg/)  
+[![Documentation](https://img.shields.io/badge/📘-Documentation%20%20%20-brightgreen?style=for-the-badge)](https://city-syntax.github.io/buildings.sg/documentation.html)  
+[![GitHub](https://img.shields.io/badge/🛠️-GitHub%20%20%20-black?style=for-the-badge)](https://github.com/City-Syntax/buildings.sg/tree/main)
+
 
 
 
