@@ -1,36 +1,56 @@
 # Buildings.sg
 
-![image](https://github.com/user-attachments/assets/3a21117b-211f-4bc8-8ef0-e101a984a903)
+| 📍 Buildings.sg | 📘 Documentation | 🛠️ GitHub Repository |
+|-----------------|-----------------|------------------------|
+| Access the live platform for urban energy and carbon analysis. | Read the full pipeline, methods, and usage guide. | Explore the source code, datasets, and templates. |
+| **http://buildings.sg/** | **https://city-syntax.github.io/buildings.sg/documentation.html** | **https://github.com/City-Syntax/buildings.sg/tree/main** |
 
-[Buildings.sg](https://buildings.sg) is an open, interactive platform developed by the [City Syntax Lab](https://www.citysyntax.io/) at the National University of Singapore (NUS) for **Urban Building Energy Modeling (UBEM)** and carbon emissions mapping in Singapore.
+<img width="1920" height="1200" alt="platform1" src="https://github.com/user-attachments/assets/56349b70-5349-4b0b-b53a-119879239733" />
 
-The platform combines spatial data with operational and embodied carbon simulations, supported by a full set of EnergyPlus templates for typical building archetypes in Singapore. Users can freely download and customize the (open-source) EnergyPlus templates for their simulations. The platform also enables users to visualize and analyze building-level carbon footprints, identifying opportunities for reduction.
+[Buildings.sg](https://buildings.sg) is an open, interactive platform developed by the [City Syntax Lab](https://www.citysyntax.io/) at the National University of Singapore (NUS) for **Urban Building Energy Modeling (UBEM)** and carbon emissions mapping in Singapore. The platform integrates spatial data with operational and embodied carbon simulations, supported by a comprehensive set of open-source EnergyPlus templates for typical building archetypes in Singapore. Users can download and customize these templates for detailed simulations. The platform supports Singapore’s Green Plan 2030 and is designed to be scalable for deployment in other regions with available building and climate data.
 
-[Buildings.sg](https://buildings.sg) supports Singapore’s Green Plan 2030 by promoting energy-efficient designs, sustainable materials, and low-carbon construction practices. The platform is designed to be scalable and adaptable, making it deployable in any city or municipality with available building and climate data.
+### Building Archetypes
+Singapore’s buildings are organized into seven Building Subtypes and 23 Building Archetypes, forming a three-tier classification optimized for UBEM and carbon assessment. Detailed descriptions are available in the Archetypes section of the platform.
+
+### Operational Carbon Simulation
+Operational carbon reflects emissions from day-to-day building energy use, including cooling, lighting, equipment, and heating. Buildings.sg adopts a city-scale shoebox-based UBEM workflow to evaluate multiple scenarios and identify effective carbon-reduction strategies.
+
+### Embodied Carbon Simulation
+Embodied carbon includes emissions from material extraction, transport, manufacturing, and construction (A1–A5). A probabilistic method is used to address uncertainties, with results presented as probability distributions for risk-informed decision-making.
 
 ## 📂 Project Structure
 
-- **index.html** – The main entry point that loads and initializes the web application.
-- **data/** – Contains GeoJSON files and spreadsheets used to generate charts and support data analysis.
-- **download/** – Provides EnergyPlus IDF templates, DesignBuilder files and map data files for users to download and use externally.
-- **image/** – Holds images illustrating different building archetypes, used throughout the interface for better visualization.
-- **logo/** – Includes icons and branding graphics displayed on the site.
-- **mapbox.js, panel.js, popup.js** – Core JavaScript files managing the frontend behavior:
-  - `mapbox.js`: initializes and styles the interactive map using Mapbox GL JS.
-  - `panel.js`: handles user interface panels, controls, and filtering options.
-  - `popup.js`: creates and displays informational popups `Data` and `About`.
- 
+index.html          – Main entry point that loads and initializes the web application.  
+documentation.html  – Documentation for project pipelines and user guidance.  
+data/               – GeoJSON files and spreadsheets supporting charts and analysis.  
+download/           – EnergyPlus IDF templates, DesignBuilder files, and map data.  
+image/              – Illustration images for building archetypes.  
+logo/               – Icons and branding graphics used across the site.  
+mapbox.js           – Initializes and styles the Mapbox GL JS 3D environment.  
+panel.js            – Manages UI panels, controls, and filtering logic.  
+popup.js            – Generates informational popups for Data and About sections.
+
 ## 🚀 Main Features
 
-The platform offers a range of interactive tools designed to support urban-scale building performance analysis and decision-making:
+- Multi-layer 3D visualization of building archetypes, operational carbon, embodied carbon, and Green Mark attributes.  
+- Archetype-based filtering to explore simulation methods, parameters, and results.  
+- Interactive building-level information panels showing energy use, emissions, and key metrics.  
+- Integration of Singapore’s Master Plan 2019 zoning with 3D land-use layers.  
+- Toggle machine-learning–derived parameters to explore alternative scenarios.  
+- Downloadable GeoJSON datasets and EnergyPlus IDF templates for external modeling.  
+- Minimal dependencies and no complex frameworks, enabling easy maintenance and adaptation for other cities.
 
-- Multi-layer 3D visualization of building archetypes, embodied and operational carbon, and Green Mark attributes.  
-- Filter by building archetype to explore detailed simulation methods, parameters, and results.  
-- Click on individual buildings to view energy, carbon emissions, and key metrics. 
-- Explore Singapore’s Master Plan 2019 land use with interactive 3D zoning layers, enabling detailed urban planning insights directly within the platform.
-- Toggle displays for machine learning–derived parameters to explore various scenaros.  
-- Download GeoJSON map data and EnergyPlus IDF templates for the selected archetypes to facilitate further simulation or analysis.
-- Built with minimal dependencies and without reliance on complex frameworks, the platform is easy to edit, maintain, and scale for use in other regions.
+## 🧩 Version Information
+
+**Platform Version:** 5.0  
+**Release Date:** 2025-11-15  
+**Status:** Active  
+
+### Energy Simulation  
+**Version:** 5.0  **Last Updated:** 2025-06-18  
+
+### Embodied Carbon Simulation  
+**Version:** 3.0  **Last Updated:** 2025-06-11  
 
 ## 🛠️ Running Locally
 
@@ -54,7 +74,7 @@ Then navigate to `http://localhost:8000` in your browser.
 
 These datasets are merged into a unified GeoJSON format and visualized using **Mapbox GL JS**. Color-coded map layers primarily represent building archetype classifications, embodied and operational carbon metrics, along with selected government data such as EUI and Green Mark ratings.
 
-The full dataset is available in `sg_buildings_v3.zip`. You can find it directly in the `/data` folder or download it via the Buildings.sg platform under **Data → Download → Download GEOJSON Files**.
+The full dataset is available in `sg_buildings_v5.zip`. You can find it directly in the `/data` folder or download it via the Buildings.sg platform under **Data → Download → Download GEOJSON Files**.
 
 Each feature corresponds to a single building with its geometry and detailed attributes. A sample entry is shown below:
 
@@ -105,36 +125,17 @@ A ZIP archive `AllArhcetypes_SGP_2025_V5.zip` collects all templates. These file
 
 These models can be imported into Rhino3D and Grasshopper for scenario customization using tools like Ladybug Tools, which includes Honeybee and Honeybee-Energy for assigning constructions, internal loads, and HVAC systems, along with Ladybug for climate integration and visualization. Alternatively, the provided EnergyPlus templates can be used directly in any software that supports the EnergyPlus engine, such as ClimateStudio, DesignBuilder, or custom simulation workflows. Initial calibration can be performed using Singapore’s EPW climate data (2001–2020), before proceeding to batch simulations or archetype-level performance analyses.
 
-## 💡 Example Usage
+## 💡 Usage Pipeline
 
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/17bfe306-908a-47ba-b04f-2cfbbf0166ae" /><br>
+You can find complete details on how Buildings.sg is developed and operated in the **official documentation**.
 
+### Operational Carbon Simulation
+For a step-by-step guide to EnergyPlus-based UBEM workflows, visit:  
+https://city-syntax.github.io/buildings.sg/documentation.html#energy
 
-Here is an example workflow demonstrating how to use Buildings.sg for urban energy and carbon analysis:
-
-1. **Select study area**  
-   Use the polygon selection tool on Buildings.sg to delineate your candidate study area. The tool displays outline information such as building counts by archetype, average Energy Use Intensity (EUI), and total carbon footprint.
-
-2. **Export geometry**  
-   Export the selected area as a Rhino 3D model from Cadmapper. Perform minor adjustments as needed.
-
-3. **Complete missing attributes**  
-   Inspect individual buildings directly on Buildings.sg to retrieve missing attributes, such as building levels or height.
-
-4. **Download simulation templates**  
-   Download the EnergyPlus IDF templates corresponding to the building archetypes in your study area.
-
-5. **Set up simulation**  
-   Replace default simulation models in Grasshopper with the building data from your study area. Verify meteorological files before running baseline energy simulations.
-
-6. **Run scenarios**  
-   Adjust parameters such as building envelope and occupancy conditions to develop multiple simulation scenarios.
-
-7. **Calculate regional carbon metrics**  
-   Aggregate simulation outputs using Python and Excel. Calculate total energy consumption and carbon emissions by weighting archetype-level Energy Use Intensity (EUI) with gross floor area (GFA), incorporating various end-use categories and photovoltaic (PV) savings as applicable.
-
-8. **Visualize and interpret results**  
-   Use Buildings.sg to analyze and visualize the spatial distribution of energy performance and carbon footprints, enabling data-driven insights and decision-making.
-
-Whether you are a policymaker, urban planner, or researcher, Buildings.sg provides an accessible, data-driven platform for analyzing building energy use, quantifying carbon emissions, evaluating reduction scenarios, and supporting sustainable urban development decisions.
+### Embodied Carbon Simulation
+To explore the probabilistic embodied-carbon workflow, visit:  
+https://city-syntax.github.io/buildings.sg/documentation.html#carbon  
+or download the tutorial slide deck:  
+https://github.com/City-Syntax/buildings.sg/blob/main/download/Rhino%20%26%20Grasshopper%20Tutorial.pptx
 
