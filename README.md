@@ -1,18 +1,25 @@
 # Buildings.sg
 
-<p>
-  <a href="http://buildings.sg/" style="background:#3b82f6;color:white;padding:10px 18px;border-radius:8px;text-decoration:none;margin-right:8px;">
-    🌐 Visit Buildings.sg
-  </a>
+## 📦 Quick Access
 
-  <a href="https://city-syntax.github.io/buildings.sg/documentation.html" style="background:#10b981;color:white;padding:10px 18px;border-radius:8px;text-decoration:none;margin-right:8px;">
-    📘 Documentation
-  </a>
+<div style="padding:16px; background:#f2f7ff; border-left:6px solid #3b82f6; margin-bottom:12px;">
+  <strong>Buildings.sg</strong><br>
+  Access the live platform for urban energy and carbon analysis.<br>
+  🔗 <a href="http://buildings.sg/">http://buildings.sg/</a>
+</div>
 
-  <a href="https://github.com/City-Syntax/buildings.sg/tree/main" style="background:#f59e0b;color:white;padding:10px 18px;border-radius:8px;text-decoration:none;">
-    🛠️ GitHub Repo
-  </a>
-</p>
+<div style="padding:16px; background:#f0fdfa; border-left:6px solid #14b8a6; margin-bottom:12px;">
+  <strong>Buildings.sg Documentation</strong><br>
+  Read the full pipelines, simulation workflows, and methods.<br>
+  🔗 <a href="https://city-syntax.github.io/buildings.sg/documentation.html">Documentation</a>
+</div>
+
+<div style="padding:16px; background:#fef6e4; border-left:6px solid #f59e0b;">
+  <strong>GitHub Repository</strong><br>
+  Explore the source code, datasets, and EnergyPlus templates.<br>
+  🔗 <a href="https://github.com/City-Syntax/buildings.sg/tree/main">GitHub Repo</a>
+</div>
+
 
 <img width="1920" height="1200" alt="platform1" src="https://github.com/user-attachments/assets/56349b70-5349-4b0b-b53a-119879239733" />
 
