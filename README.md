@@ -106,7 +106,7 @@ Each feature corresponds to a single building with its geometry and detailed att
   }
 }
 ```
-<br><br>
+<br>
 
 ## 🧾 EnergyPlus Templates
 
