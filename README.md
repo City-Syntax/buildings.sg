@@ -15,6 +15,7 @@ Operational carbon reflects emissions from day-to-day building energy use, inclu
 ### Embodied Carbon Simulation
 Embodied carbon includes emissions from material extraction, transport, manufacturing, and construction (A1–A5). A probabilistic method is used to address uncertainties, with results presented as probability distributions for risk-informed decision-making.
 
+
 ## 📂 Project Structure
 
 index.html          – Main entry point that loads and initializes the web application.  
@@ -27,6 +28,7 @@ mapbox.js           – Initializes and styles the Mapbox GL JS 3D environment.
 panel.js            – Manages UI panels, controls, and filtering logic.  
 popup.js            – Generates informational popups for Data and About sections.
 
+
 ## 🚀 Main Features
 
 - Multi-layer 3D visualization of building archetypes, operational carbon, embodied carbon, and Green Mark attributes.  
@@ -36,6 +38,7 @@ popup.js            – Generates informational popups for Data and About sectio
 - Toggle machine-learning–derived parameters to explore alternative scenarios.  
 - Downloadable GeoJSON datasets and EnergyPlus IDF templates for external modeling.  
 - Minimal dependencies and no complex frameworks, enabling easy maintenance and adaptation for other cities.
+
 
 ## 🧩 Version Information
 
@@ -49,6 +52,7 @@ popup.js            – Generates informational popups for Data and About sectio
 ### Embodied Carbon Simulation  
 **Version:** 3.0  **Last Updated:** 2025-06-11  
 
+
 ## 🛠️ Running Locally
 
 Download the entire code base and open `index.html` in a modern browser. Some browsers restrict local file access, so serving the project with a simple HTTP server can help:
@@ -58,6 +62,7 @@ python3 -m http.server
 ```
 
 Then navigate to `http://localhost:8000` in your browser.
+
 
 ## 🧱 Data Backbone
 
@@ -102,6 +107,7 @@ Each feature corresponds to a single building with its geometry and detailed att
 }
 ```
 
+
 ## 🧾 EnergyPlus Templates
 
 The `Data/Download` directory provides `.idf` templates for use with EnergyPlus. Each file represents a common building archetype in Singapore, with the parameter set sourced and contextualized for the relevant buildings. The archetype templates are either calibrated or validated against benchmark data published by the authorities:
@@ -121,6 +127,7 @@ The `Data/Download` directory provides `.idf` templates for use with EnergyPlus.
 A ZIP archive `AllArhcetypes_SGP_2025_V5.zip` collects all templates. These files include typical schedules, constructions, and system assumptions reflecting Singapore's 2025 building stock. You can modify them or plug them directly into EnergyPlus for your own analyses.
 
 These models can be imported into Rhino3D and Grasshopper for scenario customization using tools like Ladybug Tools, which includes Honeybee and Honeybee-Energy for assigning constructions, internal loads, and HVAC systems, along with Ladybug for climate integration and visualization. Alternatively, the provided EnergyPlus templates can be used directly in any software that supports the EnergyPlus engine, such as ClimateStudio, DesignBuilder, or custom simulation workflows. Initial calibration can be performed using Singapore’s EPW climate data (2001–2020), before proceeding to batch simulations or archetype-level performance analyses.
+
 
 ## 💡 Usage Pipeline
 
