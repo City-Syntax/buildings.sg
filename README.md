@@ -2,9 +2,7 @@
 
 <img width="1920" height="1200" alt="platform1" src="https://github.com/user-attachments/assets/56349b70-5349-4b0b-b53a-119879239733" />
 
-[![Buildings.sg](https://img.shields.io/badge/🌐-Buildings.sg-blue?style=for-the-badge)](http://buildings.sg/)  
-[![Documentation](https://img.shields.io/badge/📘-Documentation-brightgreen?style=for-the-badge)](https://city-syntax.github.io/buildings.sg/documentation.html)  
-[![GitHub](https://img.shields.io/badge/🛠️-GitHub%20Repo-black?style=for-the-badge)](https://github.com/City-Syntax/buildings.sg/tree/main)
+[![Buildings.sg](https://img.shields.io/badge/🌐-Buildings.sg-blue?style=for-the-badge)](http://buildings.sg/)  [![Documentation](https://img.shields.io/badge/📘-Documentation-brightgreen?style=for-the-badge)](https://city-syntax.github.io/buildings.sg/documentation.html)  [![GitHub](https://img.shields.io/badge/🛠️-GitHub%20Repo-black?style=for-the-badge)](https://github.com/City-Syntax/buildings.sg/tree/main)
 
 
 [Buildings.sg](https://buildings.sg) is an open, interactive platform developed by the [City Syntax Lab](https://www.citysyntax.io/) at the National University of Singapore (NUS) for **Urban Building Energy Modeling (UBEM)** and carbon emissions mapping in Singapore. The platform integrates spatial data with operational and embodied carbon simulations, supported by a comprehensive set of open-source EnergyPlus templates for typical building archetypes in Singapore. Users can download and customize these templates for detailed simulations. The platform supports Singapore’s Green Plan 2030 and is designed to be scalable for deployment in other regions with available building and climate data.
