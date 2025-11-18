@@ -42,9 +42,8 @@ popup.js            – Generates informational popups for Data and About sectio
 
 ## 🧩 Version Information
 
-**Platform Version:** 5.0  
-**Release Date:** 2025-11-15  
-**Status:** Active  
+**Platform Version:** 1.0  **Status:** Active  
+**Building dataset Version:**  **Last Updated:** 2025-11-15  
 
 ### Energy Simulation  
 **Version:** 5.0  **Last Updated:** 2025-06-18  
