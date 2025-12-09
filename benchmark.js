@@ -618,7 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 grid: [
                     { left: 10, right: '4%', top: '10%', height: '50%' }, // 直方图
-                    { left: 46, right: '4%', top: '60%', height: '16%' }  // 箱型图
+                    { left: 48, right: '4%', top: '60%', height: '16%' }  // 箱型图
                 ],
                 xAxis: [
                     {
@@ -824,5 +824,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Initialization error: Button with ID 'bm-export-btn' not found.");
         }
     });
+
 
 });
