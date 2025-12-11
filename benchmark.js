@@ -108,8 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
             gfa: parseFloat(document.getElementById('bm-gfa-input').value),
         };
 
-        if (!selectedSubtype || !selectedArchetype || Object.values(bmUserData).some(isNaN)) {
-            alert('Please select an Archetype and input all required parameters.');
+        if (!selectedSubtype || !selectedArchetype || isNaN(bmUserData.eui) || isNaN(bmUserData.gfa)) {
+            alert('Please select an Archetype and input required parameters.');
             return;
         }
 
@@ -827,3 +827,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+
