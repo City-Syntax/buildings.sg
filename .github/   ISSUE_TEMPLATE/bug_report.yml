@@ -1,1 +1,115 @@
+# .github/ISSUE_TEMPLATE/bug_report.yml
 
+name: Bug report
+description: Report a bug or technical problem in the Buildings.city package
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug in **Buildings.city**.
+
+        Please provide enough detail for us to understand and reproduce the issue.
+
+  - type: input
+    id: city
+    attributes:
+      label: City or project name
+      description: Which city deployment or project are you working on?
+      placeholder: e.g. Singapore
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue_area
+    attributes:
+      label: Area of the issue
+      description: Which part of the package is affected?
+      options:
+        - config.json
+        - GeoJSON dataset
+        - map rendering
+        - popup / interface
+        - operational energy workflow
+        - embodied carbon workflow
+        - local development / npm run dev
+        - documentation
+        - other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the issue clearly.
+      placeholder: Explain the problem you encountered.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: List the steps that caused the issue.
+      placeholder: |
+        1. Update config.json
+        2. Replace the GeoJSON dataset
+        3. Run npm run dev
+        4. Open the browser
+        5. See the error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+      placeholder: Describe the expected result.
+    validations:
+      required: true
+
+  - type: textarea
+    id: dataset_details
+    attributes:
+      label: Dataset details
+      description: Describe any relevant dataset information, such as attribute names or archetype values.
+      placeholder: e.g. building_archetype, height, gross_floor_area, embodied_carbon
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Local environment
+      description: Provide information about your setup.
+      placeholder: |
+        OS:
+        Browser:
+        Node.js version:
+        npm version:
+        Vite version:
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error messages, screenshots, or logs
+      description: Paste terminal errors, browser console output, or screenshots if available.
+      placeholder: Paste logs or attach screenshots here.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      description: Please confirm the following before submitting.
+      options:
+        - label: I checked that the GeoJSON path in config.json is correct.
+          required: false
+        - label: I checked that required GeoJSON attributes match the configuration exactly.
+          required: false
+        - label: I checked that my Mapbox token is valid.
+          required: false
+        - label: I reviewed the documentation before submitting.
+          required: false
