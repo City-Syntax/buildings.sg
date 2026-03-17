@@ -1,1 +1,92 @@
+# .github/ISSUE_TEMPLATE/feature_request.yml
 
+name: Feature request
+description: Suggest an improvement or new feature for the Buildings.city package
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement for **Buildings.city**.
+
+        Please describe the idea clearly and explain why it would be useful.
+
+  - type: input
+    id: feature_title
+    attributes:
+      label: Feature title
+      description: Give the proposed feature a short title.
+      placeholder: e.g. Add support for multiple city datasets
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature_area
+    attributes:
+      label: Area of improvement
+      description: Which part of the package would this improve?
+      options:
+        - config.json
+        - GeoJSON workflow
+        - map rendering
+        - popup / interface
+        - operational energy workflow
+        - embodied carbon workflow
+        - documentation
+        - deployment / local development
+        - other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Explain the limitation, pain point, or missing capability.
+      placeholder: Describe the current problem or workflow limitation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the feature or improvement you would like to see.
+      placeholder: Explain how the feature should work.
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Example use case
+      description: Describe how cities, researchers, or practitioners would use this feature.
+      placeholder: Describe a realistic use case.
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Describe any alternative approaches or current workarounds.
+      placeholder: Explain other options you have considered.
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context
+      description: Add links, references, sketches, screenshots, or related notes if useful.
+      placeholder: Add any supporting details here.
+
+  - type: checkboxes
+    id: principles
+    attributes:
+      label: Contribution principles
+      description: Please confirm the following if relevant.
+      options:
+        - label: This suggestion is intended to keep the package lightweight.
+          required: false
+        - label: This suggestion should remain compatible with a configuration-driven workflow.
+          required: false
+        - label: This suggestion would help cities or researchers deploy UBEM platforms more easily.
+          required: false
