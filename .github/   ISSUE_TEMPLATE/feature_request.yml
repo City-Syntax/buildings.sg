@@ -1,1 +1,15 @@
+# .github/ISSUE_TEMPLATE/config.yml
 
+blank_issues_enabled: false
+contact_links:
+  - name: Buildings.city documentation
+    url: https://city-syntax.github.io/buildings.sg/documentation.html
+    about: Please review the documentation before opening an issue.
+
+  - name: Buildings.city website
+    url: https://buildings.sg
+    about: Learn more about the Buildings.city platform.
+
+  - name: Source repository
+    url: https://github.com/City-Syntax/buildings.sg
+    about: Browse the codebase and project files.
