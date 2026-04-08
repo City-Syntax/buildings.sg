@@ -1,0 +1,5 @@
+# Local secrets
+config.local.js
+.env
+.env.*
+!.env.example

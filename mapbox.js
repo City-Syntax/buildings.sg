@@ -1,7 +1,4 @@
-mapboxgl.accessToken = window.MAPBOX_ACCESS_TOKEN || '';
-if (!mapboxgl.accessToken) {
-    console.warn('Mapbox access token is not configured. Set window.MAPBOX_ACCESS_TOKEN before loading the map.');
-}
+mapboxgl.accessToken = '';
 
 // 初始化地图
 var map = new mapboxgl.Map({
