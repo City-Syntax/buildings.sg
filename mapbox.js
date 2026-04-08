@@ -3,7 +3,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2l0eXN5bnRheCIsImEiOiJjbTljY2E2b28wb3B5MnJxe
 // 初始化地图
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/citysyntax/cmnpptzo8000401sb75g3gnm9',
+    // 使用稳定的基础底图，专题数据图层全部通过代码动态添加，不依赖 Studio style 里的预设 layer/source
+    style: 'mapbox://styles/mapbox/light-v11',
     attributionControl: true,
     dragRotate: true,
     center: [103.825, 1.282],
@@ -48,6 +49,249 @@ map.addControl(draw, 'top-right');
 
 document.querySelector('.mapboxgl-ctrl-top-right').style.top = "46px";
 
+function ensureSourcesAndLayers() {
+    if (!map.isStyleLoaded()) return;
+
+    if (!map.getSource('buildings_all')) {
+        map.addSource('buildings_all', {
+            type: 'vector',
+            url: 'mapbox://citysyntax.dzeh34h9'
+        });
+    }
+
+    if (!map.getLayer('sg-buildings-3d')) {
+        map.addLayer({
+            "id": "sg-buildings-3d",
+            "type": "fill-extrusion",
+            "source": "buildings_all",
+            "source-layer": "sg_buildings_v5-avlt46",
+            "layout": {
+                "fill-extrusion-edge-radius": 0.5
+            },
+            "minzoom": 10,
+            "maxzoom": 20,
+            "paint": {
+                "fill-extrusion-height": [
+                    "interpolate", ["linear"], ["get", "height"],
+                    0, 3,
+                    280, 280
+                ],
+                "fill-extrusion-color": [
+                    "match", ["get", "building_archetype"],
+                    ["hdb"], "#1abc9c",
+                    ["landed_property"], "#2ecc71",
+                    ["hotel", "shophouse"], "#9b59b6",
+                    ["ihl", "non_ihl"], "#e67e22",
+                    ["clinic", "hospital", "nursing_home"], "#f1c40f",
+                    ["mixed_development", "retail", "office", "business_park"], "#34495e",
+                    ["industrial"], "#e74c3c",
+                    ["supermarket", "community_cultural", "sports", "data_centre", "restaurant", "hawker_centre"], "#95a5a6",
+                    ["private_apartment"], "#3498db",
+                    "#ffffff"
+                ],
+                "fill-extrusion-flood-light-intensity": 0,
+                "fill-extrusion-ambient-occlusion-intensity": 0,
+                "fill-extrusion-flood-light-ground-attenuation": 0.7
+            },
+            "filter": ['==', ['get', 'ml_probability'], null]
+        });
+    }
+
+    if (!map.getLayer('buildings-embodied-carbon')) {
+        map.addLayer({
+            "id": "buildings-embodied-carbon",
+            "type": "fill-extrusion",
+            "source": "buildings_all",
+            "source-layer": "sg_buildings_v5-avlt46",
+            "layout": {
+                "fill-extrusion-edge-radius": 0.5,
+                "visibility": "none"
+            },
+            "minzoom": 10,
+            "maxzoom": 20,
+            "paint": {
+                "fill-extrusion-height": [
+                    "interpolate", ["linear"], ["get", "height"],
+                    0, 3,
+                    280, 280
+                ],
+                "fill-extrusion-color": [
+                    "interpolate", ["linear"], ["get", "embodied_carbon"],
+                    0, "#2bf3a9",
+                    50000, "#2bf3a9",
+                    1000000, "#0fb89f",
+                    10000000, "#275fa0",
+                    20000000, "#df80e0",
+                    50000000, "#f0004c"
+                ],
+                "fill-extrusion-flood-light-ground-attenuation": 0.7
+            },
+            "filter": ['==', ['get', 'ml_probability'], null]
+        });
+    }
+
+    if (!map.getLayer('buildings-operational-carbon')) {
+        map.addLayer({
+            "id": "buildings-operational-carbon",
+            "type": "fill-extrusion",
+            "source": "buildings_all",
+            "source-layer": "sg_buildings_v5-avlt46",
+            "layout": {
+                "fill-extrusion-edge-radius": 0.5,
+                "visibility": "none"
+            },
+            "minzoom": 10,
+            "maxzoom": 20,
+            "paint": {
+                "fill-extrusion-height": [
+                    "interpolate", ["linear"], ["get", "height"],
+                    0, 3,
+                    280, 280
+                ],
+                "fill-extrusion-color": [
+                    "interpolate", ["linear"], ["get", "energy_total"],
+                    0, "#0d9c6c",
+                    5000, "#0d9c6c",
+                    50000, "#57f46c",
+                    500000, "#f5ed0f",
+                    5000000, "#f56b0f"
+                ],
+                "fill-extrusion-flood-light-ground-attenuation": 0.7
+            },
+            "filter": ['==', ['get', 'ml_probability'], null]
+        });
+    }
+
+    if (!map.getLayer('bca-buildings-gfa')) {
+        map.addLayer({
+            "layout": { "fill-extrusion-edge-radius": 0.5, "visibility": "none" },
+            "filter": ["match", ["get", "data_source"], ["bca"], true, false],
+            "type": "fill-extrusion",
+            "source": "buildings_all",
+            "id": "bca-buildings-gfa",
+            "minzoom": 10,
+            "maxzoom": 20,
+            "paint": {
+                "fill-extrusion-height": ["interpolate", ["linear"], ["get", "height"], 0, 3, 280, 280],
+                "fill-extrusion-color": ["interpolate", ["linear"], ["get", "gross_floor_area"], 800, "#572323", 20000, "#e07410", 100000, "#faef14", 200000, "#b8ea5d"],
+                "fill-extrusion-flood-light-ground-attenuation": 0.7
+            },
+            "source-layer": "sg_buildings_v5-avlt46"
+        });
+    }
+
+    if (!map.getLayer('bca-buildings-eui')) {
+        map.addLayer({
+            "layout": { "fill-extrusion-edge-radius": 0.5, "visibility": "none" },
+            "filter": ["match", ["get", "data_source"], ["bca"], true, false],
+            "type": "fill-extrusion",
+            "source": "buildings_all",
+            "id": "bca-buildings-eui",
+            "minzoom": 10,
+            "maxzoom": 20,
+            "paint": {
+                "fill-extrusion-height": ["interpolate", ["linear"], ["get", "height"], 0, 3, 280, 280],
+                "fill-extrusion-color": ["interpolate", ["linear"], ["get", "eui2020"], 10, "#5cfe2f", 300, "#146aff", 600, "#ef14ff"],
+                "fill-extrusion-flood-light-ground-attenuation": 0.7
+            },
+            "source-layer": "sg_buildings_v5-avlt46"
+        });
+    }
+
+    if (!map.getLayer('bca-buildings-gm')) {
+        map.addLayer({
+            "layout": { "fill-extrusion-edge-radius": 0.5, "visibility": "none" },
+            "filter": ["match", ["get", "data_source"], ["bca"], true, false],
+            "type": "fill-extrusion",
+            "source": "buildings_all",
+            "id": "bca-buildings-gm",
+            "minzoom": 10,
+            "maxzoom": 20,
+            "paint": {
+                "fill-extrusion-height": ["interpolate", ["linear"], ["get", "height"], 0, 3, 280, 280],
+                "fill-extrusion-color": ["match", ["get", "greenmark_rating"],
+                    ["GoldPlus"], "#fff457", ["Gold"], "#d6ff33", ["Platinum"], "#7eff3d",
+                    ["Legislated"], "#00ff62", ["Certified"], "#0affb1", "#999999"],
+                "fill-extrusion-flood-light-ground-attenuation": 0.7
+            },
+            "source-layer": "sg_buildings_v5-avlt46"
+        });
+    }
+
+    if (!map.getLayer('sg-buildings-3d-white')) {
+        map.addLayer({
+            "id": "sg-buildings-3d-white",
+            "type": "fill-extrusion",
+            "source": "buildings_all",
+            "source-layer": "sg_buildings_v5-avlt46",
+            "layout": {
+                "fill-extrusion-edge-radius": 0.5,
+                "visibility": "none"
+            },
+            "minzoom": 10,
+            "maxzoom": 20,
+            "paint": {
+                "fill-extrusion-height": [
+                    "interpolate", ["linear"], ["get", "height"],
+                    0, 3,
+                    280, 280
+                ],
+                "fill-extrusion-color": "#f0f0f0",
+                "fill-extrusion-opacity": 0.7,
+                "fill-extrusion-flood-light-ground-attenuation": 0.7
+            },
+            "filter": ['==', ['get', 'ml_probability'], null]
+        });
+    }
+
+    if (!map.getSource('masterplan2019')) {
+        map.addSource('masterplan2019', {
+            type: 'vector',
+            url: 'mapbox://citysyntax.1asbha62'
+        });
+    }
+
+    if (!map.getLayer('masterplan2019')) {
+        map.addLayer({
+            "id": "masterplan2019",
+            "type": "fill",
+            "source": "masterplan2019",
+            "source-layer": "masterplan2019-2z8gzy",
+            "layout": {
+                "visibility": "none"
+            },
+            "minzoom": 10,
+            "maxzoom": 20,
+            "filter": ["match", ["geometry-type"], ["Polygon"], true, false],
+            "paint": {
+                "fill-color": [
+                    "case",
+                    ["match", ["get", "LU_DESC"], ["BUSINESS PARK", "BUSINESS 1", "BUSINESS 2"], true, false], "hsl(27, 98%, 56%)",
+                    ["match", ["get", "LU_DESC"], ["COMMERCIAL", "COMMERCIAL / INSTITUTION"], true, false], "#00b4d8",
+                    ["match", ["get", "LU_DESC"], ["SPORTS & RECREATION"], true, false], "hsl(339, 93%, 57%)",
+                    ["match", ["get", "LU_DESC"], ["HOTEL"], true, false], "hsl(355, 78%, 56%)",
+                    ["match", ["get", "LU_DESC"], ["CIVIC & COMMUNITY INSTITUTION", "PLACE OF WORSHIP", "UTILITY"], true, false], "hsl(273, 46%, 38%)",
+                    ["match", ["get", "LU_DESC"], ["COMMERCIAL & RESIDENTIAL", "RESIDENTIAL WITH COMMERCIAL AT 1ST STOREY"], true, false], "hsl(43, 82%, 63%)",
+                    ["match", ["get", "LU_DESC"], ["HEALTH & MEDICAL CARE"], true, false], "hsl(152, 69%, 60%)",
+                    ["match", ["get", "LU_DESC"], ["OPEN SPACE", "PARK", "BEACH AREA", "RESERVE SITE"], true, false], "hsl(173, 70%, 40%)",
+                    ["match", ["get", "LU_DESC"], ["EDUCATIONAL INSTITUTION"], true, false], "hsl(273, 63%, 80%)",
+                    ["match", ["get", "LU_DESC"], ["RESIDENTIAL / INSTITUTION", "RESIDENTIAL"], true, false], "hsl(60, 80.60%, 85.90%)",
+                    ["match", ["get", "LU_DESC"], ["TRANSPORT FACILITIES", "PORT / AIRPORT"], true, false], "#457b9d",
+                    ["match", ["get", "LU_DESC"], ["WHITE", "BUSINESS PARK - WHITE", "BUSINESS 1 - WHITE", "BUSINESS 2 - WHITE"], true, false], "hsl(210, 0%, 100%)",
+                    ["match", ["get", "LU_DESC"], ["ROAD", "MASS RAPID TRANSIT", "LIGHT RAPID TRANSIT"], true, false], "hsl(208, 12%, 86%)",
+                    ["match", ["get", "LU_DESC"], ["WATERBODY"], true, false], "hsl(181, 94%, 78%)",
+                    "#212529"
+                ],
+                "fill-opacity": 1
+            }
+        });
+    }
+
+    toggleLayer(activeLayer || 'type');
+}
+
+map.on('style.load', ensureSourcesAndLayers);
+
 // 加载地图和layers着色
 map.on('load', () => {
     console.log('Map is fully loaded!');
@@ -69,232 +313,7 @@ map.on('load', () => {
         setTimeout(() => { console.log('New pitch:', map.getPitch()); }, 1100);
     });
 
-    // 添加数据源（更新）
-    map.addSource('buildings_all', {
-        type: 'vector',
-        url: 'mapbox://citysyntax.dzeh34h9'
-    });
-
-    // 建筑 archetype 图层
-    map.addLayer({
-        "id": "sg-buildings-3d",
-        "type": "fill-extrusion",
-        "source": "buildings_all",
-        "source-layer": "sg_buildings_v5-avlt46",
-        "layout": {
-            "fill-extrusion-edge-radius": 0.5
-        },
-        "minzoom": 10,
-        "maxzoom": 20,
-        "paint": {
-            "fill-extrusion-height": [
-                "interpolate", ["linear"], ["get", "height"],
-                0, 3,
-                280, 280
-            ],
-            "fill-extrusion-color": [
-                "match", ["get", "building_archetype"],
-                ["hdb"], "#1abc9c",
-                ["landed_property"], "#2ecc71",
-                ["hotel", "shophouse"], "#9b59b6",
-                ["ihl", "non_ihl"], "#e67e22",
-                ["clinic", "hospital", "nursing_home"], "#f1c40f",
-                ["mixed_development", "retail", "office", "business_park"], "#34495e",
-                ["industrial"], "#e74c3c",
-                ["supermarket", "community_cultural", "sports", "data_centre", "restaurant", "hawker_centre"], "#95a5a6",
-                ["private_apartment"], "#3498db",
-                "#ffffff"
-            ],
-            "fill-extrusion-flood-light-intensity": 0,
-            "fill-extrusion-ambient-occlusion-intensity": 0,
-            "fill-extrusion-flood-light-ground-attenuation": 0.7
-        },
-        "filter": ['==', ['get', 'ml_probability'], null]
-    });
-
-    // Embodied Carbon 图层
-    map.addLayer({
-        "id": "buildings-embodied-carbon",
-        "type": "fill-extrusion",
-        "source": "buildings_all",
-        "source-layer": "sg_buildings_v5-avlt46",
-        "layout": {
-            "fill-extrusion-edge-radius": 0.5
-        },
-        "minzoom": 10,
-        "maxzoom": 20,
-        "paint": {
-            "fill-extrusion-height": [
-                "interpolate", ["linear"], ["get", "height"],
-                0, 3,
-                280, 280
-            ],
-            "fill-extrusion-color": [
-                "interpolate", ["linear"], ["get", "embodied_carbon"],
-                0, "#2bf3a9",
-                50000, "#2bf3a9",
-                1000000, "#0fb89f",
-                10000000, "#275fa0",
-                20000000, "#df80e0",
-                50000000, "#f0004c"
-            ],
-            "fill-extrusion-flood-light-ground-attenuation": 0.7
-        },
-        "filter": ['==', ['get', 'ml_probability'], null]
-    });
-
-    // Operational Carbon 图层
-    map.addLayer({
-        "id": "buildings-operational-carbon",
-        "type": "fill-extrusion",
-        "source": "buildings_all",
-        "source-layer": "sg_buildings_v5-avlt46",
-        "layout": {
-            "fill-extrusion-edge-radius": 0.5
-        },
-        "minzoom": 10,
-        "maxzoom": 20,
-        "paint": {
-            "fill-extrusion-height": [
-                "interpolate", ["linear"], ["get", "height"],
-                0, 3,
-                280, 280
-            ],
-            "fill-extrusion-color": [
-                "interpolate", ["linear"], ["get", "energy_total"],
-                0, "#0d9c6c",
-                5000, "#0d9c6c",
-                50000, "#57f46c",
-                500000, "#f5ed0f",
-                5000000, "#f56b0f"
-            ],
-            "fill-extrusion-flood-light-ground-attenuation": 0.7
-        },
-        "filter": ['==', ['get', 'ml_probability'], null]
-    });
-
-    // 添加bca-buildings-gfa着色图层
-    map.addLayer({
-        "layout": { "fill-extrusion-edge-radius": 0.5 },
-        "filter": ["match", ["get", "data_source"], ["bca"], true, false],
-        "type": "fill-extrusion",
-        "source": "buildings_all",
-        "id": "bca-buildings-gfa",
-        "minzoom": 10,
-        "maxzoom": 20,
-        "paint": {
-            "fill-extrusion-height": ["interpolate", ["linear"], ["get", "height"], 0, 3, 280, 280],
-            "fill-extrusion-color": ["interpolate", ["linear"], ["get", "gross_floor_area"], 800, "#572323", 20000, "#e07410", 100000, "#faef14", 200000, "#b8ea5d"],
-            "fill-extrusion-flood-light-ground-attenuation": 0.7
-        },
-        "slot": "",
-        "source-layer": "sg_buildings_v5-avlt46"
-    });
-
-    // 添加bca-buildings-eui着色图层
-    map.addLayer({
-        "layout": { "fill-extrusion-edge-radius": 0.5, "visibility": "none" },
-        "filter": ["match", ["get", "data_source"], ["bca"], true, false],
-        "type": "fill-extrusion",
-        "source": "buildings_all",
-        "id": "bca-buildings-eui",
-        "minzoom": 10,
-        "maxzoom": 20,
-        "paint": {
-            "fill-extrusion-height": ["interpolate", ["linear"], ["get", "height"], 0, 3, 280, 280],
-            "fill-extrusion-color": ["interpolate", ["linear"], ["get", "eui2020"], 10, "#5cfe2f", 300, "#146aff", 600, "#ef14ff"],
-            "fill-extrusion-flood-light-ground-attenuation": 0.7
-        },
-        "slot": "",
-        "source-layer": "sg_buildings_v5-avlt46"
-    });
-
-    // 添加bca-buildings-gm着色图层
-    map.addLayer({
-        "layout": { "fill-extrusion-edge-radius": 0.5, "visibility": "none" },
-        "filter": ["match", ["get", "data_source"], ["bca"], true, false],
-        "type": "fill-extrusion",
-        "source": "buildings_all",
-        "id": "bca-buildings-gm",
-        "minzoom": 10,
-        "maxzoom": 20,
-        "paint": {
-            "fill-extrusion-height": ["interpolate", ["linear"], ["get", "height"], 0, 3, 280, 280],
-            "fill-extrusion-color": ["match", ["get", "greenmark_rating"],
-                ["GoldPlus"], "#fff457", ["Gold"], "#d6ff33", ["Platinum"], "#7eff3d",
-                ["Legislated"], "#00ff62", ["Certified"], "#0affb1", "#999999"],
-            "fill-extrusion-flood-light-ground-attenuation": 0.7
-        },
-        "slot": "",
-        "source-layer": "sg_buildings_v5-avlt46"
-    });
-
-    toggleLayer('type');
-
-    // 添加建筑物 3D 图层（白色）
-    map.addLayer({
-        "id": "sg-buildings-3d-white",
-        "type": "fill-extrusion",
-        "source": "buildings_all",
-        "source-layer": "sg_buildings_v5-avlt46",
-        "layout": {
-            "fill-extrusion-edge-radius": 0.5,
-            "visibility": "none" // 初始隐藏
-        },
-        "minzoom": 10,
-        "maxzoom": 20,
-        "paint": {
-            "fill-extrusion-height": [
-                "interpolate", ["linear"], ["get", "height"],
-                0, 3,
-                280, 280
-            ],
-            "fill-extrusion-color": "#f0f0f0",
-            "fill-extrusion-opacity": 0.7,
-            "fill-extrusion-flood-light-ground-attenuation": 0.7
-        },
-        "filter": ['==', ['get', 'ml_probability'], null]
-    });
-
-    // 添加 Master Plan 2019 数据源和图层
-    map.addSource('masterplan2019', {
-        type: 'vector',
-        url: 'mapbox://citysyntax.1asbha62'
-    });
-
-    map.addLayer({
-        "id": "masterplan2019",
-        "type": "fill",
-        "source": "masterplan2019",
-        "source-layer": "masterplan2019-2z8gzy",
-        "layout": {
-            "visibility": "none" // 初始隐藏
-        },
-        "minzoom": 10,
-        "maxzoom": 20,
-        "filter": ["match", ["geometry-type"], ["Polygon"], true, false],
-        "paint": {
-            "fill-color": [
-                "case",
-                ["match", ["get", "LU_DESC"], ["BUSINESS PARK", "BUSINESS 1", "BUSINESS 2"], true, false], "hsl(27, 98%, 56%)",
-                ["match", ["get", "LU_DESC"], ["COMMERCIAL", "COMMERCIAL / INSTITUTION"], true, false], "#00b4d8",
-                ["match", ["get", "LU_DESC"], ["SPORTS & RECREATION"], true, false], "hsl(339, 93%, 57%)",
-                ["match", ["get", "LU_DESC"], ["HOTEL"], true, false], "hsl(355, 78%, 56%)",
-                ["match", ["get", "LU_DESC"], ["CIVIC & COMMUNITY INSTITUTION", "PLACE OF WORSHIP", "UTILITY"], true, false], "hsl(273, 46%, 38%)",
-                ["match", ["get", "LU_DESC"], ["COMMERCIAL & RESIDENTIAL", "RESIDENTIAL WITH COMMERCIAL AT 1ST STOREY"], true, false], "hsl(43, 82%, 63%)",
-                ["match", ["get", "LU_DESC"], ["HEALTH & MEDICAL CARE"], true, false], "hsl(152, 69%, 60%)",
-                ["match", ["get", "LU_DESC"], ["OPEN SPACE", "PARK", "BEACH AREA", "RESERVE SITE"], true, false], "hsl(173, 70%, 40%)",
-                ["match", ["get", "LU_DESC"], ["EDUCATIONAL INSTITUTION"], true, false], "hsl(273, 63%, 80%)",
-                ["match", ["get", "LU_DESC"], ["RESIDENTIAL / INSTITUTION", "RESIDENTIAL"], true, false], "hsl(60, 80.60%, 85.90%)",
-                ["match", ["get", "LU_DESC"], ["TRANSPORT FACILITIES", "PORT / AIRPORT"], true, false], "#457b9d",
-                ["match", ["get", "LU_DESC"], ["WHITE", "BUSINESS PARK - WHITE", "BUSINESS 1 - WHITE", "BUSINESS 2 - WHITE"], true, false], "hsl(210, 0%, 100%)",
-                ["match", ["get", "LU_DESC"], ["ROAD", "MASS RAPID TRANSIT", "LIGHT RAPID TRANSIT"], true, false], "hsl(208, 12%, 86%)",
-                ["match", ["get", "LU_DESC"], ["WATERBODY"], true, false], "hsl(181, 94%, 78%)",
-                "#212529"
-            ],
-            "fill-opacity": 1
-        }
-    });
+    ensureSourcesAndLayers();
 
     const masterplanElements = document.querySelectorAll('.legend-container.masterplan, .introduce-masterplan');
     const masterplanBtn = document.getElementById('ura-link');
@@ -445,7 +464,11 @@ map.on('load', () => {
     ];
 
     // 确保图层位于最上层
-    layers.forEach(layer => map.moveLayer('sg-buildings-3d'));
+    layers.forEach(layerId => {
+        if (map.getLayer(layerId)) {
+            map.moveLayer(layerId);
+        }
+    });
 
     // 存储当前的 Popup 实例，防止重复弹出
     let currentPopup = null;
@@ -649,6 +672,7 @@ function toggleLayer(newLayer) {
         }
 
         Object.entries(layerVisibilityMap).forEach(([key, layer]) => {
+            if (!map.getLayer(layer)) return;
             const visibility = (key === newLayer) ? 'visible' : 'none';
             map.setLayoutProperty(layer, 'visibility', visibility);
         });
@@ -763,7 +787,9 @@ function showLayerGroup(groupName) {
 
         // 关闭所有 Mapbox 图层
         allLayerNames.forEach(layer => {
-            map.setLayoutProperty(layer, 'visibility', 'none');
+            if (map.getLayer(layer)) {
+                map.setLayoutProperty(layer, 'visibility', 'none');
+            }
         });
     } else {
         // 先关闭所有按钮、图例、图层
@@ -771,7 +797,9 @@ function showLayerGroup(groupName) {
         bcaContents.forEach(item => item.classList.remove('open'));
 
         allLayerNames.forEach(layer => {
-            map.setLayoutProperty(layer, 'visibility', 'none');
+            if (map.getLayer(layer)) {
+                map.setLayoutProperty(layer, 'visibility', 'none');
+            }
         });
 
         // 激活当前按钮、图例、图层
@@ -780,7 +808,9 @@ function showLayerGroup(groupName) {
 
         // 显示对应图层
         layers[groupName].forEach(layer => {
-            map.setLayoutProperty(layer, 'visibility', 'visible');
+            if (map.getLayer(layer)) {
+                map.setLayoutProperty(layer, 'visibility', 'visible');
+            }
         });
 
         // 显示 legend-container-bca
