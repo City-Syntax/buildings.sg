@@ -331,6 +331,14 @@ map.on('load', () => {
     // 所有 nav-link
     const navLinks = document.querySelectorAll('.nav-link, #ura-link');
 
+    function setActiveNav(linkId) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const activeLink = document.getElementById(linkId);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    }
+
     function hidePanels() {
         panelsToHide.forEach(sel => {
             document.querySelectorAll(sel).forEach(el => {
@@ -358,10 +366,8 @@ map.on('load', () => {
         e.preventDefault();
         if (masterplanBtn.classList.contains('active')) return;
 
-        // 移除所有nav-link active状态
-        navLinks.forEach(link => link.classList.remove('active'));
         // 激活 Master Plan 按钮
-        masterplanBtn.classList.add('active');
+        setActiveNav('ura-link');
 
         // 隐藏除 Master Plan 外的所有非底图图层
         map.getStyle().layers.forEach(layer => {
@@ -405,8 +411,7 @@ map.on('load', () => {
             masterplanBtn.classList.remove('active');
 
             // 给当前按钮加 active
-            navLinks.forEach(link => link.classList.remove('active'));
-            btn.classList.add('active');
+            setActiveNav(id);
 
             // 隐藏 Master Plan 图层和图例
             if (map.getLayer('sg-buildings-3d-white')) {
@@ -421,6 +426,14 @@ map.on('load', () => {
             restorePanels();
         });
     });
+
+    // 页面初始默认显示 Archetype
+    setActiveNav('type-link');
+    masterplanBtn.classList.remove('active');
+    masterplanElements.forEach(el => el.style.display = 'none');
+    restorePanels();
+    activeLayer = null;
+    toggleLayer('type');
 
     // 弹窗逻辑
     map.on('click', 'masterplan2019', (e) => {
