@@ -1,4 +1,4 @@
-mapboxgl.accessToken = '';
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2l0eXN5bnRheCIsImEiOiJjbTljY2E2b28wb3B5MnJxeGZld3pzcjQ2In0.Nr32-kduk0pH-JcRAB-WdA';
 
 // 初始化地图
 var map = new mapboxgl.Map({
