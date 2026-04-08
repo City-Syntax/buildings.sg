@@ -3,8 +3,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2l0eXN5bnRheCIsImEiOiJjbTljY2E2b28wb3B5MnJxe
 // 初始化地图
 var map = new mapboxgl.Map({
     container: 'map',
-    // 使用稳定的基础底图，专题数据图层全部通过代码动态添加，不依赖 Studio style 里的预设 layer/source
-    style: 'mapbox://styles/mapbox/light-v11',
+    style: 'mapbox://styles/citysyntax/cmnpptzo8000401sb75g3gnm9',
     attributionControl: true,
     dragRotate: true,
     center: [103.825, 1.282],
