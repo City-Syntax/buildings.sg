@@ -1,9 +1,9 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiY2l0eXN5bnRheGxhYiIsImEiOiJjbTR0cTFlanMwMjhsMmtxc3Q3NXFrbWU5In0.nRe9l9S7MDLKESSryMhVEw';
+mapboxgl.accessToken = window.MAPBOX_ACCESS_TOKEN || 'pk.eyJ1IjoiY2l0eXN5bnRheCIsImEiOiJjbTljY2E2b28wb3B5MnJxeGZld3pzcjQ2In0.Nr32-kduk0pH-JcRAB-WdA';
 
 // 初始化地图
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/citysyntaxlab/cm57lssiu006301po77yqb3r7',
+    style: 'mapbox://styles/mapbox/standard',
     config: {
         basemap: {
             theme: 'monochrome',
@@ -67,17 +67,18 @@ function addCustomSourcesAndLayers() {
 
     map.addSource('buildings_all', {
         type: 'vector',
-        url: 'mapbox://citysyntaxlab.2iuh8ory'
+        url: 'mapbox://citysyntax.5bogqzsk'
     });
 
     map.addLayer({
         "id": "sg-buildings-3d",
-        "slot": "middle",
+        "slot": "top",
         "type": "fill-extrusion",
         "source": "buildings_all",
-        "source-layer": "sg_buildings-0g14da",
+        "source-layer": "sg_buildings_v5",
         "layout": {
-            "fill-extrusion-edge-radius": 0.5
+            "fill-extrusion-edge-radius": 0.5,
+            "visibility": "visible"
         },
         "minzoom": 10,
         "maxzoom": 20,
@@ -109,10 +110,10 @@ function addCustomSourcesAndLayers() {
 
     map.addLayer({
         "id": "buildings-embodied-carbon",
-        "slot": "middle",
+        "slot": "top",
         "type": "fill-extrusion",
         "source": "buildings_all",
-        "source-layer": "sg_buildings-0g14da",
+        "source-layer": "sg_buildings_v5",
         "layout": {
             "fill-extrusion-edge-radius": 0.5,
             "visibility": "none"
@@ -141,10 +142,10 @@ function addCustomSourcesAndLayers() {
 
     map.addLayer({
         "id": "buildings-operational-carbon",
-        "slot": "middle",
+        "slot": "top",
         "type": "fill-extrusion",
         "source": "buildings_all",
-        "source-layer": "sg_buildings-0g14da",
+        "source-layer": "sg_buildings_v5",
         "layout": {
             "fill-extrusion-edge-radius": 0.5,
             "visibility": "none"
@@ -175,7 +176,7 @@ function addCustomSourcesAndLayers() {
         "filter": ["match", ["get", "data_source"], ["bca"], true, false],
         "type": "fill-extrusion",
         "source": "buildings_all",
-        "slot": "middle",
+        "slot": "top",
         "id": "bca-buildings-gfa",
         "minzoom": 10,
         "maxzoom": 20,
@@ -184,7 +185,7 @@ function addCustomSourcesAndLayers() {
             "fill-extrusion-color": ["interpolate", ["linear"], ["get", "gross_floor_area"], 800, "#572323", 20000, "#e07410", 100000, "#faef14", 200000, "#b8ea5d"],
             "fill-extrusion-flood-light-ground-attenuation": 0.7
         },
-        "source-layer": "sg_buildings-0g14da"
+        "source-layer": "sg_buildings_v5"
     });
 
     map.addLayer({
@@ -192,7 +193,7 @@ function addCustomSourcesAndLayers() {
         "filter": ["match", ["get", "data_source"], ["bca"], true, false],
         "type": "fill-extrusion",
         "source": "buildings_all",
-        "slot": "middle",
+        "slot": "top",
         "id": "bca-buildings-eui",
         "minzoom": 10,
         "maxzoom": 20,
@@ -201,7 +202,7 @@ function addCustomSourcesAndLayers() {
             "fill-extrusion-color": ["interpolate", ["linear"], ["get", "eui2020"], 10, "#5cfe2f", 300, "#146aff", 600, "#ef14ff"],
             "fill-extrusion-flood-light-ground-attenuation": 0.7
         },
-        "source-layer": "sg_buildings-0g14da"
+        "source-layer": "sg_buildings_v5"
     });
 
     map.addLayer({
@@ -209,7 +210,7 @@ function addCustomSourcesAndLayers() {
         "filter": ["match", ["get", "data_source"], ["bca"], true, false],
         "type": "fill-extrusion",
         "source": "buildings_all",
-        "slot": "middle",
+        "slot": "top",
         "id": "bca-buildings-gm",
         "minzoom": 10,
         "maxzoom": 20,
@@ -220,15 +221,15 @@ function addCustomSourcesAndLayers() {
                 ["Legislated"], "#00ff62", ["Certified"], "#0affb1", "#999999"],
             "fill-extrusion-flood-light-ground-attenuation": 0.7
         },
-        "source-layer": "sg_buildings-0g14da"
+        "source-layer": "sg_buildings_v5"
     });
 
     map.addLayer({
         "id": "sg-buildings-3d-white",
-        "slot": "middle",
+        "slot": "top",
         "type": "fill-extrusion",
         "source": "buildings_all",
-        "source-layer": "sg_buildings-0g14da",
+        "source-layer": "sg_buildings_v5",
         "layout": {
             "fill-extrusion-edge-radius": 0.5,
             "visibility": "none"
@@ -250,7 +251,7 @@ function addCustomSourcesAndLayers() {
 
     map.addSource('masterplan2019', {
         type: 'vector',
-        url: 'mapbox://citysyntaxlab.4gxilw4j'
+        url: 'mapbox://citysyntax.1asbha62'
     });
 
     map.addLayer({
@@ -258,7 +259,7 @@ function addCustomSourcesAndLayers() {
         "slot": "middle",
         "type": "fill",
         "source": "masterplan2019",
-        "source-layer": "output-47r2yb",
+        "source-layer": "masterplan2019-2z8gzy",
         "layout": {
             "visibility": "none"
         },
@@ -538,14 +539,14 @@ map.on('load', () => {
         // 清除之前的点击状态
         if (map.clickedFeatureId !== undefined) {
             map.setFeatureState(
-                { source: 'buildings_all', sourceLayer: 'sg_buildings-0g14da', id: map.clickedFeatureId },
+                { source: 'buildings_all', sourceLayer: 'sg_buildings_v5', id: map.clickedFeatureId },
                 { clicked: false }
             );
         }
 
         // 设置当前建筑为点击状态
         map.setFeatureState(
-            { source: 'buildings_all', sourceLayer: 'sg_buildings-0g14da', id: featureId },
+            { source: 'buildings_all', sourceLayer: 'sg_buildings_v5', id: featureId },
             { clicked: true }
         );
 
@@ -696,26 +697,24 @@ function updateMapFilter() {
 
 // 控制图层显示
 function toggleLayer(newLayer) {
-    if (activeLayer !== newLayer) {
-        const bcaButtons = document.querySelectorAll('.buttons-container button');
-        const isActive = Array.from(bcaButtons).some(button => button.classList.contains('active'));
+    const bcaButtons = document.querySelectorAll('.buttons-container button');
+    const isActive = Array.from(bcaButtons).some(button => button.classList.contains('active'));
 
-        // 切换图层并重置过滤
-        if (isActive) {
-            bcaButtons.forEach(button => button.classList.remove('active'));
-        }
-
-        Object.entries(layerVisibilityMap).forEach(([key, layer]) => {
-            if (!map.getLayer(layer)) return;
-            const visibility = (key === newLayer) ? 'visible' : 'none';
-            map.setLayoutProperty(layer, 'visibility', visibility);
-        });
-
-        activeLayer = newLayer; // 更新 activeLayer 为 newLayer
-        console.log('Show legend for:', newLayer); // 调试输出
-        showLegend(newLayer);  // 显示对应的图例
-        updateMapFilter(); // 重新应用筛选
+    // 切换图层并重置过滤
+    if (isActive) {
+        bcaButtons.forEach(button => button.classList.remove('active'));
     }
+
+    Object.entries(layerVisibilityMap).forEach(([key, layer]) => {
+        if (!map.getLayer(layer)) return;
+        const visibility = (key === newLayer) ? 'visible' : 'none';
+        map.setLayoutProperty(layer, 'visibility', visibility);
+    });
+
+    activeLayer = newLayer; // 更新 activeLayer 为 newLayer
+    console.log('Show legend for:', newLayer); // 调试输出
+    showLegend(newLayer);  // 显示对应的图例
+    updateMapFilter(); // 重新应用筛选
 }
 
 // 显示图例
