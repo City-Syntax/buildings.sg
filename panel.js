@@ -1196,6 +1196,10 @@ document.addEventListener("DOMContentLoaded", function () {
         sunChartsFootprint.setOption(optiontwo);
     });
 
+    function updateResultContent() {
+        updateArchetypeDescription();
+    }
+
     subtypeSelect.addEventListener("change", updateArchetypes);
     archetypeSelect.addEventListener("change", updateResultContent);
 

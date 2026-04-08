@@ -3,7 +3,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2l0eXN5bnRheCIsImEiOiJjbTljY2E2b28wb3B5MnJxe
 // 初始化地图
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/citysyntax/cmnpptzo8000401sb75g3gnm9',
+    style: 'mapbox://styles/mapbox/light-v11',
     attributionControl: true,
     dragRotate: true,
     center: [103.825, 1.282],
@@ -449,7 +449,11 @@ map.on('load', () => {
             "buildings-operational-carbon"
         ];
         const filter = toggleML.checked ? null : ['==', ['get', 'ml_probability'], null];
-        mllayers.forEach(id => map.setFilter(id, filter));
+        mllayers.forEach(id => {
+            if (map.getLayer(id)) {
+                map.setFilter(id, filter);
+            }
+        });
     });
 
     // 默认隐藏所有图层和building info弹出框
@@ -474,7 +478,12 @@ map.on('load', () => {
 
     // 鼠标悬停时改变指针
     map.on('mousemove', (e) => {
-        const features = map.queryRenderedFeatures(e.point, { layers });
+        const queryLayers = layers.filter(layerId => map.getLayer(layerId));
+        if (queryLayers.length === 0) {
+            map.getCanvas().style.cursor = '';
+            return;
+        }
+        const features = map.queryRenderedFeatures(e.point, { layers: queryLayers });
         map.getCanvas().style.cursor = features.length ? 'pointer' : '';
     });
 
@@ -486,7 +495,16 @@ map.on('load', () => {
     // 绑定点击事件（只绑定一次）
     map.on('click', (e) => {
         // 获取点击位置上的可见特征，并确保只选择最上层的一个
-        const features = map.queryRenderedFeatures(e.point, { layers });
+        const queryLayers = layers.filter(layerId => map.getLayer(layerId));
+        if (queryLayers.length === 0) {
+            if (currentPopup) {
+                currentPopup.remove();
+                currentPopup = null;
+            }
+            return;
+        }
+
+        const features = map.queryRenderedFeatures(e.point, { layers: queryLayers });
 
         if (features.length === 0) {
             if (currentPopup) {
