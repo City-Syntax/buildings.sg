@@ -1,9 +1,9 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiY2l0eXN5bnRheCIsImEiOiJjbTljY2E2b28wb3B5MnJxeGZld3pzcjQ2In0.Nr32-kduk0pH-JcRAB-WdA';
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2l0eXN5bnRheGxhYiIsImEiOiJjbTR0cTFlanMwMjhsMmtxc3Q3NXFrbWU5In0.nRe9l9S7MDLKESSryMhVEw';
 
 // 初始化地图
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/light-v11',
+    style: 'mapbox://styles/citysyntaxlab/cm57lssiu006301po77yqb3r7',
     attributionControl: true,
     dragRotate: true,
     center: [103.825, 1.282],
@@ -54,7 +54,7 @@ function ensureSourcesAndLayers() {
     if (!map.getSource('buildings_all')) {
         map.addSource('buildings_all', {
             type: 'vector',
-            url: 'mapbox://citysyntax.dzeh34h9'
+            url: 'mapbox://citysyntaxlab.2iuh8ory'
         });
     }
 
@@ -63,7 +63,7 @@ function ensureSourcesAndLayers() {
             "id": "sg-buildings-3d",
             "type": "fill-extrusion",
             "source": "buildings_all",
-            "source-layer": "sg_buildings_v5-avlt46",
+            "source-layer": "sg_buildings-0g14da",
             "layout": {
                 "fill-extrusion-edge-radius": 0.5
             },
@@ -101,7 +101,7 @@ function ensureSourcesAndLayers() {
             "id": "buildings-embodied-carbon",
             "type": "fill-extrusion",
             "source": "buildings_all",
-            "source-layer": "sg_buildings_v5-avlt46",
+            "source-layer": "sg_buildings-0g14da",
             "layout": {
                 "fill-extrusion-edge-radius": 0.5,
                 "visibility": "none"
@@ -134,7 +134,7 @@ function ensureSourcesAndLayers() {
             "id": "buildings-operational-carbon",
             "type": "fill-extrusion",
             "source": "buildings_all",
-            "source-layer": "sg_buildings_v5-avlt46",
+            "source-layer": "sg_buildings-0g14da",
             "layout": {
                 "fill-extrusion-edge-radius": 0.5,
                 "visibility": "none"
@@ -175,7 +175,7 @@ function ensureSourcesAndLayers() {
                 "fill-extrusion-color": ["interpolate", ["linear"], ["get", "gross_floor_area"], 800, "#572323", 20000, "#e07410", 100000, "#faef14", 200000, "#b8ea5d"],
                 "fill-extrusion-flood-light-ground-attenuation": 0.7
             },
-            "source-layer": "sg_buildings_v5-avlt46"
+            "source-layer": "sg_buildings-0g14da"
         });
     }
 
@@ -193,7 +193,7 @@ function ensureSourcesAndLayers() {
                 "fill-extrusion-color": ["interpolate", ["linear"], ["get", "eui2020"], 10, "#5cfe2f", 300, "#146aff", 600, "#ef14ff"],
                 "fill-extrusion-flood-light-ground-attenuation": 0.7
             },
-            "source-layer": "sg_buildings_v5-avlt46"
+            "source-layer": "sg_buildings-0g14da"
         });
     }
 
@@ -213,7 +213,7 @@ function ensureSourcesAndLayers() {
                     ["Legislated"], "#00ff62", ["Certified"], "#0affb1", "#999999"],
                 "fill-extrusion-flood-light-ground-attenuation": 0.7
             },
-            "source-layer": "sg_buildings_v5-avlt46"
+            "source-layer": "sg_buildings-0g14da"
         });
     }
 
@@ -222,7 +222,7 @@ function ensureSourcesAndLayers() {
             "id": "sg-buildings-3d-white",
             "type": "fill-extrusion",
             "source": "buildings_all",
-            "source-layer": "sg_buildings_v5-avlt46",
+            "source-layer": "sg_buildings-0g14da",
             "layout": {
                 "fill-extrusion-edge-radius": 0.5,
                 "visibility": "none"
@@ -246,7 +246,7 @@ function ensureSourcesAndLayers() {
     if (!map.getSource('masterplan2019')) {
         map.addSource('masterplan2019', {
             type: 'vector',
-            url: 'mapbox://citysyntax.1asbha62'
+            url: 'mapbox://citysyntaxlab.4gxilw4j'
         });
     }
 
@@ -255,7 +255,7 @@ function ensureSourcesAndLayers() {
             "id": "masterplan2019",
             "type": "fill",
             "source": "masterplan2019",
-            "source-layer": "masterplan2019-2z8gzy",
+            "source-layer": "output-47r2yb",
             "layout": {
                 "visibility": "none"
             },
@@ -521,14 +521,14 @@ map.on('load', () => {
         // 清除之前的点击状态
         if (map.clickedFeatureId !== undefined) {
             map.setFeatureState(
-                { source: 'buildings_all', sourceLayer: 'sg_buildings_v5-avlt46', id: map.clickedFeatureId },
+                { source: 'buildings_all', sourceLayer: 'sg_buildings-0g14da', id: map.clickedFeatureId },
                 { clicked: false }
             );
         }
 
         // 设置当前建筑为点击状态
         map.setFeatureState(
-            { source: 'buildings_all', sourceLayer: 'sg_buildings_v5-avlt46', id: featureId },
+            { source: 'buildings_all', sourceLayer: 'sg_buildings-0g14da', id: featureId },
             { clicked: true }
         );
 
