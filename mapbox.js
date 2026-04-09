@@ -67,7 +67,7 @@ function addCustomSourcesAndLayers() {
 
     map.addSource('buildings_all', {
         type: 'vector',
-        url: 'mapbox://citysyntax.a11955cp'
+        url: 'mapbox://citysyntax.8pkku6ha'
     });
 
     map.addLayer({
