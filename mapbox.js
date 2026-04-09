@@ -562,6 +562,7 @@ map.on('load', () => {
             "Building Levels": properties['building_levels'],
             "Building Footprint": properties['building_footprint'] ? `${properties['building_footprint']} m²` : null,
             "Gross Floor Area": properties['gross_floor_area'] ? `${properties['gross_floor_area']} m²` : null,
+            "Height": properties['height'] ? `${properties['height']} m` : null,
             "EUI (BCA)": properties['eui2023'] ? `${properties['eui2023']} kWh/m²` : null,
             "Embodied Carbon": properties['embodied_carbon'] ? `${(properties['embodied_carbon'] / 100).toPrecision(5)}*10² kgCO2e` : null,
             "Operational Energy": properties['energy_total'] ? `${(properties['energy_total'] / 10000).toPrecision(5)}*10⁴ kgCO2e` : null,
