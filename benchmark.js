@@ -608,7 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 toolbox: {
                     show: true,
                     orient: 'horizontal',
-                    left: '35%',
+                    left: '38%',
                     top: '86%',
                     feature: {
                         magicType: {
@@ -627,8 +627,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 },
                 grid: [
-                    { left: 10, right: '4%', top: '10%', height: '50%' }, // 直方图
-                    { left: 48, right: '4%', top: '60%', height: '16%' }  // 箱型图
+                    { left: '16%', right: '4%', top: '10%', height: '46%' }, // 直方图
+                    { left: '16%', right: '4%', top: '56%', height: '16%' }  // 箱型图
                 ],
                 xAxis: [
                     {
