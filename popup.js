@@ -329,7 +329,8 @@ const contentData = {
         <br>
         
         <h2>Publications</h2>
-        <p>Coming Soon</p>
+        <p>Lyu, P., Wong, H., Soh, R., Wang, T., & Ang, Y. Q. (2026). Buildings.city: Scalable urban building energy modeling and carbon emissions mapping using open archetype templates. Computers, Environment and Urban Systems, 128, 102453. 
+        <a href="https://doi.org/10.1016/j.compenvurbsys.2026.102453" target="_blank" class="link">https://doi.org/10.1016/j.compenvurbsys.2026.102453</a></p>
         `
 };
 
